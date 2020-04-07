@@ -31,7 +31,19 @@ func start_player_turn():
 
 func create_player():
 	var playerStats = BattleUnits.PlayerStats
-	playerStats.connect("end_turn", self, "start_enemy_turn")
+	playerStats.connect("end_turn", self, "_on_Player_end_turn")
+	# Start action buttons
+
+func _on_Player_end_turn():
+	var playerStats = BattleUnits.PlayerStats
+	var enemy = BattleUnits.Enemy
+	if enemy.is_dead():
+		print("You won!")
+	else:
+		start_enemy_turn()
+
+func _on_Enemy_end_turn():
+	start_player_turn()
 
 func create_new_enemy():
 	enemies.shuffle()
@@ -39,7 +51,7 @@ func create_new_enemy():
 	var enemy = Enemy.instance()
 	enemyStartPosition.add_child(enemy)
 	enemy.connect("died", self, "_on_Enemy_died")
-	enemy.connect("end_turn", self, "start_player_turn")
+	enemy.connect("end_turn", self, "_on_Enemy_end_turn")
 
 func _on_Enemy_died(exp_points):
 	var playerStats = BattleUnits.PlayerStats

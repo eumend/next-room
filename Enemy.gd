@@ -18,8 +18,9 @@ func attack():
 	emit_signal("end_turn")
 
 func deal_damage():
-	if BattleUnits.PlayerStats:
-		BattleUnits.PlayerStats.hp -= power
+	var playerStats = BattleUnits.PlayerStats
+	if playerStats:
+		playerStats.take_damage(power)
 
 func take_damage(amount):
 	self.hp -= amount
