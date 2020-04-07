@@ -2,7 +2,8 @@ extends Node2D
 
 const BattleUnits = preload("res://BattleUnits.tres")
 const level_chart = {
-	1: 5,
+	1: 1, # For testing level up
+#	1: 5,
 	2: 12,
 	3: 25
 }
@@ -16,6 +17,7 @@ var mp = max_mp setget set_mp
 var exp_points = 0 setget set_exp_points
 var level = 1 setget set_level
 var power = 4 setget set_power
+var status = []
 
 signal hp_changed(value)
 signal ap_changed(value)
@@ -23,6 +25,16 @@ signal mp_changed(value)
 signal level_changed(value)
 signal level_up(value)
 signal end_turn
+
+func has_status():
+	return status.size() > 0
+
+func clear_status():
+	# TODO: Run through temporal statuses for effects?
+	status = []
+
+func take_damage(damage):
+	self.hp -= damage
 
 func set_hp(value):
 	hp = clamp(value, 0, max_hp)
