@@ -1,5 +1,7 @@
 extends Panel
 
+const DialogBox = preload("res://DialogBox.tres")
+
 onready var hpLabel = $StatsContainer/HP
 onready var apLabel = $StatsContainer/AP
 onready var mpLabel = $StatsContainer/MP
@@ -22,6 +24,8 @@ func _on_PlayerStats_level_changed(value):
 	lvLabel.text = "LV\n" + str(value)
 	# Show lvl up message
 
-
 func _on_PlayerStats_level_up(value):
-	print("LEVEL UP!", value) # TODO: Show on text panel
+	DialogBox.show_timeout([
+		["LEVEL UP!", 2],
+		["HP + {hp}\nMP + {mp}\nPOW + {power}".format(value), 2],
+	])
