@@ -24,8 +24,10 @@ func deal_damage():
 func take_damage(amount):
 	self.hp -= amount
 	if is_dead():
-		queue_free()
 		emit_signal("died", exp_points)
+		animationPlayer.play("Fade")
+		yield(animationPlayer, "animation_finished")
+		queue_free()
 	else:
 		animationPlayer.play("Shake")
 		yield(animationPlayer, "animation_finished")
@@ -36,7 +38,10 @@ func is_dead():
 func set_hp(new_hp):
 	hp = new_hp
 	if hpLabel != null:
-		hpLabel.text = str(hp) + 'hp'
+		if new_hp > 0:
+			hpLabel.text = str(hp) + 'hp'
+		else:
+			hpLabel.text = ""
 
 func _ready():
 	BattleUnits.Enemy = self
