@@ -15,6 +15,7 @@ func _ready():
 
 func start_battle():
 	create_new_enemy()
+	create_player()
 	start_player_turn()
 
 func start_enemy_turn():
@@ -22,15 +23,15 @@ func start_enemy_turn():
 	actionButtons.hide()
 	if enemy != null and not enemy.is_queued_for_deletion():
 		enemy.attack()
-		yield(enemy, "end_turn")
-		start_player_turn()
 
 func start_player_turn():
 	var playerStats = BattleUnits.PlayerStats
 	actionButtons.show()
 	playerStats.ap = playerStats.max_ap
-	yield(playerStats, "end_turn")
-	start_enemy_turn()
+
+func create_player():
+	var playerStats = BattleUnits.PlayerStats
+	playerStats.connect("end_turn", self, "start_enemy_turn")
 
 func create_new_enemy():
 	enemies.shuffle()
@@ -38,6 +39,7 @@ func create_new_enemy():
 	var enemy = Enemy.instance()
 	enemyStartPosition.add_child(enemy)
 	enemy.connect("died", self, "_on_Enemy_died")
+	enemy.connect("end_turn", self, "start_player_turn")
 
 func _on_Enemy_died(exp_points):
 	var playerStats = BattleUnits.PlayerStats
