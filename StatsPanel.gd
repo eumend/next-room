@@ -6,6 +6,7 @@ onready var mpLabel = $StatsContainer/MP
 onready var lvLabel = $StatsContainer/LV
 onready var statusContainer = $StatsContainer/Status
 
+const poison_icon = preload("res://Images/skull.png")
 
 func _on_PlayerStats_hp_changed(value):
 	hpLabel.text = "HP\n" + str(value)
@@ -41,5 +42,5 @@ func display_status(statuses):
 
 func get_status_icon(status):
 	match(status):
-		GameConstants.STATUS.POISON: return load("res://Images/skull.png")
+		GameConstants.STATUS.POISON: return poison_icon
 		_: return null
