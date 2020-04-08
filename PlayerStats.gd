@@ -23,7 +23,7 @@ signal ap_changed(value)
 signal mp_changed(value)
 signal level_changed(value)
 signal level_up(value)
-signal get_status(value)
+signal status_changed(value)
 signal end_turn
 
 func is_under_status():

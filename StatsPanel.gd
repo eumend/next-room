@@ -4,6 +4,7 @@ onready var hpLabel = $StatsContainer/HP
 onready var apLabel = $StatsContainer/AP
 onready var mpLabel = $StatsContainer/MP
 onready var lvLabel = $StatsContainer/LV
+onready var statusContainer = $StatsContainer/Status
 
 
 func _on_PlayerStats_hp_changed(value):
@@ -20,10 +21,25 @@ func _on_PlayerStats_ap_changed(value):
 
 func _on_PlayerStats_level_changed(value):
 	lvLabel.text = "LV\n" + str(value)
-	# Show lvl up message
 
+func _on_PlayerStats_status_changed(statuses):
+	if statuses.size() > 0:
+		lvLabel.hide()
+		display_status(statuses)
+		statusContainer.show()
+	else:
+		statusContainer.hide()
+		display_status(statuses)
+		lvLabel.show()
 
-func _on_PlayerStats_get_status(value):
-	print("Player status updated", value)
-	# TODO: Display status on stats?
-	pass # Replace with function body.
+func display_status(statuses):
+	if statuses.size() > 0:
+		var first_status = statuses[0]
+		statusContainer.get_node("Label").text = "ST\n" + get_status_text(first_status)
+	else:
+		statusContainer.get_node("Label").text = ""
+
+func get_status_text(status):
+	match(status):
+		GameConstants.STATUS.POISON: return "PSN"
+		_: return ""
