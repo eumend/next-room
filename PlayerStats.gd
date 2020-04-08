@@ -2,8 +2,7 @@ extends Node2D
 
 const BattleUnits = preload("res://BattleUnits.tres")
 const level_chart = {
-	1: 1, # For testing level up
-#	1: 5,
+	1: 5,
 	2: 12,
 	3: 25
 }
@@ -17,21 +16,30 @@ var mp = max_mp setget set_mp
 var exp_points = 0 setget set_exp_points
 var level = 1 setget set_level
 var power = 4 setget set_power
-var status = []
+var player_statuses = []
 
 signal hp_changed(value)
 signal ap_changed(value)
 signal mp_changed(value)
 signal level_changed(value)
 signal level_up(value)
+signal get_status(value)
 signal end_turn
 
-func has_status():
-	return status.size() > 0
+func is_under_status():
+	return player_statuses.size() > 0
+
+func has_status(status):
+	return player_statuses.has(status)
+
+func add_status(new_status):
+	if not player_statuses.has(new_status):
+		player_statuses.append(new_status)
+		emit_signal("status_changed", player_statuses)
 
 func clear_status():
-	# TODO: Run through temporal statuses for effects?
-	status = []
+	player_statuses = []
+	emit_signal("status_changed", player_statuses)
 
 func take_damage(damage):
 	self.hp -= damage
@@ -56,8 +64,11 @@ func set_power(value):
 
 func set_exp_points(value):
 	exp_points = value
-	if exp_points >= level_chart[level]:
+	if leveled_up():
 		level_up(1) # TODO: Find the real next level? Might be multiple levels!
+
+func leveled_up():
+	return exp_points >= level_chart[level]
 
 func level_up(lv_increase):
 	# get increments, TODO: Make them depend on level?

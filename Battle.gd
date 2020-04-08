@@ -10,6 +10,8 @@ onready var animationPlayer = $AnimationPlayer
 onready var nextRoomButton = $UI/StatsPanel/CenterContainer/NextRoomButton
 onready var enemyStartPosition = $EnemyPosition
 
+signal _done
+
 func _ready():
 	randomize()
 	start_battle()
@@ -27,13 +29,13 @@ func start_player_turn():
 func create_player():
 	var playerStats = BattleUnits.PlayerStats
 	playerStats.connect("end_turn", self, "_on_Player_end_turn")
+	playerStats.connect("get_status", self, "_on_Player_get_status")
 	# TODO: Start action buttons depending on level, mp etc
 
 func start_enemy_turn():
 	var enemy = BattleUnits.Enemy
-	actionButtons.hide()
 	if enemy != null and not enemy.is_queued_for_deletion():
-		enemy.attack()
+		enemy.start_turn()
 
 func create_new_enemy():
 	enemies.shuffle()
@@ -43,13 +45,34 @@ func create_new_enemy():
 	enemy.connect("died", self, "_on_Enemy_died")
 	enemy.connect("end_turn", self, "_on_Enemy_end_turn")
 
+func handle_status_eot():
+	var player = BattleUnits.PlayerStats
+	if player.has_status(GameConstants.STATUS.POISON):
+		DialogBox.show_timeout("Damage by poison!", 1)
+		player.hp -= 1
+		yield(DialogBox, "done")
+	emit_signal("_done")
+
 func _on_Player_end_turn():
 	var enemy = BattleUnits.Enemy
 	if enemy != null and !enemy.is_dead():
+		actionButtons.hide()
 		start_enemy_turn()
 
 func _on_Enemy_end_turn():
+	var player = BattleUnits.PlayerStats
+	if player.is_under_status():
+		yield(get_tree().create_timer(0.3), "timeout")
+		handle_status_eot()
+		yield(self, "_done")
 	start_player_turn()
+
+func _on_Player_get_status(status):
+	match(status):
+		GameConstants.STATUS.POISON:
+			DialogBox.show_timeout("You got poisoned!")
+			return
+		_: return
 
 func _on_Enemy_died(exp_points):
 	DialogBox.show_timeout("You won!", 2)
@@ -57,6 +80,7 @@ func _on_Enemy_died(exp_points):
 	actionButtons.hide()
 	var playerStats = BattleUnits.PlayerStats
 	playerStats.exp_points += exp_points
+	playerStats.clear_status()
 
 func _on_NextRoomButton_pressed():
 	nextRoomButton.hide()

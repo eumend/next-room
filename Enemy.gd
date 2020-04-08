@@ -1,6 +1,7 @@
 extends Node2D
 
 const BattleUnits = preload("res://BattleUnits.tres")
+const DialogBox = preload("res://DialogBox.tres")
 
 export(int) var hp = 25 setget set_hp
 export(int) var power = 4
@@ -11,13 +12,29 @@ onready var animationPlayer = $AnimationPlayer
 signal died(exp_points)
 signal end_turn
 
-func attack():
+var attack_pattern = {
+	"default_attack": 100,
+}
+
+var selected_attack = null
+
+func start_turn():
 	yield(get_tree().create_timer(0.4), "timeout")
+	attack()
+
+func attack():
+	randomize()
+	selected_attack = pick_from_weighted(attack_pattern)
+	if selected_attack:
+		call(selected_attack)
+
+func default_attack():
 	animationPlayer.play("Attack")
 	yield(animationPlayer, "animation_finished")
 	emit_signal("end_turn")
 
-func deal_damage():
+
+func deal_damage(): #Connected to animations
 	var playerStats = BattleUnits.PlayerStats
 	if playerStats:
 		playerStats.take_damage(power)
@@ -50,3 +67,27 @@ func _ready():
 
 func _exit_tree():
 	BattleUnits.Enemy = null
+
+# TODO: Get out to a helpers function
+func pick_from_weighted(distribution):
+	var values = distribution.values()
+	var total_size = 0
+	for v in values:
+		total_size += v
+	var pct = rand_range(0, total_size)
+	var last_index = 0
+	var ranges = []
+	for k in distribution:
+		var val = distribution[k]
+		var end_range = last_index + val
+		ranges.append([last_index, end_range, k])
+		last_index += end_range + 1
+	var winner = null
+	for r in ranges:
+		var start_range = r[0]
+		var end_range = r[1]
+		var item = r[2]
+		if pct >= start_range and pct <= end_range:
+			winner = item
+			break
+	return winner

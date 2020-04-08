@@ -21,3 +21,9 @@ func _on_PlayerStats_ap_changed(value):
 func _on_PlayerStats_level_changed(value):
 	lvLabel.text = "LV\n" + str(value)
 	# Show lvl up message
+
+
+func _on_PlayerStats_get_status(value):
+	print("Player status updated", value)
+	# TODO: Display status on stats?
+	pass # Replace with function body.
