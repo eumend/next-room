@@ -35,11 +35,11 @@ func _on_PlayerStats_status_changed(statuses):
 func display_status(statuses):
 	if statuses.size() > 0:
 		var first_status = statuses[0]
-		statusContainer.get_node("Label").text = "ST\n" + get_status_text(first_status)
+		statusContainer.get_node("Icon").texture = get_status_icon(first_status)
 	else:
-		statusContainer.get_node("Label").text = ""
+		statusContainer.get_node("Icon").texture = null
 
-func get_status_text(status):
+func get_status_icon(status):
 	match(status):
-		GameConstants.STATUS.POISON: return "PSN"
-		_: return ""
+		GameConstants.STATUS.POISON: return load("res://Images/skull.png")
+		_: return null

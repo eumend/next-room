@@ -29,7 +29,7 @@ func start_player_turn():
 func create_player():
 	var playerStats = BattleUnits.PlayerStats
 	playerStats.connect("end_turn", self, "_on_Player_end_turn")
-	playerStats.connect("get_status", self, "_on_Player_get_status")
+	playerStats.connect("status_changed", self, "_on_Player_status_changed")
 	# TODO: Start action buttons depending on level, mp etc
 
 func start_enemy_turn():
@@ -67,12 +67,14 @@ func _on_Enemy_end_turn():
 		yield(self, "_done")
 	start_player_turn()
 
-func _on_Player_get_status(status):
-	match(status):
-		GameConstants.STATUS.POISON:
-			DialogBox.show_timeout("You got poisoned!")
-			return
-		_: return
+func _on_Player_status_changed(status):
+	if status.size() > 0:
+		var new_status = status.back()
+		match(new_status):
+			GameConstants.STATUS.POISON:
+				DialogBox.show_timeout("You got poisoned!")
+				return
+			_: return
 
 func _on_Enemy_died(exp_points):
 	DialogBox.show_timeout("You won!", 2)
