@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://ActionButtons/BaseActionButton.tscn" type="PackedScene" id=1]
+[ext_resource path="res://ActionButtons/ShieldActionButton.gd" type="Script" id=2]
+
+[node name="ShieldActionButton" instance=ExtResource( 1 )]
+text = "SHIELD"
+script = ExtResource( 2 )
+ap_cost = 2

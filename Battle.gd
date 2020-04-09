@@ -2,6 +2,7 @@ extends Node
 
 const BattleUnits = preload("res://BattleUnits.tres")
 const DialogBox = preload("res://DialogBox.tres")
+const ActionBattle = preload("res://ActionBattle.tres")
 
 export(Array, PackedScene) var enemies = []
 
@@ -17,29 +18,29 @@ var skill_tree = {
 		"name": "SWORD",
 		"level": 1,
 		"learned": false,
-		"button": preload("res://Actions/SwordActionButton.tscn")
+		"button": preload("res://ActionButtons/SwordActionButton.tscn")
 	},
 	GameConstants.PLAYER_SKILLS.HEAL: {
 		"name": "HEAL",
 		"level": 1,
 		"learned": false,
-		"button": preload("res://Actions/HealActionButton.tscn")
+		"button": preload("res://ActionButtons/HealActionButton.tscn")
 	},
 	GameConstants.PLAYER_SKILLS.SHIELD: {
 		"name": "SHIELD",
 		"level": 1,
 		"learned": false,
-		"button": preload("res://Actions/ShieldActionButton.tscn")
+		"button": preload("res://ActionButtons/ShieldActionButton.tscn")
 	},
 }
 
 func _ready():
 	randomize()
+	create_player()
 	start_battle()
 
 func start_battle():
 	create_new_enemy()
-	create_player()
 	start_player_turn()
 
 func start_player_turn():
@@ -52,7 +53,6 @@ func create_player():
 	playerStats.connect("end_turn", self, "_on_Player_end_turn")
 	playerStats.connect("status_changed", self, "_on_Player_status_changed")
 	check_learned_skills(playerStats)
-	# TODO: Start action buttons depending on level, mp etc
 
 func start_enemy_turn():
 	var enemy = BattleUnits.Enemy
@@ -99,6 +99,7 @@ func _on_Player_status_changed(status):
 			_: return
 
 func _on_Enemy_died(exp_points):
+	ActionBattle.force_end_of_battle()
 	DialogBox.show_timeout("You won!", 2)
 	nextRoomButton.show()
 	actionButtons.hide()

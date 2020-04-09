@@ -9,6 +9,7 @@ script = ExtResource( 2 )
 margin_right = 4.0
 margin_bottom = 8.0
 rect_min_size = Vector2( 72, 60 )
+action_mode = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }

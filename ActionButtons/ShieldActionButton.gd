@@ -1,4 +1,4 @@
-extends "res://ActionButton.gd"
+extends "res://ActionButtons/BaseActionButton.gd"
 
 
 func _on_pressed():
