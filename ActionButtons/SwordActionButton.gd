@@ -1,6 +1,6 @@
 extends "res://ActionButtons/BaseActionButton.gd"
 
-const Slash = preload("res://Slash.tscn")
+const Slash = preload("res://Animations/Slash.tscn")
 const SingleHitBattleField = preload("res://BattleFields/SingleHitBattleField.tscn")
 
 func _on_pressed():

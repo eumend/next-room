@@ -1,4 +1,4 @@
-extends "res://Enemy.gd"
+extends "res://Enemies/BaseEnemy.gd"
 
 func _init():
 	attack_pattern = {
