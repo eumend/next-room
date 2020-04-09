@@ -12,13 +12,34 @@ onready var enemyStartPosition = $EnemyPosition
 
 signal _done
 
+var skill_tree = {
+	GameConstants.PLAYER_SKILLS.SWORD: {
+		"name": "SWORD",
+		"level": 1,
+		"learned": false,
+		"button": preload("res://Actions/SwordActionButton.tscn")
+	},
+	GameConstants.PLAYER_SKILLS.HEAL: {
+		"name": "HEAL",
+		"level": 1,
+		"learned": false,
+		"button": preload("res://Actions/HealActionButton.tscn")
+	},
+	GameConstants.PLAYER_SKILLS.SHIELD: {
+		"name": "SHIELD",
+		"level": 1,
+		"learned": false,
+		"button": preload("res://Actions/ShieldActionButton.tscn")
+	},
+}
+
 func _ready():
 	randomize()
 	start_battle()
 
 func start_battle():
-	create_player()
 	create_new_enemy()
+	create_player()
 	start_player_turn()
 
 func start_player_turn():
@@ -30,6 +51,7 @@ func create_player():
 	var playerStats = BattleUnits.PlayerStats
 	playerStats.connect("end_turn", self, "_on_Player_end_turn")
 	playerStats.connect("status_changed", self, "_on_Player_status_changed")
+	check_learned_skills(playerStats)
 	# TODO: Start action buttons depending on level, mp etc
 
 func start_enemy_turn():
@@ -91,7 +113,22 @@ func _on_NextRoomButton_pressed():
 	start_battle()
 
 func _on_PlayerStats_level_up(value):
+	var playerStats = BattleUnits.PlayerStats
 	DialogBox.show_timeouts([
-		["LEVEL UP!", 2],
+		["Level UP!", 2],
 		["HP + {hp}\nMP + {mp}\nPOW + {power}".format(value), 2],
 	])
+	check_learned_skills(playerStats)
+
+func check_learned_skills(player):
+	var learned_skills = []
+	for k in skill_tree:
+		var skill = skill_tree[k]
+		if player.level >= skill["level"] and not skill["learned"]:
+			learned_skills.append(k)
+	for k in learned_skills:
+		var skill = skill_tree[k]
+		var new_skill_button = skill["button"].instance()
+		actionButtons.add_child(new_skill_button)
+		DialogBox.show_timeout("Learned " + skill["name"], 2)
+		skill_tree[k]["learned"] = true

@@ -7,7 +7,6 @@ func _init():
 	}
 
 func poison_attack():
-	var playerStats = BattleUnits.PlayerStats
 	animationPlayer.play("StatusAttack1")
 	yield(animationPlayer, "animation_finished")
 	emit_signal("end_turn")

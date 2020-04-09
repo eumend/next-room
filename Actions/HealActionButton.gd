@@ -6,4 +6,4 @@ func _on_pressed():
 		if playerStats.mp >= 8:
 			playerStats.hp += 5
 			playerStats.mp -= 8
-			playerStats.ap -= 1
+			playerStats.ap -= ap_cost

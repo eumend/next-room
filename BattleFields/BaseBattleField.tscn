@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://BattleFields/BaseBattleField.gd" type="Script" id=2]
+
+[node name="BaseBattleField" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="FieldButton" type="Button" parent="."]
+margin_right = 4.0
+margin_bottom = 8.0
+rect_min_size = Vector2( 72, 60 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Field" type="Node2D" parent="."]

@@ -36,7 +36,8 @@ func _on_PlayerStats_status_changed(statuses):
 func display_status(statuses):
 	if statuses.size() > 0:
 		var first_status = statuses[0]
-		statusContainer.get_node("Icon").texture = get_status_icon(first_status)
+		var icon = get_status_icon(first_status)
+		statusContainer.get_node("Icon").texture = icon
 	else:
 		statusContainer.get_node("Icon").texture = null
 

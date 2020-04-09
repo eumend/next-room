@@ -2,9 +2,9 @@ extends Node2D
 
 const BattleUnits = preload("res://BattleUnits.tres")
 const level_chart = {
-	1: 5,
-	2: 12,
-	3: 25
+	1: 4,
+	2: 10,
+	3: 18
 }
 
 export var max_hp = 25
@@ -42,7 +42,10 @@ func clear_status():
 	emit_signal("status_changed", player_statuses)
 
 func take_damage(damage):
-	self.hp -= damage
+	var taken_damage = damage
+	if self.has_status(GameConstants.STATUS.SHIELDED):
+		taken_damage = round(damage / 2)
+	self.hp -= taken_damage
 
 func set_hp(value):
 	hp = clamp(value, 0, max_hp)

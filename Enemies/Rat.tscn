@@ -3,6 +3,7 @@
 [ext_resource path="res://Enemy.tscn" type="PackedScene" id=1]
 
 [node name="Rat" instance=ExtResource( 1 )]
+hp = 10
 exp_points = 3
 
 [node name="HoverInfo" parent="." index="3"]
