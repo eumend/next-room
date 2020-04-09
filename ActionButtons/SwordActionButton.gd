@@ -16,7 +16,7 @@ func _on_SingleHitBattleField_hit(hit_force):
 	if enemy != null and playerStats != null:
 		animate_slash(enemy.global_position)
 		var damage = get_damage(playerStats.power, hit_force)
-		enemy.take_damage(playerStats.power)
+		enemy.take_damage(damage)
 
 func _on_SingleHitBattleField_done():
 	var enemy = BattleUnits.Enemy
