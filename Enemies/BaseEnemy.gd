@@ -7,7 +7,9 @@ export(int) var hp = 25 setget set_hp
 export(int) var power = 4
 export(int) var exp_points = 1
 onready var hpLabel = $HPLabel
+onready var damageLabel = $Damage
 onready var animationPlayer = $AnimationPlayer
+onready var damageAnimationPlayer = $DamageAnimationPlayer
 
 signal died(exp_points)
 signal end_turn
@@ -39,7 +41,7 @@ func deal_damage(): #Connected to animations
 	if playerStats:
 		playerStats.take_damage(power)
 
-func take_damage(amount):
+func take_damage(amount, hit_force = null):
 	self.hp -= amount
 	if is_dead():
 		emit_signal("died", exp_points)
@@ -47,8 +49,23 @@ func take_damage(amount):
 		yield(animationPlayer, "animation_finished")
 		queue_free()
 	else:
+		animate_damage(amount, hit_force)
 		animationPlayer.play("Shake")
 		yield(animationPlayer, "animation_finished")
+
+func animate_damage(amount, hit_force):
+	damageLabel.text = get_text_for_damage(amount, hit_force)
+	damageAnimationPlayer.play("DamageNormal")
+
+func get_text_for_damage(amount, hit_force):
+	if amount == 0:
+		return "MISS!"
+	var extra_text = ""
+	if hit_force == GameConstants.HIT_FORCE.CRIT:
+		extra_text = "!!"
+	elif hit_force == GameConstants.HIT_FORCE.STRONG:
+		extra_text = "!"
+	return "-" + str(amount) + extra_text
 
 func is_dead():
 	return hp <= 0

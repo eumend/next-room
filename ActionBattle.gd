@@ -10,6 +10,7 @@ func start_small_field(battle_field_node):
 	BattleField = battle_field_node
 	if MidPanel and BattleField:
 		MidPanel.hide()
+		MidPanel.get_tree().get_root().add_child(BattleField)
 		BattleField.set_global_position(MidPanel.get_position())
 		BattleField.connect("done", self, "on_BattleField_done")
 

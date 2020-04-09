@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://HoverInfo.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Images/Rat.png" type="Texture" id=2]
@@ -66,6 +66,34 @@ tracks/0/keys = {
 "values": [ Vector2( -2, 2 ), Vector2( 2, -2 ), Vector2( -2, -2 ), Vector2( 2, 2 ), Vector2( 0, 0 ) ]
 }
 
+[sub_resource type="Animation" id=4]
+resource_name = "DamageNormal"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Damage:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Damage:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 4, -23 ), Vector2( 4, -31 ) ]
+}
+
 [node name="Enemy" type="Node2D"]
 script = ExtResource( 3 )
 
@@ -73,9 +101,9 @@ script = ExtResource( 3 )
 texture = ExtResource( 2 )
 
 [node name="HPLabel" type="Label" parent="."]
-margin_left = -14.0
+margin_left = -19.0
 margin_top = -27.0
-margin_right = 26.0
+margin_right = 21.0
 margin_bottom = -13.0
 text = "0hp"
 align = 1
@@ -88,9 +116,23 @@ anims/Attack = SubResource( 1 )
 anims/Fade = SubResource( 2 )
 anims/Shake = SubResource( 3 )
 
+[node name="DamageAnimationPlayer" type="AnimationPlayer" parent="."]
+anims/DamageNormal = SubResource( 4 )
+
 [node name="HoverInfo" parent="." instance=ExtResource( 1 )]
 margin_left = -23.0
 margin_top = -16.0
 margin_right = 24.0
 margin_bottom = 15.0
 rect_min_size = Vector2( 10, 10 )
+
+[node name="Damage" type="Label" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 4.0
+margin_top = -31.0
+margin_right = 21.0
+margin_bottom = -19.0
+text = "-0"
+__meta__ = {
+"_edit_use_anchors_": false
+}

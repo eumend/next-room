@@ -22,6 +22,8 @@ func _on_FieldButton_pressed():
 		emit_signal("hit", GameConstants.HIT_FORCE.STRONG)
 	elif overlapping_area_names.has("NormalZone"):
 		emit_signal("hit", GameConstants.HIT_FORCE.NORMAL)
+	else:
+		emit_signal("miss")
 	done()
 
 func _on_BorderL_area_entered(_area):

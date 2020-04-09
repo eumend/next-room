@@ -1,6 +1,7 @@
 extends Node2D
 
 signal hit(damage)
+signal miss
 signal heal(damage)
 signal done
 

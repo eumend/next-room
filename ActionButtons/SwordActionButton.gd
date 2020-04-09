@@ -5,8 +5,8 @@ const SingleHitBattleField = preload("res://BattleFields/SingleHitBattleField.ts
 
 func _on_pressed():
 	var singleHitBattleField = SingleHitBattleField.instance()
-	get_tree().get_root().add_child(singleHitBattleField)
 	singleHitBattleField.connect("hit", self, "_on_SingleHitBattleField_hit")
+	singleHitBattleField.connect("miss", self, "_on_SingleHitBattleField_miss")
 	singleHitBattleField.connect("done", self, "_on_SingleHitBattleField_done")
 	ActionBattle.start_small_field(singleHitBattleField)
 
@@ -16,7 +16,13 @@ func _on_SingleHitBattleField_hit(hit_force):
 	if enemy != null and playerStats != null:
 		animate_slash(enemy.global_position)
 		var damage = get_damage(playerStats.power, hit_force)
-		enemy.take_damage(damage)
+		enemy.take_damage(damage, hit_force)
+
+func _on_SingleHitBattleField_miss():
+	var enemy = BattleUnits.Enemy
+	var playerStats = BattleUnits.PlayerStats
+	if enemy != null and playerStats != null:
+		enemy.take_damage(0)
 
 func _on_SingleHitBattleField_done():
 	var enemy = BattleUnits.Enemy
@@ -27,9 +33,10 @@ func _on_SingleHitBattleField_done():
 
 func get_damage(power, hit_force):
 	match(hit_force):
-		GameConstants.HIT_FORCE.STRONG: return power + 1
 		GameConstants.HIT_FORCE.CRIT: return power + 2
-		_: return power
+		GameConstants.HIT_FORCE.STRONG: return power + 1
+		GameConstants.HIT_FORCE.NORMAL: return power
+		_: return 0
 
 func animate_slash(position):
 	var slash = Slash.instance()
