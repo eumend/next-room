@@ -32,6 +32,12 @@ var skill_tree = {
 		"learned": false,
 		"button": preload("res://ActionButtons/ShieldActionButton.tscn")
 	},
+	GameConstants.PLAYER_SKILLS.COMBO: {
+		"name": "COMBO",
+		"level": 1,
+		"learned": false,
+		"button": preload("res://ActionButtons/ComboActionButton.tscn")
+	},
 }
 
 func _ready():

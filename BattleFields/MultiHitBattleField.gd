@@ -1,16 +1,26 @@
 extends "res://BattleFields/BaseBattleField.gd"
 
 var direction = 1
+var current_area = null
+var current_pointer = 1
 
-onready var pointer = $Field/Pointer
+onready var pointer1 = $Field/Pointer1
+onready var pointer2 = $Field/Pointer2
+var total_pointers = 2
+var speed = 60
 
-func _physics_process(_delta):
+func _ready():
+	var pointer = get_current_pointer()
+	pointer.show()
+
+func _physics_process(delta):
 	var motion = Vector2(direction, 0)
-	pointer.position += motion
+	var pointer = get_current_pointer()
+	pointer.position += motion * delta * speed * current_pointer
 
 func _on_FieldButton_pressed():
 	var overlapping_area_names = []
-	for area in pointer.get_overlapping_areas():
+	for area in pointer1.get_overlapping_areas():
 		overlapping_area_names.append(area.name)
 	if overlapping_area_names.has("CritZone"):
 		emit_signal("hit", GameConstants.HIT_FORCE.CRIT)
@@ -20,7 +30,19 @@ func _on_FieldButton_pressed():
 		emit_signal("hit", GameConstants.HIT_FORCE.NORMAL)
 	else:
 		emit_signal("miss")
-	done()
+	if current_pointer < total_pointers:
+		current_pointer += 1
+		var pointer = get_current_pointer()
+		direction = 1
+		pointer.show()
+	else:
+		done()
+
+func get_current_pointer():
+	if current_pointer == 1:
+		return pointer1
+	else:
+		return pointer2
 
 func _on_BorderL_area_entered(_area):
 	if direction == -1:

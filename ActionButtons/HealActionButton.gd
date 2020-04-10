@@ -1,9 +1,8 @@
 extends "res://ActionButtons/BaseActionButton.gd"
 
 func _on_pressed():
-	var playerStats = BattleUnits.PlayerStats
-	if playerStats != null:
-		if playerStats.mp >= 8:
-			playerStats.hp += 5
-			playerStats.mp -= 8
-			playerStats.ap -= ap_cost
+	if(is_player_ready()):
+		if player.mp >= 8:
+			player.hp += 5
+			player.mp -= 8
+			player.ap -= ap_cost
