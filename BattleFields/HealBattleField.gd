@@ -38,7 +38,10 @@ func on_Bullet_hit(target, bullet_position):
 	# TODO: Use position to show some animation?
 	bullets_that_hit += 1
 	if target.name == "Player":
-		emit_signal("heal", 2)
+		if bullets_that_hit == total_bullets:
+			emit_signal("heal", 4)
+		else:
+			emit_signal("heal", 2)
 	else:
 		emit_signal("miss")
 	if bullets_that_hit == total_bullets:

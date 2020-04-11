@@ -21,7 +21,7 @@ func _on_HealBattleField_heal(amount):
 
 func _on_HealBattleField_miss():
 	if(is_battle_ready()):
-		print("HEAL MISS!")
+		pass
 
 func _on_HealBattleField_done():
 	if(is_battle_ready()):

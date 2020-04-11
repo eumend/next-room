@@ -15,6 +15,11 @@ _global_script_classes=[ {
 "path": "res://ActionBattle.gd"
 }, {
 "base": "Resource",
+"class": "BattleSummary",
+"language": "GDScript",
+"path": "res://BattleSummary.gd"
+}, {
+"base": "Resource",
 "class": "BattleUnits",
 "language": "GDScript",
 "path": "res://BattleUnits.gd"
@@ -26,6 +31,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "ActionBattle": "",
+"BattleSummary": "",
 "BattleUnits": "",
 "DialogBox": ""
 }

@@ -24,6 +24,7 @@ signal mp_changed(value)
 signal level_changed(value)
 signal level_up(value)
 signal status_changed(value)
+signal died
 signal end_turn
 
 var last_level_up_summary = {}
@@ -52,6 +53,8 @@ func take_damage(damage):
 func set_hp(value):
 	hp = clamp(value, 0, max_hp)
 	emit_signal("hp_changed", hp)
+	if hp == 0:
+		emit_signal("died")
 
 func set_ap(value):
 	ap = clamp(value, 0, max_ap)

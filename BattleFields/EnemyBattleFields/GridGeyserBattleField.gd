@@ -63,7 +63,7 @@ func spawn_geysers(position = null):
 func spawn_geyser(position):
 	yield(get_tree().create_timer(0.5), "timeout")
 	var new_geyser = GeyserAnimation.instance()
-	new_geyser.set_time(1.5)
+	new_geyser.set_time(1.2)
 	$Field/Geysers.add_child(new_geyser)
 	new_geyser.position = enemy_coords[position]
 	new_geyser.z_index = enemy_z_index_post[position]
