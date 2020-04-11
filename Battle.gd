@@ -10,9 +10,30 @@ export(Array, PackedScene) var enemies = []
 onready var actionButtons = $UI/BattleActionButtons
 onready var animationPlayer = $AnimationPlayer
 onready var nextRoomButton = $UI/OverworldActionButtons/NextRoomButton
+onready var restartButton = $UI/OverworldActionButtons/RestartButton
 onready var enemyStartPosition = $EnemyPosition
 
 signal _done
+
+# Enemies
+const Enemies = {
+	"rat": preload("res://Enemies/Rat.tscn"),
+	"bat": preload("res://Enemies/Bat.tscn"),
+	"slime": preload("res://Enemies/Slime.tscn"),
+	"boss1": preload("res://Enemies/Boss1.tscn"),
+}
+
+var Levels = {
+	1: {
+		"enemies": {
+			"rat": 40,
+			"bat": 30,
+			"slime": 30,
+		},
+		"boss": "boss1",
+		"mook_count": 4
+	}
+}
 
 var skill_tree = {
 	GameConstants.PLAYER_SKILLS.SWORD: {
@@ -23,7 +44,7 @@ var skill_tree = {
 	},
 	GameConstants.PLAYER_SKILLS.HEAL: {
 		"name": "HEAL",
-		"level": 1,
+		"level": 2,
 		"learned": false,
 		"button": preload("res://ActionButtons/HealActionButton.tscn")
 	},
@@ -35,11 +56,14 @@ var skill_tree = {
 #	},
 	GameConstants.PLAYER_SKILLS.COMBO: {
 		"name": "COMBO",
-		"level": 1,
+		"level": 3,
 		"learned": false,
 		"button": preload("res://ActionButtons/ComboActionButton.tscn")
 	},
 }
+
+var current_level = 1
+var kill_streak = 0
 
 func _ready():
 	randomize()
@@ -67,12 +91,17 @@ func start_enemy_turn():
 		enemy.start_turn()
 
 func create_new_enemy():
-	enemies.shuffle()
-	var Enemy = enemies.front()
+	var level_info = Levels[current_level]
+	var is_boss_battle = kill_streak == level_info["mook_count"]
+	var enemy_name = level_info["boss"] if is_boss_battle else Utils.pick_from_weighted(level_info["enemies"])
+	var Enemy = Enemies[enemy_name]
 	var enemy = Enemy.instance()
 	enemyStartPosition.add_child(enemy)
-	enemy.connect("died", self, "_on_Enemy_died")
 	enemy.connect("end_turn", self, "_on_Enemy_end_turn")
+	if is_boss_battle:
+		enemy.connect("died", self, "_on_Boss_died")
+	else:
+		enemy.connect("died", self, "_on_Enemy_died")
 
 func handle_status_eot():
 	var player = BattleUnits.PlayerStats
@@ -105,21 +134,46 @@ func _on_Player_status_changed(status):
 				return
 			_: return
 
+func _on_Boss_died(exp_points):
+	current_level += 1
+	kill_streak = 0
+	if current_level in Levels:
+		_on_Enemy_died(exp_points)
+	else:
+		# No more levels, player won!
+		ActionBattle.force_end_of_battle()
+		BattleSummary.show_summary("GAME\nCOMPLETE", "YOU ROCK!")
+		actionButtons.hide()
+		restartButton.show()
+
+
 func _on_Enemy_died(exp_points):
 	ActionBattle.force_end_of_battle()
 	actionButtons.hide()
-	nextRoomButton.show()
 	var playerStats = BattleUnits.PlayerStats
 	playerStats.clear_status()
 	var level_before = playerStats.level
 	playerStats.exp_points += exp_points
+	kill_streak += 1
 	show_battle_summary(exp_points)
 	yield(get_tree().create_timer(1), "timeout")
 	if playerStats.level > level_before:
-		show_level_up_summary(playerStats.last_level_up_summary)
+		on_level_up()
+	
+	var level_info = Levels[current_level]
+	var is_boss_battle = kill_streak == level_info["mook_count"]
+	if is_boss_battle:
+		nextRoomButton.text = "BOSS BATTLE"
+	nextRoomButton.show()
+
+func on_level_up():
+	var playerStats = BattleUnits.PlayerStats
+	show_level_up_summary(playerStats.last_level_up_summary)
+	check_learned_skills(playerStats)
 
 func _on_NextRoomButton_pressed():
 	nextRoomButton.hide()
+	nextRoomButton.text = "ENTER NEXT ROOM"
 	BattleSummary.hide_summary()
 	animationPlayer.play("FadeToNewRoom")
 	yield(animationPlayer, "animation_finished")
@@ -160,3 +214,14 @@ func show_battle_summary(exp_points):
 
 func _on_PlayerStats_died():
 	game_over()
+
+
+func _on_RestartButton_pressed():
+	restartButton.hide()
+	BattleSummary.hide_summary()
+	var playerStats = BattleUnits.PlayerStats
+	playerStats.reset()
+	current_level = 1
+	check_learned_skills(playerStats)
+	start_battle()
+	

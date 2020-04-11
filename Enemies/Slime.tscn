@@ -7,6 +7,7 @@
 hp = 12
 power = 3
 exp_points = 2
+entry_text = "A Slime attacks!"
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )
@@ -14,7 +15,7 @@ texture = ExtResource( 2 )
 [node name="HPLabel" parent="." index="1"]
 text = "35hp"
 
-[node name="HoverInfo" parent="." index="3"]
+[node name="HoverInfo" parent="." index="4"]
 margin_top = -10.0
 margin_right = 20.0
 margin_bottom = 10.0

@@ -1,7 +1,6 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Images/Mobile RPG Mockup.png" type="Texture" id=1]
-[ext_resource path="res://Enemies/Boss1.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Images/Dungeon.png" type="Texture" id=3]
 [ext_resource path="res://Battle.gd" type="Script" id=4]
 [ext_resource path="res://PlayerStats.gd" type="Script" id=5]
@@ -31,7 +30,6 @@ tracks/0/keys = {
 
 [node name="Battle" type="Node"]
 script = ExtResource( 4 )
-enemies = [ ExtResource( 2 ) ]
 
 [node name="PlayerStats" type="Node2D" parent="."]
 script = ExtResource( 5 )
@@ -113,11 +111,20 @@ __meta__ = {
 }
 
 [node name="HP" type="Label" parent="UI/StatsPanel/StatsContainer"]
-margin_right = 40.0
+margin_right = 25.0
 margin_bottom = 19.0
 size_flags_horizontal = 3
 text = "HP
 25"
+align = 1
+
+[node name="POW" type="Label" parent="UI/StatsPanel/StatsContainer"]
+margin_left = 29.0
+margin_right = 54.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+text = "POW
+4"
 align = 1
 
 [node name="AP" type="Label" parent="UI/StatsPanel/StatsContainer"]
@@ -141,7 +148,7 @@ text = "MP
 align = 1
 
 [node name="LV" type="Label" parent="UI/StatsPanel/StatsContainer"]
-margin_left = 44.0
+margin_left = 58.0
 margin_right = 84.0
 margin_bottom = 19.0
 size_flags_horizontal = 3
@@ -201,6 +208,15 @@ margin_bottom = 37.0
 rect_min_size = Vector2( 70, 13 )
 text = "ENTER NEXT ROOM"
 
+[node name="RestartButton" type="Button" parent="UI/OverworldActionButtons"]
+visible = false
+margin_left = 1.0
+margin_top = 24.0
+margin_right = 71.0
+margin_bottom = 37.0
+rect_min_size = Vector2( 70, 13 )
+text = "RESTART"
+
 [node name="TextBoxPanel" type="Panel" parent="UI"]
 margin_left = -2.0
 margin_top = 137.0
@@ -244,5 +260,7 @@ anims/FadeToNewRoom = SubResource( 2 )
 [connection signal="hp_changed" from="PlayerStats" to="UI/StatsPanel" method="_on_PlayerStats_hp_changed"]
 [connection signal="level_changed" from="PlayerStats" to="UI/StatsPanel" method="_on_PlayerStats_level_changed"]
 [connection signal="mp_changed" from="PlayerStats" to="UI/StatsPanel" method="_on_PlayerStats_mp_changed"]
+[connection signal="power_changed" from="PlayerStats" to="UI/StatsPanel" method="_on_PlayerStats_power_changed"]
 [connection signal="status_changed" from="PlayerStats" to="UI/StatsPanel" method="_on_PlayerStats_status_changed"]
 [connection signal="pressed" from="UI/OverworldActionButtons/NextRoomButton" to="." method="_on_NextRoomButton_pressed"]
+[connection signal="pressed" from="UI/OverworldActionButtons/RestartButton" to="." method="_on_RestartButton_pressed"]

@@ -20,7 +20,8 @@ func _physics_process(delta):
 
 func _on_FieldButton_pressed():
 	var overlapping_area_names = []
-	for area in pointer1.get_overlapping_areas():
+	var pointer = get_current_pointer()
+	for area in pointer.get_overlapping_areas():
 		overlapping_area_names.append(area.name)
 	if overlapping_area_names.has("CritZone"):
 		emit_signal("hit", GameConstants.HIT_FORCE.CRIT)
@@ -32,7 +33,7 @@ func _on_FieldButton_pressed():
 		emit_signal("miss")
 	if current_pointer < total_pointers:
 		current_pointer += 1
-		var pointer = get_current_pointer()
+		pointer = get_current_pointer()
 		direction = 1
 		pointer.show()
 	else:

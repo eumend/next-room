@@ -4,6 +4,7 @@ onready var hpLabel = $StatsContainer/HP
 onready var apLabel = $StatsContainer/AP
 onready var mpLabel = $StatsContainer/MP
 onready var lvLabel = $StatsContainer/LV
+onready var powLabel = $StatsContainer/POW
 onready var statusContainer = $StatsContainer/Status
 
 const poison_icon = preload("res://Images/skull.png")
@@ -19,9 +20,11 @@ func _on_PlayerStats_mp_changed(value):
 func _on_PlayerStats_ap_changed(value):
 	apLabel.text = "AP\n" + str(value)
 
-
 func _on_PlayerStats_level_changed(value):
 	lvLabel.text = "LV\n" + str(value)
+
+func _on_PlayerStats_power_changed(value):
+	powLabel.text = "POW\n" + str(value)
 
 func _on_PlayerStats_status_changed(statuses):
 	if statuses.size() > 0:
@@ -45,3 +48,5 @@ func get_status_icon(status):
 	match(status):
 		GameConstants.STATUS.POISON: return poison_icon
 		_: return null
+
+

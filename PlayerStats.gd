@@ -15,12 +15,16 @@ export var max_mp = 10
 var mp = max_mp setget set_mp
 var exp_points = 0 setget set_exp_points
 var level = 1 setget set_level
-var power = 4 setget set_power
+export var power = 4 setget set_power
 var player_statuses = []
+
+var base_hp = max_hp
+var base_power = power
 
 signal hp_changed(value)
 signal ap_changed(value)
 signal mp_changed(value)
+signal power_changed(value)
 signal level_changed(value)
 signal level_up(value)
 signal status_changed(value)
@@ -28,6 +32,13 @@ signal died
 signal end_turn
 
 var last_level_up_summary = {}
+
+func reset():
+	self.hp = base_hp
+	self.power = base_power
+	self.level = 1
+	self.exp_points = 0
+	clear_status()
 
 func is_under_status():
 	return player_statuses.size() > 0
@@ -68,7 +79,7 @@ func set_mp(value):
 
 func set_power(value):
 	power = value
-#	emit_signal("power_changed", power)
+	emit_signal("power_changed", power)
 
 func set_exp_points(value):
 	exp_points = value

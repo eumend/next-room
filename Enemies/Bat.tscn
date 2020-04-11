@@ -36,6 +36,8 @@ tracks/1/keys = {
 [node name="Bat" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 hp = 8
+exp_points = 2
+entry_text = "A Bat attacks!"
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )
@@ -43,5 +45,5 @@ texture = ExtResource( 2 )
 [node name="AnimationPlayer" parent="." index="2"]
 anims/StatusAttack1 = SubResource( 1 )
 
-[node name="HoverInfo" parent="." index="3"]
+[node name="HoverInfo" parent="." index="4"]
 description = "A life-sucking bat!"

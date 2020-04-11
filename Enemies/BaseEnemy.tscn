@@ -96,6 +96,7 @@ tracks/1/keys = {
 
 [node name="Enemy" type="Node2D"]
 script = ExtResource( 3 )
+entry_text = "A Rat attacks!"
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )

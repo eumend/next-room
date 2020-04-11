@@ -7,6 +7,7 @@ const ActionBattle = preload("res://ActionBattle.tres")
 export(int) var hp = 25 setget set_hp
 export(int) var power = 4
 export(int) var exp_points = 1
+export (String, MULTILINE) var entry_text = ""
 onready var hpLabel = $HPLabel
 onready var damageLabel = $Damage
 onready var animationPlayer = $AnimationPlayer
@@ -27,7 +28,7 @@ func start_turn():
 
 func attack():
 	randomize()
-	selected_attack = pick_from_weighted(attack_pattern)
+	selected_attack = Utils.pick_from_weighted(attack_pattern)
 	if selected_attack:
 		call(selected_attack)
 
@@ -82,30 +83,8 @@ func set_hp(new_hp):
 func _ready():
 	BattleUnits.Enemy = self
 	set_hp(self.hp) # Updated label
+	DialogBox.show_timeout(entry_text, 3)
 
 func _exit_tree():
 	BattleUnits.Enemy = null
 
-# TODO: Get out to a helpers function
-func pick_from_weighted(distribution):
-	var values = distribution.values()
-	var total_size = 0
-	for v in values:
-		total_size += v
-	var pct = rand_range(0, total_size)
-	var last_index = 0
-	var ranges = []
-	for k in distribution:
-		var val = distribution[k]
-		var end_range = last_index + val
-		ranges.append([last_index, end_range, k])
-		last_index += end_range + 1
-	var winner = null
-	for r in ranges:
-		var start_range = r[0]
-		var end_range = r[1]
-		var item = r[2]
-		if pct >= start_range and pct <= end_range:
-			winner = item
-			break
-	return winner
