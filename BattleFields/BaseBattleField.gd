@@ -2,7 +2,7 @@ extends Node2D
 
 signal hit(damage)
 signal miss
-signal heal(damage)
+signal heal(amount)
 signal done
 
 # Called when the node enters the scene tree for the first time.

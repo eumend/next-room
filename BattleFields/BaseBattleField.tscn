@@ -1,13 +1,14 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://BattleFields/BaseBattleField.gd" type="Script" id=2]
+[ext_resource path="res://Images/BaseBattleFieldMask.png" type="Texture" id=3]
 
 [node name="BaseBattleField" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="FieldButton" type="Button" parent="."]
-margin_right = 4.0
-margin_bottom = 8.0
+margin_right = 72.0
+margin_bottom = 60.0
 rect_min_size = Vector2( 72, 60 )
 action_mode = 0
 __meta__ = {
@@ -15,3 +16,10 @@ __meta__ = {
 }
 
 [node name="Field" type="Node2D" parent="."]
+light_mask = 16384
+
+[node name="Mask" type="Light2D" parent="."]
+position = Vector2( 36, 7 )
+texture = ExtResource( 3 )
+mode = 3
+range_item_cull_mask = 16384
