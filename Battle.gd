@@ -8,7 +8,7 @@ export(Array, PackedScene) var enemies = []
 
 onready var actionButtons = $UI/BattleActionButtons
 onready var animationPlayer = $AnimationPlayer
-onready var nextRoomButton = $UI/StatsPanel/CenterContainer/NextRoomButton
+onready var nextRoomButton = $UI/OverworldActionButtons/NextRoomButton
 onready var enemyStartPosition = $EnemyPosition
 
 signal _done
@@ -106,26 +106,23 @@ func _on_Player_status_changed(status):
 
 func _on_Enemy_died(exp_points):
 	ActionBattle.force_end_of_battle()
-	DialogBox.show_timeout("You won!", 2)
-	nextRoomButton.show()
 	actionButtons.hide()
+	nextRoomButton.show()
 	var playerStats = BattleUnits.PlayerStats
-	playerStats.exp_points += exp_points
 	playerStats.clear_status()
+	var level_before = playerStats.level
+	playerStats.exp_points += exp_points
+	show_battle_summary(exp_points)
+	yield(get_tree().create_timer(1), "timeout")
+	if playerStats.level > level_before:
+		show_level_up_summary(playerStats.last_level_up_summary)
 
 func _on_NextRoomButton_pressed():
 	nextRoomButton.hide()
+	close_battle_summary()
 	animationPlayer.play("FadeToNewRoom")
 	yield(animationPlayer, "animation_finished")
 	start_battle()
-
-func _on_PlayerStats_level_up(value):
-	var playerStats = BattleUnits.PlayerStats
-	DialogBox.show_timeouts([
-		["Level UP!", 2],
-		["HP + {hp}\nMP + {mp}\nPOW + {power}".format(value), 2],
-	])
-	check_learned_skills(playerStats)
 
 func check_learned_skills(player):
 	var learned_skills = []
@@ -139,3 +136,40 @@ func check_learned_skills(player):
 		actionButtons.add_child(new_skill_button)
 		DialogBox.show_timeout("Learned " + skill["name"], 2)
 		skill_tree[k]["learned"] = true
+
+func show_level_up_summary(level_up_summary):
+	var resultsPanel = $UI/BattleResultsPanel
+	var resultsHeading = $UI/BattleResultsPanel/BattleResultsContainer/BattleHeadingContainer/BattleHeadingText
+	var resultsStats = $UI/BattleResultsPanel/BattleResultsContainer/BattleSummaryContainer/BattleSummary/BattleSummaryStats
+	var resultsNumbers = $UI/BattleResultsPanel/BattleResultsContainer/BattleSummaryContainer/BattleSummary/BattleSummaryNumbers
+	
+	resultsHeading.text = "LEVEL UP!"
+	var stats_text = ""
+	var numbers_text = ""
+	
+	if level_up_summary["hp"]:
+		stats_text += "HP\n"
+		numbers_text += "+" + str(level_up_summary["hp"]) + "\n"
+	
+	if level_up_summary["power"]:
+		stats_text += "POW\n"
+		numbers_text += "+" + str(level_up_summary["power"]) + "\n"
+
+	resultsStats.text = stats_text
+	resultsNumbers.text = numbers_text
+	resultsPanel.show()
+
+func show_battle_summary(exp_points):
+	var resultsPanel = $UI/BattleResultsPanel
+	var resultsHeading = $UI/BattleResultsPanel/BattleResultsContainer/BattleHeadingContainer/BattleHeadingText
+	var resultsStats = $UI/BattleResultsPanel/BattleResultsContainer/BattleSummaryContainer/BattleSummary/BattleSummaryStats
+	var resultsNumbers = $UI/BattleResultsPanel/BattleResultsContainer/BattleSummaryContainer/BattleSummary/BattleSummaryNumbers
+	
+	resultsHeading.text = "YOU WIN!"
+	resultsStats.text = "EXP"
+	resultsNumbers.text = "+" + str(exp_points)
+	resultsPanel.show()
+
+func close_battle_summary():
+	var resultsPanel = $UI/BattleResultsPanel
+	resultsPanel.hide()

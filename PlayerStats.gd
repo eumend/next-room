@@ -26,6 +26,8 @@ signal level_up(value)
 signal status_changed(value)
 signal end_turn
 
+var last_level_up_summary = {}
+
 func is_under_status():
 	return player_statuses.size() > 0
 
@@ -89,12 +91,12 @@ func level_up(lv_increase):
 	self.hp = self.max_hp
 	self.mp = self.max_mp
 	
-	emit_signal("level_up", {
+	last_level_up_summary = {
 		"lv": lv_increase,
 		"hp": hp_increase,
 		"mp": mp_increase,
 		"power": power_increase,
-	})
+	}
 
 func set_level(value):
 	level = clamp(value, 0, 99)
