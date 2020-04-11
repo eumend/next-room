@@ -15,6 +15,9 @@ func done():
 	emit_signal("done")
 	queue_free()
 
+func hit(damage):
+	emit_signal("hit", damage)
+
 func _on_FieldButton_pressed():
 	print("BaseBattleField: _on_FieldButton_pressed")
 	pass
