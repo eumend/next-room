@@ -1,6 +1,7 @@
 extends Node2D
 
 signal hit(damage)
+signal enemy_hit(force)
 signal miss
 signal heal(amount)
 signal done
@@ -14,9 +15,6 @@ func done():
 	# TODO: Some animation?
 	emit_signal("done")
 	queue_free()
-
-func hit(damage):
-	emit_signal("hit", damage)
 
 func _on_FieldButton_pressed():
 	print("BaseBattleField: _on_FieldButton_pressed")

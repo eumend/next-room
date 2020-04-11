@@ -34,7 +34,6 @@ var firing_status = {
 }
 
 export var geyser_amount = 4
-export var geyser_damage = 4
 var geysers_left = geyser_amount
 var geysers_done = 0
 
@@ -74,20 +73,20 @@ func spawn_geyser(position):
 
 func on_GeyserAnimation_done(position):
 	firing_status[position] = FIRING_STATUS.IDLE
-	geysers_done =+ 1
+	geysers_done += 1
 	if geysers_done == geyser_amount:
 		done()
 
 func on_GeyserAnimation_fired(position):
 	firing_status[position] = FIRING_STATUS.FIRING
 	if current_player_position == position:
-		hit(geyser_damage)
+		emit_signal("enemy_hit", GameConstants.HIT_FORCE.NORMAL)
 
 func move(position):
 	if is_next_to(position):
 		change_player_position(position)
 		if firing_status[position] == FIRING_STATUS.FIRING:
-			hit(geyser_damage)
+			emit_signal("enemy_hit", GameConstants.HIT_FORCE.NORMAL)
 
 func change_player_position(position):
 		current_player_position = position

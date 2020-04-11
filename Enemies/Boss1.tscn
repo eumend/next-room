@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Enemies/BaseEnemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Enemies/Boss1.gd" type="Script" id=2]
+
+[node name="Boss1" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Sprite" parent="." index="0"]
+modulate = Color( 0.819608, 0.113725, 0.113725, 1 )

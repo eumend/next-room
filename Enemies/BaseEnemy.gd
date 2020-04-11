@@ -2,6 +2,7 @@ extends Node2D
 
 const BattleUnits = preload("res://BattleUnits.tres")
 const DialogBox = preload("res://DialogBox.tres")
+const ActionBattle = preload("res://ActionBattle.tres")
 
 export(int) var hp = 25 setget set_hp
 export(int) var power = 4
