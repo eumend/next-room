@@ -4,8 +4,8 @@ const JanKenBattleField = preload("res://BattleFields/EnemyBattleFields/JankenBa
 
 func _init():
 	attack_pattern = {
-		"default_attack": 25,
-		"janken_attack": 75,
+		"default_attack": 50,
+		"janken_attack": 50,
 	}
 
 func janken_attack():
@@ -19,6 +19,7 @@ func janken_attack():
 
 func _on_jankenBattleField_enemy_heal(heal_amount):
 	.heal_damage(heal_amount)
+	.deal_damage()
 
 func _on_jankenBattleField_hit(amount):
 	.take_damage(amount)

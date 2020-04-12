@@ -1,13 +1,15 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Enemies/BaseEnemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Enemies/Boss1.gd" type="Script" id=2]
+[ext_resource path="res://Images/Boss1.png" type="Texture" id=3]
 
 [node name="Boss1" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-hp = 20
+hp = 25
+power = 5
 exp_points = 5
-entry_text = "The Boss draws near!!"
+entry_text = "Mummy Knight draws near!!"
 
 [node name="Sprite" parent="." index="0"]
-modulate = Color( 0.819608, 0.113725, 0.113725, 1 )
+texture = ExtResource( 3 )

@@ -4,7 +4,8 @@ const BattleUnits = preload("res://BattleUnits.tres")
 const level_chart = {
 	1: 4,
 	2: 10,
-	3: 18
+	3: 18,
+	4: 30,
 }
 
 export var max_hp = 25
@@ -87,7 +88,7 @@ func set_exp_points(value):
 		level_up(1) # TODO: Find the real next level? Might be multiple levels!
 
 func leveled_up():
-	return exp_points >= level_chart[level]
+	return level in level_chart and exp_points >= level_chart[level]
 
 func level_up(lv_increase):
 	# get increments, TODO: Make them depend on level?

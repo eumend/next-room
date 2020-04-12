@@ -22,6 +22,7 @@ const Enemies = {
 	"slime": preload("res://Enemies/Slime.tscn"),
 	"skull": preload("res://Enemies/Skull.tscn"),
 	"boss1": preload("res://Enemies/Boss1.tscn"),
+	"boss2": preload("res://Enemies/Boss2.tscn"),
 }
 
 var Levels = {
@@ -42,7 +43,7 @@ var Levels = {
 			"bat": 20,
 			"slime": 20,
 		},
-		"boss": "boss1",
+		"boss": "boss2",
 		"mook_count": 4,
 		"background": preload("res://Images/Dungeon2.png")
 	}
