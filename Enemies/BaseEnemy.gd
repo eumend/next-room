@@ -43,9 +43,12 @@ func deal_damage(): #Connected to animations
 	if playerStats:
 		playerStats.take_damage(power)
 
+func heal_damage(amount):
+	self.hp += amount
+	animate_heal(amount)
+
 func take_damage(amount, hit_force = null):
 	self.hp -= amount
-	print("Took damage", amount)
 	if is_dead():
 		emit_signal("died", exp_points)
 		animationPlayer.play("Fade")
@@ -55,6 +58,10 @@ func take_damage(amount, hit_force = null):
 		animate_damage(amount, hit_force)
 		animationPlayer.play("Shake")
 		yield(animationPlayer, "animation_finished")
+
+func animate_heal(amount):
+	damageLabel.text = "+" + str(amount)
+	damageAnimationPlayer.play("DamageNormal")
 
 func animate_damage(amount, hit_force):
 	damageLabel.text = get_text_for_damage(amount, hit_force)

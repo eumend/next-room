@@ -1,16 +1,23 @@
 extends "res://Enemies/BaseEnemy.gd"
 
+const FireAtackBattleField = preload("res://BattleFields/EnemyBattleFields/GridGeyserBattleField.tscn")
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+func _init():
+	attack_pattern = {
+		"default_attack": 25,
+		"fire_attack": 75,
+	}
 
+func fire_attack():
+	DialogBox.show_timeout("BURN!", 1)
+	yield(DialogBox, "done")
+	var fireAttackBattleField = FireAtackBattleField.instance()
+	fireAttackBattleField.connect("enemy_hit", self, "_on_fireAttackBattleField_enemy_hit")
+	fireAttackBattleField.connect("done", self, "_on_fireAttackBattleField_done")
+	ActionBattle.start_small_field(fireAttackBattleField)
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+func _on_fireAttackBattleField_enemy_hit(hit_force):
+	.deal_damage()
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _on_fireAttackBattleField_done():
+	emit_signal("end_turn")
