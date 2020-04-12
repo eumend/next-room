@@ -4,7 +4,7 @@ const BattleUnits = preload("res://BattleUnits.tres")
 const DialogBox = preload("res://DialogBox.tres")
 const ActionBattle = preload("res://ActionBattle.tres")
 
-export(int) var hp = 25 setget set_hp
+export(int) var hp = 10 setget set_hp
 export(int) var power = 4
 export(int) var exp_points = 1
 export (String, MULTILINE) var entry_text = ""
@@ -45,6 +45,7 @@ func deal_damage(): #Connected to animations
 
 func take_damage(amount, hit_force = null):
 	self.hp -= amount
+	print("Took damage", amount)
 	if is_dead():
 		emit_signal("died", exp_points)
 		animationPlayer.play("Fade")

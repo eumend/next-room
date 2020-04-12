@@ -46,6 +46,10 @@ func _ready():
 	player.show()
 	spawn_geysers(starting_position)
 
+func init(new_amount = 4):
+	geyser_amount = new_amount
+	geysers_left = new_amount
+
 func spawn_geysers(position = null):
 	if position == null:
 		var free_positions = []

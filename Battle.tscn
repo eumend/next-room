@@ -158,8 +158,8 @@ align = 1
 
 [node name="Status" type="VBoxContainer" parent="UI/StatsPanel/StatsContainer"]
 visible = false
-margin_left = 66.0
-margin_right = 82.0
+margin_left = 68.0
+margin_right = 84.0
 margin_bottom = 19.0
 custom_constants/separation = 0
 __meta__ = {

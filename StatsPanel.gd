@@ -7,7 +7,7 @@ onready var lvLabel = $StatsContainer/LV
 onready var powLabel = $StatsContainer/POW
 onready var statusContainer = $StatsContainer/Status
 
-const poison_icon = preload("res://Images/skull.png")
+const poison_icon = preload("res://Images/skull_icon.png")
 
 func _on_PlayerStats_hp_changed(value):
 	hpLabel.text = "HP\n" + str(value)
@@ -28,13 +28,11 @@ func _on_PlayerStats_power_changed(value):
 
 func _on_PlayerStats_status_changed(statuses):
 	if statuses.size() > 0:
-		lvLabel.hide()
 		display_status(statuses)
 		statusContainer.show()
 	else:
 		statusContainer.hide()
 		display_status(statuses)
-		lvLabel.show()
 
 func display_status(statuses):
 	if statuses.size() > 0:

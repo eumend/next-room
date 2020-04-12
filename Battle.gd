@@ -20,6 +20,7 @@ const Enemies = {
 	"rat": preload("res://Enemies/Rat.tscn"),
 	"bat": preload("res://Enemies/Bat.tscn"),
 	"slime": preload("res://Enemies/Slime.tscn"),
+	"skull": preload("res://Enemies/Skull.tscn"),
 	"boss1": preload("res://Enemies/Boss1.tscn"),
 }
 
@@ -31,7 +32,19 @@ var Levels = {
 			"slime": 30,
 		},
 		"boss": "boss1",
-		"mook_count": 4
+		"mook_count": 4,
+		"background": preload("res://Images/Dungeon.png")
+	},
+	2: {
+		"enemies": {
+			"skull": 40,
+			"rat": 20,
+			"bat": 20,
+			"slime": 20,
+		},
+		"boss": "boss1",
+		"mook_count": 4,
+		"background": preload("res://Images/Dungeon2.png")
 	}
 }
 
@@ -66,11 +79,12 @@ var current_level = 1
 var kill_streak = 0
 
 func _ready():
-	randomize()
 	create_player()
+	randomize()
 	start_battle()
 
 func start_battle():
+	update_level_layout()
 	create_new_enemy()
 	start_player_turn()
 
@@ -146,6 +160,8 @@ func _on_Boss_died(exp_points):
 		actionButtons.hide()
 		restartButton.show()
 
+func update_level_layout():
+	$Dungeon.texture = Levels[current_level]["background"]
 
 func _on_Enemy_died(exp_points):
 	ActionBattle.force_end_of_battle()
