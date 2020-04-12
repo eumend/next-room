@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Images/Mobile RPG Mockup.png" type="Texture" id=1]
+[ext_resource path="res://Music/Songs/bg_music.ogg" type="AudioStream" id=2]
 [ext_resource path="res://Images/Dungeon.png" type="Texture" id=3]
 [ext_resource path="res://Battle.gd" type="Script" id=4]
 [ext_resource path="res://PlayerStats.gd" type="Script" id=5]
@@ -255,6 +256,11 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/FadeToNewRoom = SubResource( 2 )
+
+[node name="BGPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+
+[node name="SFXPlayer" type="AudioStreamPlayer" parent="."]
 [connection signal="ap_changed" from="PlayerStats" to="UI/StatsPanel" method="_on_PlayerStats_ap_changed"]
 [connection signal="died" from="PlayerStats" to="." method="_on_PlayerStats_died"]
 [connection signal="heal_damage" from="PlayerStats" to="UI/StatsPanel" method="_on_PlayerStats_heal_damage"]

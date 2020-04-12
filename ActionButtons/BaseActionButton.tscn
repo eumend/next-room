@@ -10,4 +10,6 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="SFXPlayer" type="AudioStreamPlayer2D" parent="."]
 [connection signal="pressed" from="." to="." method="_on_pressed"]

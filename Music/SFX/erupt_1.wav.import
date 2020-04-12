@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/erupt_1.wav-5f785330ab2fb5d0183275a532c5dcfa.sample"
+
+[deps]
+
+source_file="res://Music/SFX/erupt_1.wav"
+dest_files=[ "res://.import/erupt_1.wav-5f785330ab2fb5d0183275a532c5dcfa.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

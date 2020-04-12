@@ -7,7 +7,3 @@
 text = "SWORD"
 script = ExtResource( 1 )
 ap_cost = 3
-
-[node name="HoverInfo" parent="." index="0"]
-description = "Sword
-Deals 4 Damage"

@@ -11,6 +11,8 @@ export (String, MULTILINE) var entry_text = ""
 onready var hpLabel = $HPLabel
 onready var animationPlayer = $AnimationPlayer
 const NumberAnimation = preload("res://Animations/NumberAnimation.tscn")
+const blow_sfx = preload("res://Music/SFX/blow_2.wav")
+const heal_sfx = preload("res://Music/SFX/heal_1.wav")
 signal died(exp_points)
 signal end_turn
 var max_hp = hp
@@ -37,7 +39,9 @@ func default_attack():
 	yield(animationPlayer, "animation_finished")
 	emit_signal("end_turn")
 
+
 func deal_damage(hit_force = null): #Connected to animations
+	play_sfx(blow_sfx)
 	var playerStats = BattleUnits.PlayerStats
 	if playerStats:
 		var amount = get_attack_damage_amount(power, hit_force)
@@ -45,6 +49,7 @@ func deal_damage(hit_force = null): #Connected to animations
 
 func heal_damage(amount):
 	self.hp += amount
+	play_sfx(heal_sfx)
 	animate_heal(amount)
 
 func take_damage(amount, hit_force = null):
@@ -106,3 +111,6 @@ func _ready():
 func _exit_tree():
 	BattleUnits.Enemy = null
 
+func play_sfx(sfx_stream):
+	$SFXPlayer.stream = sfx_stream
+	$SFXPlayer.play()

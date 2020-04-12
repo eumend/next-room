@@ -2,6 +2,7 @@ extends "res://ActionButtons/BaseActionButton.gd"
 
 const Slash = preload("res://Animations/Slash.tscn")
 const MultiHitBattleField = preload("res://BattleFields/MultiHitBattleField.tscn")
+const blow_sfx = preload("res://Music/SFX/blow_1.wav")
 
 func _on_pressed():
 	var multiHitBattleField = MultiHitBattleField.instance()
@@ -13,6 +14,7 @@ func _on_pressed():
 func _on_MultiHitBattleField_hit(hit_force):
 	if(is_battle_ready()):
 		animate_slash(enemy.global_position)
+		play_sfx(hit_force)
 		var damage = get_damage(player.power, hit_force)
 		enemy.take_damage(damage, hit_force)
 
@@ -31,6 +33,10 @@ func get_damage(power, hit_force):
 		GameConstants.HIT_FORCE.STRONG: return round(power * 0.5)
 		GameConstants.HIT_FORCE.NORMAL: return round(power * 0.3)
 		_: return 0
+
+func play_sfx(_hit_force):
+	$SFXPlayer.stream = blow_sfx
+	$SFXPlayer.play()
 
 func animate_slash(position):
 	var slash = Slash.instance()

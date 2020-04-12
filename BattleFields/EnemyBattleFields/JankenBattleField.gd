@@ -10,6 +10,8 @@ var icon_map = {
 }
 
 const QuestionIcon = preload("res://Images/Buttons/question_button.png")
+const win_sfx = preload("res://Music/SFX/win_1.wav")
+const error_sfx = preload("res://Music/SFX/error_1.wav")
 
 func _ready():
 	$Field/VBoxContainer/PlayerOptions/PaperButton.connect("pressed", self, "_on_player_selected", [CHOICES.PAPER])
@@ -31,12 +33,16 @@ func handle_outcome(outcome):
 		OUTCOMES.WIN:
 			$Field/VBoxContainer/Outcome/Text.text = "YOU WIN!"
 			$Field/VBoxContainer/Outcome.show()
+			$SFXPlayer.stream = win_sfx
+			$SFXPlayer.play()
 			emit_signal("hit", GameConstants.HIT_FORCE.NORMAL)
 			yield(get_tree().create_timer(2), "timeout")
 			done()
 		OUTCOMES.LOSE:
 			$Field/VBoxContainer/Outcome/Text.text = "YOU LOSE!"
 			$Field/VBoxContainer/Outcome.show()
+			$SFXPlayer.stream = error_sfx
+			$SFXPlayer.play()
 			emit_signal("enemy_heal", GameConstants.HIT_FORCE.NORMAL)
 			yield(get_tree().create_timer(2), "timeout")
 			done()

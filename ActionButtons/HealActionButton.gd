@@ -1,6 +1,7 @@
 extends "res://ActionButtons/BaseActionButton.gd"
 
 const HealBattleField = preload("res://BattleFields/HealBattleField.tscn")
+const heal_sfx = preload("res://Music/SFX/heal_1.wav")
 
 func _on_pressed():
 	var healBattleField = HealBattleField.instance()
@@ -17,6 +18,7 @@ func _on_pressed():
 
 func _on_HealBattleField_heal(hit_force = null):
 	if(is_battle_ready()):
+		play_sfx(hit_force)
 		var base_amount = round(player.max_hp / 10)
 		var heal_amount = get_heal_amount(base_amount, hit_force)
 		player.hp += heal_amount
@@ -28,6 +30,10 @@ func _on_HealBattleField_miss():
 func _on_HealBattleField_done():
 	if(is_battle_ready()):
 		player.ap -= ap_cost
+
+func play_sfx(_hit_force):
+	$SFXPlayer.stream = heal_sfx
+	$SFXPlayer.play()
 
 func get_heal_amount(amount, hit_force):
 	match(hit_force):
