@@ -20,11 +20,11 @@ func undead_attack():
 	ActionBattle.start_small_field(fireAttackBattleField)
 
 func _on_fireAttackBattleField_enemy_hit(_hit_force):
-	.deal_damage()
+	.deal_damage(GameConstants.HIT_FORCE.STRONG)
 
 func _on_fireAttackBattleField_done():
 	can_die = true
-	.take_damage(1)
+	.take_damage(1) # Just to kill us off
 
 func is_dead():
 	return can_die and .is_dead()

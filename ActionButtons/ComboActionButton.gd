@@ -25,12 +25,11 @@ func _on_MultiHitBattleField_done():
 		player.mp += 2
 		player.ap -= ap_cost
 
-func get_damage(player_power, hit_force):
-	var power = round(player_power / 2)
+func get_damage(power, hit_force):
 	match(hit_force):
-		GameConstants.HIT_FORCE.CRIT: return power + 2
-		GameConstants.HIT_FORCE.STRONG: return power + 1
-		GameConstants.HIT_FORCE.NORMAL: return power
+		GameConstants.HIT_FORCE.CRIT: return round(power * 0.8)
+		GameConstants.HIT_FORCE.STRONG: return round(power * 0.5)
+		GameConstants.HIT_FORCE.NORMAL: return round(power * 0.3)
 		_: return 0
 
 func animate_slash(position):

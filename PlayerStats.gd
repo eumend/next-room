@@ -3,9 +3,9 @@ extends Node2D
 const BattleUnits = preload("res://BattleUnits.tres")
 const level_chart = {
 	1: 4,
-	2: 10,
-	3: 18,
-	4: 30,
+	2: 12,
+	3: 20,
+	4: 33,
 }
 
 export var max_hp = 25
@@ -16,7 +16,7 @@ export var max_mp = 10
 var mp = max_mp setget set_mp
 var exp_points = 0 setget set_exp_points
 var level = 1 setget set_level
-export var power = 4 setget set_power
+export var power = 3 setget set_power
 var player_statuses = []
 
 var base_hp = max_hp

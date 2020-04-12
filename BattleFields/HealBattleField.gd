@@ -39,9 +39,9 @@ func on_Bullet_hit(target, bullet_position):
 	bullets_that_hit += 1
 	if target.name == "Player":
 		if bullets_that_hit == total_bullets:
-			emit_signal("heal", 4)
+			emit_signal("heal", GameConstants.HIT_FORCE.CRIT)
 		else:
-			emit_signal("heal", 2)
+			emit_signal("heal")
 	else:
 		emit_signal("miss")
 	if bullets_that_hit == total_bullets:

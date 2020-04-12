@@ -27,8 +27,8 @@ func _on_SingleHitBattleField_done():
 
 func get_damage(power, hit_force):
 	match(hit_force):
-		GameConstants.HIT_FORCE.CRIT: return power + 2
-		GameConstants.HIT_FORCE.STRONG: return power + 1
+		GameConstants.HIT_FORCE.CRIT: return power + round(power / 3)
+		GameConstants.HIT_FORCE.STRONG: return power + round(power / 10)
 		GameConstants.HIT_FORCE.NORMAL: return power
 		_: return 0
 

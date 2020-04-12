@@ -1,10 +1,10 @@
 extends Node2D
 
-signal hit(damage)
+signal hit(force)
 signal enemy_hit(force)
 signal miss
-signal heal(amount)
-signal enemy_heal(amount)
+signal heal(force)
+signal enemy_heal(force)
 signal done
 
 # Called when the node enters the scene tree for the first time.

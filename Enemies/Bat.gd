@@ -11,7 +11,7 @@ func poison_attack():
 	yield(animationPlayer, "animation_finished")
 	emit_signal("end_turn")
 
-func deal_damage():
+func deal_damage(hit_force = null):
 	var playerStats = BattleUnits.PlayerStats
 	if playerStats:
 		if selected_attack == "poison_attack":
@@ -19,4 +19,4 @@ func deal_damage():
 			playerStats.take_damage(attack_power)
 			playerStats.add_status(GameConstants.STATUS.POISON)
 		else:
-			.deal_damage()
+			.deal_damage(hit_force)

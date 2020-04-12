@@ -12,9 +12,9 @@ onready var hpLabel = $HPLabel
 onready var damageLabel = $Damage
 onready var animationPlayer = $AnimationPlayer
 onready var damageAnimationPlayer = $DamageAnimationPlayer
-
 signal died(exp_points)
 signal end_turn
+var max_hp = hp
 
 var attack_pattern = {
 	"default_attack": 100,
@@ -33,15 +33,15 @@ func attack():
 		call(selected_attack)
 
 func default_attack():
-	animationPlayer.play("Attack")
+	animationPlayer.play("Attack") # Calls "deal_damage" mid animation
 	yield(animationPlayer, "animation_finished")
 	emit_signal("end_turn")
 
-
-func deal_damage(): #Connected to animations
+func deal_damage(hit_force = null): #Connected to animations
 	var playerStats = BattleUnits.PlayerStats
 	if playerStats:
-		playerStats.take_damage(power)
+		var amount = get_attack_damage_amount(power, hit_force)
+		playerStats.take_damage(amount)
 
 func heal_damage(amount):
 	self.hp += amount
@@ -67,6 +67,12 @@ func animate_damage(amount, hit_force):
 	damageLabel.text = get_text_for_damage(amount, hit_force)
 	damageAnimationPlayer.play("DamageNormal")
 
+func get_attack_damage_amount(amount, hit_force):
+	match(hit_force):
+		GameConstants.HIT_FORCE.CRIT: return amount + round(amount / 3)
+		GameConstants.HIT_FORCE.STRONG: return amount + round(amount / 5)
+		_: return amount
+
 func get_text_for_damage(amount, hit_force):
 	if amount == 0:
 		return "MISS!"
@@ -91,7 +97,7 @@ func set_hp(new_hp):
 func _ready():
 	BattleUnits.Enemy = self
 	set_hp(self.hp) # Updated label
-	DialogBox.show_timeout(entry_text, 3)
+	DialogBox.show_timeout(entry_text, 2)
 
 func _exit_tree():
 	BattleUnits.Enemy = null

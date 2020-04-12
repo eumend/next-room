@@ -76,8 +76,11 @@ var skill_tree = {
 	},
 }
 
-var current_level = 1
 var kill_streak = 0
+
+# Score vars
+var current_level = 1
+var turns_taken = 0
 
 func _ready():
 	create_player()
@@ -90,6 +93,7 @@ func start_battle():
 	start_player_turn()
 
 func start_player_turn():
+	turns_taken += 1
 	var playerStats = BattleUnits.PlayerStats
 	actionButtons.show()
 	playerStats.ap = playerStats.max_ap
@@ -157,9 +161,14 @@ func _on_Boss_died(exp_points):
 	else:
 		# No more levels, player won!
 		ActionBattle.force_end_of_battle()
-		BattleSummary.show_summary("GAME\nCOMPLETE", "YOU ROCK!")
-		actionButtons.hide()
-		restartButton.show()
+		on_game_finished()
+
+func on_game_finished():
+	var playerStats = BattleUnits.PlayerStats
+	var text = "LEVEL: " + str(playerStats.level) + "\n" + "TURNS: " + str(turns_taken)
+	BattleSummary.show_summary("GAME\nCOMPLETE", text)
+	actionButtons.hide()
+	restartButton.show()
 
 func update_level_layout():
 	$Dungeon.texture = Levels[current_level]["background"]
@@ -236,9 +245,13 @@ func _on_PlayerStats_died():
 func _on_RestartButton_pressed():
 	restartButton.hide()
 	BattleSummary.hide_summary()
+	restart_game()
+
+func restart_game():
 	var playerStats = BattleUnits.PlayerStats
 	playerStats.reset()
 	current_level = 1
+	turns_taken = 0
 	check_learned_skills(playerStats)
 	start_battle()
 	

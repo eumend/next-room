@@ -1,8 +1,5 @@
 extends "res://BattleFields/BaseBattleField.gd"
 
-var heal_amount = 4
-var damage_amount = 2
-
 enum CHOICES{ROCK, PAPER, SCISSORS}
 enum OUTCOMES{WIN, LOSE, DRAW}
 
@@ -34,13 +31,13 @@ func handle_outcome(outcome):
 		OUTCOMES.WIN:
 			$Field/VBoxContainer/Outcome/Text.text = "YOU WIN!"
 			$Field/VBoxContainer/Outcome.show()
-			emit_signal("hit", damage_amount)
+			emit_signal("hit", GameConstants.HIT_FORCE.NORMAL)
 			yield(get_tree().create_timer(2), "timeout")
 			done()
 		OUTCOMES.LOSE:
 			$Field/VBoxContainer/Outcome/Text.text = "YOU LOSE!"
 			$Field/VBoxContainer/Outcome.show()
-			emit_signal("enemy_heal", heal_amount)
+			emit_signal("enemy_heal", GameConstants.HIT_FORCE.NORMAL)
 			yield(get_tree().create_timer(2), "timeout")
 			done()
 		OUTCOMES.DRAW:

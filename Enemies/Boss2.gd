@@ -16,8 +16,8 @@ func fire_attack():
 	fireAttackBattleField.connect("done", self, "_on_fireAttackBattleField_done")
 	ActionBattle.start_small_field(fireAttackBattleField)
 
-func _on_fireAttackBattleField_enemy_hit(hit_force):
-	.deal_damage()
+func _on_fireAttackBattleField_enemy_hit(_hit_force):
+	.deal_damage(GameConstants.HIT_FORCE.STRONG)
 
 func _on_fireAttackBattleField_done():
 	emit_signal("end_turn")
