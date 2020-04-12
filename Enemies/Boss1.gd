@@ -7,6 +7,7 @@ func _init():
 		"default_attack": 65,
 		"janken_attack": 35,
 	}
+	death_animation_name = "ShakeFade"
 
 func janken_attack():
 	DialogBox.show_timeout("JAN-KEN...", 1)
@@ -25,3 +26,6 @@ func _on_jankenBattleField_hit(_hit_force):
 
 func _on_jankenBattleField_done():
 	emit_signal("end_turn")
+
+func on_dead():
+	.on_dead()

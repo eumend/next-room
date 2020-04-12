@@ -15,6 +15,7 @@ onready var damageAnimationPlayer = $DamageAnimationPlayer
 signal died(exp_points)
 signal end_turn
 var max_hp = hp
+var death_animation_name = "Fade"
 
 var attack_pattern = {
 	"default_attack": 100,
@@ -50,14 +51,17 @@ func heal_damage(amount):
 func take_damage(amount, hit_force = null):
 	self.hp -= amount
 	if is_dead():
-		emit_signal("died", exp_points)
-		animationPlayer.play("Fade")
-		yield(animationPlayer, "animation_finished")
-		queue_free()
+		on_dead()
 	else:
 		animate_damage(amount, hit_force)
 		animationPlayer.play("Shake")
 		yield(animationPlayer, "animation_finished")
+
+func on_dead():
+	animationPlayer.play(death_animation_name)
+	yield(animationPlayer, "animation_finished")
+	emit_signal("died", exp_points)
+	queue_free()
 
 func animate_heal(amount):
 	damageLabel.text = "+" + str(amount)

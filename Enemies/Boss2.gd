@@ -7,6 +7,7 @@ func _init():
 		"default_attack": 25,
 		"fire_attack": 75,
 	}
+	death_animation_name = "ShakeFade"
 
 func fire_attack():
 	DialogBox.show_timeout("BURN!", 1)
