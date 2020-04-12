@@ -1,7 +1,6 @@
 extends "res://BattleFields/BaseBattleField.gd"
 
 const GeyserAnimation = preload("res://Animations/GeyserAnimation.tscn")
-const erupt_sfx = preload("res://Music/SFX/erupt_1.wav")
 
 enum POSITIONS{TL, TR, BL, BR}
 enum FIRING_STATUS{IDLE, ERUPTING, FIRING}
@@ -83,8 +82,7 @@ func on_GeyserAnimation_done(position):
 		done()
 
 func on_GeyserAnimation_fired(position):
-	$SFXPlayer.stream = erupt_sfx
-	$SFXPlayer.play()
+	$SFXErupt.play()
 	firing_status[position] = FIRING_STATUS.FIRING
 	if current_player_position == position:
 		emit_signal("enemy_hit", GameConstants.HIT_FORCE.NORMAL)

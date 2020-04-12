@@ -9,6 +9,7 @@ script = ExtResource( 2 )
 hp = 25
 power = 5
 exp_points = 5
+is_boss = true
 entry_text = "Mummy Knight draws near!!"
 
 [node name="Sprite" parent="." index="0"]

@@ -7,16 +7,15 @@ const ActionBattle = preload("res://ActionBattle.tres")
 export(int) var hp = 10 setget set_hp
 export(int) var power = 4
 export(int) var exp_points = 1
+export(bool) var is_boss = false
 export (String, MULTILINE) var entry_text = ""
 onready var hpLabel = $HPLabel
 onready var animationPlayer = $AnimationPlayer
 const NumberAnimation = preload("res://Animations/NumberAnimation.tscn")
-const blow_sfx = preload("res://Music/SFX/blow_2.wav")
-const heal_sfx = preload("res://Music/SFX/heal_1.wav")
+
 signal died(exp_points)
 signal end_turn
 var max_hp = hp
-var death_animation_name = "Fade"
 
 var attack_pattern = {
 	"default_attack": 100,
@@ -41,7 +40,7 @@ func default_attack():
 
 
 func deal_damage(hit_force = null): #Connected to animations
-	play_sfx(blow_sfx)
+	$SFXBlow.play()
 	var playerStats = BattleUnits.PlayerStats
 	if playerStats:
 		var amount = get_attack_damage_amount(power, hit_force)
@@ -49,7 +48,7 @@ func deal_damage(hit_force = null): #Connected to animations
 
 func heal_damage(amount):
 	self.hp += amount
-	play_sfx(heal_sfx)
+	$SFXHeal.play()
 	animate_heal(amount)
 
 func take_damage(amount, hit_force = null):
@@ -62,6 +61,9 @@ func take_damage(amount, hit_force = null):
 		yield(animationPlayer, "animation_finished")
 
 func on_dead():
+	if is_boss:
+		$SFXBossDeath.play()
+	var death_animation_name = "ShakeFade" if is_boss else "Fade"
 	animationPlayer.play(death_animation_name)
 	yield(animationPlayer, "animation_finished")
 	emit_signal("died", exp_points)
@@ -110,7 +112,3 @@ func _ready():
 
 func _exit_tree():
 	BattleUnits.Enemy = null
-
-func play_sfx(sfx_stream):
-	$SFXPlayer.stream = sfx_stream
-	$SFXPlayer.play()

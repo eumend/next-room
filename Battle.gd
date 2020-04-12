@@ -5,10 +5,6 @@ const DialogBox = preload("res://DialogBox.tres")
 const ActionBattle = preload("res://ActionBattle.tres")
 const BattleSummary = preload("res://BattleSummary.tres")
 
-const level_up_sfx = preload("res://Music/SFX/level_up.wav")
-const game_over_sfx = preload("res://Music/SFX/game_over.wav")
-const footsteps_sfx = preload("res://Music/SFX/footsteps_1.wav")
-
 export(Array, PackedScene) var enemies = []
 
 onready var actionButtons = $UI/BattleActionButtons
@@ -174,8 +170,7 @@ func on_game_finished():
 	BattleSummary.show_summary("GAME\nCOMPLETE", text)
 	actionButtons.hide()
 	restartButton.show()
-	$SFXPlayer.stream = level_up_sfx
-	$SFXPlayer.play()
+	$SFXLevelUp.play()
 
 func update_level_layout():
 	$Dungeon.texture = Levels[current_level]["background"]
@@ -201,8 +196,7 @@ func _on_Enemy_died(exp_points):
 
 func on_level_up():
 	var playerStats = BattleUnits.PlayerStats
-	$SFXPlayer.stream = level_up_sfx
-	$SFXPlayer.play()
+	$SFXLevelUp.play()
 	show_level_up_summary(playerStats.last_level_up_summary)
 	check_learned_skills(playerStats)
 
@@ -210,8 +204,7 @@ func _on_NextRoomButton_pressed():
 	nextRoomButton.hide()
 	nextRoomButton.text = "ENTER NEXT ROOM"
 	BattleSummary.hide_summary()
-	$SFXPlayer.stream = footsteps_sfx
-	$SFXPlayer.play()
+	$SFXNextRoom.play()
 	animationPlayer.play("FadeToNewRoom")
 	yield(animationPlayer, "animation_finished")
 	start_battle()
@@ -219,8 +212,7 @@ func _on_NextRoomButton_pressed():
 func game_over():
 	ActionBattle.force_end_of_battle()
 	$BGPlayer.stop()
-	$SFXPlayer.stream = game_over_sfx
-	$SFXPlayer.play()
+	$SFXGameOver.play()
 	BattleSummary.show_summary("GAME OVER", "")
 
 func check_learned_skills(player):

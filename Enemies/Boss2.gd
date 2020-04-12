@@ -1,14 +1,12 @@
 extends "res://Enemies/BaseEnemy.gd"
 
 const FireAtackBattleField = preload("res://BattleFields/EnemyBattleFields/GridGeyserBattleField.tscn")
-const death_sfx = preload("res://Music/SFX/explosion_1.wav")
 
 func _init():
 	attack_pattern = {
 		"default_attack": 25,
 		"fire_attack": 75,
 	}
-	death_animation_name = "ShakeFade"
 
 func fire_attack():
 	DialogBox.show_timeout("BURN!", 1)
@@ -23,7 +21,3 @@ func _on_fireAttackBattleField_enemy_hit(_hit_force):
 
 func _on_fireAttackBattleField_done():
 	emit_signal("end_turn")
-
-func on_dead():
-	play_sfx(death_sfx)
-	.on_dead()

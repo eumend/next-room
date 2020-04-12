@@ -2,7 +2,6 @@ extends "res://ActionButtons/BaseActionButton.gd"
 
 const Slash = preload("res://Animations/Slash.tscn")
 const SingleHitBattleField = preload("res://BattleFields/SingleHitBattleField.tscn")
-const blow_sfx = preload("res://Music/SFX/blow_1.wav")
 
 func _on_pressed():
 	var singleHitBattleField = SingleHitBattleField.instance()
@@ -35,8 +34,7 @@ func get_damage(power, hit_force):
 		_: return 0
 
 func play_sfx(_hit_force):
-	$SFXPlayer.stream = blow_sfx
-	$SFXPlayer.play()
+	$SFXBlow.play()
 
 func animate_slash(position):
 	var slash = Slash.instance()
