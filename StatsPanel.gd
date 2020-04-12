@@ -8,6 +8,7 @@ onready var powLabel = $StatsContainer/POW
 onready var statusContainer = $StatsContainer/Status
 
 const poison_icon = preload("res://Images/skull_icon.png")
+const NumberAnimation = preload("res://Animations/NumberAnimation.tscn")
 
 func _on_PlayerStats_hp_changed(value):
 	hpLabel.text = "HP\n" + str(value)
@@ -48,3 +49,15 @@ func get_status_icon(status):
 		_: return null
 
 
+
+
+func _on_PlayerStats_heal_damage(amount):
+	var numberAnimation = NumberAnimation.instance()
+	hpLabel.add_child(numberAnimation)
+	numberAnimation.play_heal(amount)
+
+
+func _on_PlayerStats_took_damage(amount):
+	var numberAnimation = NumberAnimation.instance()
+	hpLabel.add_child(numberAnimation)
+	numberAnimation.play_damage(amount)

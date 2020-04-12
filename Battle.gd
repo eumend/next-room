@@ -248,10 +248,12 @@ func _on_RestartButton_pressed():
 	restart_game()
 
 func restart_game():
+	animationPlayer.play("FadeToNewRoom")
 	var playerStats = BattleUnits.PlayerStats
 	playerStats.reset()
 	current_level = 1
 	turns_taken = 0
 	check_learned_skills(playerStats)
+	yield(animationPlayer, "animation_finished")
 	start_battle()
 	

@@ -9,9 +9,8 @@ export(int) var power = 4
 export(int) var exp_points = 1
 export (String, MULTILINE) var entry_text = ""
 onready var hpLabel = $HPLabel
-onready var damageLabel = $Damage
 onready var animationPlayer = $AnimationPlayer
-onready var damageAnimationPlayer = $DamageAnimationPlayer
+const NumberAnimation = preload("res://Animations/NumberAnimation.tscn")
 signal died(exp_points)
 signal end_turn
 var max_hp = hp
@@ -64,12 +63,17 @@ func on_dead():
 	queue_free()
 
 func animate_heal(amount):
-	damageLabel.text = "+" + str(amount)
-	damageAnimationPlayer.play("DamageNormal")
+	var numberAnimation = NumberAnimation.instance()
+	hpLabel.add_child(numberAnimation)
+	numberAnimation.play_heal(amount)
 
 func animate_damage(amount, hit_force):
-	damageLabel.text = get_text_for_damage(amount, hit_force)
-	damageAnimationPlayer.play("DamageNormal")
+	var numberAnimation = NumberAnimation.instance()
+	hpLabel.add_child(numberAnimation)
+	if amount == 0:
+		numberAnimation.play_miss()
+	else:
+		numberAnimation.play_damage(amount, get_hit_force_text(hit_force))
 
 func get_attack_damage_amount(amount, hit_force):
 	match(hit_force):
@@ -77,15 +81,11 @@ func get_attack_damage_amount(amount, hit_force):
 		GameConstants.HIT_FORCE.STRONG: return amount + round(amount / 5)
 		_: return amount
 
-func get_text_for_damage(amount, hit_force):
-	if amount == 0:
-		return "MISS!"
-	var extra_text = ""
-	if hit_force == GameConstants.HIT_FORCE.CRIT:
-		extra_text = "!!"
-	elif hit_force == GameConstants.HIT_FORCE.STRONG:
-		extra_text = "!"
-	return "-" + str(amount) + extra_text
+func get_hit_force_text(hit_force):
+	match(hit_force):
+		GameConstants.HIT_FORCE.CRIT: return "!!"
+		GameConstants.HIT_FORCE.STRONG: return "!"
+		_: return ""
 
 func is_dead():
 	return hp <= 0

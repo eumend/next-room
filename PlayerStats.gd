@@ -29,6 +29,8 @@ signal power_changed(value)
 signal level_changed(value)
 signal level_up(value)
 signal status_changed(value)
+signal took_damage(value)
+signal heal_damage(value)
 signal died
 signal end_turn
 
@@ -56,6 +58,7 @@ func clear_status():
 	player_statuses = []
 	emit_signal("status_changed", player_statuses)
 
+
 func take_damage(damage):
 	var taken_damage = damage
 	if self.has_status(GameConstants.STATUS.SHIELDED):
@@ -63,8 +66,13 @@ func take_damage(damage):
 	self.hp -= taken_damage
 
 func set_hp(value):
+	var old_hp = hp
 	hp = clamp(value, 0, max_hp)
 	emit_signal("hp_changed", hp)
+	if old_hp > hp:
+		emit_signal("took_damage", old_hp - hp)
+	elif old_hp < hp:
+		emit_signal("heal_damage", hp - old_hp)
 	if hp == 0:
 		emit_signal("died")
 
