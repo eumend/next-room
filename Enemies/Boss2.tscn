@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Enemies/BaseEnemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Enemies/Boss2.gd" type="Script" id=2]
+
+[node name="Boss2" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+entry_text = ""

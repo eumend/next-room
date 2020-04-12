@@ -5,6 +5,7 @@
 
 [node name="Boss1" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+hp = 20
 exp_points = 5
 entry_text = "The Boss draws near!!"
 
