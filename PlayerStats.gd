@@ -36,6 +36,9 @@ signal end_turn
 
 var last_level_up_summary = {}
 
+func is_dead():
+	return self.hp <= 0
+
 func reset():
 	self.hp = base_hp
 	self.power = base_power

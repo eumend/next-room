@@ -132,18 +132,19 @@ func handle_status_eot():
 	emit_signal("_done")
 
 func _on_Player_end_turn():
+	actionButtons.hide()
 	var enemy = BattleUnits.Enemy
 	if enemy != null and !enemy.is_dead():
-		actionButtons.hide()
 		start_enemy_turn()
 
 func _on_Enemy_end_turn():
 	var player = BattleUnits.PlayerStats
-	if player.is_under_status():
-		yield(get_tree().create_timer(0.3), "timeout")
-		handle_status_eot()
-		yield(self, "_done")
-	start_player_turn()
+	if not player.is_dead():
+		if player.is_under_status():
+			yield(get_tree().create_timer(0.3), "timeout")
+			handle_status_eot()
+			yield(self, "_done")
+		start_player_turn()
 
 func _on_Player_status_changed(status):
 	if status.size() > 0:
@@ -259,6 +260,7 @@ func restart_game():
 	playerStats.reset()
 	current_level = 1
 	turns_taken = 0
+	kill_streak = 0
 	check_learned_skills(playerStats)
 	yield(animationPlayer, "animation_finished")
 	$BGPlayer.play()

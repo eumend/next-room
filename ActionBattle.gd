@@ -22,6 +22,9 @@ func force_end_of_battle():
 		battleField.queue_free()
 
 func on_BattleField_done():
-	var battleField = BattleField.get_ref()
-	if MidPanel != null and battleField:
-		MidPanel.show()
+	# TODO: Show Upper and Lower Panel when we are done. The MidPanel will be shows by the Battle.gd script.
+	# We want to keep the get_ref here as battlefields clear up themselves and we want to check if they freed themselves
+	pass # The battle code will show the action buttons/mid field when it needs to!
+#	var battleField = BattleField.get_ref()
+#	if MidPanel != null and battleField:
+#		MidPanel.show()
