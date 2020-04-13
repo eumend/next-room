@@ -28,9 +28,9 @@ func _on_MultiHitBattleField_done():
 
 func get_damage(power, hit_force):
 	match(hit_force):
-		GameConstants.HIT_FORCE.CRIT: return round(power * 0.8)
-		GameConstants.HIT_FORCE.STRONG: return round(power * 0.5)
-		GameConstants.HIT_FORCE.NORMAL: return round(power * 0.3)
+		GameConstants.HIT_FORCE.CRIT: return ceil(power * 0.8)
+		GameConstants.HIT_FORCE.STRONG: return ceil(power * 0.5)
+		GameConstants.HIT_FORCE.NORMAL: return ceil(power * 0.3)
 		_: return 0
 
 func play_sfx(_hit_force):

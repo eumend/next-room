@@ -8,7 +8,7 @@ const level_chart = {
 	4: 33,
 }
 
-export var max_hp = 25
+export var max_hp = 20
 var hp = max_hp setget set_hp
 export var max_ap = 3
 var ap = max_ap setget set_ap
@@ -113,7 +113,7 @@ func level_up(lv_increase):
 	self.power += power_increase
 	
 	# Heal
-	self.hp = self.max_hp
+	self.hp += round(self.max_hp / 2)
 	self.mp = self.max_mp
 	
 	last_level_up_summary = {

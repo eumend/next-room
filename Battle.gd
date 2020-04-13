@@ -53,6 +53,8 @@ var Levels = {
 var kill_streak = 0
 var current_level = 1
 var turns_taken = 0
+var total_turns_taken = 0
+var current_run = 0
 
 func _ready():
 	$BGPlayer.play()
@@ -67,6 +69,7 @@ func start_battle():
 
 func start_player_turn():
 	turns_taken += 1
+	total_turns_taken += 1
 	var playerStats = BattleUnits.PlayerStats
 	actionButtons.show_skills()
 	playerStats.ap = playerStats.max_ap
@@ -137,9 +140,10 @@ func _on_Boss_died(exp_points):
 		on_game_finished()
 
 func on_game_finished():
+	current_run += 1
 	var playerStats = BattleUnits.PlayerStats
-	var text = "LEVEL: " + str(playerStats.level) + "\n" + "TURNS: " + str(turns_taken)
-	BattleSummary.show_summary("GAME\nCOMPLETE", text)
+	var text = "TURNS: " + str(turns_taken) + "\n" + "TOTAL: " + str(total_turns_taken) + "\n" + "STREAK: " + str(current_run)
+	BattleSummary.show_summary("FINISHED!", text)
 	actionButtons.hide()
 	restartButton.show()
 	$SFXLevelUp.play()
@@ -184,7 +188,11 @@ func game_over():
 	ActionBattle.force_end_of_battle()
 	$BGPlayer.stop()
 	$SFXGameOver.play()
-	BattleSummary.show_summary("GAME OVER", "")
+	var text = "TURNS: " + str(turns_taken) + "\n" + "TOTAL: " + str(total_turns_taken) + "\n" + "STREAK: " + str(current_run)
+	BattleSummary.show_summary("GAME OVER", text)
+	actionButtons.hide()
+	restartButton.show()
+	current_run = 0
 
 func show_level_up_summary(level_up_summary):
 	var body = ""
@@ -215,6 +223,10 @@ func restart_game():
 	animationPlayer.play("FadeToNewRoom")
 	var playerStats = BattleUnits.PlayerStats
 	playerStats.reset()
+	var enemy = BattleUnits.Enemy
+	if enemy:
+		BattleUnits.Enemy = null
+		enemy.queue_free()
 	current_level = 1
 	turns_taken = 0
 	kill_streak = 0

@@ -16,7 +16,7 @@ func deal_damage(hit_force = null):
 	if playerStats:
 		if selected_attack == "poison_attack":
 			$SFXBlow.play()
-			var attack_power = max(round(power / 2), 1)
+			var attack_power = max(ceil(power / 2), 1)
 			playerStats.take_damage(attack_power)
 			playerStats.add_status(GameConstants.STATUS.POISON)
 		else:

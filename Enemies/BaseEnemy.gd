@@ -21,6 +21,12 @@ var attack_pattern = {
 	"default_attack": 100,
 }
 
+var hit_force_pattern = {
+	GameConstants.HIT_FORCE.NORMAL: 60,
+	GameConstants.HIT_FORCE.STRONG: 30,
+	GameConstants.HIT_FORCE.CRIT: 10,
+}
+
 var selected_attack = null
 
 func start_turn():
@@ -43,6 +49,7 @@ func deal_damage(hit_force = null): #Connected to animations
 	$SFXBlow.play()
 	var playerStats = BattleUnits.PlayerStats
 	if playerStats:
+		hit_force = hit_force if hit_force else Utils.pick_from_weighted(hit_force_pattern)
 		var amount = get_attack_damage_amount(power, hit_force)
 		playerStats.take_damage(amount)
 
@@ -84,8 +91,8 @@ func animate_damage(amount, hit_force):
 
 func get_attack_damage_amount(amount, hit_force):
 	match(hit_force):
-		GameConstants.HIT_FORCE.CRIT: return amount + round(amount / 3)
-		GameConstants.HIT_FORCE.STRONG: return amount + round(amount / 5)
+		GameConstants.HIT_FORCE.CRIT: return amount + ceil(amount / 3)
+		GameConstants.HIT_FORCE.STRONG: return amount + ceil(amount / 5)
 		_: return amount
 
 func get_hit_force_text(hit_force):

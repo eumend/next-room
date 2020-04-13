@@ -9,23 +9,38 @@ onready var statusContainer = $StatsContainer/Status
 
 const poison_icon = preload("res://Images/skull_icon.png")
 const NumberAnimation = preload("res://Animations/NumberAnimation.tscn")
+const BattleUnits = preload("res://BattleUnits.tres")
 
-func _on_PlayerStats_hp_changed(value):
+func _ready():
+	var player = BattleUnits.PlayerStats
+	if player:
+		update_hp(player.hp)
+		update_pow(player.power)
+		update_level(player.level)
+
+func update_hp(value):
 	hpLabel.text = "HP\n" + str(value)
 
+func update_pow(value):
+	powLabel.text = "POW\n" + str(value)
 
+func update_level(value):
+	lvLabel.text = "LV\n" + str(value)
+
+func _on_PlayerStats_hp_changed(value):
+	update_hp(value)
+	
 func _on_PlayerStats_mp_changed(value):
 	mpLabel.text = "MP\n" + str(value)
-
 
 func _on_PlayerStats_ap_changed(value):
 	apLabel.text = "AP\n" + str(value)
 
 func _on_PlayerStats_level_changed(value, _old_value):
-	lvLabel.text = "LV\n" + str(value)
+	update_level(value)
 
 func _on_PlayerStats_power_changed(value):
-	powLabel.text = "POW\n" + str(value)
+	update_pow(value)
 
 func _on_PlayerStats_status_changed(statuses):
 	if statuses.size() > 0:
