@@ -21,7 +21,7 @@ func _on_PlayerStats_mp_changed(value):
 func _on_PlayerStats_ap_changed(value):
 	apLabel.text = "AP\n" + str(value)
 
-func _on_PlayerStats_level_changed(value):
+func _on_PlayerStats_level_changed(value, _old_value):
 	lvLabel.text = "LV\n" + str(value)
 
 func _on_PlayerStats_power_changed(value):

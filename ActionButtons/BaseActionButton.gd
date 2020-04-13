@@ -6,6 +6,14 @@ var player = null
 var enemy = null
 
 export(int) var ap_cost = 1
+export(int) var level_required = 1
+
+func is_learned():
+	player = BattleUnits.PlayerStats
+	return player and player.level >= level_required
+
+func is_disabled():
+	return false
 
 func _on_pressed():
 	pass # Replace with function body.

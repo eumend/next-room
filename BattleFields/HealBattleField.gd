@@ -34,7 +34,7 @@ func fire_bullet():
 	add_child(new_bullet)
 	new_bullet.connect("hit", self, "on_Bullet_hit")
 
-func on_Bullet_hit(target, bullet_position):
+func on_Bullet_hit(target, _bullet_position):
 	# TODO: Use position to show some animation?
 	bullets_that_hit += 1
 	if target.name == "Player":

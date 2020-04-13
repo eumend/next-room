@@ -5,7 +5,7 @@ var direction = Vector2(0, 1) # Down
 var base_speed = 40
 var speed_increment = 1
 
-func init(new_position, new_direction, new_speed_increment = null, new_color = null):
+func init(new_position, new_direction, new_speed_increment = null, _new_color = null):
 	if new_position:
 		self.position = new_position
 	if new_direction:

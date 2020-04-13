@@ -125,8 +125,9 @@ func level_up(lv_increase):
 	}
 
 func set_level(value):
+	var old_level = level
 	level = clamp(value, 0, 99)
-	emit_signal("level_changed", level)
+	emit_signal("level_changed", level, old_level)
 
 func _ready():
 	BattleUnits.PlayerStats = self

@@ -8,12 +8,6 @@ func _on_pressed():
 	healBattleField.connect("miss", self, "_on_HealBattleField_miss")
 	healBattleField.connect("done", self, "_on_HealBattleField_done")
 	ActionBattle.start_small_field(healBattleField)
-#	if(is_player_ready()):
-#		if player.mp >= 8:
-#			player.hp += 5
-#			player.mp -= 8
-#			player.ap -= ap_cost
-#
 
 func _on_HealBattleField_heal(hit_force = null):
 	if(is_battle_ready()):
@@ -38,3 +32,7 @@ func get_heal_amount(amount, hit_force):
 		GameConstants.HIT_FORCE.CRIT: return amount * 2
 		GameConstants.HIT_FORCE.STRONG: return amount + round(amount / 10)
 		_: return amount
+
+func is_disabled():
+	player = BattleUnits.PlayerStats
+	return player.hp >= player.max_hp

@@ -49,36 +49,8 @@ var Levels = {
 	}
 }
 
-var skill_tree = {
-	GameConstants.PLAYER_SKILLS.SWORD: {
-		"name": "SWORD",
-		"level": 1,
-		"learned": false,
-		"button": preload("res://ActionButtons/SwordActionButton.tscn")
-	},
-	GameConstants.PLAYER_SKILLS.HEAL: {
-		"name": "HEAL",
-		"level": 2,
-		"learned": false,
-		"button": preload("res://ActionButtons/HealActionButton.tscn")
-	},
-#	GameConstants.PLAYER_SKILLS.SHIELD: {
-#		"name": "SHIELD",
-#		"level": 1,
-#		"learned": false,
-#		"button": preload("res://ActionButtons/ShieldActionButton.tscn")
-#	},
-	GameConstants.PLAYER_SKILLS.COMBO: {
-		"name": "COMBO",
-		"level": 3,
-		"learned": false,
-		"button": preload("res://ActionButtons/ComboActionButton.tscn")
-	},
-}
-
-var kill_streak = 0
-
 # Score vars
+var kill_streak = 0
 var current_level = 1
 var turns_taken = 0
 
@@ -96,14 +68,13 @@ func start_battle():
 func start_player_turn():
 	turns_taken += 1
 	var playerStats = BattleUnits.PlayerStats
-	actionButtons.show()
+	actionButtons.show_skills()
 	playerStats.ap = playerStats.max_ap
 
 func create_player():
 	var playerStats = BattleUnits.PlayerStats
 	playerStats.connect("end_turn", self, "_on_Player_end_turn")
 	playerStats.connect("status_changed", self, "_on_Player_status_changed")
-	check_learned_skills(playerStats)
 
 func start_enemy_turn():
 	var enemy = BattleUnits.Enemy
@@ -199,7 +170,6 @@ func on_level_up():
 	var playerStats = BattleUnits.PlayerStats
 	$SFXLevelUp.play()
 	show_level_up_summary(playerStats.last_level_up_summary)
-	check_learned_skills(playerStats)
 
 func _on_NextRoomButton_pressed():
 	nextRoomButton.hide()
@@ -215,19 +185,6 @@ func game_over():
 	$BGPlayer.stop()
 	$SFXGameOver.play()
 	BattleSummary.show_summary("GAME OVER", "")
-
-func check_learned_skills(player):
-	var learned_skills = []
-	for k in skill_tree:
-		var skill = skill_tree[k]
-		if player.level >= skill["level"] and not skill["learned"]:
-			learned_skills.append(k)
-	for k in learned_skills:
-		var skill = skill_tree[k]
-		var new_skill_button = skill["button"].instance()
-		actionButtons.add_child(new_skill_button)
-		DialogBox.show_timeout("Learned " + skill["name"], 2)
-		skill_tree[k]["learned"] = true
 
 func show_level_up_summary(level_up_summary):
 	var body = ""
@@ -261,7 +218,6 @@ func restart_game():
 	current_level = 1
 	turns_taken = 0
 	kill_streak = 0
-	check_learned_skills(playerStats)
 	yield(animationPlayer, "animation_finished")
 	$BGPlayer.play()
 	start_battle()
