@@ -35,4 +35,4 @@ func get_heal_amount(amount, hit_force):
 
 func is_disabled():
 	player = BattleUnits.PlayerStats
-	return player.hp >= player.max_hp
+	return .is_disabled() or player.hp >= player.max_hp
