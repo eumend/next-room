@@ -2,8 +2,8 @@ extends "res://Enemies/BaseEnemy.gd"
 
 const JanKenBattleField = preload("res://BattleFields/EnemyBattleFields/JankenBattleField.tscn")
 
-func _init():
-	attack_pattern = {
+func get_attack_pattern():
+	return {
 		"default_attack": 55,
 		"janken_attack": 45,
 	}

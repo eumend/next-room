@@ -6,6 +6,7 @@
 
 [node name="Skull" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
+max_hp = 12
 exp_points = 3
 entry_text = "A Skull appeared!"
 

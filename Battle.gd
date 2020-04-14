@@ -132,6 +132,7 @@ func _on_Player_status_changed(status):
 func _on_Boss_died(exp_points):
 	current_level += 1
 	kill_streak = 0
+	nextRoomButton.text = "NEXT FLOOR"
 	if current_level in Levels:
 		_on_Enemy_died(exp_points)
 	else:
@@ -141,7 +142,6 @@ func _on_Boss_died(exp_points):
 
 func on_game_finished():
 	current_run += 1
-	var playerStats = BattleUnits.PlayerStats
 	var text = "TURNS: " + str(turns_taken) + "\n" + "TOTAL: " + str(total_turns_taken) + "\n" + "STREAK: " + str(current_run)
 	BattleSummary.show_summary("FINISHED!", text)
 	actionButtons.hide()

@@ -6,7 +6,7 @@
 
 [node name="Boss2" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-hp = 30
+max_hp = 30
 is_boss = true
 entry_text = "Flame Skull attacks!"
 

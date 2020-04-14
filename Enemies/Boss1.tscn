@@ -6,7 +6,7 @@
 
 [node name="Boss1" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-hp = 25
+max_hp = 25
 power = 5
 exp_points = 5
 is_boss = true

@@ -4,7 +4,7 @@
 [ext_resource path="res://Images/Slime.png" type="Texture" id=2]
 
 [node name="Slime" instance=ExtResource( 1 )]
-hp = 12
+max_hp = 15
 power = 3
 exp_points = 2
 entry_text = "A Slime attacks!"

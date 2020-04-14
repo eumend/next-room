@@ -60,7 +60,7 @@ func spawn_geysers(position = null):
 	spawn_geyser(position)
 	geysers_left -= 1
 	if geysers_left > 0:
-		var time = 1 if geysers_left > 2 else 0.8
+		var time = 1.0 if geysers_left > 2 else 0.8
 		yield(get_tree().create_timer(time), "timeout")
 		spawn_geysers()
 

@@ -1,7 +1,7 @@
 extends "res://Enemies/BaseEnemy.gd"
 
-func _init():
-	attack_pattern = {
+func get_attack_pattern():
+	return {
 		"default_attack": 25,
 		"poison_attack": 75,
 	}

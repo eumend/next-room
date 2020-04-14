@@ -4,8 +4,8 @@ const FireAtackBattleField = preload("res://BattleFields/EnemyBattleFields/GridG
 
 var can_die = false
 
-func _init():
-	attack_pattern = {
+func get_attack_pattern():
+	return {
 		"default_attack": 35,
 		"fire_attack": 65,
 	}

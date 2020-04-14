@@ -4,7 +4,7 @@ const BattleUnits = preload("res://BattleUnits.tres")
 const DialogBox = preload("res://DialogBox.tres")
 const ActionBattle = preload("res://ActionBattle.tres")
 
-export(int) var hp = 10 setget set_hp
+export(int) var max_hp = 10
 export(int) var power = 4
 export(int) var exp_points = 1
 export(bool) var is_boss = false
@@ -15,11 +15,8 @@ const NumberAnimation = preload("res://Animations/NumberAnimation.tscn")
 
 signal died(exp_points)
 signal end_turn
-var max_hp = hp
 
-var attack_pattern = {
-	"default_attack": 100,
-}
+var hp = max_hp setget set_hp
 
 var hit_force_pattern = {
 	GameConstants.HIT_FORCE.NORMAL: 60,
@@ -27,7 +24,7 @@ var hit_force_pattern = {
 	GameConstants.HIT_FORCE.CRIT: 10,
 }
 
-var selected_attack = null
+var selected_attack = null # Used when calling an attack during an animation
 
 func start_turn():
 	yield(get_tree().create_timer(0.4), "timeout")
@@ -35,9 +32,15 @@ func start_turn():
 
 func attack():
 	randomize()
+	var attack_pattern = get_attack_pattern()
 	selected_attack = Utils.pick_from_weighted(attack_pattern)
 	if selected_attack:
 		call(selected_attack)
+
+func get_attack_pattern():
+	return {
+		"default_attack": 100,
+	}
 
 func default_attack():
 	animationPlayer.play("Attack") # Calls "deal_damage" mid animation
@@ -114,7 +117,7 @@ func set_hp(new_hp):
 
 func _ready():
 	BattleUnits.Enemy = self
-	set_hp(self.hp) # Updated label
+	self.hp = self.max_hp
 	DialogBox.show_timeout(entry_text, 2)
 
 func _exit_tree():
