@@ -67,58 +67,38 @@ func start_battle():
 	create_new_enemy()
 	start_player_turn()
 
+
+func create_player():
+	var playerStats = BattleUnits.PlayerStats
+	playerStats.connect("end_turn", self, "_on_Player_end_turn")
+	playerStats.connect("died", self, "_on_Player_died")
+	playerStats.connect("status_changed", self, "_on_Player_status_changed")
+
 func start_player_turn():
+	BattleUnits.set_current_turn(GameConstants.UNITS.PLAYER)
 	turns_taken += 1
 	total_turns_taken += 1
 	var playerStats = BattleUnits.PlayerStats
 	actionButtons.show_skills()
 	playerStats.ap = playerStats.max_ap
 
-func create_player():
-	var playerStats = BattleUnits.PlayerStats
-	playerStats.connect("end_turn", self, "_on_Player_end_turn")
-	playerStats.connect("status_changed", self, "_on_Player_status_changed")
-
-func start_enemy_turn():
-	var enemy = BattleUnits.Enemy
-	if enemy != null and not enemy.is_queued_for_deletion():
-		enemy.start_turn()
-
-func create_new_enemy():
-	var level_info = Levels[current_level]
-	var is_boss_battle = kill_streak == level_info["mook_count"]
-	var enemy_name = level_info["boss"] if is_boss_battle else Utils.pick_from_weighted(level_info["enemies"])
-	var Enemy = Enemies[enemy_name]
-	var enemy = Enemy.instance()
-	enemyStartPosition.add_child(enemy)
-	enemy.connect("end_turn", self, "_on_Enemy_end_turn")
-	if is_boss_battle:
-		enemy.connect("died", self, "_on_Boss_died")
-	else:
-		enemy.connect("died", self, "_on_Enemy_died")
-
-func handle_status_eot():
-	var player = BattleUnits.PlayerStats
-	if player.has_status(GameConstants.STATUS.POISON):
-		DialogBox.show_timeout("Damage by poison!", 1)
-		player.hp -= 1
-		yield(DialogBox, "done")
-	emit_signal("_done")
-
 func _on_Player_end_turn():
-	actionButtons.hide()
-	var enemy = BattleUnits.Enemy
-	if enemy != null and !enemy.is_dead():
-		start_enemy_turn()
+	if BattleUnits.is_player_turn(): # We trigger this early if the enemy dies, so this can get called twice
+		BattleUnits.set_current_turn(null)
+		actionButtons.hide()
+		var battle_continues = eot_checks()
+		var player_continues = player_eot_checks()
+		if battle_continues and player_continues:
+			start_enemy_turn()
 
-func _on_Enemy_end_turn():
-	var player = BattleUnits.PlayerStats
-	if not player.is_dead():
-		if player.is_under_status():
-			yield(get_tree().create_timer(0.3), "timeout")
-			handle_status_eot()
-			yield(self, "_done")
-		start_player_turn()
+func player_eot_checks():
+	return true
+
+func _on_PlayerStats_died():
+	ActionBattle.force_end_of_battle()
+	if BattleUnits.is_player_turn():
+		actionButtons.hide()
+	# TODO: We could show game_over instantly here
 
 func _on_Player_status_changed(status):
 	if status.size() > 0:
@@ -129,40 +109,88 @@ func _on_Player_status_changed(status):
 				return
 			_: return
 
-func _on_Boss_died(exp_points):
+func create_new_enemy():
+	var level_info = Levels[current_level]
+	var is_boss_battle = kill_streak == level_info["mook_count"]
+	var enemy_name = level_info["boss"] if is_boss_battle else Utils.pick_from_weighted(level_info["enemies"])
+	var Enemy = Enemies[enemy_name]
+	var enemy = Enemy.instance()
+	enemyStartPosition.add_child(enemy)
+	enemy.connect("end_turn", self, "_on_Enemy_end_turn")
+	enemy.connect("died", self, "_on_Enemy_died")
+
+func _on_Enemy_end_turn():
+	BattleUnits.set_current_turn(null)
+	var battle_continues = eot_checks()
+	var enemy_continues = enemy_eot_checks()
+	if battle_continues and enemy_continues:
+		start_player_turn()
+
+func _on_Enemy_died():
+	ActionBattle.force_end_of_battle()
+	if BattleUnits.is_player_turn():
+		_on_Player_end_turn()
+
+func start_enemy_turn():
+	var enemy = BattleUnits.Enemy
+	if enemy != null and not enemy.is_queued_for_deletion(): # TODO: Check fi still needed
+		BattleUnits.set_current_turn(GameConstants.UNITS.ENEMY)
+		enemy.start_turn()
+
+func handle_status_eot():
+	var player = BattleUnits.PlayerStats
+	if player.has_status(GameConstants.STATUS.POISON):
+		DialogBox.show_timeout("Damage by poison!", 1)
+		player.hp -= 1
+		yield(DialogBox, "done")
+	emit_signal("_done")
+
+func enemy_eot_checks():
+	var player = BattleUnits.PlayerStats
+	if not player.is_dead():
+		if player.is_under_status():
+			yield(get_tree().create_timer(0.3), "timeout")
+			handle_status_eot()
+			yield(self, "_done")
+			if player.is_dead():
+				return false
+	return true
+
+func eot_checks():
+	var player = BattleUnits.PlayerStats
+	var enemy = BattleUnits.Enemy
+	if player.is_dead():
+		game_over()
+		return false
+	if enemy.is_dead():
+		if enemy.is_boss:
+			kill_streak = 0
+			handle_boss_death_eot(enemy)
+		else:
+			kill_streak += 1
+			handle_enemy_death_eot(enemy)
+		return false
+	return true
+
+func handle_boss_death_eot(enemy):
 	current_level += 1
-	kill_streak = 0
 	nextRoomButton.text = "NEXT FLOOR"
 	if current_level in Levels:
-		_on_Enemy_died(exp_points)
+		handle_enemy_death_eot(enemy)
 	else:
-		# No more levels, player won!
-		ActionBattle.force_end_of_battle()
+		if enemy.on_death_animation:
+			yield(enemy, "death_animation_done")
 		on_game_finished()
+		enemy.queue_free()
 
-func on_game_finished():
-	current_run += 1
-	var text = "TURNS: " + str(turns_taken) + "\n" + "TOTAL: " + str(total_turns_taken) + "\n" + "STREAK: " + str(current_run)
-	BattleSummary.show_summary("FINISHED!", text)
-	actionButtons.hide()
-	restartButton.show()
-	$SFXLevelUp.play()
-
-func update_level_layout():
-	$Dungeon.texture = Levels[current_level]["background"]
-
-func _on_Enemy_died(exp_points):
-	ActionBattle.force_end_of_battle()
-	actionButtons.hide()
-	var playerStats = BattleUnits.PlayerStats
-	playerStats.clear_status()
-	var level_before = playerStats.level
-	playerStats.exp_points += exp_points
-	kill_streak += 1
-	show_battle_summary(exp_points)
-	yield(get_tree().create_timer(1), "timeout")
-	if playerStats.level > level_before:
-		on_level_up()
+func handle_enemy_death_eot(enemy):
+	if enemy.on_death_animation:
+		yield(enemy, "death_animation_done")
+	increase_player_exp(enemy.exp_points)
+	
+	# Battle over cleanup
+	reset_player_status()
+	enemy.queue_free()
 	
 	var level_info = Levels[current_level]
 	var is_boss_battle = kill_streak == level_info["mook_count"]
@@ -170,29 +198,18 @@ func _on_Enemy_died(exp_points):
 		nextRoomButton.text = "BOSS BATTLE"
 	nextRoomButton.show()
 
-func on_level_up():
+func reset_player_status():
 	var playerStats = BattleUnits.PlayerStats
-	$SFXLevelUp.play()
-	show_level_up_summary(playerStats.last_level_up_summary)
+	playerStats.clear_status()
 
-func _on_NextRoomButton_pressed():
-	nextRoomButton.hide()
-	nextRoomButton.text = "ENTER NEXT ROOM"
-	BattleSummary.hide_summary()
-	$SFXNextRoom.play()
-	animationPlayer.play("FadeToNewRoom")
-	yield(animationPlayer, "animation_finished")
-	start_battle()
-
-func game_over():
-	ActionBattle.force_end_of_battle()
-	$BGPlayer.stop()
-	$SFXGameOver.play()
-	var text = "TURNS: " + str(turns_taken) + "\n" + "TOTAL: " + str(total_turns_taken) + "\n" + "STREAK: " + str(current_run)
-	BattleSummary.show_summary("GAME OVER", text)
-	actionButtons.hide()
-	restartButton.show()
-	current_run = 0
+func increase_player_exp(exp_points):
+	var playerStats = BattleUnits.PlayerStats
+	var level_before = playerStats.level
+	playerStats.exp_points += exp_points
+	BattleSummary.show_summary("YOU WIN!", "EXP +" + str(exp_points))
+	if playerStats.level > level_before:
+		$SFXLevelUp.play()
+		show_level_up_summary(playerStats.last_level_up_summary)
 
 func show_level_up_summary(level_up_summary):
 	var body = ""
@@ -205,14 +222,14 @@ func show_level_up_summary(level_up_summary):
 
 	BattleSummary.show_summary("LEVEL UP!", body)
 
-func show_battle_summary(exp_points):
-	var body = "EXP +" + str(exp_points)
-	BattleSummary.show_summary("YOU WIN!", body)
-
-
-func _on_PlayerStats_died():
-	game_over()
-
+func _on_NextRoomButton_pressed():
+	nextRoomButton.hide()
+	nextRoomButton.text = "ENTER NEXT ROOM"
+	BattleSummary.hide_summary()
+	$SFXNextRoom.play()
+	animationPlayer.play("FadeToNewRoom")
+	yield(animationPlayer, "animation_finished")
+	start_battle()
 
 func _on_RestartButton_pressed():
 	restartButton.hide()
@@ -233,4 +250,22 @@ func restart_game():
 	yield(animationPlayer, "animation_finished")
 	$BGPlayer.play()
 	start_battle()
-	
+
+func game_over():
+	$BGPlayer.stop()
+	$SFXGameOver.play()
+	var text = "TURNS: " + str(turns_taken) + "\n" + "TOTAL: " + str(total_turns_taken) + "\n" + "STREAK: " + str(current_run)
+	BattleSummary.show_summary("GAME OVER", text)
+	restartButton.show()
+	current_run = 0
+
+func on_game_finished():
+	current_run += 1
+	var text = "TURNS: " + str(turns_taken) + "\n" + "TOTAL: " + str(total_turns_taken) + "\n" + "STREAK: " + str(current_run)
+	BattleSummary.show_summary("FINISHED!", text)
+	actionButtons.hide()
+	restartButton.show()
+	$SFXLevelUp.play()
+
+func update_level_layout():
+	$Dungeon.texture = Levels[current_level]["background"]

@@ -26,3 +26,7 @@ func is_battle_ready():
 func is_player_ready():
 	player = BattleUnits.PlayerStats
 	return player != null
+
+func finish_turn():
+	if(is_battle_ready()):
+		player.ap -= player.max_ap

@@ -3,6 +3,8 @@ extends "res://ActionButtons/BaseActionButton.gd"
 const Slash = preload("res://Animations/Slash.tscn")
 const SingleHitBattleField = preload("res://BattleFields/SingleHitBattleField.tscn")
 
+var battlefield_done = false
+
 func _on_pressed():
 	var singleHitBattleField = SingleHitBattleField.instance()
 	singleHitBattleField.connect("hit", self, "_on_SingleHitBattleField_hit")
@@ -20,11 +22,10 @@ func _on_SingleHitBattleField_hit(hit_force):
 func _on_SingleHitBattleField_miss():
 	if(is_battle_ready()):
 		enemy.take_damage(0)
+		finish_turn()
 
 func _on_SingleHitBattleField_done():
-	if(is_battle_ready()):
-		player.mp += 2
-		player.ap -= ap_cost
+	battlefield_done = true
 
 func get_damage(power, hit_force):
 	match(hit_force):
@@ -40,4 +41,9 @@ func animate_slash(position):
 	var slash = Slash.instance()
 	var main = get_tree().current_scene
 	main.add_child(slash)
+	slash.connect("done", self, "_on_Slash_animation_finished")
 	slash.global_position = position
+
+func _on_Slash_animation_finished():
+	if battlefield_done:
+		finish_turn()

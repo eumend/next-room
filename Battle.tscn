@@ -290,7 +290,6 @@ stream = ExtResource( 10 )
 [node name="SFXNextRoom" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
 [connection signal="ap_changed" from="PlayerStats" to="UI/StatsPanel" method="_on_PlayerStats_ap_changed"]
-[connection signal="died" from="PlayerStats" to="." method="_on_PlayerStats_died"]
 [connection signal="heal_damage" from="PlayerStats" to="UI/StatsPanel" method="_on_PlayerStats_heal_damage"]
 [connection signal="hp_changed" from="PlayerStats" to="UI/StatsPanel" method="_on_PlayerStats_hp_changed"]
 [connection signal="level_changed" from="PlayerStats" to="UI/StatsPanel" method="_on_PlayerStats_level_changed"]

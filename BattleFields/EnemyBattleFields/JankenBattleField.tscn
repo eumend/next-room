@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://BattleFields/BaseBattleField.tscn" type="PackedScene" id=1]
 [ext_resource path="res://BattleFields/EnemyBattleFields/JankenBattleField.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Images/Buttons/shield_button.png" type="Texture" id=6]
 [ext_resource path="res://Music/SFX/win_1.wav" type="AudioStream" id=7]
 [ext_resource path="res://Music/SFX/error_1.wav" type="AudioStream" id=8]
+[ext_resource path="res://Music/SFX/draw_1.wav" type="AudioStream" id=9]
 
 [node name="JankenBattleField" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -94,8 +95,11 @@ margin_bottom = 24.0
 size_flags_vertical = 4
 texture_normal = ExtResource( 5 )
 
-[node name="SFXWin" type="AudioStreamPlayer" parent="." index="4"]
+[node name="SFXWin" type="AudioStreamPlayer" parent="." index="3"]
 stream = ExtResource( 7 )
 
-[node name="SFXLose" type="AudioStreamPlayer" parent="." index="5"]
+[node name="SFXLose" type="AudioStreamPlayer" parent="." index="4"]
 stream = ExtResource( 8 )
+
+[node name="SFXDraw" type="AudioStreamPlayer" parent="." index="5"]
+stream = ExtResource( 9 )

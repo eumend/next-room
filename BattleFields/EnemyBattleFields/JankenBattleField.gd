@@ -32,21 +32,22 @@ func handle_outcome(outcome):
 			$Field/VBoxContainer/Outcome/Text.text = "YOU WIN!"
 			$Field/VBoxContainer/Outcome.show()
 			$SFXWin.play()
+			yield(get_tree().create_timer(1), "timeout")
 			emit_signal("hit", GameConstants.HIT_FORCE.NORMAL)
-			yield(get_tree().create_timer(2), "timeout")
 			done()
 		OUTCOMES.LOSE:
 			$Field/VBoxContainer/Outcome/Text.text = "YOU LOSE!"
 			$Field/VBoxContainer/Outcome.show()
 			$SFXLose.play()
+			yield(get_tree().create_timer(1), "timeout")
 			emit_signal("enemy_hit", GameConstants.HIT_FORCE.NORMAL)
-			yield(get_tree().create_timer(2), "timeout")
 			done()
 		OUTCOMES.DRAW:
 			$Field/VBoxContainer/Outcome/Text.text = "DRAW!"
 			$Field/VBoxContainer/Outcome.show()
+			$SFXDraw.play()
+			yield(get_tree().create_timer(1), "timeout")
 			emit_signal("enemy_heal", GameConstants.HIT_FORCE.NORMAL)
-			yield(get_tree().create_timer(2), "timeout")
 			$Field/VBoxContainer/EnemyChoice/Sprite.texture = QuestionIcon
 			$Field/VBoxContainer/PlayerOptions.show()
 			$Field/VBoxContainer/PlayerChoice.hide()

@@ -13,10 +13,12 @@ onready var hpLabel = $HPLabel
 onready var animationPlayer = $AnimationPlayer
 const NumberAnimation = preload("res://Animations/NumberAnimation.tscn")
 
-signal died(exp_points)
+signal died
 signal end_turn
+signal death_animation_done
 
 var hp = max_hp setget set_hp
+var on_death_animation = false
 
 var hit_force_pattern = {
 	GameConstants.HIT_FORCE.NORMAL: 60,
@@ -48,36 +50,48 @@ func default_attack():
 	emit_signal("end_turn")
 
 
-func deal_damage(hit_force = null): #Connected to animations
+func deal_damage(hit_force = null, fixed_amount = null): #Connected to animations
 	$SFXBlow.play()
 	var playerStats = BattleUnits.PlayerStats
 	if playerStats:
 		hit_force = hit_force if hit_force else Utils.pick_from_weighted(hit_force_pattern)
-		var amount = get_attack_damage_amount(power, hit_force)
+		var amount = fixed_amount if fixed_amount else get_attack_damage_amount(power, hit_force)
 		playerStats.take_damage(amount)
+		if playerStats.is_dead():
+			emit_signal("end_turn")
 
 func heal_damage(amount):
-	self.hp += amount
-	$SFXHeal.play()
-	animate_heal(amount)
+	var old_hp = hp
+	self.hp = clamp(old_hp + amount, 0, self.max_hp)
+	var healed = self.hp - old_hp
+	if healed > 0:
+		$SFXHeal.play()
+		animate_heal(healed)
 
 func take_damage(amount, hit_force = null):
+	if amount > 0:
+		$SFXBlow.play()
 	self.hp -= amount
+	animate_damage(amount, hit_force)
 	if is_dead():
-		on_dead()
+		on_death()
 	else:
-		animate_damage(amount, hit_force)
 		animationPlayer.play("Shake")
 		yield(animationPlayer, "animation_finished")
 
-func on_dead():
+func on_death():
+	on_death_animation = true
+	emit_signal("died")
 	if is_boss:
 		$SFXBossDeath.play()
 	var death_animation_name = "ShakeFade" if is_boss else "Fade"
 	animationPlayer.play(death_animation_name)
 	yield(animationPlayer, "animation_finished")
-	emit_signal("died", exp_points)
-	queue_free()
+	on_death_animation = false
+	emit_signal("death_animation_done")
+	self.hide()
+	if BattleUnits.is_enemy_turn():
+		emit_signal("end_turn")
 
 func animate_heal(amount):
 	var numberAnimation = NumberAnimation.instance()

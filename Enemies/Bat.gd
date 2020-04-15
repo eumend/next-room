@@ -11,13 +11,12 @@ func poison_attack():
 	yield(animationPlayer, "animation_finished")
 	emit_signal("end_turn")
 
-func deal_damage(hit_force = null):
+func deal_damage(hit_force = null, _fixed_amount= null):
 	var playerStats = BattleUnits.PlayerStats
 	if playerStats:
 		if selected_attack == "poison_attack":
-			$SFXBlow.play()
 			var attack_power = max(ceil(power / 2), 1)
-			playerStats.take_damage(attack_power)
+			.deal_damage(null, attack_power)
 			playerStats.add_status(GameConstants.STATUS.POISON)
 		else:
 			.deal_damage(hit_force)
