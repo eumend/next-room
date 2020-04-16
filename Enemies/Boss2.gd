@@ -2,6 +2,8 @@ extends "res://Enemies/BaseEnemy.gd"
 
 const FireAtackBattleField = preload("res://BattleFields/EnemyBattleFields/GridGeyserBattleField.tscn")
 
+var undead = true
+
 func get_attack_pattern():
 	return {
 		"default_attack": 35,
@@ -15,7 +17,7 @@ func attack():
 		.attack()
 
 func is_dead():
-	return false
+	return .is_dead() and not undead
 
 func fire_attack():
 	DialogBox.show_timeout("BURN!", 1)
@@ -39,6 +41,7 @@ func _on_fireAttackBattleField_enemy_hit(_hit_force):
 
 func _on_fireAttackBattleField_done():
 	if self.hp <= 0:
+		undead = false
 		.on_death()
 	else:
 		emit_signal("end_turn")

@@ -2,6 +2,8 @@ extends "res://Enemies/BaseEnemy.gd"
 
 const FireAtackBattleField = preload("res://BattleFields/EnemyBattleFields/GridGeyserBattleField.tscn")
 
+var undead = true
+
 func attack():
 	if self.hp <= 0:
 		undead_attack()
@@ -21,7 +23,8 @@ func _on_fireAttackBattleField_enemy_hit(_hit_force):
 	.deal_damage(GameConstants.HIT_FORCE.STRONG)
 
 func _on_fireAttackBattleField_done():
+	undead = false
 	.on_death()
 
 func is_dead():
-	return false
+	return .is_dead() and not undead
