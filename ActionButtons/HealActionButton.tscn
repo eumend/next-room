@@ -8,3 +8,4 @@ text = "HEAL"
 script = ExtResource( 2 )
 ap_cost = 3
 level_required = 2
+recharge_turns = 2

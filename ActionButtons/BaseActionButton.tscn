@@ -1,13 +1,16 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://ActionButtons/BaseActionButton.gd" type="Script" id=1]
 [ext_resource path="res://Music/SFX/blow_1.wav" type="AudioStream" id=2]
 [ext_resource path="res://Music/SFX/heal_1.wav" type="AudioStream" id=3]
+[ext_resource path="res://Images/ProgressBars/progress_over_1.png" type="Texture" id=4]
+[ext_resource path="res://Images/ProgressBars/progress_mid.png" type="Texture" id=6]
 
 [node name="ActionButton" type="Button"]
-margin_right = 4.0
-margin_bottom = 8.0
-rect_min_size = Vector2( 32, 13 )
+margin_right = 34.0
+margin_bottom = 13.0
+rect_min_size = Vector2( 34, 13 )
+text = "TESTO"
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -18,4 +21,33 @@ stream = ExtResource( 2 )
 
 [node name="SFXHeal" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
-[connection signal="pressed" from="." to="." method="_on_pressed"]
+
+[node name="ProgressContainer" type="CenterContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -16.0
+margin_top = -4.0
+margin_right = 17.0
+margin_bottom = -9.53674e-07
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ProgressBar" type="TextureProgress" parent="ProgressContainer"]
+margin_left = 2.0
+margin_top = 1.0
+margin_right = 30.0
+margin_bottom = 2.0
+rect_min_size = Vector2( 28, 0 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+max_value = 1.0
+value = 1.0
+texture_over = ExtResource( 4 )
+texture_progress = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="." to="." method="_on_ActionButton_pressed"]

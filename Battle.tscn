@@ -197,19 +197,14 @@ __meta__ = {
 }
 
 [node name="SwordActionButton" parent="UI/BattleActionButtons" instance=ExtResource( 15 )]
-visible = false
-margin_right = 32.0
-margin_bottom = 13.0
 
 [node name="HealActionButton" parent="UI/BattleActionButtons" instance=ExtResource( 14 )]
-visible = false
-margin_right = 32.0
-margin_bottom = 13.0
+margin_left = 42.0
+margin_right = 76.0
 
 [node name="ComboActionButton" parent="UI/BattleActionButtons" instance=ExtResource( 16 )]
-visible = false
-margin_right = 32.0
-margin_bottom = 13.0
+margin_top = 16.0
+margin_bottom = 29.0
 
 [node name="OverworldActionButtons" type="CenterContainer" parent="UI"]
 margin_left = 9.0

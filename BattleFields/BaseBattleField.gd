@@ -18,5 +18,5 @@ func done():
 	queue_free()
 
 func _on_FieldButton_pressed():
-	print("BaseBattleField: _on_FieldButton_pressed")
+	# Field button pressed
 	pass
