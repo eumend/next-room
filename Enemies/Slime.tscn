@@ -1,13 +1,14 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Enemies/BaseEnemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Images/Slime.png" type="Texture" id=2]
+[ext_resource path="res://Enemies/Slime.gd" type="Script" id=3]
 
 [node name="Slime" instance=ExtResource( 1 )]
-max_hp = 15
-power = 3
+script = ExtResource( 3 )
+max_hp = 12
 exp_points = 2
-entry_text = "A Slime attacks!"
+entry_text = ""
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )

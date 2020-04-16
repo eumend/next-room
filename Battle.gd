@@ -87,12 +87,8 @@ func _on_Player_end_turn():
 		BattleUnits.set_current_turn(null)
 		actionButtons.hide()
 		var battle_continues = eot_checks()
-		var player_continues = player_eot_checks()
-		if battle_continues and player_continues:
+		if battle_continues:
 			start_enemy_turn()
-
-func player_eot_checks():
-	return true
 
 func _on_PlayerStats_died():
 	ActionBattle.force_end_of_battle()
@@ -121,9 +117,10 @@ func create_new_enemy():
 
 func _on_Enemy_end_turn():
 	BattleUnits.set_current_turn(null)
+	handle_status_eot()
+	yield(self, "_done")
 	var battle_continues = eot_checks()
-	var enemy_continues = enemy_eot_checks()
-	if battle_continues and enemy_continues:
+	if battle_continues:
 		start_player_turn()
 
 func _on_Enemy_died():
@@ -139,22 +136,19 @@ func start_enemy_turn():
 
 func handle_status_eot():
 	var player = BattleUnits.PlayerStats
-	if player.has_status(GameConstants.STATUS.POISON):
-		DialogBox.show_timeout("Damage by poison!", 1)
-		player.hp -= 1
-		yield(DialogBox, "done")
-	emit_signal("_done")
-
-func enemy_eot_checks():
-	var player = BattleUnits.PlayerStats
 	if not player.is_dead():
-		if player.is_under_status():
-			yield(get_tree().create_timer(0.3), "timeout")
-			handle_status_eot()
-			yield(self, "_done")
-			if player.is_dead():
-				return false
-	return true
+		if player.has_status(GameConstants.STATUS.POISON):
+			yield(get_tree().create_timer(0.5), "timeout")
+			DialogBox.show_timeout("Damage by poison!", 1)
+			player.take_damage(1)
+			yield(DialogBox, "done")
+			emit_signal("_done")
+		else:
+			yield(get_tree().create_timer(0.1), "timeout")
+			emit_signal("_done")
+	else:
+		yield(get_tree().create_timer(0.1), "timeout")
+		emit_signal("_done")
 
 func eot_checks():
 	var player = BattleUnits.PlayerStats
@@ -194,8 +188,11 @@ func handle_enemy_death_eot(enemy):
 	
 	var level_info = Levels[current_level]
 	var is_boss_battle = kill_streak == level_info["mook_count"]
+	var boss_battle_is_next = kill_streak == level_info["mook_count"] - 1
 	if is_boss_battle:
 		nextRoomButton.text = "BOSS BATTLE"
+	elif boss_battle_is_next:
+		nextRoomButton.text = "YOU ARE CLOSE..."
 	nextRoomButton.show()
 
 func reset_player_status():
@@ -224,7 +221,7 @@ func show_level_up_summary(level_up_summary):
 
 func _on_NextRoomButton_pressed():
 	nextRoomButton.hide()
-	nextRoomButton.text = "ENTER NEXT ROOM"
+	nextRoomButton.text = "NEXT ROOM"
 	BattleSummary.hide_summary()
 	$SFXNextRoom.play()
 	animationPlayer.play("FadeToNewRoom")

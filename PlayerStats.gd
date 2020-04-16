@@ -2,7 +2,7 @@ extends Node2D
 
 const BattleUnits = preload("res://BattleUnits.tres")
 const level_chart = {
-	1: 4,
+	1: 2,
 	2: 12,
 	3: 20,
 	4: 33,
@@ -61,20 +61,25 @@ func clear_status():
 	emit_signal("status_changed", player_statuses)
 
 
-func take_damage(damage):
-	var taken_damage = damage
+func take_damage(damage, hit_force = null):
+	var old_hp = self.hp
 	if self.has_status(GameConstants.STATUS.SHIELDED):
-		taken_damage = round(damage / 2)
-	self.hp -= taken_damage
+		damage = round(damage / 2)
+	self.hp -= damage
+	var damage_amount = old_hp - self.hp
+	if damage_amount > 0:
+		emit_signal("took_damage", damage_amount, hit_force)
+
+func heal_damage(amount):
+	var old_hp = self.hp
+	self.hp += amount
+	var healed_amount = self.hp - old_hp
+	if healed_amount > 0:
+		emit_signal("heal_damage", healed_amount)
 
 func set_hp(value):
-	var old_hp = hp
 	hp = clamp(value, 0, max_hp)
 	emit_signal("hp_changed", hp)
-	if old_hp > hp:
-		emit_signal("took_damage", old_hp - hp)
-	elif old_hp < hp:
-		emit_signal("heal_damage", hp - old_hp)
 	if hp == 0:
 		emit_signal("died")
 
@@ -113,8 +118,8 @@ func level_up(lv_increase):
 	self.power += power_increase
 	
 	# Heal
-	self.hp += round(self.max_hp / 2)
-	self.mp = self.max_mp
+#	self.hp += round(self.max_hp / 2)
+#	self.mp = self.max_mp
 	
 	last_level_up_summary = {
 		"lv": lv_increase,

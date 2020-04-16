@@ -3,10 +3,24 @@ extends "res://Enemies/BaseEnemy.gd"
 const JanKenBattleField = preload("res://BattleFields/EnemyBattleFields/JankenBattleField.tscn")
 
 func get_attack_pattern():
-	return {
-		"default_attack": 55,
-		"janken_attack": 45,
-	}
+	if self.hp < round(self.max_hp / 4):
+		return {
+			"janken_attack": 100,
+		}
+	elif self.hp < round(self.max_hp / 2):
+		return {
+			"default_attack": 20,
+			"janken_attack": 80,
+		}
+	elif self.hp > round(self.max_hp * 0.75):
+		return {
+			"default_attack": 100,
+		}
+	else:
+		return {
+			"default_attack": 50,
+			"janken_attack": 50,
+		}
 
 func janken_attack():
 	DialogBox.show_timeout("JAN-KEN...", 1)

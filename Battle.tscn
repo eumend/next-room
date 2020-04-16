@@ -223,7 +223,7 @@ margin_top = 24.0
 margin_right = 71.0
 margin_bottom = 37.0
 rect_min_size = Vector2( 70, 13 )
-text = "ENTER NEXT ROOM"
+text = "NEXT ROOM"
 
 [node name="RestartButton" type="Button" parent="UI/OverworldActionButtons"]
 visible = false

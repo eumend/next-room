@@ -54,11 +54,14 @@ func deal_damage(hit_force = null, fixed_amount = null): #Connected to animation
 	$SFXBlow.play()
 	var playerStats = BattleUnits.PlayerStats
 	if playerStats:
-		hit_force = hit_force if hit_force else Utils.pick_from_weighted(hit_force_pattern)
+		hit_force = hit_force if hit_force else Utils.pick_from_weighted(get_hit_force_pattern())
 		var amount = fixed_amount if fixed_amount else get_attack_damage_amount(power, hit_force)
-		playerStats.take_damage(amount)
+		playerStats.take_damage(amount, hit_force)
 		if playerStats.is_dead():
 			emit_signal("end_turn")
+
+func get_hit_force_pattern():
+	return hit_force_pattern
 
 func heal_damage(amount):
 	var old_hp = hp

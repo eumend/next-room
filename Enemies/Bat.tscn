@@ -36,7 +36,6 @@ tracks/1/keys = {
 [node name="Bat" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 max_hp = 8
-exp_points = 2
 entry_text = "A Bat attacks!"
 
 [node name="Sprite" parent="." index="0"]

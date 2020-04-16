@@ -23,8 +23,7 @@ func _on_MultiHitBattleField_miss():
 
 func _on_MultiHitBattleField_done():
 	if(is_battle_ready()):
-		player.mp += 2
-		player.ap -= ap_cost
+		finish_turn()
 
 func get_damage(power, hit_force):
 	match(hit_force):

@@ -6,6 +6,5 @@
 [node name="ComboActionButton" instance=ExtResource( 1 )]
 text = "COMBO"
 script = ExtResource( 2 )
-ap_cost = 3
 level_required = 3
 recharge_turns = 3

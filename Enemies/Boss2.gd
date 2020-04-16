@@ -5,10 +5,16 @@ const FireAtackBattleField = preload("res://BattleFields/EnemyBattleFields/GridG
 var undead = true
 
 func get_attack_pattern():
-	return {
-		"default_attack": 35,
-		"fire_attack": 65,
-	}
+	var playerStats = BattleUnits.PlayerStats
+	if playerStats.hp <= round(self.power * 2):
+		return {
+			"default_attack": 100,
+		}
+	else:
+		return {
+			"default_attack": 20,
+			"fire_attack": 80,
+		}
 
 func attack():
 	if self.hp <= 0:
@@ -20,9 +26,13 @@ func is_dead():
 	return .is_dead() and not undead
 
 func fire_attack():
-	DialogBox.show_timeout("BURN!", 1)
-	yield(DialogBox, "done")
-	do_fire_attack(4)
+	DialogBox.show_timeout("BURN!", 2)
+	if self.hp <= round(self.max_hp / 3):
+		do_fire_attack(5)
+	elif self.hp <= round(self.max_hp / 2):
+		do_fire_attack(4)
+	else:
+		do_fire_attack(3)
 
 func undead_attack():
 	DialogBox.show_timeout("UNDEAD ATTACK!", 1)
