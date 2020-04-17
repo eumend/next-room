@@ -39,11 +39,11 @@ func on_Bullet_hit(target, _bullet_position):
 	bullets_that_hit += 1
 	if target.name == "Player":
 		if bullets_that_hit == total_bullets:
-			emit_signal("heal", GameConstants.HIT_FORCE.CRIT)
+			heal(GameConstants.HIT_FORCE.CRIT)
 		else:
-			emit_signal("heal")
+			heal()
 	else:
-		emit_signal("miss")
+		miss()
 	if bullets_that_hit == total_bullets:
 		yield(get_tree().create_timer(0.3), "timeout")
 		done()

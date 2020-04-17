@@ -85,13 +85,13 @@ func on_GeyserAnimation_fired(position):
 	$SFXErupt.play()
 	firing_status[position] = FIRING_STATUS.FIRING
 	if current_player_position == position:
-		emit_signal("enemy_hit", GameConstants.HIT_FORCE.NORMAL)
+		enemy_hit(GameConstants.HIT_FORCE.CRIT)
 
 func move(position):
 	if is_next_to(position):
 		change_player_position(position)
 		if firing_status[position] == FIRING_STATUS.FIRING:
-			emit_signal("enemy_hit", GameConstants.HIT_FORCE.NORMAL)
+			enemy_hit(GameConstants.HIT_FORCE.NORMAL)
 
 func change_player_position(position):
 		current_player_position = position

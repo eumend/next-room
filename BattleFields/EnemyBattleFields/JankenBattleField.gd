@@ -1,5 +1,7 @@
 extends "res://BattleFields/BaseBattleField.gd"
 
+onready var playerOptions = $Field/VBoxContainer/PlayerOptions
+
 enum CHOICES{ROCK, PAPER, SCISSORS}
 enum OUTCOMES{WIN, LOSE, DRAW}
 
@@ -12,9 +14,9 @@ var icon_map = {
 const QuestionIcon = preload("res://Images/Buttons/question_button.png")
 
 func _ready():
-	$Field/VBoxContainer/PlayerOptions/PaperButton.connect("pressed", self, "_on_player_selected", [CHOICES.PAPER])
-	$Field/VBoxContainer/PlayerOptions/RockButton.connect("pressed", self, "_on_player_selected", [CHOICES.ROCK])
-	$Field/VBoxContainer/PlayerOptions/ScissorButton.connect("pressed", self, "_on_player_selected", [CHOICES.SCISSORS])
+	playerOptions.find_node("PaperButton").connect("pressed", self, "_on_player_selected", [CHOICES.PAPER])
+	playerOptions.find_node("RockButton").connect("pressed", self, "_on_player_selected", [CHOICES.ROCK])
+	playerOptions.find_node("ScissorButton").connect("pressed", self, "_on_player_selected", [CHOICES.SCISSORS])
 
 func _on_player_selected(choice):
 	randomize()
@@ -33,21 +35,21 @@ func handle_outcome(outcome):
 			$Field/VBoxContainer/Outcome.show()
 			$SFXWin.play()
 			yield(get_tree().create_timer(1), "timeout")
-			emit_signal("hit", GameConstants.HIT_FORCE.NORMAL)
+			hit()
 			done()
 		OUTCOMES.LOSE:
 			$Field/VBoxContainer/Outcome/Text.text = "YOU LOSE!"
 			$Field/VBoxContainer/Outcome.show()
 			$SFXLose.play()
 			yield(get_tree().create_timer(1), "timeout")
-			emit_signal("enemy_hit", GameConstants.HIT_FORCE.NORMAL)
+			enemy_hit()
 			done()
 		OUTCOMES.DRAW:
 			$Field/VBoxContainer/Outcome/Text.text = "DRAW!"
 			$Field/VBoxContainer/Outcome.show()
 			$SFXDraw.play()
 			yield(get_tree().create_timer(1), "timeout")
-			emit_signal("enemy_heal", GameConstants.HIT_FORCE.NORMAL)
+			enemy_heal()
 			$Field/VBoxContainer/EnemyChoice/Sprite.texture = QuestionIcon
 			$Field/VBoxContainer/PlayerOptions.show()
 			$Field/VBoxContainer/PlayerChoice.hide()
