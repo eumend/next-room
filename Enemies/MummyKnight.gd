@@ -5,7 +5,7 @@ const JanKenBattleField = preload("res://BattleFields/EnemyBattleFields/JankenBa
 func get_attack_pattern():
 	if self.hp < round(self.max_hp / 4):
 		return {
-			"janken_attack": 100,
+			"vengeance_attack": 100,
 		}
 	elif self.hp < round(self.max_hp / 2):
 		return {
@@ -21,6 +21,18 @@ func get_attack_pattern():
 			"default_attack": 50,
 			"janken_attack": 50,
 		}
+
+func vengeance_attack():
+	$Sprite.modulate = "ff0000"
+	DialogBox.show_timeout("VENGEANCE!", 1)
+	yield(DialogBox, "done")
+	var jankenBattleField = JanKenBattleField.instance()
+	jankenBattleField.play_until = [jankenBattleField.OUTCOMES.LOSE]
+	jankenBattleField.connect("enemy_heal", self, "_on_jankenBattleField_enemy_heal")
+	jankenBattleField.connect("enemy_hit", self, "_on_jankenBattleField_enemy_hit")
+	jankenBattleField.connect("hit", self, "_on_jankenBattleField_hit")
+	jankenBattleField.connect("done", self, "_on_jankenBattleField_done")
+	ActionBattle.start_small_field(jankenBattleField)
 
 func janken_attack():
 	DialogBox.show_timeout("JAN-KEN...", 1)
@@ -42,4 +54,5 @@ func _on_jankenBattleField_hit(_hit_force):
 	.take_damage(max(ceil(self.max_hp / 8), 2))
 
 func _on_jankenBattleField_done():
+	$Sprite.modulate = "ffffff"
 	emit_signal("end_turn")

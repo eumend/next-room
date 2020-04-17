@@ -1,12 +1,13 @@
 extends "res://BattleFields/BaseBattleField.gd"
 
 var direction = 1
+var speed = 70
 
 onready var pointer = $Field/Pointer
 
-func _physics_process(_delta):
+func _physics_process(delta):
 	var motion = Vector2(direction, 0)
-	pointer.position += motion
+	pointer.position += motion * delta * speed
 
 func _on_FieldButton_pressed():
 	var overlapping_area_names = []

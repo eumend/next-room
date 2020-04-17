@@ -6,4 +6,3 @@
 [node name="SwordActionButton" instance=ExtResource( 2 )]
 text = "SWORD"
 script = ExtResource( 1 )
-ap_cost = 3

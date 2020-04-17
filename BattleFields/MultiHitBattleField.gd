@@ -7,7 +7,7 @@ var current_pointer = 1
 onready var pointer1 = $Field/Pointer1
 onready var pointer2 = $Field/Pointer2
 var total_pointers = 2
-var speed = 60
+var speed = 70
 
 func _ready():
 	var pointer = get_current_pointer()
