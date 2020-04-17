@@ -1,23 +1,32 @@
 extends Area2D
 
 signal hit(target, position)
+signal point_reached(bullet)
 var direction = Vector2(0, 1) # Down
 var base_speed = 50
-var speed_increment = 1
+var speed_multiplier = 1
+var paused = false
+var stop_point = null
+var color = "ffffff" setget set_color
 
-func init(new_position, new_direction, new_speed_increment = null, _new_color = null):
-	if new_position:
-		self.position = new_position
-	if new_direction:
-		self.direction = new_direction
-	if new_speed_increment:
-		self.speed_increment = new_speed_increment
-#	pass # Replace with function body.
+func set_color(new_color):
+	color = new_color
+	$ColorRect.color = new_color
 
 func _physics_process(delta):
-	var speed = base_speed * speed_increment
-	self.position += direction * speed * delta
+	if not paused:
+		var speed = base_speed * speed_multiplier
+		self.position += direction * speed * delta
+		if stop_point and self.position.y  >= stop_point:
+			stop_point = null
+			emit_signal("point_reached", self)
 
 func _on_Bullet_area_entered(area):
 	emit_signal("hit", area, self.position)
 	queue_free()
+
+func pause():
+	paused = true
+
+func unpause():
+	paused = false

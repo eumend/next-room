@@ -21,8 +21,8 @@ const Enemies = {
 	"bat": preload("res://Enemies/Bat.tscn"),
 	"slime": preload("res://Enemies/Slime.tscn"),
 	"skull": preload("res://Enemies/Skull.tscn"),
-	"boss1": preload("res://Enemies/Boss1.tscn"),
-	"boss2": preload("res://Enemies/Boss2.tscn"),
+	"mummy_knight": preload("res://Enemies/MummyKnight.tscn"),
+	"fire_skull": preload("res://Enemies/FireSkull.tscn"),
 }
 
 var Levels = {
@@ -32,7 +32,7 @@ var Levels = {
 			"bat": 30,
 			"slime": 30,
 		},
-		"boss": "boss1",
+		"boss": "mummy_knight",
 		"mook_count": 4,
 		"background": preload("res://Images/Dungeon.png")
 	},
@@ -43,7 +43,7 @@ var Levels = {
 			"bat": 10,
 			"slime": 20,
 		},
-		"boss": "boss2",
+		"boss": "fire_skull",
 		"mook_count": 4,
 		"background": preload("res://Images/Dungeon2.png")
 	}
