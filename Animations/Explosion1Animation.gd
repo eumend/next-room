@@ -8,6 +8,7 @@ signal boom
 var boom_frame = 3
 
 func _ready():
+	$BoomSFX.play()
 	sprite.play("explosion")
 
 func _on_AnimatedSprite_animation_finished():
@@ -16,5 +17,4 @@ func _on_AnimatedSprite_animation_finished():
 
 func _on_AnimatedSprite_frame_changed():
 	if $AnimatedSprite.get_frame() == boom_frame:
-		$BoomSFX.play()
 		emit_signal("boom")

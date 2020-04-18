@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Images/Mobile RPG Mockup.png" type="Texture" id=1]
 [ext_resource path="res://Music/Songs/bg_music.ogg" type="AudioStream" id=2]
@@ -16,6 +16,55 @@
 [ext_resource path="res://ActionButtons/HealActionButton.tscn" type="PackedScene" id=14]
 [ext_resource path="res://ActionButtons/SwordActionButton.tscn" type="PackedScene" id=15]
 [ext_resource path="res://ActionButtons/ComboActionButton.tscn" type="PackedScene" id=16]
+
+[sub_resource type="Animation" id=5]
+resource_name = "ShakeDown"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 3, 52 ), Vector2( 3, 54.9875 ), Vector2( 3, 52 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "ShakeV"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 3, 52 ), Vector2( 3, 54.9875 ), Vector2( 3, 50.0084 ), Vector2( 3, 52 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "ShakeV2"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 3, 52 ), Vector2( 3, 47.0209 ), Vector2( 3, 52.9958 ), Vector2( 3, 49.7594 ), Vector2( 3, 53.4937 ), Vector2( 3, 52 ) ]
+}
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -182,6 +231,11 @@ align = 1
 [node name="Icon" type="Sprite" parent="UI/StatsPanel/StatsContainer/Status"]
 position = Vector2( 7, 12.9456 )
 texture = ExtResource( 12 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/StatsPanel"]
+anims/ShakeDown = SubResource( 5 )
+anims/ShakeV = SubResource( 3 )
+anims/ShakeV2 = SubResource( 4 )
 
 [node name="BattleActionButtons" type="GridContainer" parent="UI"]
 margin_left = 9.0

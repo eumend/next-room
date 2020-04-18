@@ -73,10 +73,18 @@ func _on_PlayerStats_heal_damage(amount):
 
 
 func _on_PlayerStats_took_damage(amount, hit_force):
+	animate_panel(hit_force)
 	var extra_text = get_hit_force_text(hit_force)
 	var numberAnimation = NumberAnimation.instance()
 	hpLabel.add_child(numberAnimation)
 	numberAnimation.play_damage(amount, extra_text)
+
+func animate_panel(hit_force):
+	match(hit_force):
+		GameConstants.HIT_FORCE.CRIT: return $AnimationPlayer.play("ShakeV2")
+		GameConstants.HIT_FORCE.STRONG: return $AnimationPlayer.play("ShakeV")
+		GameConstants.HIT_FORCE.NORMAL: return $AnimationPlayer.play("ShakeDown")
+		_: return
 
 func get_hit_force_text(hit_force):
 	match(hit_force):
