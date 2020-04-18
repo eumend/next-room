@@ -4,7 +4,7 @@
 [ext_resource path="res://Enemies/FireSkull.gd" type="Script" id=2]
 [ext_resource path="res://Images/Boss2.png" type="Texture" id=3]
 
-[node name="Boss2" instance=ExtResource( 1 )]
+[node name="FireSkull" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 max_hp = 30
 power = 5

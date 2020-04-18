@@ -17,7 +17,7 @@
 [ext_resource path="res://ActionButtons/SwordActionButton.tscn" type="PackedScene" id=15]
 [ext_resource path="res://ActionButtons/ComboActionButton.tscn" type="PackedScene" id=16]
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=1]
 resource_name = "ShakeDown"
 length = 0.2
 step = 0.05
@@ -34,7 +34,7 @@ tracks/0/keys = {
 "values": [ Vector2( 3, 52 ), Vector2( 3, 54.9875 ), Vector2( 3, 52 ) ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 resource_name = "ShakeV"
 length = 0.3
 tracks/0/type = "value"
@@ -50,7 +50,7 @@ tracks/0/keys = {
 "values": [ Vector2( 3, 52 ), Vector2( 3, 54.9875 ), Vector2( 3, 50.0084 ), Vector2( 3, 52 ) ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 resource_name = "ShakeV2"
 length = 0.5
 tracks/0/type = "value"
@@ -66,9 +66,9 @@ tracks/0/keys = {
 "values": [ Vector2( 3, 52 ), Vector2( 3, 47.0209 ), Vector2( 3, 52.9958 ), Vector2( 3, 49.7594 ), Vector2( 3, 53.4937 ), Vector2( 3, 52 ) ]
 }
 
-[sub_resource type="StyleBoxEmpty" id=1]
+[sub_resource type="StyleBoxEmpty" id=4]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=5]
 length = 0.5
 step = 0.05
 tracks/0/type = "value"
@@ -233,9 +233,9 @@ position = Vector2( 7, 12.9456 )
 texture = ExtResource( 12 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI/StatsPanel"]
-anims/ShakeDown = SubResource( 5 )
-anims/ShakeV = SubResource( 3 )
-anims/ShakeV2 = SubResource( 4 )
+anims/ShakeDown = SubResource( 1 )
+anims/ShakeV = SubResource( 2 )
+anims/ShakeV2 = SubResource( 3 )
 
 [node name="BattleActionButtons" type="GridContainer" parent="UI"]
 margin_left = 9.0
@@ -303,7 +303,7 @@ margin_left = 3.0
 margin_top = 2.0
 margin_right = 91.0
 margin_bottom = 22.0
-custom_styles/normal = SubResource( 1 )
+custom_styles/normal = SubResource( 4 )
 custom_constants/table_vseparation = 0
 custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 0
@@ -325,7 +325,7 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/FadeToNewRoom = SubResource( 2 )
+anims/FadeToNewRoom = SubResource( 5 )
 
 [node name="BGPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )

@@ -38,7 +38,7 @@ func deal_damage(hit_force = null, _fixed_amount= null):
 			.deal_damage(null, attack_power)
 			playerStats.add_status(GameConstants.STATUS.POISON)
 		elif selected_attack == "leech_life":
-			var attack_power = max(ceil(power / 2), 1)
+			var attack_power = max(ceil(power / 3), 3)
 			.deal_damage(null, attack_power)
 			.heal_damage(attack_power)
 		else:

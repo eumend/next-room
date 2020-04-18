@@ -1,6 +1,7 @@
 extends "res://Enemies/BaseEnemy.gd"
 
 const FireAtackBattleField = preload("res://BattleFields/EnemyBattleFields/GridGeyserBattleField.tscn")
+const Explosion = preload("res://Animations/Explosion1Animation.tscn")
 
 var undead = true
 
@@ -35,9 +36,25 @@ func fire_attack():
 		do_fire_attack(3)
 
 func undead_attack():
-	DialogBox.show_timeout("UNDEAD ATTACK!", 1)
+	DialogBox.show_timeout("DIE!", 1)
 	yield(DialogBox, "done")
-	do_fire_attack(6)
+	animate_explosion()
+
+func _on_Explosion_animation_finished():
+	undead = false
+	.on_death()
+
+func _on_Explosion_animation_boom():
+	self.hide()
+	.deal_damage(GameConstants.HIT_FORCE.CRIT, self.power * 2)
+
+func animate_explosion():
+	var explosion = Explosion.instance()
+	var main = get_tree().current_scene
+	main.add_child(explosion)
+	explosion.connect("boom", self, "_on_Explosion_animation_boom")
+	explosion.connect("done", self, "_on_Explosion_animation_finished")
+	explosion.global_position = $Sprite.global_position
 
 func do_fire_attack(pillars):
 	var fireAttackBattleField = FireAtackBattleField.instance()

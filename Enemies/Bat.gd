@@ -3,8 +3,8 @@ extends "res://Enemies/BaseEnemy.gd"
 func get_attack_pattern():
 	if self.hp < round(self.max_hp / 2):
 		return {
-			"default_attack": 50,
-			"leech_life": 50,
+			"default_attack": 30,
+			"leech_life": 70,
 		}
 	else:
 		return {

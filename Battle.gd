@@ -20,11 +20,14 @@ const Enemies = {
 	"rat": preload("res://Enemies/Rat.tscn"),
 	"bat": preload("res://Enemies/Bat.tscn"),
 	"slime": preload("res://Enemies/Slime.tscn"),
+	"sewer_chimera": preload("res://Enemies/ChimeraRBS.tscn"),
 	"skull": preload("res://Enemies/Skull.tscn"),
 	"flame_head": preload("res://Enemies/FlameHead.tscn"),
-	"chimera_rbs": preload("res://Enemies/ChimeraRBS.tscn"),
-	"mummy_knight": preload("res://Enemies/MummyKnight.tscn"),
 	"fire_skull": preload("res://Enemies/FireSkull.tscn"),
+	"ancient_sword": preload("res://Enemies/AncientSword.tscn"),
+	"ancient_shield": preload("res://Enemies/AncientShield.tscn"),
+	"ancient_tome": preload("res://Enemies/AncientTome.tscn"),
+	"mummy_knight": preload("res://Enemies/MummyKnight.tscn"),
 }
 
 var Levels = {
@@ -34,7 +37,7 @@ var Levels = {
 			"bat": 30,
 			"slime": 30,
 		},
-		"boss": "chimera_rbs",
+		"boss": "sewer_chimera",
 		"mook_count": 4,
 		"background": preload("res://Images/Dungeon.png")
 	},
@@ -46,6 +49,16 @@ var Levels = {
 		"boss": "fire_skull",
 		"mook_count": 4,
 		"background": preload("res://Images/Dungeon2.png")
+	},
+	3: {
+		"enemies": {
+			"ancient_sword": 50,
+			"ancient_shield": 40,
+			"ancient_tome": 10,
+		},
+		"boss": "mummy_knight",
+		"mook_count": 5,
+		"background": preload("res://Images/Dungeon3.png")
 	}
 }
 

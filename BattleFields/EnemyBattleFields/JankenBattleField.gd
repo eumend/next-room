@@ -9,6 +9,12 @@ var max_turns = 3
 var play_until = [OUTCOMES.WIN, OUTCOMES.LOSE]
 var turns = 0
 
+var choice_map = null
+
+signal player_win
+signal player_lose
+signal player_draw
+
 var icon_map = {
 	CHOICES.ROCK: preload("res://Images/Buttons/shield_button.png"),
 	CHOICES.SCISSORS: preload("res://Images/Buttons/sword_button.png"),
@@ -30,8 +36,9 @@ func _on_player_selected(choice):
 	$Field/VBoxContainer/PlayerChoice/Sprite.texture = icon_map[choice]
 	$Field/VBoxContainer/PlayerOptions.hide()
 	$Field/VBoxContainer/PlayerChoice.show()
-	handle_outcome(outcome)
+	show_outcome(outcome)
 	yield(get_tree().create_timer(1), "timeout")
+	emit_outcome(outcome)
 	turns += 1
 	if turns == max_turns or outcome in play_until:
 		done()
@@ -39,6 +46,8 @@ func _on_player_selected(choice):
 		reset_gui()
 
 func pick_enemy_choice():
+	if choice_map:
+		return Utils.pick_from_weighted(choice_map)
 	return [CHOICES.ROCK, CHOICES.SCISSORS, CHOICES.PAPER][randi() % 3]
 
 func reset_gui():
@@ -47,23 +56,30 @@ func reset_gui():
 		$Field/VBoxContainer/PlayerChoice.hide()
 		$Field/VBoxContainer/Outcome.hide()
 
-func handle_outcome(outcome):
+func emit_outcome(outcome):
+	match(outcome):
+		OUTCOMES.WIN:
+			emit_signal("player_win")
+		OUTCOMES.LOSE:
+			emit_signal("player_lose")
+		OUTCOMES.DRAW:
+			emit_signal("player_draw")
+
+func show_outcome(outcome):
 	match(outcome):
 		OUTCOMES.WIN:
 			$Field/VBoxContainer/Outcome/Text.text = "YOU WIN!"
 			$Field/VBoxContainer/Outcome.show()
 			$SFXWin.play()
-			hit()
 		OUTCOMES.LOSE:
 			$Field/VBoxContainer/Outcome/Text.text = "YOU LOSE!"
 			$Field/VBoxContainer/Outcome.show()
 			$SFXLose.play()
-			enemy_hit()
 		OUTCOMES.DRAW:
 			$Field/VBoxContainer/Outcome/Text.text = "DRAW!"
 			$Field/VBoxContainer/Outcome.show()
 			$SFXDraw.play()
-			enemy_heal()
+			
 
 func check_win(player_choice, enemy_choice):
 	if player_choice == enemy_choice:
