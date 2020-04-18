@@ -103,7 +103,7 @@ func _on_Player_end_turn():
 		if battle_continues:
 			start_enemy_turn()
 
-func _on_PlayerStats_died():
+func _on_Player_died():
 	ActionBattle.force_end_of_battle()
 	if BattleUnits.is_player_turn():
 		actionButtons.hide()
