@@ -7,6 +7,8 @@ var LowerPanel = null
 var BattleField = null
 
 func start_small_field(battle_field_node):
+	if BattleField:
+		BattleField.get_ref().queue_free()
 	BattleField = weakref(battle_field_node)
 	var battleField = BattleField.get_ref()
 	if MidPanel != null and battleField:

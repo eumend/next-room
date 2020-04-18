@@ -6,6 +6,8 @@ const level_chart = {
 	2: 12,
 	3: 20,
 	4: 33,
+	5: 50,
+	6: 80,
 }
 
 export var max_hp = 20
@@ -38,12 +40,16 @@ var last_level_up_summary = {}
 func is_dead():
 	return self.hp <= 0
 
-func reset():
+func reset_plus():
 	self.hp = base_hp
 	self.power = base_power
 	self.level = 1
 	self.exp_points = 0
 	clear_status()
+
+func reset():
+	reset_plus()
+	self.max_hp = 20
 
 func is_under_status():
 	return player_statuses.size() > 0

@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Enemies/BaseEnemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Enemies/SeaHorse.gd" type="Script" id=2]
+[ext_resource path="res://Images/SeaHorse.png" type="Texture" id=3]
+
+[node name="SeaHorse" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+max_hp = 25
+power = 7
+exp_points = 7
+entry_text = "Sea Horse swims in!"
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 3 )

@@ -28,6 +28,10 @@ const Enemies = {
 	"ancient_shield": preload("res://Enemies/AncientShield.tscn"),
 	"ancient_tome": preload("res://Enemies/AncientTome.tscn"),
 	"mummy_knight": preload("res://Enemies/MummyKnight.tscn"),
+	"sea_horse": preload("res://Enemies/SeaHorse.tscn"),
+	"mermaid": preload("res://Enemies/Mermaid.tscn"),
+	"starfish": preload("res://Enemies/StarFish.tscn"),
+	"sea_horse_rider": preload("res://Enemies/SeaHorseRider.tscn"),
 }
 
 var Levels = {
@@ -59,6 +63,16 @@ var Levels = {
 		"boss": "mummy_knight",
 		"mook_count": 5,
 		"background": preload("res://Images/Dungeon3.png")
+	},
+	4: {
+		"enemies": {
+			"sea_horse": 40,
+			"mermaid": 40,
+			"starfish": 20,
+		},
+		"boss": "sea_horse_rider",
+		"mook_count": 5,
+		"background": preload("res://Images/Dungeon4.png")
 	}
 }
 
@@ -249,7 +263,10 @@ func _on_RestartButton_pressed():
 func restart_game():
 	animationPlayer.play("FadeToNewRoom")
 	var playerStats = BattleUnits.PlayerStats
-	playerStats.reset()
+	if current_run > 0:
+		playerStats.reset_plus()
+	else:
+		playerStats.reset()
 	var enemy = BattleUnits.Enemy
 	if enemy:
 		BattleUnits.Enemy = null

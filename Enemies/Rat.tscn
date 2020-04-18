@@ -5,4 +5,4 @@
 
 [node name="Rat" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-entry_text = ""
+entry_text = "A Rat draws near!"

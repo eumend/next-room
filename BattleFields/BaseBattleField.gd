@@ -17,7 +17,8 @@ func _ready():
 func done():
 	# TODO: Some animation?
 	emit_signal("done")
-	queue_free()
+	self.hide()
+#	queue_free()
 
 func hit(hit_force = GameConstants.HIT_FORCE.NORMAL):
 	emit_signal("hit", hit_force)

@@ -9,7 +9,7 @@ script = ExtResource( 2 )
 max_hp = 25
 power = 5
 is_boss = true
-entry_text = "Sewer Chimera draws near!"
+entry_text = "Sewer Chimera attacks!"
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 3 )

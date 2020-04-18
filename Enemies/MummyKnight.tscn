@@ -7,7 +7,7 @@
 [node name="MummyKnight" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 max_hp = 35
-power = 8
+power = 7
 exp_points = 7
 is_boss = true
 entry_text = "Mummy Knight draws near!!"

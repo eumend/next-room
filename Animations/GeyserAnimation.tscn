@@ -47,3 +47,5 @@ script = ExtResource( 2 )
 light_mask = 16385
 frames = SubResource( 7 )
 animation = "loop"
+
+[node name="Timer" type="Timer" parent="."]

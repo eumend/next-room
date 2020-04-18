@@ -8,7 +8,7 @@
 script = ExtResource( 3 )
 max_hp = 12
 exp_points = 2
-entry_text = ""
+entry_text = "A Slime draws near!"
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )
