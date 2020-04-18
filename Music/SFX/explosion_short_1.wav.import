@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/explosion_short_1.wav-bff6308005249ca77055382a7d856364.sample"
+
+[deps]
+
+source_file="res://Music/SFX/explosion_short_1.wav"
+dest_files=[ "res://.import/explosion_short_1.wav-bff6308005249ca77055382a7d856364.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

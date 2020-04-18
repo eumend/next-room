@@ -21,6 +21,7 @@ const Enemies = {
 	"bat": preload("res://Enemies/Bat.tscn"),
 	"slime": preload("res://Enemies/Slime.tscn"),
 	"skull": preload("res://Enemies/Skull.tscn"),
+	"flame_head": preload("res://Enemies/FlameHead.tscn"),
 	"chimera_rbs": preload("res://Enemies/ChimeraRBS.tscn"),
 	"mummy_knight": preload("res://Enemies/MummyKnight.tscn"),
 	"fire_skull": preload("res://Enemies/FireSkull.tscn"),
@@ -40,9 +41,7 @@ var Levels = {
 	2: {
 		"enemies": {
 			"skull": 50,
-			"rat": 20,
-			"bat": 10,
-			"slime": 20,
+			"flame_head": 50,
 		},
 		"boss": "fire_skull",
 		"mook_count": 4,
