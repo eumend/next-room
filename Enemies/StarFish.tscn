@@ -6,7 +6,7 @@
 
 [node name="StarFish" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-max_hp = 28
+max_hp = 34
 power = 1
 exp_points = 10
 entry_text = "A Star Fish... appears?"

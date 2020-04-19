@@ -6,7 +6,7 @@
 
 [node name="SeaHorse" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-max_hp = 25
+max_hp = 28
 power = 7
 exp_points = 7
 entry_text = "Sea Horse swims in!"

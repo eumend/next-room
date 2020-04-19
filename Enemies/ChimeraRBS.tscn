@@ -8,6 +8,7 @@
 script = ExtResource( 2 )
 max_hp = 25
 power = 5
+exp_points = 5
 is_boss = true
 entry_text = "Sewer Chimera attacks!"
 

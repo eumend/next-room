@@ -23,16 +23,11 @@ func get_attack_pattern():
 		}
 
 func vengeance_attack():
-	$Sprite.modulate = "ff0000"
 	DialogBox.show_timeout("VENGEANCE!", 1)
 	yield(DialogBox, "done")
 	var jankenBattleField = JanKenBattleField.instance()
 	jankenBattleField.play_until = [jankenBattleField.OUTCOMES.LOSE]
-	jankenBattleField.choice_map = {
-		jankenBattleField.CHOICES.SCISSORS: 50,
-		jankenBattleField.CHOICES.PAPER: 30,
-		jankenBattleField.CHOICES.ROCK: 20,
-	}
+	jankenBattleField.max_turns = 5
 	jankenBattleField.connect("player_win", self, "_on_jankenBattleField_player_win")
 	jankenBattleField.connect("player_lose", self, "_on_jankenBattleField_player_lose")
 	jankenBattleField.connect("player_draw", self, "_on_jankenBattleField_player_draw")
@@ -59,5 +54,4 @@ func _on_jankenBattleField_player_win():
 	.take_damage(max(ceil(self.max_hp / 8), 2))
 
 func _on_jankenBattleField_done():
-	$Sprite.modulate = "ffffff"
 	emit_signal("end_turn")

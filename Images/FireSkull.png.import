@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Boss2.png-fb008714281489c14bd7af8a1e2dc2a1.stex"
+path="res://.import/FireSkull.png-7de440ce320f64c6b6acd3d5a3cced8f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/Boss2.png"
-dest_files=[ "res://.import/Boss2.png-fb008714281489c14bd7af8a1e2dc2a1.stex" ]
+source_file="res://Images/FireSkull.png"
+dest_files=[ "res://.import/FireSkull.png-7de440ce320f64c6b6acd3d5a3cced8f.stex" ]
 
 [params]
 

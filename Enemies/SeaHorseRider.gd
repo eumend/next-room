@@ -27,7 +27,7 @@ func sing_attack():
 	yield(DialogBox, "done")
 	var battleField = BulletsDownBattleField.instance()
 	battleField.base_speed = 80
-	battleField.total_bullets = 4
+	battleField.total_bullets = 5
 	battleField.stop_point = 25
 	battleField.color = "2effff" # Light blue
 	battleField.connect("hit", self, "on_BattleField_hit")
@@ -40,7 +40,7 @@ func ink_attack():
 	yield(DialogBox, "done")
 	var battleField = BulletsDownBattleField.instance()
 	battleField.base_speed = 90
-	battleField.total_bullets = 5
+	battleField.total_bullets = 6
 	battleField.connect("hit", self, "on_BattleField_hit")
 	battleField.connect("done", self, "on_BattleField_done")
 	ActionBattle.start_small_field(battleField)

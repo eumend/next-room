@@ -268,7 +268,6 @@ func _on_RestartButton_pressed():
 func restart_game():
 	animationPlayer.play("FadeOut")
 	yield(animationPlayer, "animation_finished")
-	update_level_layout()
 	animationPlayer.play("FadeToNewRoom")
 	var playerStats = BattleUnits.PlayerStats
 	if current_run > 0:
@@ -282,6 +281,7 @@ func restart_game():
 	current_level = 1
 	turns_taken = 0
 	kill_streak = 0
+	update_level_layout()
 	yield(get_tree().create_timer(0.2), "timeout")
 	animationPlayer.play("FadeIn")
 	yield(animationPlayer, "animation_finished")

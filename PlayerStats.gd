@@ -46,6 +46,7 @@ func reset_plus():
 	self.level = 1
 	self.exp_points = 0
 	clear_status()
+	self.max_hp = 20 # TODO: Once we enable restart+, this should be removed so the player keeps its current max hp
 
 func reset():
 	reset_plus()

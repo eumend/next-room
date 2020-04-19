@@ -47,6 +47,7 @@ func undead_attack():
 
 func _on_Explosion_animation_finished():
 	undead = false
+	self.hp = 0 # We can get here on very low health
 	.on_death()
 
 func _on_Explosion_animation_boom():
