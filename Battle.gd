@@ -273,6 +273,7 @@ func restart_game():
 	if current_run > 0:
 		playerStats.reset_plus()
 	else:
+		total_turns_taken = 0
 		playerStats.reset()
 	var enemy = BattleUnits.Enemy
 	if enemy:
