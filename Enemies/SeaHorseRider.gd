@@ -18,7 +18,9 @@ func get_attack_pattern():
 
 func regenerate_attack():
 	DialogBox.show_timeout("I'm tired...", 1)
-	.heal_damage(round(self.max_hp / 4))
+	yield(DialogBox, "done")
+	.heal_damage(round(self.max_hp / 3))
+	emit_signal("end_turn")
 
 func sing_attack():
 	DialogBox.show_timeout("SEA MELODY!", 1)

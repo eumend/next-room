@@ -90,7 +90,6 @@ func _ready():
 	start_battle()
 
 func start_battle():
-	update_level_layout()
 	create_new_enemy()
 	start_player_turn()
 
@@ -247,11 +246,15 @@ func show_level_up_summary(level_up_summary):
 	BattleSummary.show_summary("LEVEL UP!", body)
 
 func _on_NextRoomButton_pressed():
+	animationPlayer.play("FadeOut")
+	yield(animationPlayer, "animation_finished")
+	$SFXNextRoom.play()
 	nextRoomButton.hide()
+	update_level_layout()
 	nextRoomButton.text = "NEXT ROOM"
 	BattleSummary.hide_summary()
-	$SFXNextRoom.play()
-	animationPlayer.play("FadeToNewRoom")
+	yield(get_tree().create_timer(0.2), "timeout")
+	animationPlayer.play("FadeIn")
 	yield(animationPlayer, "animation_finished")
 	start_battle()
 
@@ -261,6 +264,9 @@ func _on_RestartButton_pressed():
 	restart_game()
 
 func restart_game():
+	animationPlayer.play("FadeOut")
+	yield(animationPlayer, "animation_finished")
+	update_level_layout()
 	animationPlayer.play("FadeToNewRoom")
 	var playerStats = BattleUnits.PlayerStats
 	if current_run > 0:
@@ -274,6 +280,8 @@ func restart_game():
 	current_level = 1
 	turns_taken = 0
 	kill_streak = 0
+	yield(get_tree().create_timer(0.2), "timeout")
+	animationPlayer.play("FadeIn")
 	yield(animationPlayer, "animation_finished")
 	$BGPlayer.play()
 	start_battle()

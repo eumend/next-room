@@ -9,7 +9,7 @@ script = ExtResource( 2 )
 max_hp = 28
 power = 1
 exp_points = 10
-entry_text = "a Star Fish... appears?"
+entry_text = "A Star Fish... appears?"
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 3 )
