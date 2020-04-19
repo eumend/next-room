@@ -23,6 +23,7 @@ const Enemies = {
 	"sewer_chimera": preload("res://Enemies/ChimeraRBS.tscn"),
 	"skull": preload("res://Enemies/Skull.tscn"),
 	"flame_head": preload("res://Enemies/FlameHead.tscn"),
+	"candle": preload("res://Enemies/Candle.tscn"),
 	"fire_skull": preload("res://Enemies/FireSkull.tscn"),
 	"ancient_sword": preload("res://Enemies/AncientSword.tscn"),
 	"ancient_shield": preload("res://Enemies/AncientShield.tscn"),
@@ -37,9 +38,9 @@ const Enemies = {
 var Levels = {
 	1: {
 		"enemies": {
-			"rat": 40,
-			"bat": 30,
-			"slime": 30,
+			"rat": 45,
+			"bat": 40,
+			"slime": 15,
 		},
 		"boss": "sewer_chimera",
 		"mook_count": 4,
@@ -47,8 +48,9 @@ var Levels = {
 	},
 	2: {
 		"enemies": {
-			"skull": 50,
-			"flame_head": 50,
+			"flame_head": 45,
+			"skull": 40,
+			"candle": 15,
 		},
 		"boss": "fire_skull",
 		"mook_count": 4,
@@ -56,9 +58,9 @@ var Levels = {
 	},
 	3: {
 		"enemies": {
-			"ancient_sword": 50,
+			"ancient_sword": 45,
 			"ancient_shield": 40,
-			"ancient_tome": 10,
+			"ancient_tome": 15,
 		},
 		"boss": "mummy_knight",
 		"mook_count": 5,
@@ -66,9 +68,9 @@ var Levels = {
 	},
 	4: {
 		"enemies": {
-			"sea_horse": 40,
+			"sea_horse": 45,
 			"mermaid": 40,
-			"starfish": 20,
+			"starfish": 15,
 		},
 		"boss": "sea_horse_rider",
 		"mook_count": 5,

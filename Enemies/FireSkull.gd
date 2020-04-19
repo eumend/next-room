@@ -18,7 +18,7 @@ func get_attack_pattern():
 		}
 
 func attack():
-	if self.hp <= 0:
+	if self.hp <= round(self.max_hp / 5):
 		undead_attack()
 	else:
 		.attack()
@@ -34,6 +34,11 @@ func fire_attack():
 		do_fire_attack(4)
 	else:
 		do_fire_attack(3)
+
+func suicide_attack():
+	DialogBox.show_timeout("DIE!", 1)
+	yield(DialogBox, "done")
+	animate_explosion()
 
 func undead_attack():
 	DialogBox.show_timeout("DIE!", 1)
