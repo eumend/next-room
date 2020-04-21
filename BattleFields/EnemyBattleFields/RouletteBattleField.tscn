@@ -1,0 +1,22 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://BattleFields/BaseBattleField.tscn" type="PackedScene" id=1]
+[ext_resource path="res://BattleFields/EnemyBattleFields/RouletteBattleField.gd" type="Script" id=2]
+[ext_resource path="res://BattleFields/Bullets/Roulette.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Images/Button9Slice.png" type="Texture" id=4]
+[ext_resource path="res://Images/Button9SliceHover.png" type="Texture" id=5]
+[ext_resource path="res://Images/Button9SlicePressed.png" type="Texture" id=6]
+
+[node name="RouletteBattleField" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+faces = [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ]
+
+[node name="Roulette" parent="Field" index="0" instance=ExtResource( 3 )]
+position = Vector2( 36, 30 )
+
+[node name="Timer" parent="Field/Roulette" index="1"]
+wait_time = 0.1
+
+[node name="ShowSelectedTimer" type="Timer" parent="." index="3"]
+
+[editable path="Field/Roulette"]
