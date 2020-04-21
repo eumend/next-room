@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Slime.png-511a3647f073a5417b830232c38056b3.stex"
+path="res://.import/FireSkull.png-2cad5949487a0a44cf2938cc4b6fee9b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/Slime.png"
-dest_files=[ "res://.import/Slime.png-511a3647f073a5417b830232c38056b3.stex" ]
+source_file="res://Images/Enemies/FireSkull.png"
+dest_files=[ "res://.import/FireSkull.png-2cad5949487a0a44cf2938cc4b6fee9b.stex" ]
 
 [params]
 

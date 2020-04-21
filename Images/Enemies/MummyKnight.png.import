@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Skull.png-392e126156699fb8a8329320f6d29f08.stex"
+path="res://.import/MummyKnight.png-ba1dc64ee4aa71d9be026a187ecf7485.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/Skull.png"
-dest_files=[ "res://.import/Skull.png-392e126156699fb8a8329320f6d29f08.stex" ]
+source_file="res://Images/Enemies/MummyKnight.png"
+dest_files=[ "res://.import/MummyKnight.png-ba1dc64ee4aa71d9be026a187ecf7485.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/SeaHorse.png-8a290d57893e392c0c8d6cfdc35eabc6.stex"
+path="res://.import/ChimeraRBS.png-2c0303b0a56262a3654f50935b0066c2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/SeaHorse.png"
-dest_files=[ "res://.import/SeaHorse.png-8a290d57893e392c0c8d6cfdc35eabc6.stex" ]
+source_file="res://Images/Enemies/ChimeraRBS.png"
+dest_files=[ "res://.import/ChimeraRBS.png-2c0303b0a56262a3654f50935b0066c2.stex" ]
 
 [params]
 

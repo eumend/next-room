@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Mermaid.png-4434b3004182b2f2bb24c9745c8d8ca1.stex"
+path="res://.import/AncientTome.png-3dac9a9150ffa26a3a2263910fce2b3a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/Mermaid.png"
-dest_files=[ "res://.import/Mermaid.png-4434b3004182b2f2bb24c9745c8d8ca1.stex" ]
+source_file="res://Images/Enemies/AncientTome.png"
+dest_files=[ "res://.import/AncientTome.png-3dac9a9150ffa26a3a2263910fce2b3a.stex" ]
 
 [params]
 

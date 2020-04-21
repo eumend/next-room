@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Rat.png-99eeca3c6e43c78f212618dc4a5bc83e.stex"
+path="res://.import/SeaHorse.png-180bd3d4b33368e16aa426a2a1763258.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/Rat.png"
-dest_files=[ "res://.import/Rat.png-99eeca3c6e43c78f212618dc4a5bc83e.stex" ]
+source_file="res://Images/Enemies/SeaHorse.png"
+dest_files=[ "res://.import/SeaHorse.png-180bd3d4b33368e16aa426a2a1763258.stex" ]
 
 [params]
 

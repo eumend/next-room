@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/StarFish.png-ad4b537b313fabab4e92a7e9d7885c1f.stex"
+path="res://.import/AncientSword.png-6dd880e7087bd56d4bf020eebaf6473f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/StarFish.png"
-dest_files=[ "res://.import/StarFish.png-ad4b537b313fabab4e92a7e9d7885c1f.stex" ]
+source_file="res://Images/Enemies/AncientSword.png"
+dest_files=[ "res://.import/AncientSword.png-6dd880e7087bd56d4bf020eebaf6473f.stex" ]
 
 [params]
 

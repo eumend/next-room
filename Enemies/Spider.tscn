@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Enemies/BaseEnemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Enemies/Spider.gd" type="Script" id=2]
-[ext_resource path="res://Images/Spider.png" type="Texture" id=3]
+[ext_resource path="res://Images/Enemies/Spider.png" type="Texture" id=3]
 
 [node name="Spider" instance=ExtResource( 1 )]
 script = ExtResource( 2 )

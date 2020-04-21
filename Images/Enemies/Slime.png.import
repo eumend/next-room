@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/AncientShield.png-346df3eb1d5c130bdc252145635295e2.stex"
+path="res://.import/Slime.png-28fde55f27bffc43b416b589bda68dd9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/AncientShield.png"
-dest_files=[ "res://.import/AncientShield.png-346df3eb1d5c130bdc252145635295e2.stex" ]
+source_file="res://Images/Enemies/Slime.png"
+dest_files=[ "res://.import/Slime.png-28fde55f27bffc43b416b589bda68dd9.stex" ]
 
 [params]
 

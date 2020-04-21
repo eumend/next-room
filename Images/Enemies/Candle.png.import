@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/SeaHorseRider.png-15099040ff025ecb33edf105d99fd532.stex"
+path="res://.import/Candle.png-f38016ef5e509c4a6ca6eb82bfe9890a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/SeaHorseRider.png"
-dest_files=[ "res://.import/SeaHorseRider.png-15099040ff025ecb33edf105d99fd532.stex" ]
+source_file="res://Images/Enemies/Candle.png"
+dest_files=[ "res://.import/Candle.png-f38016ef5e509c4a6ca6eb82bfe9890a.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ChimeraRBS.png-408e3aefad8a4881ca9f30b92a69101c.stex"
+path="res://.import/StarFish.png-aa826f8ea4e98d96df8c9e26f7ae63a3.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/ChimeraRBS.png"
-dest_files=[ "res://.import/ChimeraRBS.png-408e3aefad8a4881ca9f30b92a69101c.stex" ]
+source_file="res://Images/Enemies/StarFish.png"
+dest_files=[ "res://.import/StarFish.png-aa826f8ea4e98d96df8c9e26f7ae63a3.stex" ]
 
 [params]
 

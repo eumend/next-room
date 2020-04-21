@@ -1,8 +1,9 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Enemies/BaseEnemy.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Images/Slime.png" type="Texture" id=2]
+[ext_resource path="res://Images/Enemies/Slime.png" type="Texture" id=2]
 [ext_resource path="res://Enemies/Slime.gd" type="Script" id=3]
+
 
 [node name="Slime" instance=ExtResource( 1 )]
 script = ExtResource( 3 )

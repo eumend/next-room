@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/MummyKnight.png-ced6e55bae3565970f3e05c19f7bbcb9.stex"
+path="res://.import/Mermaid.png-1f9cd826a6bdf53ee3749175a2b55242.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/MummyKnight.png"
-dest_files=[ "res://.import/MummyKnight.png-ced6e55bae3565970f3e05c19f7bbcb9.stex" ]
+source_file="res://Images/Enemies/Mermaid.png"
+dest_files=[ "res://.import/Mermaid.png-1f9cd826a6bdf53ee3749175a2b55242.stex" ]
 
 [params]
 

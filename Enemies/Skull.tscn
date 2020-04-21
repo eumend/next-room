@@ -1,8 +1,9 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Enemies/BaseEnemy.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Images/Skull.png" type="Texture" id=2]
+[ext_resource path="res://Images/Enemies/Skull.png" type="Texture" id=2]
 [ext_resource path="res://Enemies/Skull.gd" type="Script" id=3]
+
 
 [node name="Skull" instance=ExtResource( 1 )]
 script = ExtResource( 3 )

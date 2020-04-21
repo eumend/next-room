@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/FlameHead.png-c853f14e42eb317f774066ea540a81fd.stex"
+path="res://.import/Rat.png-40f3a0663a803ccc3dc082575da4ab23.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/FlameHead.png"
-dest_files=[ "res://.import/FlameHead.png-c853f14e42eb317f774066ea540a81fd.stex" ]
+source_file="res://Images/Enemies/Rat.png"
+dest_files=[ "res://.import/Rat.png-40f3a0663a803ccc3dc082575da4ab23.stex" ]
 
 [params]
 

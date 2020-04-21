@@ -2,8 +2,9 @@
 
 [ext_resource path="res://Enemies/BaseEnemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Enemies/SeaHorseRider.gd" type="Script" id=2]
-[ext_resource path="res://Images/SeaHorseRider.png" type="Texture" id=3]
+[ext_resource path="res://Images/Enemies/SeaHorseRider.png" type="Texture" id=3]
 [ext_resource path="res://Music/SFX/neutral_1.wav" type="AudioStream" id=4]
+
 
 [node name="SeaHorseRider" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
