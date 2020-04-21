@@ -74,8 +74,7 @@ func take_damage(damage, hit_force = null):
 		damage = round(damage / 2)
 	self.hp -= damage
 	var damage_amount = old_hp - self.hp
-	if damage_amount > 0:
-		emit_signal("took_damage", damage_amount, hit_force)
+	emit_signal("took_damage", damage_amount, hit_force)
 
 func heal_damage(amount):
 	var old_hp = self.hp

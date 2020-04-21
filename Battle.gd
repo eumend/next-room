@@ -33,6 +33,7 @@ const Enemies = {
 	"mermaid": preload("res://Enemies/Mermaid.tscn"),
 	"starfish": preload("res://Enemies/StarFish.tscn"),
 	"sea_horse_rider": preload("res://Enemies/SeaHorseRider.tscn"),
+	"spider": preload("res://Enemies/Spider.tscn"),
 }
 
 var Levels = {

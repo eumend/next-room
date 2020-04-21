@@ -10,7 +10,6 @@ onready var face = $Face
 signal show_face(index, texture)
 
 func _ready():
-	change_face(0)
 	timer.connect("timeout", self, "on_timeout")
 
 func on_timeout():
@@ -22,10 +21,16 @@ func change_face(new_index):
 	current_face = new_index
 	var new_texture = faces[current_face]
 	face.texture = faces[current_face]
+	if not face.visible:
+		face.show()
 	emit_signal("show_face", current_face, new_texture)
 
 func set_time(time):
 	timer.wait_time = time
+
+func start():
+	change_face(0)
+	timer.start()
 
 func stop():
 	timer.stop()

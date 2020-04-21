@@ -11,6 +11,7 @@ export(bool) var is_boss = false
 export (String, MULTILINE) var entry_text = ""
 onready var hpLabel = $HPLabel
 onready var animationPlayer = $AnimationPlayer
+onready var attackAnimationPlayer = $AttackAnimationPlayer
 const NumberAnimation = preload("res://Animations/NumberAnimation.tscn")
 
 signal died
@@ -55,7 +56,7 @@ func deal_damage(hit_force = null, fixed_amount = null): #Connected to animation
 	var playerStats = BattleUnits.PlayerStats
 	if playerStats:
 		hit_force = hit_force if hit_force else Utils.pick_from_weighted(get_hit_force_pattern())
-		var amount = fixed_amount if fixed_amount else get_attack_damage_amount(power, hit_force)
+		var amount = fixed_amount if fixed_amount != null else get_attack_damage_amount(power, hit_force)
 		playerStats.take_damage(amount, hit_force)
 		if playerStats.is_dead():
 			emit_signal("end_turn")
@@ -136,6 +137,10 @@ func _ready():
 	BattleUnits.Enemy = self
 	self.hp = self.max_hp
 	DialogBox.show_timeout(entry_text, 2)
+	attackAnimationPlayer.connect("animation_finished", self, "on_attack_animation_finished")
+
+func on_attack_animation_finished(_animation_name):
+	pass
 
 func _exit_tree():
 	BattleUnits.Enemy = null
