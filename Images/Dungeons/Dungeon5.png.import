@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Dungeon3.png-628d23df655f71c79f9e2bf075c26340.stex"
+path="res://.import/Dungeon5.png-52c6d20d02476f6b637356691918e081.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/Dungeon3.png"
-dest_files=[ "res://.import/Dungeon3.png-628d23df655f71c79f9e2bf075c26340.stex" ]
+source_file="res://Images/Dungeons/Dungeon5.png"
+dest_files=[ "res://.import/Dungeon5.png-52c6d20d02476f6b637356691918e081.stex" ]
 
 [params]
 

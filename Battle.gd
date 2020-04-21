@@ -45,7 +45,7 @@ var Levels = {
 		},
 		"boss": "sewer_chimera",
 		"mook_count": 4,
-		"background": preload("res://Images/Dungeon.png")
+		"background": preload("res://Images/Dungeons/Dungeon.png")
 	},
 	2: {
 		"enemies": {
@@ -55,7 +55,7 @@ var Levels = {
 		},
 		"boss": "fire_skull",
 		"mook_count": 4,
-		"background": preload("res://Images/Dungeon2.png")
+		"background": preload("res://Images/Dungeons/Dungeon2.png")
 	},
 	3: {
 		"enemies": {
@@ -65,7 +65,7 @@ var Levels = {
 		},
 		"boss": "mummy_knight",
 		"mook_count": 5,
-		"background": preload("res://Images/Dungeon3.png")
+		"background": preload("res://Images/Dungeons/Dungeon3.png")
 	},
 	4: {
 		"enemies": {
@@ -75,7 +75,15 @@ var Levels = {
 		},
 		"boss": "sea_horse_rider",
 		"mook_count": 5,
-		"background": preload("res://Images/Dungeon4.png")
+		"background": preload("res://Images/Dungeons/Dungeon4.png")
+	},
+	5: {
+		"enemies": {
+			"spider": 100,
+		},
+		"boss": "spider",
+		"mook_count": 5,
+		"background": preload("res://Images/Dungeons/Dungeon5.png")
 	}
 }
 
@@ -88,6 +96,7 @@ var current_run = 0
 
 func _ready():
 	$BGPlayer.play()
+	update_level_layout()
 	create_player()
 	randomize()
 	start_battle()
