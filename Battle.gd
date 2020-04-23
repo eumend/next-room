@@ -34,6 +34,7 @@ const Enemies = {
 	"starfish": preload("res://Enemies/StarFish.tscn"),
 	"sea_horse_rider": preload("res://Enemies/SeaHorseRider.tscn"),
 	"spider": preload("res://Enemies/Spider.tscn"),
+	"spectre": preload("res://Enemies/Spectre.tscn"),
 }
 
 var Levels = {
@@ -79,7 +80,8 @@ var Levels = {
 	},
 	5: {
 		"enemies": {
-			"spider": 100,
+			"spider": 45,
+			"spectre": 40,
 		},
 		"boss": "spider",
 		"mook_count": 5,
@@ -104,7 +106,6 @@ func _ready():
 func start_battle():
 	create_new_enemy()
 	start_player_turn()
-
 
 func create_player():
 	var playerStats = BattleUnits.PlayerStats

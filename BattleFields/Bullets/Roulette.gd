@@ -3,7 +3,7 @@ extends Node2D
 export (Array, Texture) var faces
 
 var current_face = 0
-var speed = 100
+var time = 0.5 setget set_time
 onready var timer = $Timer
 onready var face = $Face
 
@@ -25,7 +25,8 @@ func change_face(new_index):
 		face.show()
 	emit_signal("show_face", current_face, new_texture)
 
-func set_time(time):
+func set_time(new_time):
+	time = new_time
 	timer.wait_time = time
 
 func start():
