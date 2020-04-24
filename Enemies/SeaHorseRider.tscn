@@ -5,10 +5,9 @@
 [ext_resource path="res://Images/Enemies/SeaHorseRider.png" type="Texture" id=3]
 [ext_resource path="res://Music/SFX/neutral_1.wav" type="AudioStream" id=4]
 
-
 [node name="SeaHorseRider" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-max_hp = 55
+max_hp = 60
 power = 8
 exp_points = 9
 is_boss = true

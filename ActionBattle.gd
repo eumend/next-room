@@ -18,12 +18,13 @@ func start_small_field(battle_field_node):
 		battleField.connect("done", self, "on_BattleField_done")
 
 func force_end_of_battle():
-	var battleField = BattleField.get_ref()
-	if battleField:
-		battleField.hide()
-		battleField.disconnect("done", self, "on_BattleField_done")
-		battleField.queue_free()
-		BattleField = null
+	if BattleField:
+		var battleField = BattleField.get_ref()
+		if battleField:
+			battleField.hide()
+			battleField.disconnect("done", self, "on_BattleField_done")
+			battleField.queue_free()
+			BattleField = null
 
 func on_BattleField_done():
 	# TODO: Show Upper and Lower Panel when we are done. The MidPanel will be shows by the Battle.gd script.

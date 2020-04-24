@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Enemies/BaseEnemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Images/Enemies/VoodooCurse.png" type="Texture" id=2]
+[ext_resource path="res://Enemies/VoodooCurse.gd" type="Script" id=3]
+
+[node name="VoodooCurse" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+max_hp = 75
+power = 9
+exp_points = 12
+is_boss = true
+entry_text = "The Voodoo Curse awakens!"
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 2 )

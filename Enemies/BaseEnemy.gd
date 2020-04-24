@@ -31,7 +31,11 @@ var selected_attack = null # Used when calling an attack during an animation
 
 func start_turn():
 	yield(get_tree().create_timer(0.4), "timeout")
+	on_start_turn()
 	attack()
+
+func on_start_turn():
+	pass
 
 func attack():
 	randomize()

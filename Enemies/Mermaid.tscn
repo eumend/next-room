@@ -5,11 +5,10 @@
 [ext_resource path="res://Music/SFX/neutral_1.wav" type="AudioStream" id=3]
 [ext_resource path="res://Images/Enemies/Mermaid.png" type="Texture" id=4]
 
-
 [node name="Mermaid" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 max_hp = 32
-power = 6
+power = 7
 exp_points = 5
 entry_text = "Mermaid swims in!"
 

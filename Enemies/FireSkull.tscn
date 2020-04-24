@@ -4,11 +4,10 @@
 [ext_resource path="res://Enemies/FireSkull.gd" type="Script" id=2]
 [ext_resource path="res://Images/Enemies/FireSkull.png" type="Texture" id=3]
 
-
 [node name="FireSkull" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 max_hp = 32
-power = 5
+power = 6
 exp_points = 5
 is_boss = true
 entry_text = "Flame Skull attacks!"

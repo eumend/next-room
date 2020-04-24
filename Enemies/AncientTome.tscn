@@ -4,11 +4,10 @@
 [ext_resource path="res://Enemies/AncientTome.gd" type="Script" id=2]
 [ext_resource path="res://Images/Enemies/AncientTome.png" type="Texture" id=3]
 
-
 [node name="AncientTome" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 max_hp = 20
-power = 6
+power = 7
 exp_points = 4
 entry_text = "Ancient Tome unearthed!"
 

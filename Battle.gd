@@ -35,6 +35,8 @@ const Enemies = {
 	"sea_horse_rider": preload("res://Enemies/SeaHorseRider.tscn"),
 	"spider": preload("res://Enemies/Spider.tscn"),
 	"spectre": preload("res://Enemies/Spectre.tscn"),
+	"voodoo_doll": preload("res://Enemies/VoodooDoll.tscn"),
+	"voodoo_curse": preload("res://Enemies/VoodooCurse.tscn"),
 }
 
 var Levels = {
@@ -82,8 +84,9 @@ var Levels = {
 		"enemies": {
 			"spider": 45,
 			"spectre": 40,
+			"voodoo_doll": 15
 		},
-		"boss": "spider",
+		"boss": "voodoo_curse",
 		"mook_count": 5,
 		"background": preload("res://Images/Dungeons/Dungeon5.png")
 	}
@@ -179,7 +182,7 @@ func handle_status_eot():
 		if player.has_status(GameConstants.STATUS.POISON):
 			yield(get_tree().create_timer(0.5), "timeout")
 			DialogBox.show_timeout("Damage by poison!", 1)
-			player.take_damage(1)
+			player.take_damage(round(player.max_hp / 8))
 			yield(DialogBox, "done")
 			emit_signal("_done")
 		else:

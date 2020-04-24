@@ -91,12 +91,14 @@ func on_rouletteBattleField_face_displayed(_index, _texture):
 	pass
 
 func on_attack_animation_finished(_animation_name):
-	if current_roulette_index < roulettes.size() - 1:
-		current_roulette_index += 1
-		start_roulette(current_roulette_index)
-	else:
-		rouletteBattleField.done()
-		emit_signal("end_turn")
+	var playerStats = BattleUnits.PlayerStats
+	if playerStats and not playerStats.is_dead():
+		if current_roulette_index < roulettes.size() - 1:
+			current_roulette_index += 1
+			start_roulette(current_roulette_index)
+		else:
+			rouletteBattleField.done()
+			emit_signal("end_turn")
 
 func deal_damage(hit_force = null, _fixed_amount = null):
 	var playerStats = BattleUnits.PlayerStats

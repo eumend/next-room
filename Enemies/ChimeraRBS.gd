@@ -9,8 +9,8 @@ func get_attack_pattern():
 		}
 	elif self.hp <= round(self.max_hp / 2):
 		return {
-			"leech_life": 70,
-			"default_attack": 30,
+			"leech_life": 60,
+			"default_attack": 40,
 		}
 	else:
 		return {

@@ -4,10 +4,9 @@
 [ext_resource path="res://Enemies/ChimeraRBS.gd" type="Script" id=2]
 [ext_resource path="res://Images/Enemies/ChimeraRBS.png" type="Texture" id=3]
 
-
 [node name="ChimeraRBS" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-max_hp = 25
+max_hp = 24
 power = 5
 exp_points = 5
 is_boss = true
