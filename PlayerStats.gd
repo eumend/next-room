@@ -125,7 +125,7 @@ func level_up(lv_increase):
 	self.power += power_increase
 	
 	# Heal
-	self.hp += self.max_hp
+#	self.hp += self.max_hp
 #	self.mp = self.max_mp
 	
 	last_level_up_summary = {

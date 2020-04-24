@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Images/Mobile RPG Mockup.png" type="Texture" id=1]
 [ext_resource path="res://Music/Songs/bg_1.ogg" type="AudioStream" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Music/SFX/footsteps_1.wav" type="AudioStream" id=9]
 [ext_resource path="res://Music/SFX/game_over.wav" type="AudioStream" id=10]
 [ext_resource path="res://TextBoxPanel.gd" type="Script" id=11]
+[ext_resource path="res://ActionButtons/SuperAttackButton.tscn" type="PackedScene" id=12]
 [ext_resource path="res://BattleActionButtons.gd" type="Script" id=13]
 [ext_resource path="res://ActionButtons/HealActionButton.tscn" type="PackedScene" id=14]
 [ext_resource path="res://ActionButtons/SwordActionButton.tscn" type="PackedScene" id=15]
@@ -288,6 +289,12 @@ margin_right = 76.0
 
 [node name="ComboActionButton" parent="UI/BattleActionButtons" instance=ExtResource( 16 )]
 margin_top = 16.0
+margin_bottom = 29.0
+
+[node name="SuperAttackButton" parent="UI/BattleActionButtons" instance=ExtResource( 12 )]
+margin_left = 42.0
+margin_top = 16.0
+margin_right = 76.0
 margin_bottom = 29.0
 
 [node name="OverworldActionButtons" type="CenterContainer" parent="UI"]

@@ -209,6 +209,9 @@ func eot_checks():
 	return true
 
 func handle_boss_death_eot(enemy):
+	var playerStats = BattleUnits.PlayerStats
+	if playerStats.hp < playerStats.max_hp:
+		playerStats.heal_damage(playerStats.max_hp)
 	current_level += 1
 	nextRoomButton.text = "NEXT FLOOR"
 	if current_level in Levels:

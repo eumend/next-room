@@ -131,6 +131,18 @@ const secondary_attack_roulettes = [
 			"sprite": SurpriseSprite,
 			"id": FACES.SURPRISE
 		},
+		{
+			"sprite": PowerUpSprite,
+			"id": FACES.POWER_UP
+		},
+		{
+			"sprite": DrainLifeSprite,
+			"id": FACES.DRAIN_LIFE
+		},
+		{
+			"sprite": WinSprite,
+			"id": FACES.WIN
+		},
 	],
 ]
 
@@ -265,6 +277,8 @@ func deal_damage(hit_force = null, _fixed_amount = null):
 						var bufferForPoison = poison_damage if playerStats.hp > poison_damage else 0 # If player can survive poison next turn, we want him to survive with 1 HP
 						surprise_damage -= bufferForPoison
 					.deal_damage(null, surprise_damage)
+				FACES.WIN:
+					.deal_damage(null, damage_amount)
 			
 		else:
 			.deal_damage(hit_force)

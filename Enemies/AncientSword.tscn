@@ -4,10 +4,9 @@
 [ext_resource path="res://Enemies/AncientSword.gd" type="Script" id=2]
 [ext_resource path="res://Images/Enemies/AncientSword.png" type="Texture" id=3]
 
-
 [node name="AncientSword" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-max_hp = 18
+max_hp = 20
 power = 8
 exp_points = 3
 entry_text = "Ancient Sword unearthed!"
