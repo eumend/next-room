@@ -46,7 +46,7 @@ func deal_damage(hit_force = null, _fixed_amount= null):
 
 func get_hit_force_pattern():
 	return {
-		GameConstants.HIT_FORCE.NORMAL: 40,
-		GameConstants.HIT_FORCE.STRONG: 35,
-		GameConstants.HIT_FORCE.CRIT: 25,
+		GameConstants.HIT_FORCE.NORMAL: 50,
+		GameConstants.HIT_FORCE.STRONG: 30,
+		GameConstants.HIT_FORCE.CRIT: 20,
 	}

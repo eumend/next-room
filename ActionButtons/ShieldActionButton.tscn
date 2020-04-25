@@ -6,4 +6,4 @@
 [node name="ShieldActionButton" instance=ExtResource( 1 )]
 text = "SHIELD"
 script = ExtResource( 2 )
-ap_cost = 2
+recharge_turns = 0
