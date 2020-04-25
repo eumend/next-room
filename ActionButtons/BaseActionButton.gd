@@ -15,6 +15,7 @@ var progress_map = {
 	2: preload("res://Images/ProgressBars/progress_over_2.png"),
 	3: preload("res://Images/ProgressBars/progress_over_3.png"),
 	4: preload("res://Images/ProgressBars/progress_over_4.png"),
+	5: preload("res://Images/ProgressBars/progress_over_5.png"),
 }
 
 func _ready():

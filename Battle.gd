@@ -121,6 +121,7 @@ func start_player_turn():
 	turns_taken += 1
 	total_turns_taken += 1
 	var playerStats = BattleUnits.PlayerStats
+	playerStats.clear_buffs()
 	actionButtons.start_turn()
 	playerStats.ap = playerStats.max_ap
 

@@ -7,7 +7,8 @@ onready var lvLabel = $StatsContainer/LV
 onready var powLabel = $StatsContainer/POW
 onready var statusContainer = $StatsContainer/Status
 
-const poison_icon = preload("res://Images/skull_icon.png")
+const PoisonIcon = preload("res://Images/skull_icon.png")
+const ShieldIcon = preload("res://Images/shield_icon.png")
 const NumberAnimation = preload("res://Animations/NumberAnimation.tscn")
 const BattleUnits = preload("res://BattleUnits.tres")
 
@@ -52,15 +53,16 @@ func _on_PlayerStats_status_changed(statuses):
 
 func display_status(statuses):
 	if statuses.size() > 0:
-		var first_status = statuses[0]
-		var icon = get_status_icon(first_status)
+		var last_status = statuses.back()
+		var icon = get_status_icon(last_status)
 		statusContainer.get_node("Icon").texture = icon
 	else:
 		statusContainer.get_node("Icon").texture = null
 
 func get_status_icon(status):
 	match(status):
-		GameConstants.STATUS.POISON: return poison_icon
+		GameConstants.STATUS.POISON: return PoisonIcon
+		GameConstants.STATUS.SHIELDED: return ShieldIcon
 		_: return null
 
 
