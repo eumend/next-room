@@ -157,8 +157,8 @@ func get_attack_pattern():
 	var playerStats = BattleUnits.PlayerStats
 	if self.hp <= round(self.max_hp / 3):
 		return {
-			"voodoo_atack": 75,
-			"triple_hit_roulette_attack": 25,
+			"voodoo_atack": 65,
+			"triple_hit_roulette_attack": 35,
 		}
 	elif not playerStats.has_status(GameConstants.STATUS.POISON):
 		return {

@@ -1,6 +1,5 @@
 extends GridContainer
 
-#const SlashAttack = preload("res://Attacks/SlashAttack.tscn")
 const ActionBattle = preload("res://ActionBattle.tres")
 const BattleUnits = preload("res://BattleUnits.tres")
 const DialogBox = preload("res://DialogBox.tres")

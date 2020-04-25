@@ -10,6 +10,7 @@ var last_side = null
 var total_bullets = 4 setget set_total_bullets
 var bullets_left = total_bullets
 var bullets_that_hit = 0
+var fired_bullets = 0
 var stop_point = null
 var stop_point_time = null
 var base_speed = 70
@@ -26,6 +27,7 @@ func _ready():
 	fire_bullet()
 
 func fire_bullet():
+	fired_bullets += 1
 	bulletTimer.wait_time = get_bullet_wait_time()
 	bulletTimer.start()
 
@@ -51,16 +53,18 @@ func _fire_bullet():
 	emit_signal("fired")
 
 func get_bullet_speed():
-	match(bullets_left):
-		1: return base_speed * 2
-		2: return base_speed * 1.5
+	var fired_bullets_left = total_bullets - fired_bullets
+	match(fired_bullets_left):
+		0: return base_speed * 2
+		1: return base_speed * 1.5
 		_: return base_speed
 
 func get_bullet_wait_time():
-	match(bullets_left):
-		1: return 0.7
-		2: return 0.6
-		_: return 0.5
+	var fired_bullets_left = total_bullets - fired_bullets
+	match(fired_bullets_left):
+		0: return 0.6
+		1: return 0.5
+		_: return 0.4
 
 func pick_bullet_side():
 	if last_side != null:

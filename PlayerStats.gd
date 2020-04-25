@@ -73,10 +73,16 @@ func clear_buffs():
 		player_statuses.erase(GameConstants.STATUS.SHIELDED)
 		emit_signal("status_changed", player_statuses)
 
+func take_status_damage(damage):
+	_take_damage(damage, null)
+
 func take_damage(damage, hit_force = null):
-	var old_hp = self.hp
 	if self.has_status(GameConstants.STATUS.SHIELDED):
 		damage = round(damage / 2)
+	_take_damage(damage, hit_force)
+
+func _take_damage(damage, hit_force):
+	var old_hp = self.hp
 	self.hp -= damage
 	var damage_amount = old_hp - self.hp
 	emit_signal("took_damage", damage_amount, hit_force)

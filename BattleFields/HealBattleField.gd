@@ -47,8 +47,10 @@ func get_bullet_speed():
 
 func get_bullet_wait_time():
 	match(bullets_left):
-		1: return 0.8
-		_: return 0.5
+		total_bullets: return 0.1
+		1: return 0.6
+		2: return 0.5
+		_: return 0.4
 
 func pick_bullet_side():
 	if last_side != null:

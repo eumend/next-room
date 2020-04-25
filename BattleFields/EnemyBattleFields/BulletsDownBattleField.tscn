@@ -32,5 +32,7 @@ position = Vector2( 0, 6 )
 shape = SubResource( 2 )
 
 [node name="DoneTimer" type="Timer" parent="." index="3"]
+one_shot = true
 
 [node name="FireBulletTimer" type="Timer" parent="." index="4"]
+one_shot = true

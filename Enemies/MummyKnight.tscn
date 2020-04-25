@@ -10,7 +10,7 @@ max_hp = 45
 power = 8
 exp_points = 7
 is_boss = true
-entry_text = "Mummy Knight draws near!!"
+entry_text = "Mummy Knight unearthed!!"
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 3 )

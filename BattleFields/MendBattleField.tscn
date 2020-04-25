@@ -34,8 +34,10 @@ position = Vector2( 36, 60 )
 shape = SubResource( 2 )
 
 [node name="BulletTimer" type="Timer" parent="Field" index="4"]
+one_shot = true
 
 [node name="DoneTimer" type="Timer" parent="Field" index="5"]
+one_shot = true
 [connection signal="area_entered" from="Field/BorderL" to="." method="_on_BorderL_area_entered"]
 [connection signal="area_entered" from="Field/BorderR" to="." method="_on_BorderR_area_entered"]
 [connection signal="area_entered" from="Field/BorderB" to="." method="_on_BorderB_area_entered"]

@@ -7,7 +7,7 @@
 
 [node name="Mermaid" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-max_hp = 32
+max_hp = 34
 power = 7
 exp_points = 5
 entry_text = "Mermaid swims in!"

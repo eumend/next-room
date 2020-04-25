@@ -183,7 +183,7 @@ func handle_status_eot():
 		if player.has_status(GameConstants.STATUS.POISON):
 			yield(get_tree().create_timer(0.5), "timeout")
 			DialogBox.show_timeout("Damage by poison!", 1)
-			player.take_damage(round(player.max_hp / 8))
+			player.take_status_damage(round(player.max_hp / 8))
 			yield(DialogBox, "done")
 			emit_signal("_done")
 		else:
@@ -212,7 +212,7 @@ func eot_checks():
 func handle_boss_death_eot(enemy):
 	var playerStats = BattleUnits.PlayerStats
 	if playerStats.hp < playerStats.max_hp:
-		playerStats.heal_damage(playerStats.max_hp)
+		playerStats.hp = playerStats.max_hp
 	current_level += 1
 	nextRoomButton.text = "NEXT FLOOR"
 	if current_level in Levels:

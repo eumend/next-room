@@ -271,9 +271,9 @@ anims/ShakeV = SubResource( 3 )
 anims/ShakeV2 = SubResource( 4 )
 
 [node name="BattleActionButtons" type="GridContainer" parent="UI"]
-margin_left = 9.0
+margin_left = 7.0
 margin_top = 73.0
-margin_right = 81.0
+margin_right = 83.0
 margin_bottom = 134.0
 custom_constants/vseparation = 3
 custom_constants/hseparation = 8
@@ -292,6 +292,7 @@ margin_right = 76.0
 [node name="ComboActionButton" parent="UI/BattleActionButtons" instance=ExtResource( 16 )]
 margin_top = 16.0
 margin_bottom = 29.0
+level_required = 4
 
 [node name="HealActionButton" parent="UI/BattleActionButtons" instance=ExtResource( 14 )]
 margin_left = 42.0

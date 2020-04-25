@@ -6,7 +6,7 @@
 
 [node name="AncientTome" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-max_hp = 20
+max_hp = 22
 power = 7
 exp_points = 4
 entry_text = "Ancient Tome unearthed!"

@@ -15,6 +15,7 @@ var starting_y = 50
 var total_bullets = 8
 var bullets_left = total_bullets
 var bullets_that_hit = 0
+var fired_bullets = 0
 var base_speed = 65
 var bullet_starting_y = -4 # Above the screen
 
@@ -36,6 +37,7 @@ func start_player_bumper():
 	player.start()
 
 func fire_bullet():
+	fired_bullets += 1
 	bulletTimer.wait_time = get_bullet_wait_time()
 	bulletTimer.start()
 
@@ -43,7 +45,7 @@ func _fire_bullet():
 	var new_bullet = Bullet.instance()
 	new_bullet.position = Vector2(rand_range(min_starting_x, max_starting_x), bullet_starting_y)
 	new_bullet.speed = get_bullet_speed()
-	if bullets_that_hit == total_bullets -  1: # Last bullet
+	if fired_bullets == total_bullets: # Last bullet
 		new_bullet.color = "00ffed" # Blue
 	add_child(new_bullet)
 	new_bullet.connect("hit", self, "on_Bullet_hit")
@@ -73,7 +75,7 @@ func get_bullet_speed():
 
 func get_bullet_wait_time():
 	match(bullets_left):
-		1: return 0.9
+		1: return 0.6
 		_: return 0.7
 
 func on_bulletTimer_timeout():

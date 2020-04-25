@@ -45,7 +45,7 @@ func janken_attack():
 	ActionBattle.start_small_field(jankenBattleField)
 
 func _on_jankenBattleField_player_draw():
-	.heal_damage(ceil(self.max_hp / 5))
+	.heal_damage(ceil(self.max_hp / 6))
 
 func _on_jankenBattleField_player_lose():
 	.deal_damage(GameConstants.HIT_FORCE.STRONG)
