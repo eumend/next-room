@@ -1,13 +1,17 @@
 extends Area2D
 
 signal hit(target, position)
-signal point_reached(bullet)
 var direction = Vector2(0, 1) # Down
-var base_speed = 50
-var speed_multiplier = 1
+var speed = 50
 var paused = false
 var stop_point = null
+var stop_point_time = null
 var color = "ffffff" setget set_color
+onready var animationPlayer = $AnimationPlayer
+onready var stopPointTimer = $StopPointTimer
+
+func _ready():
+	stopPointTimer.connect("timeout", self, "on_stopPointTimer_timeout")
 
 func set_color(new_color):
 	color = new_color
@@ -15,18 +19,35 @@ func set_color(new_color):
 
 func _physics_process(delta):
 	if not paused:
-		var speed = base_speed * speed_multiplier
 		self.position += direction * speed * delta
-		if stop_point and self.position.y  >= stop_point:
+		if stop_point and stop_point_time and self.position.y  >= stop_point:
+			self.pause()
+			stopPointTimer.wait_time = stop_point_time
+			stopPointTimer.start()
 			stop_point = null
-			emit_signal("point_reached", self)
+			stop_point_time = null
+
+func on_stopPointTimer_timeout():
+	self.unpause()
 
 func _on_Bullet_area_entered(area):
-	emit_signal("hit", area, self.position)
-	queue_free()
+	if not paused: # FIXME: For some reason it keeps firing this event after hitting one time, even though it should not be moving anymore. This is a workaround to only detect once.
+		paused = true
+		emit_signal("hit", area, self)
 
 func pause():
 	paused = true
 
 func unpause():
 	paused = false
+
+func disappear():
+	paused = true
+	animationPlayer.play("Disappear")
+
+func explode():
+	paused = true
+	animationPlayer.play("Explode")
+
+func _on_AnimationPlayer_animation_finished(_anim_name):
+	queue_free()

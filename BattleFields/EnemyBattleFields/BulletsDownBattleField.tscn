@@ -30,3 +30,7 @@ position = Vector2( 36, 55 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Field/Bottom" index="0"]
 position = Vector2( 0, 6 )
 shape = SubResource( 2 )
+
+[node name="DoneTimer" type="Timer" parent="." index="3"]
+
+[node name="FireBulletTimer" type="Timer" parent="." index="4"]

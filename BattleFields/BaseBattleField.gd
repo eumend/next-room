@@ -4,6 +4,7 @@ signal hit(force)
 signal enemy_hit(force)
 signal miss
 signal heal(force)
+signal heal_status
 signal enemy_heal(force)
 signal done
 
@@ -28,6 +29,9 @@ func enemy_hit(hit_force = GameConstants.HIT_FORCE.NORMAL):
 
 func heal(hit_force = GameConstants.HIT_FORCE.NORMAL):
 	emit_signal("heal", hit_force)
+
+func heal_status():
+	emit_signal("heal_status")
 
 func enemy_heal(hit_force = GameConstants.HIT_FORCE.NORMAL):
 	emit_signal("enemy_heal", hit_force)

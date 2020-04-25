@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://BattleFields/BaseBattleField.tscn" type="PackedScene" id=1]
 [ext_resource path="res://BattleFields/HealBattleField.gd" type="Script" id=2]
-[ext_resource path="res://BattleFields/Bullets/Bullet.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 15, 2 )
@@ -36,6 +35,9 @@ shape = SubResource( 1 )
 position = Vector2( 36, 60 )
 shape = SubResource( 2 )
 
-[node name="Bullet" parent="Field" index="2" instance=ExtResource( 3 )]
-visible = false
-position = Vector2( 50, 47 )
+[node name="DoneTimer" type="Timer" parent="." index="3"]
+wait_time = 0.3
+one_shot = true
+
+[node name="FireBulletTimer" type="Timer" parent="." index="4"]
+one_shot = true

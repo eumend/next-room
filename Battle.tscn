@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Images/Mobile RPG Mockup.png" type="Texture" id=1]
 [ext_resource path="res://Music/Songs/bg_1.ogg" type="AudioStream" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://ActionButtons/SwordActionButton.tscn" type="PackedScene" id=15]
 [ext_resource path="res://ActionButtons/ComboActionButton.tscn" type="PackedScene" id=16]
 [ext_resource path="res://ActionButtons/ShieldActionButton.tscn" type="PackedScene" id=17]
+[ext_resource path="res://ActionButtons/MendActionButton.tscn" type="PackedScene" id=18]
 
 [sub_resource type="StreamTexture" id=1]
 
@@ -300,6 +301,12 @@ margin_bottom = 29.0
 
 [node name="SuperAttackButton" parent="UI/BattleActionButtons" instance=ExtResource( 12 )]
 margin_top = 32.0
+margin_bottom = 45.0
+
+[node name="MendActionButton" parent="UI/BattleActionButtons" instance=ExtResource( 18 )]
+margin_left = 42.0
+margin_top = 32.0
+margin_right = 76.0
 margin_bottom = 45.0
 
 [node name="OverworldActionButtons" type="CenterContainer" parent="UI"]

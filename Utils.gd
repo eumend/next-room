@@ -5,6 +5,7 @@ func pick_from_weighted(distribution):
 	var total_size = 0
 	for v in values:
 		total_size += v
+	randomize()
 	var pct = rand_range(0, total_size)
 	var last_index = 0
 	var ranges = []
