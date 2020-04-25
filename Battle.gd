@@ -37,6 +37,10 @@ const Enemies = {
 	"spectre": preload("res://Enemies/Spectre.tscn"),
 	"voodoo_doll": preload("res://Enemies/VoodooDoll.tscn"),
 	"voodoo_curse": preload("res://Enemies/VoodooCurse.tscn"),
+	"worm": preload("res://Enemies/Worm.tscn"),
+	"bug": preload("res://Enemies/Bug.tscn"),
+	"saucer": preload("res://Enemies/Saucer.tscn"),
+	"cosmic_menagerie": preload("res://Enemies/CosmicMenagerie.tscn"),
 }
 
 var Levels = {
@@ -89,6 +93,16 @@ var Levels = {
 		"boss": "voodoo_curse",
 		"mook_count": 5,
 		"background": preload("res://Images/Dungeons/Dungeon5.png")
+	},
+	6: {
+		"enemies": {
+			"worm": 45,
+			"bug": 40,
+			"saucer": 15,
+		},
+		"boss": "cosmic_menagerie",
+		"mook_count": 5,
+		"background": preload("res://Images/Dungeons/Dungeon6.png")
 	}
 }
 

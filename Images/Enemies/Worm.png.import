@@ -1,0 +1,34 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/Worm.png-4a671c4e5e8a541f1fc7212b75827149.stex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://Images/Enemies/Worm.png"
+dest_files=[ "res://.import/Worm.png-4a671c4e5e8a541f1fc7212b75827149.stex" ]
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/bptc_ldr=0
+compress/normal_map=0
+flags/repeat=0
+flags/filter=false
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+process/invert_color=false
+stream=false
+size_limit=0
+detect_3d=false
+svg/scale=1.0
