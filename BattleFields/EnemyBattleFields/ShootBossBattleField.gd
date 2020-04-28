@@ -1,5 +1,7 @@
 extends "res://BattleFields/EnemyBattleFields/ShootEmUpBattleField.gd"
 
+signal boss_hit
+
 onready var bossBullet = $Field/BossBullet
 onready var bossHP = $Field/BossHP
 
@@ -11,11 +13,17 @@ var bullet_pattern = {
 var bullet_time = 2
 var pause = false
 var initial_bullets = 0
+var boss_sprite = null
+var boss_hp = null
 
 func _ready():
 	bulletTimer.wait_time = bullet_time
 	bossBullet.position = get_bullet_position()
 	bossBullet.direction = get_bullet_direction()
+	if boss_sprite:
+		bossBullet.boss_sprite = boss_sprite
+	if boss_hp:
+		bossBullet.hp = boss_hp
 	bossHP.max_value = bossBullet.hp
 	bossHP.value = bossBullet.hp
 	bossBullet.connect("hit", self, "on_bossBullet_hit")
@@ -66,6 +74,7 @@ func on_bossBullet_hit(target, bullet):
 			return
 		"Laser":
 			bullet.take_hit()
+			emit_signal("boss_hit")
 			return
 
 func on_bossBullet_hp_changed(hp):

@@ -108,13 +108,14 @@ var Levels = {
 
 # Score vars
 var kill_streak = 0
-var current_level = 6
+var current_level = 1
 var turns_taken = 0
 var total_turns_taken = 0
 var current_run = 0
 
 func _ready():
 	$BGPlayer.play()
+#	skip_to_level(6, 8) # Debugging
 	update_level_layout()
 	create_player()
 	randomize()
@@ -339,3 +340,10 @@ func on_game_finished():
 
 func update_level_layout():
 	$Dungeon.texture = Levels[current_level]["background"]
+
+func skip_to_level(lvl, player_lvl):
+	var playerStats = BattleUnits.PlayerStats
+	current_level = lvl
+	for i in range(1, player_lvl):
+		playerStats.level_up(1)
+	playerStats.hp = playerStats.max_hp

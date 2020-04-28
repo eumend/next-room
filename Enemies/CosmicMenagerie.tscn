@@ -1,9 +1,16 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Enemies/BaseEnemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Images/Enemies/CosmicMenagerie.png" type="Texture" id=2]
+[ext_resource path="res://Enemies/CosmicMenagerie.gd" type="Script" id=3]
 
 [node name="CosmicMenagerie" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+max_hp = 88
+power = 9
+exp_points = 10
+is_boss = true
+entry_text = "The Cosmic Menagerie dives down!"
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )

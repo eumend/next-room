@@ -17,6 +17,8 @@ var boss_sprite = null setget set_boss_sprite
 
 func _ready():
 	animationPlayer.connect("animation_finished", self, "_on_animationPlayer_animation_finished")
+	if boss_sprite:
+		sprite.texture = boss_sprite
 	pass # Replace with function body.
 
 func _physics_process(delta):
@@ -33,7 +35,10 @@ func take_hit():
 	else:
 		animationPlayer.play("Hit")
 		hitSFX.play()
-		speed = speed * 1.2
+		speed = speed * 1.1
+		var turn_around = Utils.pick_from_weighted({true: 30, false: 70})
+		if turn_around:
+			self.direction = Vector2(self.direction.x * -1, self.direction.y)
 
 func _on_animationPlayer_animation_finished(anim_name):
 	if anim_name == "Explode":
