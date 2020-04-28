@@ -108,7 +108,7 @@ var Levels = {
 
 # Score vars
 var kill_streak = 0
-var current_level = 1
+var current_level = 6
 var turns_taken = 0
 var total_turns_taken = 0
 var current_run = 0
