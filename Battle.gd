@@ -11,6 +11,7 @@ onready var actionButtons = $UI/BattleActionButtons
 onready var animationPlayer = $AnimationPlayer
 onready var nextRoomButton = $UI/OverworldActionButtons/NextRoomButton
 onready var restartButton = $UI/OverworldActionButtons/RestartButton
+onready var continueButton = $UI/OverworldActionButtons/ContinueButton
 onready var enemyStartPosition = $EnemyPosition
 
 signal _done
@@ -48,7 +49,7 @@ var Levels = {
 		"enemies": {
 			"rat": 45,
 			"bat": 40,
-			"slime": 15,
+			"slime": 999999,
 		},
 		"boss": "sewer_chimera",
 		"mook_count": 4,
@@ -110,8 +111,8 @@ var Levels = {
 var kill_streak = 0
 var current_level = 1
 var turns_taken = 0
-var total_turns_taken = 0
 var current_run = 0
+var continues_taken = 0
 
 func _ready():
 	$BGPlayer.play()
@@ -134,7 +135,6 @@ func create_player():
 func start_player_turn():
 	BattleUnits.set_current_turn(GameConstants.UNITS.PLAYER)
 	turns_taken += 1
-	total_turns_taken += 1
 	var playerStats = BattleUnits.PlayerStats
 	playerStats.clear_buffs()
 	actionButtons.start_turn()
@@ -295,8 +295,30 @@ func _on_NextRoomButton_pressed():
 
 func _on_RestartButton_pressed():
 	restartButton.hide()
+	continueButton.hide()
 	BattleSummary.hide_summary()
 	restart_game()
+
+func on_continue():
+	animationPlayer.play("FadeOut")
+	yield(animationPlayer, "animation_finished")
+	animationPlayer.play("FadeToNewRoom")
+	var playerStats = BattleUnits.PlayerStats
+	playerStats.heal_all()
+	var enemy = BattleUnits.Enemy
+	if enemy:
+		BattleUnits.Enemy = null
+		enemy.queue_free()
+	kill_streak = 0
+	continues_taken += 1
+	update_level_layout()
+	yield(get_tree().create_timer(0.2), "timeout")
+	animationPlayer.play("FadeIn")
+	yield(animationPlayer, "animation_finished")
+	actionButtons.recharge_all()
+	$BGPlayer.play()
+	start_battle()
+	
 
 func restart_game():
 	animationPlayer.play("FadeOut")
@@ -306,7 +328,6 @@ func restart_game():
 	if current_run > 0:
 		playerStats.reset_plus()
 	else:
-		total_turns_taken = 0
 		playerStats.reset()
 	var enemy = BattleUnits.Enemy
 	if enemy:
@@ -315,6 +336,8 @@ func restart_game():
 	current_level = 1
 	turns_taken = 0
 	kill_streak = 0
+	current_run = 0
+	continues_taken = 0
 	update_level_layout()
 	yield(get_tree().create_timer(0.2), "timeout")
 	animationPlayer.play("FadeIn")
@@ -325,14 +348,14 @@ func restart_game():
 func game_over():
 	$BGPlayer.stop()
 	$SFXGameOver.play()
-	var text = "TURNS: " + str(turns_taken) + "\n" + "TOTAL: " + str(total_turns_taken) + "\n" + "STREAK: " + str(current_run)
+	var text = "RUN: " + str(current_run) + "\n" + "CONT: " + str(continues_taken) + "\n" + "TURNS: " + str(turns_taken)
 	BattleSummary.show_summary("GAME OVER", text)
 	restartButton.show()
-	current_run = 0
+	continueButton.show()
 
 func on_game_finished():
 	current_run += 1
-	var text = "TURNS: " + str(turns_taken) + "\n" + "TOTAL: " + str(total_turns_taken) + "\n" + "STREAK: " + str(current_run)
+	var text = "RUN: " + str(current_run) + "\n" + "CONT: " + str(continues_taken) + "\n" + "TURNS: " + str(turns_taken)
 	BattleSummary.show_summary("FINISHED!", text)
 	actionButtons.hide()
 	restartButton.show()
@@ -344,6 +367,13 @@ func update_level_layout():
 func skip_to_level(lvl, player_lvl):
 	var playerStats = BattleUnits.PlayerStats
 	current_level = lvl
-	for i in range(1, player_lvl):
+	for _i in range(1, player_lvl):
 		playerStats.level_up(1)
 	playerStats.hp = playerStats.max_hp
+
+
+func _on_ContinueButton_pressed():
+	restartButton.hide()
+	continueButton.hide()
+	BattleSummary.hide_summary()
+	on_continue()

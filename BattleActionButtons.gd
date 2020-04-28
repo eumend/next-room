@@ -16,6 +16,11 @@ func on_playerStats_level_changed(level, old_level):
 			if skill.level_required > old_level and skill.level_required <= level:
 				DialogBox.show_timeout("LEARNED " + skill.text + "!")
 
+func recharge_all(num = null):
+	var skills = get_children()
+	for skill in skills:
+		skill.recharge_by(num if num != null else skill.recharge_turns)
+
 func start_turn():
 	var skills = get_children()
 	for skill in skills:

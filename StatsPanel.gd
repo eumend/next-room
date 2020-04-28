@@ -20,7 +20,8 @@ func _ready():
 		update_level(player.level)
 
 func update_hp(value):
-	hpLabel.text = "HP\n" + str(value)
+	var player = BattleUnits.PlayerStats
+	hpLabel.text = "HP\n" + str(value) + "/" + str(player.max_hp)
 
 func update_pow(value):
 	powLabel.text = "POW\n" + str(value)
@@ -30,12 +31,6 @@ func update_level(value):
 
 func _on_PlayerStats_hp_changed(value):
 	update_hp(value)
-	
-func _on_PlayerStats_mp_changed(value):
-	mpLabel.text = "MP\n" + str(value)
-
-func _on_PlayerStats_ap_changed(value):
-	apLabel.text = "AP\n" + str(value)
 
 func _on_PlayerStats_level_changed(value, _old_value):
 	update_level(value)
@@ -46,9 +41,11 @@ func _on_PlayerStats_power_changed(value):
 func _on_PlayerStats_status_changed(statuses):
 	if statuses.size() > 0:
 		display_status(statuses)
+		lvLabel.hide()
 		statusContainer.show()
 	else:
 		statusContainer.hide()
+		lvLabel.show()
 		display_status(statuses)
 
 func display_status(statuses):

@@ -11,7 +11,7 @@ func attack():
 		.attack()
 
 func undead_attack():
-	DialogBox.show_timeout("SELF-DESTRUCT!", 1)
+	DialogBox.show_timeout("KAMIKAZE!", 1)
 	yield(DialogBox, "done")
 	animate_explosion()
 
