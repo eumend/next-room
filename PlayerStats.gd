@@ -43,6 +43,10 @@ var last_level_up_summary = {}
 func is_dead():
 	return self.hp <= 0
 
+func heal_all():
+	self.hp = self.max_hp
+	clear_status()
+
 func reset_plus():
 	self.hp = base_hp
 	self.power = base_power
@@ -69,6 +73,11 @@ func add_status(new_status):
 func clear_status():
 	player_statuses = []
 	emit_signal("status_changed", player_statuses)
+
+func heal_status():
+	if player_statuses.has(GameConstants.STATUS.POISON):
+		player_statuses.erase(GameConstants.STATUS.POISON)
+		emit_signal("status_changed", player_statuses)
 
 func clear_buffs():
 	if player_statuses.has(GameConstants.STATUS.SHIELDED):

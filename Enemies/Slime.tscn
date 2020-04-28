@@ -4,10 +4,10 @@
 [ext_resource path="res://Images/Enemies/Slime.png" type="Texture" id=2]
 [ext_resource path="res://Enemies/Slime.gd" type="Script" id=3]
 
-
 [node name="Slime" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 max_hp = 12
+power = 3
 exp_points = 2
 entry_text = "A Slime draws near!"
 

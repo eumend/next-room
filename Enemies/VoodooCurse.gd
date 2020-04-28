@@ -201,7 +201,7 @@ func triple_hit_roulette_attack():
 	start_triple_roulette(current_roulette_index)
 
 func start_triple_roulette(roulette_index):
-	var roulette_speed = 0.1 - (0.01 * roulette_index) # Faster as we go up
+	var roulette_speed = 0.12 - (0.01 * roulette_index) # Faster as we go up
 	var roulette_data = triple_attack_roulettes[roulette_index]
 	var faces = get_roulette_sprites(roulette_data)
 	rouletteBattleField.start_roulette(faces, roulette_speed)

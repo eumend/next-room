@@ -5,7 +5,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 3, 3 )
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 resource_name = "Disappear"
 length = 0.05
 step = 0.05
@@ -22,8 +22,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "Explode"
+[sub_resource type="Animation" id=3]
 length = 0.1
 step = 0.05
 tracks/0/type = "value"
@@ -85,8 +84,8 @@ __meta__ = {
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Disappear = SubResource( 3 )
-anims/Explode = SubResource( 2 )
+anims/Disappear = SubResource( 2 )
+anims/Explode = SubResource( 3 )
 anims/None = SubResource( 4 )
 
 [node name="StopPointTimer" type="Timer" parent="."]
