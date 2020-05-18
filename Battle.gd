@@ -53,7 +53,7 @@ var Levels = {
 		"enemies": {
 			"rat": 45,
 			"bat": 40,
-			"slime": 15,
+			"slime": 999999,
 		},
 		"boss": "sewer_chimera",
 		"mook_count": 4,
