@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Enemies/BaseEnemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Images/Enemies/RingAngel.png" type="Texture" id=2]
+[ext_resource path="res://Enemies/RingAngel.gd" type="Script" id=3]
+
+[node name="RingAngel" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+max_hp = 90
+power = 10
+exp_points = 15
+entry_text = "A Ring Angel descends!"
+bullet_interval = 1.0
+wall_interval = 2
+total_time = 9
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 2 )

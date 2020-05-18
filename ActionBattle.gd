@@ -7,14 +7,14 @@ var LowerPanel = null
 var BattleField = null
 
 func start_small_field(battle_field_node):
-	if BattleField:
+	if BattleField and BattleField.get_ref():
 		BattleField.get_ref().queue_free()
 	BattleField = weakref(battle_field_node)
 	var battleField = BattleField.get_ref()
 	if MidPanel != null and battleField:
 		MidPanel.hide()
 		MidPanel.get_tree().get_root().add_child(battleField)
-		battleField.set_global_position(MidPanel.get_position())
+		battleField.set_global_position(MidPanel.get_position() + Vector2(2, 0))
 		battleField.connect("done", self, "on_BattleField_done")
 
 func force_end_of_battle():

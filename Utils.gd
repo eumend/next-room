@@ -1,5 +1,9 @@
 extends Node
 
+func pick_from_list(list):
+	randomize()
+	return list[randi() % list.size()]
+
 func pick_from_weighted(distribution):
 	var values = distribution.values()
 	var total_size = 0

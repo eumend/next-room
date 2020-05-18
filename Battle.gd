@@ -42,6 +42,10 @@ const Enemies = {
 	"bug": preload("res://Enemies/Bug.tscn"),
 	"saucer": preload("res://Enemies/Saucer.tscn"),
 	"cosmic_menagerie": preload("res://Enemies/CosmicMenagerie.tscn"),
+	"feather_angel": preload("res://Enemies/FeatherAngel.tscn"),
+	"ring_angel": preload("res://Enemies/RingAngel.tscn"),
+	"face_angel": preload("res://Enemies/FaceAngel.tscn"),
+	"archangel": preload("res://Enemies/Archangel.tscn"),
 }
 
 var Levels = {
@@ -104,6 +108,17 @@ var Levels = {
 		"boss": "cosmic_menagerie",
 		"mook_count": 5,
 		"background": preload("res://Images/Dungeons/Dungeon6.png")
+	},
+	7: {
+		"enemies": {
+			"feather_angel": 45,
+			"ring_angel": 40,
+			"face_angel": 15,
+#			"archangel": 100
+		},
+		"boss": "archangel",
+		"mook_count": 5,
+		"background": preload("res://Images/Dungeons/Dungeon7.png")
 	}
 }
 
@@ -116,7 +131,7 @@ var continues_taken = 0
 
 func _ready():
 	$BGPlayer.play()
-#	skip_to_level(6, 8) # Debugging
+#	skip_to_level(7, 9) # Debugging
 	update_level_layout()
 	create_player()
 	randomize()

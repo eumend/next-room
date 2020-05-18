@@ -1,8 +1,6 @@
 extends Panel
 
 onready var hpLabel = $StatsContainer/HP
-onready var apLabel = $StatsContainer/AP
-onready var mpLabel = $StatsContainer/MP
 onready var lvLabel = $StatsContainer/LV
 onready var powLabel = $StatsContainer/POW
 onready var statusContainer = $StatsContainer/Status

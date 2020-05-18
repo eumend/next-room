@@ -6,7 +6,7 @@
 
 [node name="CosmicMenagerie" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
-max_hp = 88
+max_hp = 108
 power = 9
 exp_points = 10
 is_boss = true
