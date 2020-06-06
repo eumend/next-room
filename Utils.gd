@@ -1,5 +1,8 @@
 extends Node
 
+func value_from_float_range(min_f, max_f):
+	return min_f + (randf() * (max_f - min_f))
+
 func pick_from_list(list):
 	randomize()
 	return list[randi() % list.size()]
