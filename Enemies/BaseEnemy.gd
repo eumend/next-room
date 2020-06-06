@@ -16,6 +16,7 @@ const NumberAnimation = preload("res://Animations/NumberAnimation.tscn")
 
 signal died
 signal end_turn
+signal fled
 signal death_animation_done
 
 var hp = max_hp setget set_hp
@@ -32,10 +33,9 @@ var selected_attack = null # Used when calling an attack during an animation
 func start_turn():
 	yield(get_tree().create_timer(0.4), "timeout")
 	on_start_turn()
-	attack()
 
 func on_start_turn():
-	pass
+	attack()
 
 func attack():
 	randomize()
@@ -86,6 +86,11 @@ func take_damage(amount, hit_force = null):
 	else:
 		animationPlayer.play("Shake")
 		yield(animationPlayer, "animation_finished")
+
+func flee():
+	animationPlayer.play("Flee")
+	yield(animationPlayer, "animation_finished")
+	emit_signal("fled")
 
 func on_death():
 	on_death_animation = true
@@ -140,8 +145,11 @@ func set_hp(new_hp):
 func _ready():
 	BattleUnits.Enemy = self
 	self.hp = self.max_hp
-	DialogBox.show_timeout(entry_text, 2)
 	attackAnimationPlayer.connect("animation_finished", self, "on_attack_animation_finished")
+	on_start_of_battle()
+
+func on_start_of_battle():
+	DialogBox.show_timeout(entry_text, 2)
 
 func on_attack_animation_finished(_animation_name):
 	pass

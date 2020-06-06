@@ -2,9 +2,9 @@ extends "res://BattleFields/BaseBattleField.gd"
 
 enum STATES{HIDDEN, PEEKING, SHOWING, HIT, MISS}
 
-var hide_time_range = [1, 4]
-var peek_time = 0.3
-var number_of_peeks = 2
+var hide_time_range = [1, 3]
+var peek_time = 0.5
+var number_of_peeks = 1
 var peek_count = 0
 var state = STATES.HIDDEN
 var sprites = {
@@ -17,7 +17,6 @@ var sprites = {
 
 onready var peekTimer = $Field/PeekTimer
 onready var attackTimer = $Field/AttackTimer
-onready var doneTimer = $Field/DoneTimer
 onready var afterHitTimer = $Field/AfterHitTimer
 onready var sprite = $Field/Sprite
 
@@ -28,7 +27,6 @@ func _ready():
 	peekTimer.connect("timeout", self, "on_peekTimer_timeout")
 	attackTimer.connect("timeout", self, "on_attackTimer_timeout")
 	afterHitTimer.connect("timeout", self, "on_afterHitTimer_timeout")
-	doneTimer.connect("timeout", self, "on_doneTimer_timeout")
 	start()
 
 func update_state(new_state):
@@ -49,7 +47,7 @@ func peek():
 
 func on_attackTimer_timeout():
 	update_state(STATES.SHOWING)
-	hit()
+	enemy_hit()
 	afterHitTimer.start()
 
 func on_pressed():
@@ -58,16 +56,14 @@ func on_pressed():
 	if state == STATES.PEEKING:
 		update_state(STATES.HIT)
 		hit()
+		afterHitTimer.start()
 	else:
 		update_state(STATES.MISS)
-		enemy_hit()
-	afterHitTimer.start()
-
-func on_doneTimer_timeout():
-	done()
+		miss()
+		afterHitTimer.start()
 
 func on_afterHitTimer_timeout():
 	if peek_count >= number_of_peeks:
-		doneTimer.start()
+		done()
 	else:
 		start()

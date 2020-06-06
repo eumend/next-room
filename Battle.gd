@@ -18,6 +18,7 @@ signal _done
 
 # Enemies
 const Enemies = {
+	"hood_1": preload("res://Enemies/Hood1.tscn"),
 	"rat": preload("res://Enemies/Rat.tscn"),
 	"bat": preload("res://Enemies/Bat.tscn"),
 	"slime": preload("res://Enemies/Slime.tscn"),
@@ -53,7 +54,7 @@ var Levels = {
 		"enemies": {
 			"rat": 45,
 			"bat": 40,
-			"slime": 999999,
+			"slime": 15,
 		},
 		"boss": "sewer_chimera",
 		"mook_count": 4,
@@ -114,7 +115,6 @@ var Levels = {
 			"feather_angel": 45,
 			"ring_angel": 40,
 			"face_angel": 15,
-#			"archangel": 100
 		},
 		"boss": "archangel",
 		"mook_count": 5,
@@ -187,6 +187,7 @@ func create_new_enemy():
 	enemyStartPosition.add_child(enemy)
 	enemy.connect("end_turn", self, "_on_Enemy_end_turn")
 	enemy.connect("died", self, "_on_Enemy_died")
+	enemy.connect("fled", self, "_on_Enemy_fled")
 
 func _on_Enemy_end_turn():
 	BattleUnits.set_current_turn(null)
@@ -200,6 +201,11 @@ func _on_Enemy_died():
 	ActionBattle.force_end_of_battle()
 	if BattleUnits.is_player_turn():
 		_on_Player_end_turn()
+
+func _on_Enemy_fled():
+	var enemy = BattleUnits.Enemy
+	ActionBattle.force_end_of_battle()
+	end_battle(enemy)
 
 func start_enemy_turn():
 	var enemy = BattleUnits.Enemy
@@ -257,7 +263,9 @@ func handle_enemy_death_eot(enemy):
 	if enemy.on_death_animation:
 		yield(enemy, "death_animation_done")
 	increase_player_exp(enemy.exp_points)
-	
+	end_battle(enemy)
+
+func end_battle(enemy):
 	# Battle over cleanup
 	reset_player_status()
 	enemy.queue_free()
@@ -270,6 +278,8 @@ func handle_enemy_death_eot(enemy):
 	elif boss_battle_is_next:
 		nextRoomButton.text = "YOU ARE CLOSE..."
 	nextRoomButton.show()
+	
+
 
 func reset_player_status():
 	var playerStats = BattleUnits.PlayerStats

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Music/SFX/blow_2.wav" type="AudioStream" id=1]
 [ext_resource path="res://Images/Enemies/Rat.png" type="Texture" id=2]
@@ -36,6 +36,9 @@ tracks/1/keys = {
 } ]
 }
 
+[sub_resource type="Animation" id=10]
+resource_name = "Default"
+
 [sub_resource type="Animation" id=2]
 length = 0.5
 tracks/0/type = "value"
@@ -52,6 +55,22 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=3]
+resource_name = "Flee"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=4]
 length = 0.2
 step = 0.05
 tracks/0/type = "value"
@@ -67,7 +86,7 @@ tracks/0/keys = {
 "values": [ Vector2( -2, 2 ), Vector2( 2, -2 ), Vector2( -2, -2 ), Vector2( 2, 2 ), Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=5]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:modulate")
 tracks/0/interp = 1
@@ -93,7 +112,7 @@ tracks/1/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 2, 2 ), Vector2( -2, 3.667 ), Vector2( 2, 5.334 ), Vector2( -2, 7 ), Vector2( 0, 10 ) ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=6]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:position")
 tracks/0/interp = 1
@@ -121,8 +140,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=6]
-resource_name = "Attack"
+[sub_resource type="Animation" id=7]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:position")
@@ -151,10 +169,9 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=7]
-resource_name = "None"
-
 [sub_resource type="Animation" id=8]
+
+[sub_resource type="Animation" id=9]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:position")
 tracks/0/interp = 1
@@ -202,15 +219,17 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Attack = SubResource( 1 )
+anims/Default = SubResource( 10 )
 anims/Fade = SubResource( 2 )
-anims/Shake = SubResource( 3 )
-anims/ShakeFade = SubResource( 4 )
-anims/StatusAttack1 = SubResource( 5 )
+anims/Flee = SubResource( 3 )
+anims/Shake = SubResource( 4 )
+anims/ShakeFade = SubResource( 5 )
+anims/StatusAttack1 = SubResource( 6 )
 
 [node name="AttackAnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Attack = SubResource( 6 )
-anims/None = SubResource( 7 )
-anims/StatusAttack1 = SubResource( 8 )
+anims/Attack = SubResource( 7 )
+anims/None = SubResource( 8 )
+anims/StatusAttack1 = SubResource( 9 )
 
 [node name="SFXBlow" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )
