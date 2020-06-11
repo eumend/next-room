@@ -57,7 +57,7 @@ func on_pressed():
 		update_state(STATES.HIT)
 		hit()
 		afterHitTimer.start()
-	else:
+	elif state == STATES.HIDDEN:
 		update_state(STATES.MISS)
 		miss()
 		afterHitTimer.start()

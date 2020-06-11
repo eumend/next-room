@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Enemies/BaseEnemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Enemies/Mermaid.gd" type="Script" id=2]
-[ext_resource path="res://Music/SFX/neutral_1.wav" type="AudioStream" id=3]
 [ext_resource path="res://Images/Enemies/Mermaid.png" type="Texture" id=4]
 
 [node name="Mermaid" instance=ExtResource( 1 )]
@@ -14,6 +13,3 @@ entry_text = "Mermaid swims in!"
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 4 )
-
-[node name="SFXNeutral" type="AudioStreamPlayer" parent="." index="6"]
-stream = ExtResource( 3 )

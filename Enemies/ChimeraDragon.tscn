@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Enemies/BaseEnemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Images/Enemies/ChimeraLast.png" type="Texture" id=2]
+
+[node name="ChimeraDragon" instance=ExtResource( 1 )]
+position = Vector2( 0, 40 )
+max_hp = 250
+power = 12
+entry_text = "???"
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 2 )
+
+[node name="HPLabel" parent="." index="1"]
+visible = false
+margin_left = 6.0
+margin_top = -39.0
+margin_right = 46.0
+margin_bottom = -25.0

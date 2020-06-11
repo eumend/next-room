@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Hood3.png-bc646033a1a88ca968f14912660a9065.stex"
+path="res://.import/Spike.png-660590b449161d54d5c5f8bf542fb21c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/Enemies/Hood3.png"
-dest_files=[ "res://.import/Hood3.png-bc646033a1a88ca968f14912660a9065.stex" ]
+source_file="res://Images/Aux/Spike.png"
+dest_files=[ "res://.import/Spike.png-660590b449161d54d5c5f8bf542fb21c.stex" ]
 
 [params]
 

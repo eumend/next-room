@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Hood4.png-3bbd8d52939ac22095e79613e36f175f.stex"
+path="res://.import/ShieldEffect.png-e106b21530e4a3487a3744be3a49eb24.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/Enemies/Hood4.png"
-dest_files=[ "res://.import/Hood4.png-3bbd8d52939ac22095e79613e36f175f.stex" ]
+source_file="res://Images/ShieldEffect.png"
+dest_files=[ "res://.import/ShieldEffect.png-e106b21530e4a3487a3744be3a49eb24.stex" ]
 
 [params]
 

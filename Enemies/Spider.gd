@@ -6,48 +6,48 @@ const PoisonHitSprite = preload("res://Images/Roulette/HitPoison.png")
 const WinSprite = preload("res://Images/Roulette/Win.png")
 const PoisonHitDoubleSprite = preload("res://Images/Roulette/Hit2Poison.png")
 
-enum FACES{HIT, POISON_HIT, POISON_HIT_DOUBLE, WIN}
+enum ROULETTE_FACES{HIT, POISON_HIT, POISON_HIT_DOUBLE, WIN}
 
 const roulettes = [
 	[
 		{
 			"sprite": HitSprite,
-			"id": FACES.HIT
+			"id": ROULETTE_FACES.HIT
 		},
 		{
 			"sprite": PoisonHitSprite,
-			"id": FACES.POISON_HIT
+			"id": ROULETTE_FACES.POISON_HIT
 		},
 		{
 			"sprite": WinSprite,
-			"id": FACES.WIN
+			"id": ROULETTE_FACES.WIN
 		},
 		{
 			"sprite": PoisonHitDoubleSprite,
-			"id": FACES.POISON_HIT_DOUBLE
+			"id": ROULETTE_FACES.POISON_HIT_DOUBLE
 		}
 	],
 	[
 		{
 			"sprite": HitSprite,
-			"id": FACES.HIT
+			"id": ROULETTE_FACES.HIT
 		},
 		{
 			"sprite": PoisonHitSprite,
-			"id": FACES.POISON_HIT
+			"id": ROULETTE_FACES.POISON_HIT
 		},
 		{
 			"sprite": WinSprite,
-			"id": FACES.WIN
+			"id": ROULETTE_FACES.WIN
 		},
 		{
 			"sprite": PoisonHitDoubleSprite,
-			"id": FACES.POISON_HIT_DOUBLE
+			"id": ROULETTE_FACES.POISON_HIT_DOUBLE
 		}
 	]
 ]
 var current_roulette_index = 0
-var selected_index = 0
+var selected_roulette_index = 0
 var rouletteBattleField = null
 
 func get_attack_pattern():
@@ -74,18 +74,18 @@ func bite_attack():
 func start_roulette(roulette_index):
 	var roulette_speed = 0.09 + (0.01 * roulette_index) # A bit slower as we go up
 	var roulette_data = roulettes[roulette_index]
-	var faces = []
+	var ROULETTE_FACES = []
 	for option in roulette_data:
-		faces.append(option["sprite"])
-	rouletteBattleField.start_roulette(faces, roulette_speed)
+		ROULETTE_FACES.append(option["sprite"])
+	rouletteBattleField.start_roulette(ROULETTE_FACES, roulette_speed)
 
 func on_rouletteBattleField_face_selected(index, _texture):
-	selected_index = index
+	selected_roulette_index = index
 	var current_roulette = roulettes[current_roulette_index]
-	var selected_id = current_roulette[selected_index]["id"]
+	var selected_id = current_roulette[selected_roulette_index]["id"]
 	match(selected_id):
-		FACES.POISON_HIT, FACES.POISON_HIT_DOUBLE: return attackAnimationPlayer.play("StatusAttack1")
-		FACES.HIT, FACES.WIN: return attackAnimationPlayer.play("Attack")
+		ROULETTE_FACES.POISON_HIT, ROULETTE_FACES.POISON_HIT_DOUBLE: return attackAnimationPlayer.play("StatusAttack1")
+		ROULETTE_FACES.HIT, ROULETTE_FACES.WIN: return attackAnimationPlayer.play("Attack")
 
 func on_rouletteBattleField_face_displayed(_index, _texture):
 	pass
@@ -105,17 +105,17 @@ func deal_damage(hit_force = null, _fixed_amount = null):
 	if playerStats:
 		if selected_attack == "bite_attack":
 			var current_roulette = roulettes[current_roulette_index]
-			var selected_id = current_roulette[selected_index]["id"]
+			var selected_id = current_roulette[selected_roulette_index]["id"]
 			match(selected_id):
-				FACES.POISON_HIT:
+				ROULETTE_FACES.POISON_HIT:
 					.deal_damage(GameConstants.HIT_FORCE.STRONG)
 					playerStats.add_status(GameConstants.STATUS.POISON)
-				FACES.POISON_HIT_DOUBLE:
+				ROULETTE_FACES.POISON_HIT_DOUBLE:
 					.deal_damage(GameConstants.HIT_FORCE.CRIT, power)
 					playerStats.add_status(GameConstants.STATUS.POISON)
-				FACES.HIT:
+				ROULETTE_FACES.HIT:
 					.deal_damage(GameConstants.HIT_FORCE.NORMAL)
-				FACES.WIN:
+				ROULETTE_FACES.WIN:
 					.deal_damage(null, 0)
 		else:
 			.deal_damage(hit_force)

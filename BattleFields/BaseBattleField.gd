@@ -17,38 +17,38 @@ func _ready():
 
 func done():
 	# TODO: Some animation?
-	print("BF: DONE")
+#	print("BF: DONE")
 	emit_signal("done")
 	self.hide()
 #	queue_free()
 
 func hit(hit_force = GameConstants.HIT_FORCE.NORMAL):
-	print("BF: HIT", hit_force)
+#	print("BF: HIT", hit_force)
 	emit_signal("hit", hit_force)
 
 func enemy_hit(hit_force = GameConstants.HIT_FORCE.NORMAL):
-	print("BF: ENEMY HIT", hit_force)
+#	print("BF: ENEMY HIT", hit_force)
 	emit_signal("enemy_hit", hit_force)
 
 func heal(hit_force = GameConstants.HIT_FORCE.NORMAL):
-	print("BF: HEAL", hit_force)
+#	print("BF: HEAL", hit_force)
 	emit_signal("heal", hit_force)
 
 func heal_status():
-	print("BF: HEAL STATUS")
+#	print("BF: HEAL STATUS")
 	emit_signal("heal_status")
 
 func enemy_heal(hit_force = GameConstants.HIT_FORCE.NORMAL):
-	print("BF: ENEMY HEAL", hit_force)
+#	print("BF: ENEMY HEAL", hit_force)
 	emit_signal("enemy_heal", hit_force)
 
 func miss():
-	print("BF: MISS")
+#	print("BF: MISS")
 	emit_signal("miss")
 
 func _on_FieldButton_pressed():
 	# Field button pressed
-	print("BF: PRESSED")
+#	print("BF: PRESSED")
 	on_pressed()
 	pass
 

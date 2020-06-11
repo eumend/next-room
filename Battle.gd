@@ -18,7 +18,6 @@ signal _done
 
 # Enemies
 const Enemies = {
-	"hood_1": preload("res://Enemies/Hood1.tscn"),
 	"rat": preload("res://Enemies/Rat.tscn"),
 	"bat": preload("res://Enemies/Bat.tscn"),
 	"slime": preload("res://Enemies/Slime.tscn"),
@@ -47,6 +46,10 @@ const Enemies = {
 	"ring_angel": preload("res://Enemies/RingAngel.tscn"),
 	"face_angel": preload("res://Enemies/FaceAngel.tscn"),
 	"archangel": preload("res://Enemies/Archangel.tscn"),
+	"rat_chimera": preload("res://Enemies/RatChimera.tscn"),
+	"bat_chimera": preload("res://Enemies/BatChimera.tscn"),
+	"slime_chimera": preload("res://Enemies/SlimeChimera.tscn"),
+	"dragon_chimera": preload("res://Enemies/ChimeraDragon.tscn"),
 }
 
 var Levels = {
@@ -119,6 +122,16 @@ var Levels = {
 		"boss": "archangel",
 		"mook_count": 5,
 		"background": preload("res://Images/Dungeons/Dungeon7.png")
+	},
+	8: {
+		"enemies": {
+			"rat_chimera": 45,
+			"bat_chimera": 40,
+			"slime_chimera": 15,
+		},
+		"boss": "dragon_chimera",
+		"mook_count": 3,
+		"background": preload("res://Images/Dungeons/Dungeon8.png")
 	}
 }
 
@@ -131,7 +144,7 @@ var continues_taken = 0
 
 func _ready():
 	$BGPlayer.play()
-#	skip_to_level(7, 9) # Debugging
+#	skip_to_level(8, 10) # Debugging
 	update_level_layout()
 	create_player()
 	randomize()
@@ -179,11 +192,17 @@ func _on_Player_status_changed(status):
 			_: return
 
 func create_new_enemy():
+	var enemy_name = null
 	var level_info = Levels[current_level]
 	var is_boss_battle = kill_streak == level_info["mook_count"]
-	var enemy_name = level_info["boss"] if is_boss_battle else Utils.pick_from_weighted(level_info["enemies"])
-	var Enemy = Enemies[enemy_name]
-	var enemy = Enemy.instance()
+	if is_boss_battle:
+		enemy_name = level_info["boss"]
+	elif current_level == 8:
+#		enemy_name = ["slime_chimera"][kill_streak]
+		enemy_name = ["rat_chimera", "bat_chimera", "slime_chimera"][kill_streak]
+	else:
+		enemy_name = Utils.pick_from_weighted(level_info["enemies"])
+	var enemy = Enemies[enemy_name].instance()
 	enemyStartPosition.add_child(enemy)
 	enemy.connect("end_turn", self, "_on_Enemy_end_turn")
 	enemy.connect("died", self, "_on_Enemy_died")

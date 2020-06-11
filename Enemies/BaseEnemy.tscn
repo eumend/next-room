@@ -1,10 +1,12 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Music/SFX/blow_2.wav" type="AudioStream" id=1]
 [ext_resource path="res://Images/Enemies/Rat.png" type="Texture" id=2]
 [ext_resource path="res://Enemies/BaseEnemy.gd" type="Script" id=3]
 [ext_resource path="res://Music/SFX/heal_1.wav" type="AudioStream" id=4]
 [ext_resource path="res://Music/SFX/explosion_1.wav" type="AudioStream" id=5]
+[ext_resource path="res://Music/SFX/flee_1.wav" type="AudioStream" id=6]
+[ext_resource path="res://Music/SFX/neutral_1.wav" type="AudioStream" id=7]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Attack"
@@ -36,26 +38,10 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=2]
 resource_name = "Default"
 
-[sub_resource type="Animation" id=2]
-length = 0.5
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
-}
-
 [sub_resource type="Animation" id=3]
-resource_name = "Flee"
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:modulate")
@@ -71,6 +57,21 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=4]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=5]
 length = 0.2
 step = 0.05
 tracks/0/type = "value"
@@ -86,7 +87,7 @@ tracks/0/keys = {
 "values": [ Vector2( -2, 2 ), Vector2( 2, -2 ), Vector2( -2, -2 ), Vector2( 2, 2 ), Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=6]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:modulate")
 tracks/0/interp = 1
@@ -112,7 +113,7 @@ tracks/1/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 2, 2 ), Vector2( -2, 3.667 ), Vector2( 2, 5.334 ), Vector2( -2, 7 ), Vector2( 0, 10 ) ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=7]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:position")
 tracks/0/interp = 1
@@ -140,7 +141,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=8]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:position")
@@ -169,9 +170,9 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=8]
-
 [sub_resource type="Animation" id=9]
+
+[sub_resource type="Animation" id=10]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:position")
 tracks/0/interp = 1
@@ -208,9 +209,9 @@ texture = ExtResource( 2 )
 
 [node name="HPLabel" type="Label" parent="."]
 margin_left = -19.0
-margin_top = -27.0
+margin_top = -30.0
 margin_right = 21.0
-margin_bottom = -13.0
+margin_bottom = -16.0
 text = "0hp"
 align = 1
 __meta__ = {
@@ -219,17 +220,17 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Attack = SubResource( 1 )
-anims/Default = SubResource( 10 )
-anims/Fade = SubResource( 2 )
-anims/Flee = SubResource( 3 )
-anims/Shake = SubResource( 4 )
-anims/ShakeFade = SubResource( 5 )
-anims/StatusAttack1 = SubResource( 6 )
+anims/Default = SubResource( 2 )
+anims/Fade = SubResource( 3 )
+anims/Flee = SubResource( 4 )
+anims/Shake = SubResource( 5 )
+anims/ShakeFade = SubResource( 6 )
+anims/StatusAttack1 = SubResource( 7 )
 
 [node name="AttackAnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Attack = SubResource( 7 )
-anims/None = SubResource( 8 )
-anims/StatusAttack1 = SubResource( 9 )
+anims/Attack = SubResource( 8 )
+anims/None = SubResource( 9 )
+anims/StatusAttack1 = SubResource( 10 )
 
 [node name="SFXBlow" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )
@@ -239,3 +240,9 @@ stream = ExtResource( 4 )
 
 [node name="SFXBossDeath" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
+
+[node name="SFXFlee" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+
+[node name="SFXNeutral" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )

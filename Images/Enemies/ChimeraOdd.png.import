@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Hood.png-2b9cc4d1a1a5f83b8ac43f49724c3df9.stex"
+path="res://.import/ChimeraOdd.png-730aafb49c72edd0af09658b06c42de9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/Enemies/Hood.png"
-dest_files=[ "res://.import/Hood.png-2b9cc4d1a1a5f83b8ac43f49724c3df9.stex" ]
+source_file="res://Images/Enemies/ChimeraOdd.png"
+dest_files=[ "res://.import/ChimeraOdd.png-730aafb49c72edd0af09658b06c42de9.stex" ]
 
 [params]
 

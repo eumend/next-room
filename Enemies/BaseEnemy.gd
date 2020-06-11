@@ -88,6 +88,8 @@ func take_damage(amount, hit_force = null):
 		yield(animationPlayer, "animation_finished")
 
 func flee():
+	$SFXFlee.play()
+	hpLabel.hide()
 	animationPlayer.play("Flee")
 	yield(animationPlayer, "animation_finished")
 	emit_signal("fled")

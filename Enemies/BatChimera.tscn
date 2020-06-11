@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Enemies/BaseEnemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Images/Enemies/ChimeraDefense.png" type="Texture" id=2]
+[ext_resource path="res://Enemies/BatChimera.gd" type="Script" id=3]
+
+[node name="BatChimera" instance=ExtResource( 1 )]
+position = Vector2( 0, -6 )
+script = ExtResource( 3 )
+max_hp = 170
+power = 11
+entry_text = "It's the Bat Chimera!"
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 2 )
+
+[node name="HPLabel" parent="." index="1"]
+margin_left = -5.0
+margin_top = 12.0
+margin_right = 35.0
+margin_bottom = 26.0
