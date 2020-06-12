@@ -30,7 +30,8 @@ func get_attack_pattern():
 # Slime
 
 func slime_attack():
-	DialogBox.show_timeout("It's... secreting ooze?", 0.5)
+	DialogBox.show_timeout("It's... secreting ooze?", 1)
+	yield(DialogBox, "done")
 	animationPlayer.play("StatusAttack1")
 	yield(animationPlayer, "animation_finished")
 	emit_signal("end_turn")
@@ -97,7 +98,7 @@ func _on_jankenBattleField_done():
 func starfish_attack():
 	DialogBox.show_timeout("It's... laying down...", 1)
 	yield(DialogBox, "done")
-	.heal_damage(round(self.max_hp / 4))
+	.heal_damage(round(self.max_hp / 5))
 	emit_signal("end_turn")
 
 # Voodoo doll

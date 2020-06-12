@@ -3,6 +3,7 @@ extends Node2D
 signal fired
 
 onready var animationPlayer = $AnimationPlayer
+var shooting = false
 
 func _ready():
 	animationPlayer.connect("animation_finished", self, "on_animationPlayer_animation_finished")
@@ -11,11 +12,12 @@ func _ready():
 func on_animationPlayer_animation_finished(anim_name):
 	if anim_name == "Peek":
 		animationPlayer.play("Shoot")
-#	elif anim_name == "Shoot":
-#		self.hide()
+	elif anim_name == "Shoot":
+		shooting = false
 		
 
 func shoot():
+	shooting = true
 	animationPlayer.play("Peek")
 	
 func on_hit_animation():

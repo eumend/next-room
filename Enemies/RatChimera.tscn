@@ -9,13 +9,15 @@ position = Vector2( -3, -6 )
 script = ExtResource( 3 )
 max_hp = 150
 power = 12
+exp_points = 0
 entry_text = "It's the Rat Chimera!"
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )
 
 [node name="HPLabel" parent="." index="1"]
-margin_left = 16.0
-margin_top = 8.0
-margin_right = 56.0
-margin_bottom = 22.0
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = -15.0
+margin_top = -8.0
+margin_right = 25.0
+margin_bottom = 6.0

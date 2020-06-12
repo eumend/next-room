@@ -13,7 +13,8 @@ func get_attack_pattern():
 		}
 
 func poison_attack():
-	DialogBox.show_timeout("POISON ATTACK!", 0.5)
+	DialogBox.show_timeout("POISON ATTACK!", 1)
+	yield(DialogBox, "done")
 	animationPlayer.play("StatusAttack1")
 	yield(animationPlayer, "animation_finished")
 	emit_signal("end_turn")

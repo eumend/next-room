@@ -9,33 +9,33 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4.91491, 4.91881 )
 
-[sub_resource type="AtlasTexture" id=5]
+[sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 5 )
 region = Rect2( 0, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 5 )
 region = Rect2( 16, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=7]
+[sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 5 )
 region = Rect2( 32, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=8]
+[sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 5 )
 region = Rect2( 48, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=9]
+[sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 5 )
 region = Rect2( 64, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=10]
+[sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 5 )
 region = Rect2( 80, 0, 16, 16 )
 
-[sub_resource type="SpriteFrames" id=11]
+[sub_resource type="SpriteFrames" id=8]
 animations = [ {
-"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
 "loop": true,
 "name": "Shield",
 "speed": 12.0
@@ -55,9 +55,9 @@ texture = ExtResource( 3 )
 
 [node name="ShieldAnimation" type="AnimatedSprite" parent="Field/Player" index="2"]
 visible = false
-frames = SubResource( 11 )
+frames = SubResource( 8 )
 animation = "Shield"
-frame = 1
+frame = 4
 playing = true
 
 [node name="TSpike" parent="Field" index="1" instance=ExtResource( 4 )]
@@ -68,28 +68,50 @@ rotation = 3.14159
 position = Vector2( 69, 1 )
 rotation = 3.92699
 
+[node name="ColorRect" parent="Field/TRSpike/Spike" index="0"]
+self_modulate = Color( 0.898039, 0.898039, 0.898039, 1 )
+
 [node name="RSpike" parent="Field" index="3" instance=ExtResource( 4 )]
 position = Vector2( 71, 30 )
 rotation = 4.71239
+
+[node name="ColorRect" parent="Field/RSpike/Spike" index="0"]
+self_modulate = Color( 0.85098, 0, 0, 1 )
 
 [node name="BRSpike" parent="Field" index="4" instance=ExtResource( 4 )]
 position = Vector2( 70, 60 )
 rotation = 5.49779
 
+[node name="ColorRect" parent="Field/BRSpike/Spike" index="0"]
+self_modulate = Color( 0.882353, 0.623529, 0, 1 )
+
 [node name="BSpike" parent="Field" index="5" instance=ExtResource( 4 )]
 position = Vector2( 37, 67 )
+
+[node name="ColorRect" parent="Field/BSpike/Spike" index="0"]
+self_modulate = Color( 0.027451, 0.345098, 0.823529, 1 )
 
 [node name="BLSpike" parent="Field" index="6" instance=ExtResource( 4 )]
 position = Vector2( 3, 59 )
 rotation = 0.785398
 
+[node name="ColorRect" parent="Field/BLSpike/Spike" index="0"]
+self_modulate = Color( 0.705882, 0, 1, 1 )
+
 [node name="LSpike" parent="Field" index="7" instance=ExtResource( 4 )]
+self_modulate = Color( 0, 0.192157, 0, 1 )
 position = Vector2( -1, 31 )
 rotation = 1.5708
+
+[node name="ColorRect" parent="Field/LSpike/Spike" index="0"]
+self_modulate = Color( 0.352941, 1, 0, 1 )
 
 [node name="TLSpike" parent="Field" index="8" instance=ExtResource( 4 )]
 position = Vector2( 2, 0 )
 rotation = 2.35619
+
+[node name="ColorRect" parent="Field/TLSpike/Spike" index="0"]
+self_modulate = Color( 0.67451, 0.67451, 0.67451, 1 )
 
 [node name="SpikeTimer" type="Timer" parent="Field" index="9"]
 
@@ -102,3 +124,19 @@ wait_time = 0.5
 [node name="DoneTimer" type="Timer" parent="Field" index="12"]
 wait_time = 1.5
 one_shot = true
+
+[editable path="Field/TSpike"]
+
+[editable path="Field/TRSpike"]
+
+[editable path="Field/RSpike"]
+
+[editable path="Field/BRSpike"]
+
+[editable path="Field/BSpike"]
+
+[editable path="Field/BLSpike"]
+
+[editable path="Field/LSpike"]
+
+[editable path="Field/TLSpike"]

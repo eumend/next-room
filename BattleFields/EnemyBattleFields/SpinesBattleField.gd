@@ -19,10 +19,11 @@ var ALL_SPIKES = []
 var shielded = false
 var cooldown = false
 
-var total_spikes = 2
+export var total_spikes = 2
+export var spikes_per_hit = {3: 100}
+export var spike_time = 1
 var fired_spikes = 0
 var done_spikes = 0
-var spikes_per_hit = {3: 100}
 
 func _ready():
 	ALL_SPIKES = [tSpike, trSpike, rSpike, brSpike, bSpike, blSpike, lSpike, tlSpike]
@@ -38,21 +39,19 @@ func _ready():
 	cooldownTimer.connect("timeout", self, "on_cooldownTimer_timeout")
 	shieldTimer.connect("timeout", self, "on_shieldTimer_timeout")
 	doneTimer.connect("timeout", self, "on_doneTimer_timeout")
+	spikeTimer.wait_time = spike_time
 	spikeTimer.start()
 
 func on_spikeTimer_timeout():
-	print("shooting spike?")
 	if fired_spikes < total_spikes:
 		var spike_qty = Utils.pick_from_weighted(spikes_per_hit)
-		if spike_qty > 1:
-			var spikes_list = ALL_SPIKES.duplicate()
-			spikes_list.shuffle()
-			print("spike_qty", spike_qty)
-			for _i in range(0, spike_qty):
-				var spike = spikes_list.pop_front() # TODO: Refractor this logid, we actually need to pop all the time so we arent reusing spikes on each timer loop
-				spike.shoot()
-		else:
-			var spike = Utils.pick_from_list(ALL_SPIKES)
+		var spikes_list = []
+		for spike in ALL_SPIKES:
+			if not spike.shooting:
+				spikes_list.append(spike)
+		spikes_list.shuffle()
+		for _i in range(0, spike_qty):
+			var spike = spikes_list.pop_front()
 			spike.shoot()
 		fired_spikes += 1
 

@@ -24,7 +24,8 @@ func get_attack_pattern():
 # Bat
 
 func leech_life():
-	DialogBox.show_timeout("It's showing fangs!", 2)
+	DialogBox.show_timeout("It's showing fangs!", 1)
+	yield(DialogBox, "done")
 	animationPlayer.play("StatusAttack1")
 	yield(animationPlayer, "animation_finished")
 	emit_signal("end_turn")
@@ -45,7 +46,7 @@ func undead_attack():
 	DialogBox.show_timeout("It's burying itself!?", 1)
 	yield(DialogBox, "done")
 	var fireAttackBattleField = FireAtackBattleField.instance()
-	fireAttackBattleField.init(2)
+	fireAttackBattleField.init(4)
 	fireAttackBattleField.connect("enemy_hit", self, "_on_fireAttackBattleField_enemy_hit")
 	fireAttackBattleField.connect("done", self, "_on_fireAttackBattleField_done")
 	ActionBattle.start_small_field(fireAttackBattleField)
@@ -84,10 +85,10 @@ func _on_jankenBattleField_player_draw():
 	pass
 
 func _on_jankenBattleField_player_lose():
-	.heal_damage(ceil(self.max_hp / 3))
+	.heal_damage(ceil(self.max_hp / 5))
 
 func _on_jankenBattleField_player_win():
-	.take_damage(1)
+	.take_damage(ceil(self.max_hp / 8))
 
 func _on_jankenBattleField_done():
 	if self.hp <= 0:
@@ -213,7 +214,7 @@ func deal_damage(hit_force = null, _fixed_amount= null):
 		if selected_attack == "leech_life":
 			var attack_power = max(ceil(power / 2), 1)
 			.deal_damage(null, attack_power)
-			.heal_damage(round(self.max_hp / 3))
+			.heal_damage(round(self.max_hp / 5))
 		elif selected_attack == "spectre_attack":
 			var first_id = roulettes[0][roulette_selections[0]]["id"]
 			var second_id = roulettes[1][roulette_selections[1]]["id"]

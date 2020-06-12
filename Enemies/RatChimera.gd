@@ -27,7 +27,7 @@ var undead = true
 
 func attack():
 	if self.hp <= 0:
-		undead_attack()
+		undead_attack() 
 	else:
 		.attack()
 
@@ -45,7 +45,7 @@ func _on_Explosion_animation_finished():
 
 func _on_Explosion_animation_boom():
 	self.hide()
-	.deal_damage(GameConstants.HIT_FORCE.CRIT, self.power * 2)
+	.deal_damage(GameConstants.HIT_FORCE.CRIT, self.power * 1.5)
 
 func animate_explosion():
 	var explosion = Explosion.instance()
@@ -64,9 +64,9 @@ func sword_janken_attack():
 	yield(DialogBox, "done")
 	var jankenBattleField = JanKenBattleField.instance()
 	jankenBattleField.choice_map = {
-		jankenBattleField.CHOICES.SCISSORS: 0,
-		jankenBattleField.CHOICES.PAPER: 80,
-		jankenBattleField.CHOICES.ROCK: 20,
+		jankenBattleField.CHOICES.SCISSORS: 80,
+		jankenBattleField.CHOICES.PAPER: 20,
+		jankenBattleField.CHOICES.ROCK: 0,
 	}
 	jankenBattleField.max_turns = 3
 	jankenBattleField.play_until = []
@@ -77,13 +77,13 @@ func sword_janken_attack():
 	ActionBattle.start_small_field(jankenBattleField)
 
 func _on_jankenBattleField_player_draw():
-	.heal_damage(ceil(self.max_hp / 4))
+	.heal_damage(ceil(self.max_hp / 5))
 
 func _on_jankenBattleField_player_lose():
 	.deal_damage(GameConstants.HIT_FORCE.STRONG)
 
 func _on_jankenBattleField_player_win():
-	.take_damage(ceil(self.max_hp / 4))
+	.take_damage(ceil(self.max_hp / 6))
 
 func _on_jankenBattleField_done():
 	if self.hp <= 0:
@@ -100,7 +100,7 @@ func seahorse_ink_attack():
 	yield(DialogBox, "done")
 	var battleField = BulletsDownBattleField.instance()
 	battleField.base_speed = 90
-	battleField.total_bullets = 4
+	battleField.total_bullets = 5
 	battleField.connect("hit", self, "on_bulletsDownBattleField_hit")
 	battleField.connect("done", self, "on_bulletsDownBattleField_done")
 	ActionBattle.start_small_field(battleField)

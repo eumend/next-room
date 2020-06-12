@@ -124,13 +124,13 @@ var Levels = {
 		"background": preload("res://Images/Dungeons/Dungeon7.png")
 	},
 	8: {
-		"enemies": {
-			"rat_chimera": 45,
-			"bat_chimera": 40,
-			"slime_chimera": 15,
+		"enemies": { # Handled by code
+			"rat_chimera": 1,
+			"bat_chimera": 1,
+			"slime_chimera": 1,
 		},
 		"boss": "dragon_chimera",
-		"mook_count": 3,
+		"mook_count": 0,
 		"background": preload("res://Images/Dungeons/Dungeon8.png")
 	}
 }
@@ -144,7 +144,7 @@ var continues_taken = 0
 
 func _ready():
 	$BGPlayer.play()
-#	skip_to_level(8, 10) # Debugging
+	skip_to_level(8, 10) # Debugging
 	update_level_layout()
 	create_player()
 	randomize()
