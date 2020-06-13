@@ -48,18 +48,6 @@ func heal_all():
 	self.hp = self.max_hp
 	clear_status()
 
-func reset_plus():
-	self.hp = base_hp
-	self.power = base_power
-	self.level = 1
-	self.exp_points = 0
-	clear_status()
-	self.max_hp = 20 # TODO: Once we enable restart+, this should be removed so the player keeps its current max hp
-
-func reset():
-	reset_plus()
-	self.max_hp = 20
-
 func is_under_status():
 	return player_statuses.size() > 0
 
@@ -164,6 +152,46 @@ func set_level(value):
 
 func _ready():
 	BattleUnits.PlayerStats = self
+	load_save()
+
+func reset_plus():
+	self.hp = base_hp
+	self.power = base_power
+	self.level = 1
+	self.exp_points = 0
+	self.max_hp = 20 # TODO: Once we enable restart+, this should be removed so the player keeps its current max hp
+	clear_status()
+
+func reset():
+	reset_plus()
+	self.max_hp = 20
+
+func load_save():
+	var saved_state = SaveFile.load_save("player_stats")
+	if saved_state:
+		set_data_from_json(saved_state)
+
+func save():
+	var data = get_data_json()
+	SaveFile.save("player_stats", data)
+
+func get_data_json():
+	return {
+		"hp": self.hp,
+		"power": self.power,
+		"level": self.level,
+		"exp": self.exp_points,
+		"max_hp": self.max_hp,
+		"status": self.player_statuses,
+	}
+
+func set_data_from_json(json):
+	hp = int(json["hp"])
+	power = int(json["power"])
+	level = int(json["level"])
+	exp_points = int(json["exp"])
+	max_hp = int(json["max_hp"])
+	player_statuses = json["status"]
 
 func _exit_tree():
 	BattleUnits.PlayerStats = null

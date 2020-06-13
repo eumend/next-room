@@ -1,0 +1,66 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Main.gd" type="Script" id=1]
+[ext_resource path="res://Images/Dungeons/Dungeon.png" type="Texture" id=2]
+
+[node name="Main" type="Node"]
+script = ExtResource( 1 )
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 45, 80 )
+texture = ExtResource( 2 )
+
+[node name="UI" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="CenterContainer" parent="UI"]
+margin_right = 90.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 50 )
+
+[node name="Title" type="Label" parent="UI/Title"]
+margin_left = 9.0
+margin_top = 19.0
+margin_right = 80.0
+margin_bottom = 31.0
+text = "THIS IS A TITLE"
+
+[node name="Buttons" type="VBoxContainer" parent="UI"]
+margin_top = 54.0
+margin_right = 90.0
+margin_bottom = 160.0
+size_flags_vertical = 3
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ContinueButton" type="Button" parent="UI/Buttons"]
+margin_left = 14.0
+margin_top = 31.0
+margin_right = 74.0
+margin_bottom = 51.0
+rect_min_size = Vector2( 60, 20 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "CONTINUE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StartButton" type="Button" parent="UI/Buttons"]
+margin_left = 14.0
+margin_top = 55.0
+margin_right = 74.0
+margin_bottom = 75.0
+rect_min_size = Vector2( 60, 20 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "START"
+__meta__ = {
+"_edit_use_anchors_": false
+}

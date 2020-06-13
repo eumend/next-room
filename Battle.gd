@@ -5,14 +5,13 @@ const DialogBox = preload("res://DialogBox.tres")
 const ActionBattle = preload("res://ActionBattle.tres")
 const BattleSummary = preload("res://BattleSummary.tres")
 
-export(Array, PackedScene) var enemies = []
-
 onready var actionButtons = $UI/BattleActionButtons
 onready var animationPlayer = $AnimationPlayer
 onready var nextRoomButton = $UI/OverworldActionButtons/NextRoomButton
 onready var restartButton = $UI/OverworldActionButtons/RestartButton
 onready var continueButton = $UI/OverworldActionButtons/ContinueButton
 onready var enemyStartPosition = $EnemyPosition
+onready var playerScore = $PlayerScore
 
 signal _done
 
@@ -130,21 +129,14 @@ var Levels = {
 			"slime_chimera": 1,
 		},
 		"boss": "dragon_chimera",
-		"mook_count": 0,
+		"mook_count": 3,
 		"background": preload("res://Images/Dungeons/Dungeon8.png")
 	}
 }
 
-# Score vars
-var kill_streak = 0
-var current_level = 1
-var turns_taken = 0
-var current_run = 0
-var continues_taken = 0
-
 func _ready():
 	$BGPlayer.play()
-	skip_to_level(8, 10) # Debugging
+#	skip_to_level(5, 20) # Debugging
 	update_level_layout()
 	create_player()
 	randomize()
@@ -162,7 +154,7 @@ func create_player():
 
 func start_player_turn():
 	BattleUnits.set_current_turn(GameConstants.UNITS.PLAYER)
-	turns_taken += 1
+	playerScore.turns_taken += 1
 	var playerStats = BattleUnits.PlayerStats
 	playerStats.clear_buffs()
 	actionButtons.start_turn()
@@ -193,13 +185,13 @@ func _on_Player_status_changed(status):
 
 func create_new_enemy():
 	var enemy_name = null
-	var level_info = Levels[current_level]
-	var is_boss_battle = kill_streak == level_info["mook_count"]
+	var level_info = Levels[playerScore.current_level]
+	var is_boss_battle = playerScore.kill_streak == level_info["mook_count"]
 	if is_boss_battle:
 		enemy_name = level_info["boss"]
-	elif current_level == 8:
+	elif playerScore.current_level == 8:
 #		enemy_name = ["slime_chimera"][kill_streak]
-		enemy_name = ["rat_chimera", "bat_chimera", "slime_chimera"][kill_streak]
+		enemy_name = ["rat_chimera", "bat_chimera", "slime_chimera"][playerScore.kill_streak]
 	else:
 		enemy_name = Utils.pick_from_weighted(level_info["enemies"])
 	var enemy = Enemies[enemy_name].instance()
@@ -256,10 +248,10 @@ func eot_checks():
 		return false
 	if enemy.is_dead():
 		if enemy.is_boss:
-			kill_streak = 0
+			playerScore.kill_streak = 0
 			handle_boss_death_eot(enemy)
 		else:
-			kill_streak += 1
+			playerScore.kill_streak += 1
 			handle_enemy_death_eot(enemy)
 		return false
 	return true
@@ -268,9 +260,9 @@ func handle_boss_death_eot(enemy):
 	var playerStats = BattleUnits.PlayerStats
 	if playerStats.hp < playerStats.max_hp:
 		playerStats.hp = playerStats.max_hp
-	current_level += 1
+	playerScore.current_level += 1
 	nextRoomButton.text = "NEXT FLOOR"
-	if current_level in Levels:
+	if playerScore.current_level in Levels:
 		handle_enemy_death_eot(enemy)
 	else:
 		if enemy.on_death_animation:
@@ -287,11 +279,17 @@ func handle_enemy_death_eot(enemy):
 func end_battle(enemy):
 	# Battle over cleanup
 	reset_player_status()
+	if enemy.is_boss:
+		# Save current progress
+		playerScore.save()
+		var playerStats = BattleUnits.PlayerStats
+		if playerStats:
+			playerStats.save()
 	enemy.queue_free()
 	
-	var level_info = Levels[current_level]
-	var is_boss_battle = kill_streak == level_info["mook_count"]
-	var boss_battle_is_next = kill_streak == level_info["mook_count"] - 1
+	var level_info = Levels[playerScore.current_level]
+	var is_boss_battle = playerScore.kill_streak == level_info["mook_count"]
+	var boss_battle_is_next = playerScore.kill_streak == level_info["mook_count"] - 1
 	if is_boss_battle:
 		nextRoomButton.text = "BOSS BATTLE"
 	elif boss_battle_is_next:
@@ -353,8 +351,8 @@ func on_continue():
 	if enemy:
 		BattleUnits.Enemy = null
 		enemy.queue_free()
-	kill_streak = 0
-	continues_taken += 1
+	playerScore.kill_streak = 0
+	playerScore.continues_taken += 1
 	update_level_layout()
 	yield(get_tree().create_timer(0.2), "timeout")
 	animationPlayer.play("FadeIn")
@@ -369,7 +367,7 @@ func restart_game():
 	yield(animationPlayer, "animation_finished")
 	animationPlayer.play("FadeToNewRoom")
 	var playerStats = BattleUnits.PlayerStats
-	if current_run > 0:
+	if playerScore.current_run > 0:
 		playerStats.reset_plus()
 	else:
 		playerStats.reset()
@@ -377,11 +375,7 @@ func restart_game():
 	if enemy:
 		BattleUnits.Enemy = null
 		enemy.queue_free()
-	current_level = 1
-	turns_taken = 0
-	kill_streak = 0
-	current_run = 0
-	continues_taken = 0
+	playerScore.reset()
 	update_level_layout()
 	yield(get_tree().create_timer(0.2), "timeout")
 	animationPlayer.play("FadeIn")
@@ -392,25 +386,25 @@ func restart_game():
 func game_over():
 	$BGPlayer.stop()
 	$SFXGameOver.play()
-	var text = "RUN: " + str(current_run) + "\n" + "CONT: " + str(continues_taken) + "\n" + "TURNS: " + str(turns_taken)
+	var text = "RUN: " + str(playerScore.current_run) + "\n" + "CONT: " + str(playerScore.continues_taken) + "\n" + "TURNS: " + str(playerScore.turns_taken)
 	BattleSummary.show_summary("GAME OVER", text)
 	restartButton.show()
 	continueButton.show()
 
 func on_game_finished():
-	current_run += 1
-	var text = "RUN: " + str(current_run) + "\n" + "CONT: " + str(continues_taken) + "\n" + "TURNS: " + str(turns_taken)
+	playerScore.current_run += 1
+	var text = "RUN: " + str(playerScore.current_run) + "\n" + "CONT: " + str(playerScore.continues_taken) + "\n" + "TURNS: " + str(playerScore.turns_taken)
 	BattleSummary.show_summary("FINISHED!", text)
 	actionButtons.hide()
 	restartButton.show()
 	$SFXLevelUp.play()
 
 func update_level_layout():
-	$Dungeon.texture = Levels[current_level]["background"]
+	$Dungeon.texture = Levels[playerScore.current_level]["background"]
 
 func skip_to_level(lvl, player_lvl):
 	var playerStats = BattleUnits.PlayerStats
-	current_level = lvl
+	playerScore.current_level = lvl
 	for _i in range(1, player_lvl):
 		playerStats.level_up(1)
 	playerStats.hp = playerStats.max_hp

@@ -39,13 +39,14 @@ _global_script_class_icons={
 [application]
 
 config/name="MobileRPG"
-run/main_scene="res://Battle.tscn"
+run/main_scene="res://Main.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 GameConstants="*res://GameConstants.gd"
 Utils="*res://Utils.gd"
+SaveFile="*res://SaveFile.gd"
 
 [display]
 
