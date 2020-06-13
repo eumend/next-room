@@ -18,6 +18,8 @@ var progress_map = {
 	5: preload("res://Images/ProgressBars/progress_over_5.png"),
 }
 
+onready var sfxBeep = $SFXBeep
+
 func _ready():
 	if recharge_turns > 1:
 		recharge_by(recharge_turns) # We start off the skill charged already!
@@ -54,6 +56,7 @@ func finish_turn():
 
 func _on_ActionButton_pressed():
 	charge = 0
+	sfxBeep.play()
 	_on_pressed()
 
 func _on_pressed():

@@ -2,6 +2,8 @@ extends Node
 
 onready var startButton = $UI/Buttons/StartButton
 onready var continueButton = $UI/Buttons/ContinueButton
+onready var sfxMove = $SFXMove
+onready var animationPlayer = $AnimationPlayer
 
 func _ready():
 	startButton.connect("pressed", self, "on_startButton_pressed")
@@ -18,4 +20,8 @@ func on_continueButton_pressed():
 	go_to_battle()
 
 func go_to_battle():
+	sfxMove.play()
+	animationPlayer.play("FadeIn")
+	yield(animationPlayer, "animation_finished")
+	print("ANIMATION FINISHED")
 	var _result = get_tree().change_scene("res://Battle.tscn")
