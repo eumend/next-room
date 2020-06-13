@@ -106,7 +106,7 @@ var voodoo = false
 
 func on_start_turn():
 	voodoo = false
-	.attack()
+	.on_start_turn()
 
 func voodoo_attack():
 	voodoo = true

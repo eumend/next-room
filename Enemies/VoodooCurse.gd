@@ -176,6 +176,7 @@ func on_start_turn():
 	if hit_while_voodoo:
 		on_voodoo = false
 		hit_while_voodoo = false
+	.on_start_turn()
 
 func voodoo_atack():
 	DialogBox.show_timeout("It's stares at you with a grudge...", 1.5)
