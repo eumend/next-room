@@ -8,20 +8,18 @@ func pick_from_list(list):
 	return list[randi() % list.size()]
 
 func pick_from_weighted(distribution):
-	var values = distribution.values()
-	var total_size = 0
-	for v in values:
-		total_size += v
 	randomize()
-	var pct = rand_range(0, total_size)
+	var total_size = 0
 	var last_index = 0
 	var ranges = []
 	for k in distribution:
 		var val = distribution[k]
+		total_size += val
 		var end_range = last_index + val
 		ranges.append([last_index, end_range, k])
 		last_index = end_range
 	var winner = null
+	var pct = rand_range(0, total_size)
 	for r in ranges:
 		var start_range = r[0]
 		var end_range = r[1]

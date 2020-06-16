@@ -85,5 +85,3 @@ func on_bossBullet_hp_changed(hp):
 func on_bossBullet_hp_died():
 	doneTimer.start()
 
-func _on_doneTimer_timeout():
-	done()

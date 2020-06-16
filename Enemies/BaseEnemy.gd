@@ -12,6 +12,7 @@ export (String, MULTILINE) var entry_text = ""
 onready var hpLabel = $HPLabel
 onready var animationPlayer = $AnimationPlayer
 onready var attackAnimationPlayer = $AttackAnimationPlayer
+onready var startTurnTimer = $StartTurnTimer
 const NumberAnimation = preload("res://Animations/NumberAnimation.tscn")
 
 signal died
@@ -31,7 +32,9 @@ var hit_force_pattern = {
 var selected_attack = null # Used when calling an attack during an animation
 
 func start_turn():
-	yield(get_tree().create_timer(0.4), "timeout")
+	startTurnTimer.start()
+
+func on_startTurnTimer_timeout():
 	on_start_turn()
 
 func on_start_turn():
@@ -148,6 +151,7 @@ func _ready():
 	BattleUnits.Enemy = self
 	self.hp = self.max_hp
 	attackAnimationPlayer.connect("animation_finished", self, "on_attack_animation_finished")
+	startTurnTimer.connect("timeout", self, "on_startTurnTimer_timeout")
 	on_start_of_battle()
 
 func on_start_of_battle():

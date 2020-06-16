@@ -32,7 +32,6 @@ onready var bfFloor = $Field/BFFloor
 onready var bfCeil =  $Field/BFCeiling
 onready var closeInTimer = $Field/CloseInTimer
 onready var bulletTimer = $Field/BulletTimer
-onready var doneTimer = $Field/DoneTimer
 onready var touchLimitSFX = $Field/TouchLimitSFX
 
 signal hit_limit
@@ -44,7 +43,6 @@ func _ready():
 	player.connect("body_entered", self, "on_player_body_entered")
 	closeInTimer.connect("timeout", self, "on_close_in_timer_timeout")
 	bulletTimer.connect("timeout", self, "on_bulletTimer_timeout")
-	doneTimer.connect("timeout", self, "on_doneTimer_timeout")
 	if move_time > 0:
 		closeInTimer.wait_time = move_time
 		closeInTimer.start()
@@ -77,23 +75,20 @@ func on_close_in_timer_timeout():
 	elif side == BOTTOM:
 		bfFloor.move(floor_data["force"], floor_data["time"])
 
-func on_doneTimer_timeout():
-	on_done()
-
 func on_player_body_entered(node):
 	if (floor_data["can_kill"] and node.name == "BFFloor") or (ceil_data["can_kill"] and node.name == "BFCeiling"):
 		emit_signal("hit_limit")
 		touchLimitSFX.play()
-		on_done()
+		done()
 
 func _on_FieldButton_pressed():
 	player.apply_impulse(Vector2(), force)
 
-func on_done():
-	done()
+func done():
+	# TODO: Wtf is this????
+	.done()
 	queue_free()
 	is_done = true
 	player.disconnect("body_entered", self, "on_player_body_entered")
 	closeInTimer.disconnect("timeout", self, "on_close_in_timer_timeout")
 	bulletTimer.disconnect("timeout", self, "on_bulletTimer_timeout")
-	doneTimer.disconnect("timeout", self, "on_doneTimer_timeout")

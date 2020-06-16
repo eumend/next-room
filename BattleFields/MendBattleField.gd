@@ -4,7 +4,6 @@ const Bullet = preload("res://BattleFields/Bullets/Bullet.tscn")
 
 onready var player = $Field/Player
 onready var bulletTimer = $Field/BulletTimer
-onready var doneTimer = $Field/DoneTimer
 
 # Player
 var min_starting_x = 10
@@ -23,7 +22,6 @@ var bullet_starting_y = -4 # Above the screen
 func _ready():
 	randomize()
 	bulletTimer.connect("timeout", self, "on_bulletTimer_timeout")
-	doneTimer.connect("timeout", self, "on_doneTimer_timeout")
 	start_player_bumper()
 	fire_bullet()
 
@@ -83,9 +81,6 @@ func on_bulletTimer_timeout():
 		_fire_bullet()
 		bullets_left -= 1
 		fire_bullet()
-
-func on_doneTimer_timeout():
-	done()
 
 func _on_FieldButton_pressed():
 	if player.paused:

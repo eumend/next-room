@@ -246,3 +246,7 @@ stream = ExtResource( 6 )
 
 [node name="SFXNeutral" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
+
+[node name="StartTurnTimer" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true

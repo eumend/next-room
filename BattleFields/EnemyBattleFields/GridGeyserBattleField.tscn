@@ -60,6 +60,9 @@ texture = ExtResource( 4 )
 
 [node name="SFXErupt" type="AudioStreamPlayer" parent="." index="3"]
 stream = ExtResource( 5 )
+
+[node name="SpawnGeyserTimer" type="Timer" parent="." index="4"]
+one_shot = true
 [connection signal="pressed" from="Field/Grid/TL" to="." method="_on_TL_pressed"]
 [connection signal="pressed" from="Field/Grid/TR" to="." method="_on_TR_pressed"]
 [connection signal="pressed" from="Field/Grid/BL" to="." method="_on_BL_pressed"]

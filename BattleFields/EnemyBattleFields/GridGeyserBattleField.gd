@@ -36,12 +36,15 @@ var firing_status = {
 export var geyser_amount = 4
 var geysers_left = geyser_amount
 var geysers_done = 0
+var next_position = null
 
 onready var player = $Field/Player
+onready var spawnGeyserTimer = $SpawnGeyserTimer
 var current_player_position = null
 
 func _ready():
-	var starting_position = [POSITIONS.TL, POSITIONS.TR, POSITIONS.BL, POSITIONS.BR][randi() % 4]
+	spawnGeyserTimer.connect("timeout", self, "on_spawnGeyserTimer_timeout")
+	var starting_position = get_free_position()
 	change_player_position(starting_position)
 	player.show()
 	spawn_geysers(starting_position)
@@ -52,20 +55,18 @@ func init(new_amount = 4):
 
 func spawn_geysers(position = null):
 	if position == null:
-		var free_positions = []
-		for s in firing_status:
-			if firing_status[s] == FIRING_STATUS.IDLE:
-				free_positions.append(s)
-		position = free_positions[randi() % free_positions.size()]
+		position = get_free_position()
 	spawn_geyser(position)
 	geysers_left -= 1
 	if geysers_left > 0:
 		var time = 1.0 if geysers_left > 2 else 0.8
-		yield(get_tree().create_timer(time), "timeout")
-		spawn_geysers()
+		spawnGeyserTimer.wait_time = time
+		spawnGeyserTimer.start()
+
+func on_spawnGeyserTimer_timeout():
+	spawn_geysers()
 
 func spawn_geyser(position):
-	yield(get_tree().create_timer(0.5), "timeout")
 	var new_geyser = GeyserAnimation.instance()
 	new_geyser.set_time(1.2)
 	$Field/Geysers.add_child(new_geyser)
@@ -75,11 +76,18 @@ func spawn_geyser(position):
 	new_geyser.connect("fired", self, "on_GeyserAnimation_fired", [position])
 	new_geyser.connect("done", self, "on_GeyserAnimation_done", [position])
 
+func get_free_position():
+	var free_positions = []
+	for s in firing_status:
+		if firing_status[s] == FIRING_STATUS.IDLE:
+			free_positions.append(s)
+	return free_positions[randi() % free_positions.size()]
+
 func on_GeyserAnimation_done(position):
 	firing_status[position] = FIRING_STATUS.IDLE
 	geysers_done += 1
 	if geysers_done == geyser_amount:
-		done()
+		doneTimer.start()
 
 func on_GeyserAnimation_fired(position):
 	$SFXErupt.play()

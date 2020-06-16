@@ -9,11 +9,13 @@ signal enemy_heal(force)
 signal done
 
 onready var fieldButton = $FieldButton
+onready var doneTimer = $DoneTimer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# TODO: Some animation?
 	fieldButton.connect("pressed", self, "_on_FieldButton_pressed")
+	doneTimer.connect("timeout", self, "done")
 
 func done():
 	# TODO: Some animation?

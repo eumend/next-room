@@ -49,8 +49,7 @@ func _on_bumperTimer_timeout():
 		fired_bumpers += 1
 	else:
 		bumperTimer.stop()
-		yield(get_tree().create_timer(1), "timeout") # FIXME: We just wait for all bumpers to be done, this is enough for now
-		done()
+		doneTimer.start()
 
 func pick_bullet_side():
 	if last_side != null:

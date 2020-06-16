@@ -12,7 +12,6 @@ onready var tlSpike = $Field/TLSpike
 onready var spikeTimer = $Field/SpikeTimer
 onready var cooldownTimer = $Field/CooldownTimer
 onready var shieldTimer = $Field/ShieldTimer
-onready var doneTimer = $Field/DoneTimer
 onready var shieldAnimation = $Field/Player/ShieldAnimation
 
 var ALL_SPIKES = []
@@ -38,7 +37,6 @@ func _ready():
 	spikeTimer.connect("timeout", self, "on_spikeTimer_timeout")
 	cooldownTimer.connect("timeout", self, "on_cooldownTimer_timeout")
 	shieldTimer.connect("timeout", self, "on_shieldTimer_timeout")
-	doneTimer.connect("timeout", self, "on_doneTimer_timeout")
 	spikeTimer.wait_time = spike_time
 	spikeTimer.start()
 
@@ -61,9 +59,6 @@ func on_cooldownTimer_timeout():
 func on_shieldTimer_timeout():
 	shielded = false
 	shieldAnimation.hide()
-
-func on_doneTimer_timeout():
-	done()
 
 func on_spike_fired():
 	if shielded:

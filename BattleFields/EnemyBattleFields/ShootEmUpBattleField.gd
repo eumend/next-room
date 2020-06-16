@@ -3,7 +3,6 @@ extends "res://BattleFields/BaseBattleField.gd"
 const BombBullet = preload("res://BattleFields/Bullets/BombBullet.tscn")
 onready var bulletTimer = $Field/BulletTimer
 onready var shooter = $Field/Shooter
-onready var doneTimer = $DoneTimer
 onready var shotsLeft = $Field/ShotsLeftBar
 enum {TL, TR, BL, BR}
 var bullets = [GameConstants.BOMB_BULLET_TYPES.COUNTDOWN]
@@ -20,7 +19,6 @@ func _ready():
 
 func start_battlefield():
 	bulletTimer.connect("timeout", self, "_on_bulletTimer_timeout")
-	doneTimer.connect("timeout", self, "_on_doneTimer_timeout")
 	shotsLeft.max_value = shots_left
 	shotsLeft.value = shots_left
 	total_bullets = bullets.size()
@@ -106,6 +104,3 @@ func handle_bullet_disappeared():
 func check_finished():
 	if bullets_done == total_bullets:
 		doneTimer.start()
-
-func _on_doneTimer_timeout():
-	done()

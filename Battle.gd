@@ -136,7 +136,7 @@ var Levels = {
 
 func _ready():
 	$BGPlayer.play()
-#	skip_to_level(5, 20) # Debugging
+	skip_to_level(8, 99) # Debugging
 	update_level_layout()
 	create_player()
 	randomize()

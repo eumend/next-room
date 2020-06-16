@@ -1,6 +1,7 @@
 extends "res://BattleFields/BaseBattleField.gd"
 
 onready var playerOptions = $Field/VBoxContainer/PlayerOptions
+onready var showOutcomeTimer = $ShowOutcomeTimer
 
 enum CHOICES{ROCK, PAPER, SCISSORS}
 enum OUTCOMES{WIN, LOSE, DRAW}
@@ -10,6 +11,7 @@ var play_until = [OUTCOMES.WIN, OUTCOMES.LOSE]
 var turns = 0
 
 var choice_map = null
+var outcome = null
 
 signal player_win
 signal player_lose
@@ -27,17 +29,20 @@ func _ready():
 	playerOptions.find_node("PaperButton").connect("pressed", self, "_on_player_selected", [CHOICES.PAPER])
 	playerOptions.find_node("RockButton").connect("pressed", self, "_on_player_selected", [CHOICES.ROCK])
 	playerOptions.find_node("ScissorButton").connect("pressed", self, "_on_player_selected", [CHOICES.SCISSORS])
+	showOutcomeTimer.connect("timeout", self, "_on_showOutcomeTimer_timeout")
 
 func _on_player_selected(choice):
 	randomize()
 	var enemy_choice = pick_enemy_choice()
-	var outcome = check_win(choice, enemy_choice)
+	outcome = check_win(choice, enemy_choice)
 	$Field/VBoxContainer/EnemyChoice/Sprite.texture = icon_map[enemy_choice]
 	$Field/VBoxContainer/PlayerChoice/Sprite.texture = icon_map[choice]
 	$Field/VBoxContainer/PlayerOptions.hide()
 	$Field/VBoxContainer/PlayerChoice.show()
 	show_outcome(outcome)
-	yield(get_tree().create_timer(1), "timeout")
+	showOutcomeTimer.start()
+
+func _on_showOutcomeTimer_timeout():
 	emit_outcome(outcome)
 	turns += 1
 	if turns == max_turns or outcome in play_until:
@@ -56,8 +61,8 @@ func reset_gui():
 		$Field/VBoxContainer/PlayerChoice.hide()
 		$Field/VBoxContainer/Outcome.hide()
 
-func emit_outcome(outcome):
-	match(outcome):
+func emit_outcome(outcome_val):
+	match(outcome_val):
 		OUTCOMES.WIN:
 			emit_signal("player_win")
 		OUTCOMES.LOSE:
@@ -65,8 +70,8 @@ func emit_outcome(outcome):
 		OUTCOMES.DRAW:
 			emit_signal("player_draw")
 
-func show_outcome(outcome):
-	match(outcome):
+func show_outcome(outcome_val):
+	match(outcome_val):
 		OUTCOMES.WIN:
 			$Field/VBoxContainer/Outcome/Text.text = "YOU WIN!"
 			$Field/VBoxContainer/Outcome.show()

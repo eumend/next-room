@@ -23,5 +23,4 @@ func go_to_battle():
 	sfxMove.play()
 	animationPlayer.play("FadeIn")
 	yield(animationPlayer, "animation_finished")
-	print("ANIMATION FINISHED")
 	var _result = get_tree().change_scene("res://Battle.tscn")

@@ -60,9 +60,9 @@ __meta__ = {
 }
 
 [node name="ContinueButton" type="Button" parent="UI/Buttons"]
-margin_left = 14.0
+margin_left = 15.0
 margin_top = 31.0
-margin_right = 74.0
+margin_right = 75.0
 margin_bottom = 51.0
 rect_min_size = Vector2( 60, 20 )
 size_flags_horizontal = 4
@@ -73,9 +73,9 @@ __meta__ = {
 }
 
 [node name="StartButton" type="Button" parent="UI/Buttons"]
-margin_left = 14.0
+margin_left = 15.0
 margin_top = 55.0
-margin_right = 74.0
+margin_right = 75.0
 margin_bottom = 75.0
 rect_min_size = Vector2( 60, 20 )
 size_flags_horizontal = 4

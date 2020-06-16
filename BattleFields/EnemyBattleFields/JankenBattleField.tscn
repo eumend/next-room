@@ -103,3 +103,7 @@ stream = ExtResource( 8 )
 
 [node name="SFXDraw" type="AudioStreamPlayer" parent="." index="5"]
 stream = ExtResource( 9 )
+
+[node name="ShowOutcomeTimer" type="Timer" parent="." index="6"]
+wait_time = 0.5
+one_shot = true

@@ -25,3 +25,6 @@ position = Vector2( 36, 7 )
 texture = ExtResource( 3 )
 mode = 3
 range_item_cull_mask = 16384
+
+[node name="DoneTimer" type="Timer" parent="."]
+one_shot = true

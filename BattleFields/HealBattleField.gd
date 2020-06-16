@@ -12,11 +12,9 @@ var bullets_that_hit = 0
 var base_speed = 70
 const Bullet = preload("res://BattleFields/Bullets/Bullet.tscn")
 onready var bulletTimer = $FireBulletTimer
-onready var doneTimer = $DoneTimer
 
 func _ready():
 	bulletTimer.connect("timeout", self, "on_bulletTimer_timeout")
-	doneTimer.connect("timeout", self, "on_doneTimer_timeout")
 	fire_bullet()
 
 func fire_bullet():
@@ -78,9 +76,6 @@ func on_Bullet_hit(target, bullet):
 		miss()
 	if bullets_that_hit == total_bullets:
 		doneTimer.start()
-
-func on_doneTimer_timeout():
-	done()
 
 func _on_FieldButton_pressed():
 	if current_pos == LEFT:

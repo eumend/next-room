@@ -17,13 +17,11 @@ var base_speed = 70
 var color = "ffffff"
 const Bullet = preload("res://BattleFields/Bullets/Bullet.tscn")
 onready var bulletTimer = $FireBulletTimer
-onready var doneTimer = $DoneTimer
 onready var player = $Field/Player
 
 func _ready():
 	player.position = Vector2(20, 50)
 	bulletTimer.connect("timeout", self, "on_bulletTimer_timeout")
-	doneTimer.connect("timeout", self, "on_doneTimer_timeout")
 	fire_bullet()
 
 func fire_bullet():
@@ -88,9 +86,6 @@ func on_Bullet_hit(target, bullet):
 		bullet.disappear()
 	if bullets_that_hit == total_bullets:
 		doneTimer.start()
-
-func on_doneTimer_timeout():
-	done()
 
 func _on_FieldButton_pressed():
 	if current_pos == LEFT:
