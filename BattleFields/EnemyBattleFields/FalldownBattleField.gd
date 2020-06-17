@@ -7,7 +7,6 @@ var force = Vector2(0, -3)
 #var y_range = [10, 30]
 var x_left = -10
 var x_right = 82
-var is_done = false
 export var bullet_time = 3
 
 export var move_time = 3
@@ -65,8 +64,7 @@ func on_bulletTimer_timeout():
 	add_child(bullet)
 
 func on_bullet_hit():
-	if not is_done:
-		emit_signal("hit_bullet")
+	emit_signal("hit_bullet")
 
 func on_close_in_timer_timeout():
 	var side = Utils.pick_from_weighted(move_limit_mapping)
@@ -83,12 +81,3 @@ func on_player_body_entered(node):
 
 func _on_FieldButton_pressed():
 	player.apply_impulse(Vector2(), force)
-
-func done():
-	# TODO: Wtf is this????
-	.done()
-	queue_free()
-	is_done = true
-	player.disconnect("body_entered", self, "on_player_body_entered")
-	closeInTimer.disconnect("timeout", self, "on_close_in_timer_timeout")
-	bulletTimer.disconnect("timeout", self, "on_bulletTimer_timeout")
