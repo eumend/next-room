@@ -133,11 +133,13 @@ const roulettes = [
 		},
 		{
 			"sprite": WinSprite,
-			"id": ROULETTE_FACES.WIN
+			"id": ROULETTE_FACES.WIN,
+			"type": "good"
 		},
 		{
 			"sprite": PoisonHitDoubleSprite,
-			"id": ROULETTE_FACES.POISON_HIT_DOUBLE
+			"id": ROULETTE_FACES.POISON_HIT_DOUBLE,
+			"type": "bad"
 		}
 	],
 	[
@@ -151,11 +153,13 @@ const roulettes = [
 		},
 		{
 			"sprite": WinSprite,
-			"id": ROULETTE_FACES.WIN
+			"id": ROULETTE_FACES.WIN,
+			"type": "good"
 		},
 		{
 			"sprite": PoisonHitDoubleSprite,
-			"id": ROULETTE_FACES.POISON_HIT_DOUBLE
+			"id": ROULETTE_FACES.POISON_HIT_DOUBLE,
+			"type": "bad"
 		}
 	]
 ]
@@ -175,21 +179,15 @@ func spider_bite_attack():
 func start_roulette(roulette_index):
 	var roulette_speed = 0.09 + (0.01 * roulette_index) # A bit slower as we go up
 	var roulette_data = roulettes[roulette_index]
-	var ROULETTE_FACES = []
-	for option in roulette_data:
-		ROULETTE_FACES.append(option["sprite"])
-	rouletteBattleField.start_roulette(ROULETTE_FACES, roulette_speed)
+	rouletteBattleField.start_roulette(roulette_data, roulette_speed)
 
-func on_rouletteBattleField_face_selected(index, _texture):
+func on_rouletteBattleField_face_selected(index):
 	selected_roulette_index = index
 	var current_roulette = roulettes[current_roulette_index]
 	var selected_id = current_roulette[selected_roulette_index]["id"]
 	match(selected_id):
 		ROULETTE_FACES.POISON_HIT, ROULETTE_FACES.POISON_HIT_DOUBLE: return attackAnimationPlayer.play("StatusAttack1")
 		ROULETTE_FACES.HIT, ROULETTE_FACES.WIN: return attackAnimationPlayer.play("Attack")
-
-func on_rouletteBattleField_face_displayed(_index, _texture):
-	pass
 
 func on_attack_animation_finished(_animation_name):
 	var playerStats = BattleUnits.PlayerStats

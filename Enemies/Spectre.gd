@@ -33,7 +33,8 @@ const roulettes = [
 		},
 		{
 			"sprite": SurpriseSprite,
-			"id": ROULETTE_FACES.SURPRISE
+			"id": ROULETTE_FACES.SURPRISE,
+			"type": "bad"
 		},
 		{
 			"sprite": DrainLifeSprite,
@@ -41,7 +42,8 @@ const roulettes = [
 		},
 		{
 			"sprite": WinSprite,
-			"id": ROULETTE_FACES.WIN
+			"id": ROULETTE_FACES.WIN,
+			"type": "good"
 		}
 	]
 ]
@@ -76,15 +78,12 @@ func roulette_attack():
 func start_roulette(roulette_index):
 	var roulette_speed = 0.1 + (0.05 * roulette_index) # A bit slower as we go up
 	var roulette_data = roulettes[roulette_index]
-	var ROULETTE_FACES = []
-	for option in roulette_data:
-		ROULETTE_FACES.append(option["sprite"])
-	rouletteBattleField.start_roulette(ROULETTE_FACES, roulette_speed)
+	rouletteBattleField.start_roulette(roulette_data, roulette_speed)
 #
-func on_rouletteBattleField_face_selected(index, _texture):
+func on_rouletteBattleField_face_selected(index):
 	roulette_selections.append(index)
 #
-func on_rouletteBattleField_face_displayed(_index, _texture):
+func on_rouletteBattleField_face_displayed(_index):
 	if current_roulette_index < roulettes.size() - 1:
 		current_roulette_index += 1
 		start_roulette(current_roulette_index)

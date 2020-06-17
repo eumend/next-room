@@ -52,15 +52,18 @@ const triple_attack_roulettes = [
 		},
 		{
 			"sprite": HitTripleSprite,
-			"id": FACES.HIT_CRIT
+			"id": FACES.HIT_CRIT,
+			"type": "bad"
 		},
 		{
 			"sprite": PoisonHitTripleSprite,
-			"id": FACES.HIT_POISON_3
+			"id": FACES.HIT_POISON_3,
+			"type": "bad"
 		},
 		{
 			"sprite": WinSprite,
-			"id": FACES.WIN
+			"id": FACES.WIN,
+			"type": "good"
 		},
 	],
 	[
@@ -90,15 +93,18 @@ const triple_attack_roulettes = [
 		},
 		{
 			"sprite": HitTripleSprite,
-			"id": FACES.HIT_CRIT
+			"id": FACES.HIT_CRIT,
+			"type": "bad"
 		},
 		{
 			"sprite": PoisonHitTripleSprite,
-			"id": FACES.HIT_POISON_3
+			"id": FACES.HIT_POISON_3,
+			"type": "bad"
 		},
 		{
 			"sprite": WinSprite,
-			"id": FACES.WIN
+			"id": FACES.WIN,
+			"type": "good"
 		},
 	],
 ]
@@ -115,7 +121,8 @@ const secondary_attack_roulettes = [
 		},
 		{
 			"sprite": HitTripleSprite,
-			"id": FACES.HIT_CRIT
+			"id": FACES.HIT_CRIT,
+			"type": "bad"
 		},
 	],
 	[
@@ -129,7 +136,8 @@ const secondary_attack_roulettes = [
 		},
 		{
 			"sprite": SurpriseSprite,
-			"id": FACES.SURPRISE
+			"id": FACES.SURPRISE,
+			"type": "bad"
 		},
 		{
 			"sprite": PowerUpSprite,
@@ -141,7 +149,8 @@ const secondary_attack_roulettes = [
 		},
 		{
 			"sprite": WinSprite,
-			"id": FACES.WIN
+			"id": FACES.WIN,
+			"type": "good"
 		},
 	],
 ]
@@ -204,10 +213,9 @@ func triple_hit_roulette_attack():
 func start_triple_roulette(roulette_index):
 	var roulette_speed = 0.12 - (0.01 * roulette_index) # Faster as we go up
 	var roulette_data = triple_attack_roulettes[roulette_index]
-	var faces = get_roulette_sprites(roulette_data)
-	rouletteBattleField.start_roulette(faces, roulette_speed)
+	rouletteBattleField.start_roulette(roulette_data, roulette_speed)
 
-func on_tripleRouletteBattleField_face_selected(index, _texture):
+func on_tripleRouletteBattleField_face_selected(index):
 	selected_index = index
 	var current_roulette_data = triple_attack_roulettes[current_roulette_index]
 	var selected_id = current_roulette_data[selected_index]["id"]
@@ -284,12 +292,6 @@ func deal_damage(hit_force = null, _fixed_amount = null):
 		else:
 			.deal_damage(hit_force)
 
-func get_roulette_sprites(roulette_data):
-	var faces = []
-	for option in roulette_data:
-		faces.append(option["sprite"])
-	return faces
-
 func secondary_effect_roulette_attack():
 	DialogBox.show_timeout("!!!", 1)
 	yield(DialogBox, "done")
@@ -304,8 +306,7 @@ func secondary_effect_roulette_attack():
 func start_secondary_roulette(roulette_index):
 	var roulette_speed = 0.1 + (0.05 * roulette_index) # Slower as we go up
 	var roulette_data = secondary_attack_roulettes[roulette_index]
-	var faces = get_roulette_sprites(roulette_data)
-	rouletteBattleField.start_roulette(faces, roulette_speed)
+	rouletteBattleField.start_roulette(roulette_data, roulette_speed)
 
 func on_secondaryRouletteBattleField_face_selected(index, _texture):
 	selections.append(index)

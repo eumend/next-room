@@ -7,7 +7,7 @@ var time = 0.5 setget set_time
 onready var timer = $Timer
 onready var face = $Face
 
-signal show_face(index, texture)
+signal show_face(index)
 
 func _ready():
 	timer.connect("timeout", self, "on_timeout")
@@ -17,13 +17,11 @@ func on_timeout():
 	self.change_face(new_index)
 
 func change_face(new_index):
-	# TODO: Play some sfx?
 	current_face = new_index
-	var new_texture = faces[current_face]
 	face.texture = faces[current_face]
 	if not face.visible:
 		face.show()
-	emit_signal("show_face", current_face, new_texture)
+	emit_signal("show_face", current_face)
 
 func set_time(new_time):
 	time = new_time

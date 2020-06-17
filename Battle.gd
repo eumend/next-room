@@ -136,7 +136,7 @@ var Levels = {
 
 func _ready():
 	$BGPlayer.play()
-	skip_to_level(8, 99) # Debugging
+#	skip_to_level(5, 99) # Debugging
 	update_level_layout()
 	create_player()
 	randomize()
@@ -190,7 +190,6 @@ func create_new_enemy():
 	if is_boss_battle:
 		enemy_name = level_info["boss"]
 	elif playerScore.current_level == 8:
-#		enemy_name = ["slime_chimera"][kill_streak]
 		enemy_name = ["rat_chimera", "bat_chimera", "slime_chimera"][playerScore.kill_streak]
 	else:
 		enemy_name = Utils.pick_from_weighted(level_info["enemies"])

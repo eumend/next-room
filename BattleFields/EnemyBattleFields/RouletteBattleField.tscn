@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://BattleFields/BaseBattleField.tscn" type="PackedScene" id=1]
 [ext_resource path="res://BattleFields/EnemyBattleFields/RouletteBattleField.gd" type="Script" id=2]
 [ext_resource path="res://BattleFields/Bullets/Roulette.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Music/SFX/win_1.wav" type="AudioStream" id=4]
+[ext_resource path="res://Music/SFX/error_1.wav" type="AudioStream" id=5]
+[ext_resource path="res://Music/SFX/draw_1.wav" type="AudioStream" id=6]
 
 [node name="RouletteBattleField" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -26,5 +29,14 @@ __meta__ = {
 
 [node name="ShowSelectedTimer" type="Timer" parent="." index="3"]
 one_shot = true
+
+[node name="SFXWin" type="AudioStreamPlayer" parent="." index="5"]
+stream = ExtResource( 4 )
+
+[node name="SFXLose" type="AudioStreamPlayer" parent="." index="6"]
+stream = ExtResource( 5 )
+
+[node name="SFXNeutral" type="AudioStreamPlayer" parent="." index="7"]
+stream = ExtResource( 6 )
 
 [editable path="Field/Roulette"]
