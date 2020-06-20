@@ -136,7 +136,7 @@ var Levels = {
 
 func _ready():
 	$BGPlayer.play()
-#	skip_to_level(5, 99) # Debugging
+#	skip_to_level(8, 99) # Debugging
 	update_level_layout()
 	create_player()
 	randomize()
@@ -211,6 +211,9 @@ func _on_Enemy_died():
 	ActionBattle.force_end_of_battle()
 	if BattleUnits.is_player_turn():
 		_on_Player_end_turn()
+	else:
+		var player = BattleUnits.PlayerStats
+		player.heal_all()
 
 func _on_Enemy_fled():
 	var enemy = BattleUnits.Enemy
@@ -309,6 +312,8 @@ func increase_player_exp(exp_points):
 	if playerStats.level > level_before:
 		$SFXLevelUp.play()
 		show_level_up_summary(playerStats.last_level_up_summary)
+	else :
+		$SFXWin.play()
 
 func show_level_up_summary(level_up_summary):
 	var body = ""

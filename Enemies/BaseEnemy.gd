@@ -13,6 +13,7 @@ onready var hpLabel = $HPLabel
 onready var animationPlayer = $AnimationPlayer
 onready var attackAnimationPlayer = $AttackAnimationPlayer
 onready var startTurnTimer = $StartTurnTimer
+onready var sfxMiss = $SFXMiss
 const NumberAnimation = preload("res://Animations/NumberAnimation.tscn")
 
 signal died
@@ -121,6 +122,7 @@ func animate_damage(amount, hit_force):
 	hpLabel.add_child(numberAnimation)
 	if amount == 0:
 		numberAnimation.play_miss()
+		sfxMiss.play()
 	else:
 		numberAnimation.play_damage(amount, get_hit_force_text(hit_force))
 

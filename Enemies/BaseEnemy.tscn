@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Music/SFX/blow_2.wav" type="AudioStream" id=1]
 [ext_resource path="res://Images/Enemies/Rat.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Music/SFX/explosion_1.wav" type="AudioStream" id=5]
 [ext_resource path="res://Music/SFX/flee_1.wav" type="AudioStream" id=6]
 [ext_resource path="res://Music/SFX/neutral_1.wav" type="AudioStream" id=7]
+[ext_resource path="res://Music/SFX/miss_1.wav" type="AudioStream" id=8]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Attack"
@@ -250,3 +251,6 @@ stream = ExtResource( 7 )
 [node name="StartTurnTimer" type="Timer" parent="."]
 wait_time = 0.4
 one_shot = true
+
+[node name="SFXMiss" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )

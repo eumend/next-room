@@ -22,13 +22,13 @@ func on_continueButton_pressed():
 	go_to_battle()
 
 func go_to_battle():
-	fade_out()
+	fade_out_bg_music()
 	sfxMove.play()
 	animationPlayer.play("FadeIn")
 	yield(animationPlayer, "animation_finished")
 	bgMusic.stop()
 	var _result = get_tree().change_scene("res://Battle.tscn")
 
-func fade_out():
+func fade_out_bg_music():
 	tween.interpolate_property(bgMusic, "volume_db", 0, -80, 1, Tween.TRANS_SINE, Tween.EASE_IN)
 	tween.start()

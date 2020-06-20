@@ -21,10 +21,10 @@ func get_attack_pattern():
 		}
 	else:
 		return {
-			"tome_attack": 25,
-			"starfish_attack": 10,
-			"saucer_attack": 25,
-			"face_angel_battle_field": 30,
+			"tome_attack": 30,
+			"starfish_attack": 15,
+			"saucer_attack": 35,
+			"face_angel_battle_field": 20,
 		}
 
 # Slime

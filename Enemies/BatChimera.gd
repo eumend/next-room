@@ -14,10 +14,10 @@ func get_attack_pattern():
 		return {
 			"leech_life": 10,
 			"shield_attack": 10,
-			"mermaid_attack": 10,
-			"spectre_attack": 15,
-			"bug_attack": 25,
-			"ring_angel_attack": 25,
+			"mermaid_attack": 20,
+			"spectre_attack": 20,
+			"bug_attack": 20,
+			"ring_angel_attack": 20,
 		}
 
 

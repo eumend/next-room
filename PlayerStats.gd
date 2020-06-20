@@ -12,6 +12,7 @@ const level_chart = {
 	8: 140,
 	9: 180,
 	10: 210,
+	11: 250,
 }
 
 export var max_hp = 20

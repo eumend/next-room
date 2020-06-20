@@ -2,12 +2,12 @@ extends "res://Enemies/BaseEnemy.gd"
 
 func get_attack_pattern():
 	return {
-		"default_attack": 10,
+		"default_attack": 20,
 		"sword_janken_attack": 10,
 		"seahorse_ink_attack": 20,
-		"spider_bite_attack": 10,
-		"worm_attack": 25,
-		"feather_angel_attack": 25,
+		"spider_bite_attack": 20,
+		"worm_attack": 15,
+		"feather_angel_attack": 15,
 	}
 
 ### Rat

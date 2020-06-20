@@ -6,11 +6,10 @@
 
 [node name="RingAngel" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
-max_hp = 90
+max_hp = 78
 power = 10
 exp_points = 15
 entry_text = "A Ring Angel descends!"
-bullet_interval = 1.0
 wall_interval = 2
 total_time = 9
 

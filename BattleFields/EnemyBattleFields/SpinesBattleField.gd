@@ -18,10 +18,11 @@ var ALL_SPIKES = []
 var shielded = false
 var cooldown = false
 
-export var total_spikes = 2
+export var total_hits = 2
 export var spikes_per_hit = {3: 100}
 export var spike_time = 1
-var fired_spikes = 0
+var fired_hits = 0
+var total_spikes = 0
 var done_spikes = 0
 
 func _ready():
@@ -38,11 +39,13 @@ func _ready():
 	cooldownTimer.connect("timeout", self, "on_cooldownTimer_timeout")
 	shieldTimer.connect("timeout", self, "on_shieldTimer_timeout")
 	spikeTimer.wait_time = spike_time
+#	doneTimer.wait_time = doneTimer.wait_time + 0.5
 	spikeTimer.start()
 
 func on_spikeTimer_timeout():
-	if fired_spikes < total_spikes:
+	if fired_hits < total_hits:
 		var spike_qty = Utils.pick_from_weighted(spikes_per_hit)
+		total_spikes += spike_qty
 		var spikes_list = []
 		for spike in ALL_SPIKES:
 			if not spike.shooting:
@@ -51,7 +54,7 @@ func on_spikeTimer_timeout():
 		for _i in range(0, spike_qty):
 			var spike = spikes_list.pop_front()
 			spike.shoot()
-		fired_spikes += 1
+		fired_hits += 1
 
 func on_cooldownTimer_timeout():
 	cooldown = false

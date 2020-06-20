@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://Images/Mobile RPG Mockup.png" type="Texture" id=1]
 [ext_resource path="res://Music/Songs/bg_2.ogg" type="AudioStream" id=2]
@@ -21,6 +21,8 @@
 [ext_resource path="res://Images/skull_icon.png" type="Texture" id=19]
 [ext_resource path="res://PlayerScore.gd" type="Script" id=20]
 [ext_resource path="res://Music/SFX/beep_1.wav" type="AudioStream" id=21]
+[ext_resource path="res://Music/SFX/miss_1.wav" type="AudioStream" id=22]
+[ext_resource path="res://Music/SFX/win_short_1.wav" type="AudioStream" id=23]
 
 [sub_resource type="Animation" id=1]
 length = 0.2
@@ -254,6 +256,9 @@ anims/ShakeDown = SubResource( 1 )
 anims/ShakeV = SubResource( 2 )
 anims/ShakeV2 = SubResource( 3 )
 
+[node name="SFXMiss" type="AudioStreamPlayer" parent="UI/StatsPanel"]
+stream = ExtResource( 22 )
+
 [node name="BattleActionButtons" type="GridContainer" parent="UI"]
 margin_left = 7.0
 margin_top = 73.0
@@ -387,6 +392,9 @@ stream = ExtResource( 9 )
 
 [node name="SFXBeep" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 21 )
+
+[node name="SFXWin" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 23 )
 [connection signal="heal_damage" from="PlayerStats" to="UI/StatsPanel" method="_on_PlayerStats_heal_damage"]
 [connection signal="hp_changed" from="PlayerStats" to="UI/StatsPanel" method="_on_PlayerStats_hp_changed"]
 [connection signal="level_changed" from="PlayerStats" to="UI/StatsPanel" method="_on_PlayerStats_level_changed"]

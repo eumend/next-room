@@ -6,7 +6,7 @@
 
 [node name="FeatherAngel" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-max_hp = 80
+max_hp = 75
 power = 10
 exp_points = 12
 entry_text = "The Feather Angel descends!"

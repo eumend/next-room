@@ -32,7 +32,6 @@ func _ready():
 	shotsLeft.max_value = shots_left
 	shotsLeft.value = shots_left
 	bulletTimer.connect("timeout", self, "_on_bulletTimer_timeout")
-	doneTimer.connect("timeout", self, "_on_doneTimer_timeout")
 	bulletTimer.start()
 	fire_initial()
 

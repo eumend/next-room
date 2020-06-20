@@ -26,23 +26,23 @@ func get_dialogues():
 
 func config_spines_battlefield(spinesBattleField):
 	if self.hp <= self.max_hp * 0.2:
-		spinesBattleField.total_spikes = 8
+		spinesBattleField.total_hits = 8
 		spinesBattleField.spikes_per_hit = {3: 50, 2: 30, 1: 20}
 		spinesBattleField.spike_time = 0.8
 	elif self.hp <= self.max_hp * 0.35:
-		spinesBattleField.total_spikes = 5
+		spinesBattleField.total_hits = 5
 		spinesBattleField.spikes_per_hit = {3: 50, 2: 30, 1: 20}
 		spinesBattleField.spike_time = 0.9
 	elif self.hp <= self.max_hp * 0.5:
-		spinesBattleField.total_spikes = 4
+		spinesBattleField.total_hits = 4
 		spinesBattleField.spikes_per_hit = {3: 20, 2: 50, 1: 20}
 		spinesBattleField.spike_time = 0.9
 	elif self.hp <= self.max_hp * 0.75:
-		spinesBattleField.total_spikes = 3
+		spinesBattleField.total_hits = 3
 		spinesBattleField.spikes_per_hit = {3: 20, 2: 50, 1: 20}
 		spinesBattleField.spike_time = 1
 	else:
-		spinesBattleField.total_spikes = 2
+		spinesBattleField.total_hits = 2
 		spinesBattleField.spikes_per_hit = {3: 10, 2: 30, 1: 60}
 		spinesBattleField.spike_time = 1.1
 

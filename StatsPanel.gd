@@ -4,6 +4,7 @@ onready var hpLabel = $StatsContainer/HP
 onready var lvLabel = $StatsContainer/LV
 onready var powLabel = $StatsContainer/POW
 onready var statusContainer = $StatsContainer/Status
+onready var sfxMiss = $SFXMiss
 
 const PoisonIcon = preload("res://Images/skull_icon.png")
 const ShieldIcon = preload("res://Images/shield_icon.png")
@@ -75,6 +76,7 @@ func _on_PlayerStats_took_damage(amount, hit_force):
 	hpLabel.add_child(numberAnimation)
 	if amount == 0:
 		numberAnimation.play_miss()
+		sfxMiss.play()
 	else:
 		var extra_text = get_hit_force_text(hit_force)
 		numberAnimation.play_damage(amount, extra_text)
