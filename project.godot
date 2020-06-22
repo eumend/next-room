@@ -47,6 +47,7 @@ config/icon="res://icon.png"
 GameConstants="*res://GameConstants.gd"
 Utils="*res://Utils.gd"
 SaveFile="*res://SaveFile.gd"
+Screenshot="*res://Screenshot.gd"
 
 [display]
 
