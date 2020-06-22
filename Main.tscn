@@ -53,7 +53,7 @@ texture = ExtResource( 3 )
 [node name="Buttons" type="VBoxContainer" parent="UI"]
 margin_top = 49.0
 margin_right = 90.0
-margin_bottom = 227.0
+margin_bottom = 156.0
 size_flags_vertical = 3
 alignment = 1
 __meta__ = {
@@ -62,9 +62,9 @@ __meta__ = {
 
 [node name="ContinueButton" type="Button" parent="UI/Buttons"]
 margin_left = 15.0
-margin_top = 57.0
+margin_top = 22.0
 margin_right = 75.0
-margin_bottom = 77.0
+margin_bottom = 42.0
 rect_min_size = Vector2( 60, 20 )
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -75,9 +75,9 @@ __meta__ = {
 
 [node name="StartButton" type="Button" parent="UI/Buttons"]
 margin_left = 15.0
-margin_top = 81.0
+margin_top = 46.0
 margin_right = 75.0
-margin_bottom = 101.0
+margin_bottom = 66.0
 rect_min_size = Vector2( 60, 20 )
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -87,10 +87,10 @@ __meta__ = {
 }
 
 [node name="CreditsButton" type="Button" parent="UI/Buttons"]
-margin_left = 14.0
-margin_top = 104.0
-margin_right = 74.0
-margin_bottom = 119.0
+margin_left = 15.0
+margin_top = 70.0
+margin_right = 75.0
+margin_bottom = 85.0
 rect_min_size = Vector2( 60, 15 )
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -100,45 +100,78 @@ __meta__ = {
 }
 
 [node name="CreditsContainer" type="CenterContainer" parent="UI"]
-visible = false
-margin_top = 49.0
+margin_top = 160.0
 margin_right = 90.0
-margin_bottom = 154.0
+margin_bottom = 160.0
 rect_min_size = Vector2( 90, 0 )
 
-[node name="HBoxContainer" type="VBoxContainer" parent="UI/CreditsContainer"]
+[node name="C1" type="VBoxContainer" parent="UI/CreditsContainer"]
+visible = false
 margin_left = 10.0
+margin_top = -53.0
 margin_right = 80.0
-margin_bottom = 105.0
+margin_bottom = 52.0
 rect_min_size = Vector2( 70, 0 )
 size_flags_horizontal = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="L1" type="Label" parent="UI/CreditsContainer/HBoxContainer"]
+[node name="L1" type="Label" parent="UI/CreditsContainer/C1"]
 margin_right = 70.0
 margin_bottom = 12.0
 text = "By RockCandy"
 
-[node name="L2" type="Label" parent="UI/CreditsContainer/HBoxContainer"]
+[node name="L2" type="Label" parent="UI/CreditsContainer/C1"]
 margin_top = 16.0
 margin_right = 70.0
 margin_bottom = 49.0
 text = "SFX from Juhani Junkala (juhani.junkala@musician.org)"
 autowrap = true
 
-[node name="L3" type="Label" parent="UI/CreditsContainer/HBoxContainer"]
+[node name="L3" type="Label" parent="UI/CreditsContainer/C1"]
 margin_top = 53.0
 margin_right = 70.0
 margin_bottom = 86.0
 text = "Done on top of Heartbeast's RPG tutorial (@uheartbeast)"
 autowrap = true
 
-[node name="Back" type="Button" parent="UI/CreditsContainer/HBoxContainer"]
+[node name="Next" type="Button" parent="UI/CreditsContainer/C1"]
 margin_top = 90.0
 margin_right = 70.0
 margin_bottom = 105.0
+rect_min_size = Vector2( 0, 15 )
+text = "Next"
+
+[node name="C2" type="VBoxContainer" parent="UI/CreditsContainer"]
+visible = false
+margin_left = 10.0
+margin_top = -48.0
+margin_right = 80.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 70, 0 )
+size_flags_horizontal = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="L1" type="Label" parent="UI/CreditsContainer/C2"]
+margin_right = 70.0
+margin_bottom = 33.0
+text = "Made in Ubuntu using the Godot Engine, LMMS and GIMP."
+autowrap = true
+
+[node name="L2" type="Label" parent="UI/CreditsContainer/C2"]
+margin_top = 37.0
+margin_right = 70.0
+margin_bottom = 77.0
+text = "You can get the source code at https://github.com/eumend/next-room"
+autowrap = true
+
+[node name="Back" type="Button" parent="UI/CreditsContainer/C2"]
+margin_top = 81.0
+margin_right = 70.0
+margin_bottom = 96.0
 rect_min_size = Vector2( 0, 15 )
 text = "Back"
 
