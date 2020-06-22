@@ -61,6 +61,7 @@ __meta__ = {
 }
 
 [node name="ContinueButton" type="Button" parent="UI/Buttons"]
+visible = false
 margin_left = 15.0
 margin_top = 22.0
 margin_right = 75.0
@@ -75,9 +76,9 @@ __meta__ = {
 
 [node name="StartButton" type="Button" parent="UI/Buttons"]
 margin_left = 15.0
-margin_top = 46.0
+margin_top = 34.0
 margin_right = 75.0
-margin_bottom = 66.0
+margin_bottom = 54.0
 rect_min_size = Vector2( 60, 20 )
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -88,9 +89,9 @@ __meta__ = {
 
 [node name="CreditsButton" type="Button" parent="UI/Buttons"]
 margin_left = 15.0
-margin_top = 70.0
+margin_top = 58.0
 margin_right = 75.0
-margin_bottom = 85.0
+margin_bottom = 73.0
 rect_min_size = Vector2( 60, 15 )
 size_flags_horizontal = 4
 size_flags_vertical = 4
