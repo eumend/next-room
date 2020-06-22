@@ -43,6 +43,7 @@ func _on_FieldButton_pressed():
 		play_sfx(selected_face)
 		emit_signal("face_selected", current_face_index)
 		showSelectedTimer.start()
+		previous_index = current_face_index
 
 func play_sfx(selected_face):
 	if "type" in selected_face:
