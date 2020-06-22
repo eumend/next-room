@@ -146,9 +146,9 @@ text = "Next"
 [node name="C2" type="VBoxContainer" parent="UI/CreditsContainer"]
 visible = false
 margin_left = 10.0
-margin_top = -48.0
+margin_top = -52.0
 margin_right = 80.0
-margin_bottom = 48.0
+margin_bottom = 51.0
 rect_min_size = Vector2( 70, 0 )
 size_flags_horizontal = 2
 __meta__ = {

@@ -136,7 +136,7 @@ var Levels = {
 
 func _ready():
 	$BGPlayer.play()
-#	skip_to_level(8, 99) # Debugging
+#	skip_to_level(1, 3) # Debugging
 	update_level_layout()
 	create_player()
 	randomize()
@@ -212,8 +212,7 @@ func _on_Enemy_died():
 	if BattleUnits.is_player_turn():
 		_on_Player_end_turn()
 	else:
-		var player = BattleUnits.PlayerStats
-		player.heal_all()
+		reset_player_status()
 
 func _on_Enemy_fled():
 	var enemy = BattleUnits.Enemy
@@ -260,8 +259,6 @@ func eot_checks():
 
 func handle_boss_death_eot(enemy):
 	var playerStats = BattleUnits.PlayerStats
-	if playerStats.hp < playerStats.max_hp:
-		playerStats.hp = playerStats.max_hp
 	playerScore.current_level += 1
 	nextRoomButton.text = "NEXT FLOOR"
 	if playerScore.current_level in Levels:
@@ -329,6 +326,10 @@ func show_level_up_summary(level_up_summary):
 func _on_NextRoomButton_pressed():
 	animationPlayer.play("FadeOut")
 	yield(animationPlayer, "animation_finished")
+	var is_next_floor = playerScore.kill_streak == 0
+	if is_next_floor:
+		var player = BattleUnits.PlayerStats
+		player.heal_all()
 	$SFXNextRoom.play()
 	nextRoomButton.hide()
 	update_level_layout()
