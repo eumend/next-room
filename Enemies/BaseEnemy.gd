@@ -42,7 +42,6 @@ func on_start_turn():
 	attack()
 
 func attack():
-	randomize()
 	var attack_pattern = get_attack_pattern()
 	selected_attack = Utils.pick_from_weighted(attack_pattern)
 	if selected_attack:

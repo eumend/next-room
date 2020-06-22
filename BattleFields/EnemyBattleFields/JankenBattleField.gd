@@ -32,7 +32,6 @@ func _ready():
 	showOutcomeTimer.connect("timeout", self, "_on_showOutcomeTimer_timeout")
 
 func _on_player_selected(choice):
-	randomize()
 	var enemy_choice = pick_enemy_choice()
 	outcome = check_win(choice, enemy_choice)
 	$Field/VBoxContainer/EnemyChoice/Sprite.texture = icon_map[enemy_choice]
@@ -53,6 +52,7 @@ func _on_showOutcomeTimer_timeout():
 func pick_enemy_choice():
 	if choice_map:
 		return Utils.pick_from_weighted(choice_map)
+	randomize()
 	return [CHOICES.ROCK, CHOICES.SCISSORS, CHOICES.PAPER][randi() % 3]
 
 func reset_gui():

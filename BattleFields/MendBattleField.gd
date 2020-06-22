@@ -20,12 +20,12 @@ var bullet_starting_y = -4 # Above the screen
 
 
 func _ready():
-	randomize()
 	bulletTimer.connect("timeout", self, "on_bulletTimer_timeout")
 	start_player_bumper()
 	fire_bullet()
 
 func start_player_bumper():
+	randomize()
 	var middle_of_field = min_starting_x + (max_starting_x - min_starting_x) / 2
 	var starting_position = Vector2(rand_range(min_starting_x, max_starting_x), starting_y)
 	var starting_direction = 1 if starting_position.x < middle_of_field else -1
