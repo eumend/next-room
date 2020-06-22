@@ -72,7 +72,7 @@ tracks/0/keys = {
 
 [sub_resource type="StyleBoxEmpty" id=4]
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=6]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Fade:modulate")
@@ -87,7 +87,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=7]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Fade:modulate")
@@ -102,7 +102,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=8]
 length = 0.5
 step = 0.05
 tracks/0/type = "value"
@@ -118,7 +118,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=9]
 
 [node name="Battle" type="Node"]
 script = ExtResource( 4 )
@@ -371,10 +371,10 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/FadeIn = SubResource( 5 )
-anims/FadeOut = SubResource( 6 )
-anims/FadeToNewRoom = SubResource( 7 )
-anims/None = SubResource( 8 )
+anims/FadeIn = SubResource( 6 )
+anims/FadeOut = SubResource( 7 )
+anims/FadeToNewRoom = SubResource( 8 )
+anims/None = SubResource( 9 )
 
 [node name="BGPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )

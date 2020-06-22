@@ -139,7 +139,6 @@ func _ready():
 #	skip_to_level(1, 3) # Debugging
 	update_level_layout()
 	create_player()
-	randomize()
 	start_battle()
 
 func start_battle():
@@ -258,7 +257,6 @@ func eot_checks():
 	return true
 
 func handle_boss_death_eot(enemy):
-	var playerStats = BattleUnits.PlayerStats
 	playerScore.current_level += 1
 	nextRoomButton.text = "NEXT FLOOR"
 	if playerScore.current_level in Levels:
@@ -341,36 +339,11 @@ func _on_NextRoomButton_pressed():
 	start_battle()
 
 func _on_RestartButton_pressed():
+	animationPlayer.play("FadeOut")
+	yield(animationPlayer, "animation_finished")
 	restartButton.hide()
 	continueButton.hide()
 	BattleSummary.hide_summary()
-	restart_game()
-
-func on_continue():
-	animationPlayer.play("FadeOut")
-	yield(animationPlayer, "animation_finished")
-	animationPlayer.play("FadeToNewRoom")
-	var playerStats = BattleUnits.PlayerStats
-	playerStats.heal_all()
-	var enemy = BattleUnits.Enemy
-	if enemy:
-		BattleUnits.Enemy = null
-		enemy.queue_free()
-	playerScore.kill_streak = 0
-	playerScore.continues_taken += 1
-	update_level_layout()
-	yield(get_tree().create_timer(0.2), "timeout")
-	animationPlayer.play("FadeIn")
-	yield(animationPlayer, "animation_finished")
-	actionButtons.recharge_all()
-	$BGPlayer.play()
-	start_battle()
-	
-
-func restart_game():
-	animationPlayer.play("FadeOut")
-	yield(animationPlayer, "animation_finished")
-	animationPlayer.play("FadeToNewRoom")
 	var playerStats = BattleUnits.PlayerStats
 	if playerScore.current_run > 0:
 		playerStats.reset_plus()
@@ -382,7 +355,7 @@ func restart_game():
 		enemy.queue_free()
 	playerScore.reset()
 	update_level_layout()
-	yield(get_tree().create_timer(0.2), "timeout")
+	yield(get_tree().create_timer(0.3), "timeout")
 	animationPlayer.play("FadeIn")
 	yield(animationPlayer, "animation_finished")
 	$BGPlayer.play()
@@ -414,9 +387,24 @@ func skip_to_level(lvl, player_lvl):
 		playerStats.level_up(1)
 	playerStats.hp = playerStats.max_hp
 
-
 func _on_ContinueButton_pressed():
+	animationPlayer.play("FadeOut")
+	yield(animationPlayer, "animation_finished")
 	restartButton.hide()
 	continueButton.hide()
 	BattleSummary.hide_summary()
-	on_continue()
+	var playerStats = BattleUnits.PlayerStats
+	playerStats.heal_all()
+	var enemy = BattleUnits.Enemy
+	if enemy:
+		BattleUnits.Enemy = null
+		enemy.queue_free()
+	playerScore.kill_streak = 0
+	playerScore.continues_taken += 1
+	update_level_layout()
+	yield(get_tree().create_timer(0.3), "timeout")
+	actionButtons.recharge_all()
+	$BGPlayer.play()
+	start_battle()
+	animationPlayer.play("FadeIn")
+	yield(animationPlayer, "animation_finished")
