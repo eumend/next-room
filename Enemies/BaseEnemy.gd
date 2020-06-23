@@ -8,6 +8,7 @@ export(int) var max_hp = 10
 export(int) var power = 4
 export(int) var exp_points = 1
 export(bool) var is_boss = false
+export(bool) var is_big_boss = false
 export (String, MULTILINE) var entry_text = ""
 onready var hpLabel = $HPLabel
 onready var animationPlayer = $AnimationPlayer
@@ -100,9 +101,13 @@ func flee():
 func on_death():
 	on_death_animation = true
 	emit_signal("died")
-	if is_boss:
+	var death_animation_name = "Fade"
+	if is_big_boss:
+		$SFXBigBossDeath.play()
+		death_animation_name = "BigBossDeath"
+	elif is_boss:
 		$SFXBossDeath.play()
-	var death_animation_name = "ShakeFade" if is_boss else "Fade"
+		death_animation_name = "ShakeFade"
 	animationPlayer.play(death_animation_name)
 	yield(animationPlayer, "animation_finished")
 	on_death_animation = false

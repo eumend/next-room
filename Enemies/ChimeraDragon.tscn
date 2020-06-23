@@ -11,6 +11,7 @@ max_hp = 250
 power = 12
 exp_points = 0
 is_boss = true
+is_big_boss = true
 entry_text = "???"
 
 [node name="Sprite" parent="." index="0"]
