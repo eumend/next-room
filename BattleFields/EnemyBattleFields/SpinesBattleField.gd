@@ -13,6 +13,7 @@ onready var spikeTimer = $Field/SpikeTimer
 onready var cooldownTimer = $Field/CooldownTimer
 onready var shieldTimer = $Field/ShieldTimer
 onready var shieldAnimation = $Field/Player/ShieldAnimation
+onready var playerAnimationPlayer = $Field/Player/PlayerAnimationPlayer
 
 var ALL_SPIKES = []
 var shielded = false
@@ -67,6 +68,7 @@ func on_spike_fired():
 	if shielded:
 		miss()
 	else:
+		playerAnimationPlayer.play("ShakePlayer")
 		hit()
 	done_spikes += 1
 	if done_spikes >= total_spikes:
@@ -74,6 +76,7 @@ func on_spike_fired():
 
 func on_pressed():
 	if not cooldown:
+		$SFXShield.play()
 		shieldAnimation.show()
 		shieldTimer.start()
 		shielded = true

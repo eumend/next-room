@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://BattleFields/BaseBattleField.tscn" type="PackedScene" id=1]
 [ext_resource path="res://BattleFields/EnemyBattleFields/BulletsDownBattleField.gd" type="Script" id=2]
 [ext_resource path="res://Images/Player.png" type="Texture" id=3]
+[ext_resource path="res://Music/SFX/laser_1.wav" type="AudioStream" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 5.52525
@@ -31,8 +32,8 @@ position = Vector2( 36, 55 )
 position = Vector2( 0, 6 )
 shape = SubResource( 2 )
 
-[node name="DoneTimer" type="Timer" parent="." index="3"]
-one_shot = true
-
 [node name="FireBulletTimer" type="Timer" parent="." index="4"]
 one_shot = true
+
+[node name="SFXLaser" type="AudioStreamPlayer" parent="." index="6"]
+stream = ExtResource( 4 )

@@ -45,6 +45,7 @@ func _on_bulletTimer_timeout():
 		fire_bullet()
 
 func _fire_bullet(bullet_type, bullet_position):
+	$SFXLaser.play()
 	var bullet = BombBullet.instance()
 	bullet.direction = get_bullet_direction()
 	bullet.bullet_type = bullet_type

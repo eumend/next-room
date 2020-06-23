@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://BattleFields/Players/LaserShooter.gd" type="Script" id=1]
-[ext_resource path="res://Music/SFX/laser_1.wav" type="AudioStream" id=2]
+[ext_resource path="res://Music/SFX/laser_2.wav" type="AudioStream" id=2]
 
 [node name="Shooter" type="Node2D"]
 script = ExtResource( 1 )
@@ -37,3 +37,4 @@ __meta__ = {
 
 [node name="LaserSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
+volume_db = 10.0

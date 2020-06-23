@@ -1,14 +1,15 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://BattleFields/BaseBattleField.tscn" type="PackedScene" id=1]
 [ext_resource path="res://BattleFields/EnemyBattleFields/FalldownBattleField.gd" type="Script" id=2]
 [ext_resource path="res://BattleFields/EnemyBattleFields/Utils/FalldownCeiling.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Music/SFX/blow_2.wav" type="AudioStream" id=4]
+[ext_resource path="res://Music/SFX/crack_1.wav" type="AudioStream" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1.98877, 2.25034 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 1.14906, 29.2385 )
 
 [node name="FalldownBattleField" instance=ExtResource( 1 )]
@@ -58,14 +59,14 @@ position = Vector2( 0, 30 )
 collision_layer = 2048
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Field/BFLeft" index="0"]
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="BFRight" type="StaticBody2D" parent="Field" index="4"]
 position = Vector2( 72, 30 )
 collision_layer = 2048
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Field/BFRight" index="0"]
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="CloseInTimer" type="Timer" parent="Field" index="5"]
 wait_time = 3.0
@@ -78,3 +79,6 @@ wait_time = 3.0
 stream = ExtResource( 4 )
 
 [node name="playerAnimation" type="AnimationPlayer" parent="Field" index="9"]
+
+[node name="SFXCrack" type="AudioStreamPlayer" parent="." index="4"]
+stream = ExtResource( 5 )

@@ -67,6 +67,7 @@ func on_bullet_hit():
 	emit_signal("hit_bullet")
 
 func on_close_in_timer_timeout():
+	$SFXCrack.play()
 	var side = Utils.pick_from_weighted(move_limit_mapping)
 	if side == TOP:
 		bfCeil.move(ceil_data["force"], ceil_data["time"])

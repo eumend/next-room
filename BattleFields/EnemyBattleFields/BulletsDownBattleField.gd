@@ -36,6 +36,7 @@ func on_bulletTimer_timeout():
 		fire_bullet()
 
 func _fire_bullet():
+	$SFXLaser.play()
 	var side = pick_bullet_side()
 	var x_offset = movement if side == RIGHT else Vector2(0,0)
 	var bullet_position = base_bullet_position + x_offset
