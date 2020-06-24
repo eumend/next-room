@@ -39,6 +39,8 @@ onready var doneCooldownTimer = $DoneCooldownTimer
 signal hit_limit
 signal hit_bullet
 
+var in_done = false
+
 func _ready():
 	bfFloor.can_kill = floor_data["can_kill"]
 	bfCeil.can_kill = ceil_data["can_kill"]
@@ -60,9 +62,11 @@ func on_doneCooldownTimer_timeout():
 	done_with_cooldown()
 
 func done_with_cooldown(): # We want a tiny bit of buffer between the BF hiding and finishing the turn, since the player is probably still pressing down
-	self.hide()
-	field.queue_free()
-	doneTimer.start()
+	if not in_done:
+		in_done = true
+		self.hide()
+		field.queue_free()
+		doneTimer.start()
 
 func on_bulletTimer_timeout():
 	var bullet = Bullet.instance()
