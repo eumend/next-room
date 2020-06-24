@@ -1,6 +1,7 @@
 extends Area2D
 
-var direction = Vector2(1, 0) # Right
+const RIGHT = Vector2(1, 0)
+var direction = RIGHT
 var speed = 50
 var hit = false
 signal hit
@@ -9,6 +10,8 @@ onready var animationPlayer = $AnimationPlayer
 onready var explodeSFX = $ExplodeSFX
 
 func _ready():
+	if direction == RIGHT:
+		self.rotation_degrees = 180
 	animationPlayer.connect("animation_finished", self, "on_animationPlayer_animation_finished")
 
 func _physics_process(delta):

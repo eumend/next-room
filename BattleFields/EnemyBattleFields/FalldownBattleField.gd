@@ -26,12 +26,15 @@ export var floor_data = {
 	"force": 10,
 }
 
+onready var field = $Field
 onready var player = $Field/Player
 onready var bfFloor = $Field/BFFloor
 onready var bfCeil =  $Field/BFCeiling
 onready var closeInTimer = $Field/CloseInTimer
 onready var bulletTimer = $Field/BulletTimer
 onready var touchLimitSFX = $Field/TouchLimitSFX
+onready var playerAnimation = $Field/Player/playerAnimation
+onready var doneCooldownTimer = $DoneCooldownTimer
 
 signal hit_limit
 signal hit_bullet
@@ -42,6 +45,7 @@ func _ready():
 	player.connect("body_entered", self, "on_player_body_entered")
 	closeInTimer.connect("timeout", self, "on_close_in_timer_timeout")
 	bulletTimer.connect("timeout", self, "on_bulletTimer_timeout")
+	doneCooldownTimer.connect("timeout", self, "on_doneCooldownTimer_timeout")
 	if move_time > 0:
 		closeInTimer.wait_time = move_time
 		closeInTimer.start()
@@ -49,8 +53,16 @@ func _ready():
 		bulletTimer.wait_time = bullet_time
 		bulletTimer.start()
 	if time_limit > 0:
-		doneTimer.wait_time = time_limit
-		doneTimer.start()
+		doneCooldownTimer.wait_time = time_limit
+		doneCooldownTimer.start()
+
+func on_doneCooldownTimer_timeout():
+	done_with_cooldown()
+
+func done_with_cooldown(): # We want a tiny bit of buffer between the BF hiding and finishing the turn, since the player is probably still pressing down
+	self.hide()
+	field.queue_free()
+	doneTimer.start()
 
 func on_bulletTimer_timeout():
 	var bullet = Bullet.instance()
@@ -64,6 +76,7 @@ func on_bulletTimer_timeout():
 	add_child(bullet)
 
 func on_bullet_hit():
+	playerAnimation.play("Hit")
 	emit_signal("hit_bullet")
 
 func on_close_in_timer_timeout():
@@ -78,7 +91,7 @@ func on_player_body_entered(node):
 	if (floor_data["can_kill"] and node.name == "BFFloor") or (ceil_data["can_kill"] and node.name == "BFCeiling"):
 		emit_signal("hit_limit")
 		touchLimitSFX.play()
-		done()
+		done_with_cooldown()
 
 func _on_FieldButton_pressed():
 	player.apply_impulse(Vector2(), force)

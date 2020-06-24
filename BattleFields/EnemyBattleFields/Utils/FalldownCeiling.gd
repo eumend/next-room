@@ -5,14 +5,15 @@ var speed = 0
 export var can_kill = true setget set_can_kill
 
 onready var impulseTimer = $ImpulseTimer
-onready var sprite = $Sprite
+onready var safeSprite = $SafeSprite
+onready var killSprite = $KillSprite
 
 func set_can_kill(new_can_kill):
 	can_kill = new_can_kill
 	if can_kill:
-		sprite.color = "fa0303"
+		killSprite.show()
 	else:
-		sprite.color = "00f9ff"
+		safeSprite.show()
 
 func _ready():
 	impulseTimer.connect("timeout", self, "on_impulseTimer_timeout")
