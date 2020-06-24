@@ -87,7 +87,4 @@ shape = SubResource( 1 )
 anims/Disappear = SubResource( 2 )
 anims/Explode = SubResource( 3 )
 anims/None = SubResource( 4 )
-
-[node name="StopPointTimer" type="Timer" parent="."]
-one_shot = true
 [connection signal="area_entered" from="." to="." method="_on_Bullet_area_entered"]

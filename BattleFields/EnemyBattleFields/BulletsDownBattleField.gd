@@ -13,9 +13,10 @@ var bullets_that_hit = 0
 var fired_bullets = 0
 var stop_point = null
 var stop_point_time = null
-var base_speed = 70
+var base_speed = 50
 var color = "ffffff"
-const Bullet = preload("res://BattleFields/Bullets/Bullet.tscn")
+var sprite = null
+const Bullet = preload("res://BattleFields/Bullets/StopBullet.tscn")
 onready var bulletTimer = $FireBulletTimer
 onready var player = $Field/Player
 
@@ -44,6 +45,8 @@ func _fire_bullet():
 	if stop_point and stop_point_time:
 		new_bullet.stop_point = stop_point
 		new_bullet.stop_point_time = stop_point_time
+	if sprite:
+		new_bullet.sprite = sprite
 	new_bullet.color = color
 	new_bullet.position = bullet_position
 	new_bullet.speed = get_bullet_speed()

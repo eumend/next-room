@@ -1,6 +1,7 @@
 extends "res://Enemies/BaseEnemy.gd"
 
 const BulletsDownBattleField = preload("res://BattleFields/EnemyBattleFields/BulletsDownBattleField.tscn")
+const noteSprite = preload("res://Images/Aux/NoteBullet.png")
 
 func get_attack_pattern():
 	return {
@@ -12,11 +13,11 @@ func sing_attack():
 	DialogBox.show_timeout("SEA MELODY!", 1)
 	yield(DialogBox, "done")
 	var battleField = BulletsDownBattleField.instance()
-	battleField.base_speed = 70
+	battleField.base_speed = 55
 	battleField.total_bullets = 4
 	battleField.stop_point = 30
 	battleField.stop_point_time = 1
-	battleField.color = "2effff" # Light blue
+	battleField.sprite = noteSprite
 	battleField.connect("hit", self, "on_BattleField_hit")
 	battleField.connect("done", self, "on_BattleField_done")
 	battleField.connect("fired", self, "on_BattleField_fired")

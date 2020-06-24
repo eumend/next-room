@@ -26,7 +26,7 @@ texture = ExtResource( 3 )
 shape = SubResource( 1 )
 
 [node name="Bottom" type="Area2D" parent="Field" index="1"]
-position = Vector2( 36, 55 )
+position = Vector2( 36, 62 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Field/Bottom" index="0"]
 position = Vector2( 0, 6 )
@@ -35,5 +35,5 @@ shape = SubResource( 2 )
 [node name="FireBulletTimer" type="Timer" parent="." index="4"]
 one_shot = true
 
-[node name="SFXLaser" type="AudioStreamPlayer" parent="." index="6"]
+[node name="SFXLaser" type="AudioStreamPlayer" parent="." index="5"]
 stream = ExtResource( 4 )

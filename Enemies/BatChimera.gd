@@ -99,6 +99,7 @@ func _on_jankenBattleField_done():
 # Mermaid
 
 const BulletsDownBattleField = preload("res://BattleFields/EnemyBattleFields/BulletsDownBattleField.tscn")
+const noteSprite = preload("res://Images/Aux/NoteBullet.png")
 
 func mermaid_attack():
 	DialogBox.show_timeout("It's screeching!", 1)
@@ -108,6 +109,7 @@ func mermaid_attack():
 	battleField.total_bullets = 4
 	battleField.stop_point = 30
 	battleField.stop_point_time = 1
+	battleField.sprite = noteSprite
 	battleField.color = "2effff" # Light blue
 	battleField.connect("hit", self, "on_bulletsDownBattleField_hit")
 	battleField.connect("done", self, "on_bulletsDownBattleField_done")
