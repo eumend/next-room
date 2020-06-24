@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://BattleFields/Bullets/BossBullet.gd" type="Script" id=1]
-[ext_resource path="res://Images/ShootEmUp/ufo_1.png" type="Texture" id=2]
+[ext_resource path="res://Images/ShootEmUp/ufo_3.png" type="Texture" id=2]
 [ext_resource path="res://Music/SFX/explosion_short_1.wav" type="AudioStream" id=3]
 [ext_resource path="res://Music/SFX/blow_2.wav" type="AudioStream" id=4]
 
@@ -65,6 +65,30 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=4]
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
 
 [node name="BossBullet" type="Area2D"]
 script = ExtResource( 1 )
@@ -73,6 +97,7 @@ script = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
+light_mask = 16385
 texture = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

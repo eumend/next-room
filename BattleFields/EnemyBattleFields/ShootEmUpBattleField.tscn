@@ -68,5 +68,5 @@ position = Vector2( 35.907, 7 )
 [node name="DoneTimer" parent="." index="3"]
 wait_time = 0.5
 
-[node name="SFXLaser" type="AudioStreamPlayer" parent="." index="5"]
+[node name="SFXLaser" type="AudioStreamPlayer" parent="." index="4"]
 stream = ExtResource( 6 )
