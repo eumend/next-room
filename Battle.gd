@@ -119,7 +119,7 @@ var Levels = {
 			"face_angel": 15,
 		},
 		"boss": "archangel",
-		"mook_count": 5,
+		"mook_count": 4,
 		"background": preload("res://Images/Dungeons/Dungeon7.png")
 	},
 	8: {
@@ -136,7 +136,7 @@ var Levels = {
 
 func _ready():
 	$BGPlayer.play()
-#	skip_to_level(1, 3) # Debugging
+	# skip_to_level(7, 9) # Debugging
 	update_level_layout()
 	create_player()
 	start_battle()

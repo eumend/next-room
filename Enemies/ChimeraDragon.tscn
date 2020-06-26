@@ -7,7 +7,7 @@
 [node name="ChimeraDragon" instance=ExtResource( 1 )]
 position = Vector2( 0, 40 )
 script = ExtResource( 3 )
-max_hp = 250
+max_hp = 200
 power = 12
 exp_points = 0
 is_boss = true

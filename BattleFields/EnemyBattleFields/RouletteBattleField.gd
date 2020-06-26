@@ -20,9 +20,9 @@ func _ready():
 	showSelectedTimer.connect("timeout", self, "on_ShowSelectedTimer_timeout")
 
 func start_roulette(new_face_data, timer_speed):
-	face_data = new_face_data
 	if previous_index != null:
 		display_previous_face()
+	face_data = new_face_data
 	var faces = []
 	for option in face_data:
 		faces.append(option["sprite"])
@@ -37,13 +37,13 @@ func on_Roulette_show_face(index):
 
 func _on_FieldButton_pressed():
 	if taking_presses:
+		previous_index = current_face_index
 		taking_presses = false
 		roulette.stop()
 		var selected_face = face_data[current_face_index]
 		play_sfx(selected_face)
 		emit_signal("face_selected", current_face_index)
 		showSelectedTimer.start()
-		previous_index = current_face_index
 
 func play_sfx(selected_face):
 	if "type" in selected_face:

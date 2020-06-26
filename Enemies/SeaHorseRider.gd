@@ -42,7 +42,7 @@ func ink_attack():
 	DialogBox.show_timeout("INK ATTACK!", 1)
 	yield(DialogBox, "done")
 	var battleField = BulletsDownBattleField.instance()
-	battleField.base_speed = 65
+	battleField.base_speed = 60
 	battleField.total_bullets = 6
 	battleField.connect("hit", self, "on_BattleField_hit")
 	battleField.connect("done", self, "on_BattleField_done")

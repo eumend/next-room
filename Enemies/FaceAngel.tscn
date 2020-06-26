@@ -6,7 +6,7 @@
 
 [node name="FaceAngel" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-max_hp = 70
+max_hp = 60
 power = 11
 exp_points = 15
 entry_text = "The Face Angel descends!"

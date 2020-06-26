@@ -188,7 +188,7 @@ func on_start_turn():
 	.on_start_turn()
 
 func voodoo_atack():
-	DialogBox.show_timeout("It's stares at you with a grudge...", 1.5)
+	DialogBox.show_timeout("(It's stares at you with a grudge... be careful!)", 1.5)
 	yield(DialogBox, "done")
 	on_voodoo = true
 	emit_signal("end_turn")
@@ -308,10 +308,10 @@ func start_secondary_roulette(roulette_index):
 	var roulette_data = secondary_attack_roulettes[roulette_index]
 	rouletteBattleField.start_roulette(roulette_data, roulette_speed)
 
-func on_secondaryRouletteBattleField_face_selected(index, _texture):
+func on_secondaryRouletteBattleField_face_selected(index):
 	selections.append(index)
 
-func on_secondaryRouletteBattleField_face_displayed(_index, _texture):
+func on_secondaryRouletteBattleField_face_displayed(_index):
 	if current_roulette_index < secondary_attack_roulettes.size() - 1:
 		current_roulette_index += 1
 		start_secondary_roulette(current_roulette_index)

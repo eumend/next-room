@@ -7,7 +7,7 @@
 [node name="RatChimera" instance=ExtResource( 1 )]
 position = Vector2( -3, -6 )
 script = ExtResource( 3 )
-max_hp = 150
+max_hp = 120
 power = 12
 exp_points = 0
 entry_text = "It's the Rat Chimera!"

@@ -6,7 +6,7 @@
 
 [node name="RingAngel" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
-max_hp = 78
+max_hp = 70
 power = 10
 exp_points = 15
 entry_text = "A Ring Angel descends!"
