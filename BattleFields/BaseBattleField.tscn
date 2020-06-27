@@ -1,7 +1,8 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://BattleFields/BaseBattleField.gd" type="Script" id=2]
-[ext_resource path="res://Images/BaseBattleFieldMask.png" type="Texture" id=3]
+[ext_resource path="res://Images/UI/BaseBattleFieldMask.png" type="Texture" id=3]
+
 
 [node name="BaseBattleField" type="Node2D"]
 script = ExtResource( 2 )

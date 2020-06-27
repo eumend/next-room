@@ -1,9 +1,10 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://BattleFields/Enemy/Utils/BossBullet.gd" type="Script" id=1]
-[ext_resource path="res://Images/ShootEmUp/ufo_3.png" type="Texture" id=2]
+[ext_resource path="res://Images/BattleFields/ShootEmUp/ufo_3.png" type="Texture" id=2]
 [ext_resource path="res://Music/SFX/explosion_short_1.wav" type="AudioStream" id=3]
 [ext_resource path="res://Music/SFX/blow_2.wav" type="AudioStream" id=4]
+
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 1.37864

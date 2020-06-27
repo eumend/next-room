@@ -18,12 +18,12 @@ signal player_lose
 signal player_draw
 
 var icon_map = {
-	CHOICES.ROCK: preload("res://Images/Buttons/shield_button.png"),
-	CHOICES.SCISSORS: preload("res://Images/Buttons/sword_button.png"),
-	CHOICES.PAPER: preload("res://Images/Buttons/paper_button.png"),
+	CHOICES.ROCK: preload("res://Images/BattleFields/JanKenPon/shield_button.png"),
+	CHOICES.SCISSORS: preload("res://Images/BattleFields/JanKenPon/sword_button.png"),
+	CHOICES.PAPER: preload("res://Images/BattleFields/JanKenPon/paper_button.png"),
 }
 
-const QuestionIcon = preload("res://Images/Buttons/question_button.png")
+const QuestionIcon = preload("res://Images/BattleFields/JanKenPon/question_button.png")
 
 func _ready():
 	playerOptions.find_node("PaperButton").connect("pressed", self, "_on_player_selected", [CHOICES.PAPER])

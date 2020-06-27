@@ -1,16 +1,16 @@
 extends "res://Enemies/BaseEnemy.gd"
 
 const RouletteBattleField = preload("res://BattleFields/Enemy/RouletteBattleField.tscn")
-const HitSprite = preload("res://Images/Roulette/Hit1.png")
-const HitDoubleSprite = preload("res://Images/Roulette/Hit2.png")
-const HitTripleSprite = preload("res://Images/Roulette/Hit3.png")
-const PoisonHitSprite = preload("res://Images/Roulette/HitPoison.png")
-const PoisonHitDoubleSprite = preload("res://Images/Roulette/Hit2Poison.png")
-const PoisonHitTripleSprite = preload("res://Images/Roulette/Hit3Poison.png")
-const PowerUpSprite = preload("res://Images/Roulette/PowerUp.png")
-const DrainLifeSprite = preload("res://Images/Roulette/DrainLife.png")
-const SurpriseSprite = preload("res://Images/Roulette/Surprise.png")
-const WinSprite = preload("res://Images/Roulette/Win.png")
+const HitSprite = preload("res://Images/BattleFields/Roulette/Hit1.png")
+const HitDoubleSprite = preload("res://Images/BattleFields/Roulette/Hit2.png")
+const HitTripleSprite = preload("res://Images/BattleFields/Roulette/Hit3.png")
+const PoisonHitSprite = preload("res://Images/BattleFields/Roulette/HitPoison.png")
+const PoisonHitDoubleSprite = preload("res://Images/BattleFields/Roulette/Hit2Poison.png")
+const PoisonHitTripleSprite = preload("res://Images/BattleFields/Roulette/Hit3Poison.png")
+const PowerUpSprite = preload("res://Images/BattleFields/Roulette/PowerUp.png")
+const DrainLifeSprite = preload("res://Images/BattleFields/Roulette/DrainLife.png")
+const SurpriseSprite = preload("res://Images/BattleFields/Roulette/Surprise.png")
+const WinSprite = preload("res://Images/BattleFields/Roulette/Win.png")
 
 enum FACES{HIT, HIT_STRONG, HIT_CRIT, HIT_POISON, HIT_POISON_2, HIT_POISON_3, POWER_UP, DRAIN_LIFE, SURPRISE, WIN}
 

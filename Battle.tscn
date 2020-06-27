@@ -18,11 +18,12 @@
 [ext_resource path="res://ActionButtons/ComboActionButton.tscn" type="PackedScene" id=16]
 [ext_resource path="res://ActionButtons/ShieldActionButton.tscn" type="PackedScene" id=17]
 [ext_resource path="res://ActionButtons/MendActionButton.tscn" type="PackedScene" id=18]
-[ext_resource path="res://Images/skull_icon.png" type="Texture" id=19]
+[ext_resource path="res://Images/UI/skull_icon.png" type="Texture" id=19]
 [ext_resource path="res://PlayerScore.gd" type="Script" id=20]
 [ext_resource path="res://Music/SFX/beep_1.wav" type="AudioStream" id=21]
 [ext_resource path="res://Music/SFX/miss_1.wav" type="AudioStream" id=22]
 [ext_resource path="res://Music/SFX/win_short_1.wav" type="AudioStream" id=23]
+
 
 [sub_resource type="Animation" id=1]
 length = 0.2

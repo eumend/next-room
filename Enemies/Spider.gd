@@ -1,10 +1,10 @@
 extends "res://Enemies/BaseEnemy.gd"
 
 const RouletteBattleField = preload("res://BattleFields/Enemy/RouletteBattleField.tscn")
-const HitSprite = preload("res://Images/Roulette/Hit1.png")
-const PoisonHitSprite = preload("res://Images/Roulette/HitPoison.png")
-const WinSprite = preload("res://Images/Roulette/Win.png")
-const PoisonHitDoubleSprite = preload("res://Images/Roulette/Hit2Poison.png")
+const HitSprite = preload("res://Images/BattleFields/Roulette/Hit1.png")
+const PoisonHitSprite = preload("res://Images/BattleFields/Roulette/HitPoison.png")
+const WinSprite = preload("res://Images/BattleFields/Roulette/Win.png")
+const PoisonHitDoubleSprite = preload("res://Images/BattleFields/Roulette/Hit2Poison.png")
 
 enum ROULETTE_FACES{HIT, POISON_HIT, POISON_HIT_DOUBLE, WIN}
 

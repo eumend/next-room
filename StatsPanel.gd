@@ -6,8 +6,8 @@ onready var powLabel = $StatsContainer/POW
 onready var statusContainer = $StatsContainer/Status
 onready var sfxMiss = $SFXMiss
 
-const PoisonIcon = preload("res://Images/skull_icon.png")
-const ShieldIcon = preload("res://Images/shield_icon.png")
+const PoisonIcon = preload("res://Images/UI/skull_icon.png")
+const ShieldIcon = preload("res://Images/UI/shield_icon.png")
 const NumberAnimation = preload("res://Animations/NumberAnimation.tscn")
 const BattleUnits = preload("res://BattleUnits.tres")
 

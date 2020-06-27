@@ -3,7 +3,8 @@
 [ext_resource path="res://BattleFields/Enemy/Utils/BombBullet.gd" type="Script" id=1]
 [ext_resource path="res://Music/SFX/explosion_short_1.wav" type="AudioStream" id=2]
 [ext_resource path="res://Music/SFX/draw_1.wav" type="AudioStream" id=3]
-[ext_resource path="res://Images/ShootEmUp/ufo_1.png" type="Texture" id=4]
+[ext_resource path="res://Images/BattleFields/ShootEmUp/ufo_1.png" type="Texture" id=4]
+
 
 [sub_resource type="Animation" id=1]
 resource_name = "Cooldown"

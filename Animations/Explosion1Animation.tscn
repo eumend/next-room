@@ -1,8 +1,9 @@
 [gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Animations/Explosion1Animation.gd" type="Script" id=1]
-[ext_resource path="res://Images/Explosion1Animation.png" type="Texture" id=2]
+[ext_resource path="res://Images/Battle/Explosion1Animation.png" type="Texture" id=2]
 [ext_resource path="res://Music/SFX/explosion_short_1.wav" type="AudioStream" id=3]
+
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )

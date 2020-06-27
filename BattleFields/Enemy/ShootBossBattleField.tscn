@@ -3,8 +3,9 @@
 [ext_resource path="res://BattleFields/Enemy/ShootEmUpBattleField.tscn" type="PackedScene" id=1]
 [ext_resource path="res://BattleFields/Enemy/ShootBossBattleField.gd" type="Script" id=2]
 [ext_resource path="res://BattleFields/Enemy/Utils/BossBullet.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Images/ShootEmUp/shoot_up_over.png" type="Texture" id=4]
-[ext_resource path="res://Images/ShootEmUp/shoot_up_hp_progress.png" type="Texture" id=5]
+[ext_resource path="res://Images/BattleFields/ShootEmUp/shoot_up_over.png" type="Texture" id=4]
+[ext_resource path="res://Images/BattleFields/ShootEmUp/shoot_up_hp_progress.png" type="Texture" id=5]
+
 
 [node name="ShootBossBattleField" instance=ExtResource( 1 )]
 script = ExtResource( 2 )

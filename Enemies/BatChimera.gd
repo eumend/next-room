@@ -99,7 +99,7 @@ func _on_jankenBattleField_done():
 # Mermaid
 
 const BulletsDownBattleField = preload("res://BattleFields/Enemy/BulletsDownBattleField.tscn")
-const noteSprite = preload("res://Images/Aux/NoteBullet.png")
+const noteSprite = preload("res://Images/BattleFields/BulletsDown/NoteBullet.png")
 
 func mermaid_attack():
 	DialogBox.show_timeout("It's screeching!", 1)
@@ -128,13 +128,13 @@ func on_bulletsDownBattleField_done():
 # Spectre
 
 const RouletteBattleField = preload("res://BattleFields/Enemy/RouletteBattleField.tscn")
-const HitSprite = preload("res://Images/Roulette/Hit1.png")
-const HitDoubleSprite = preload("res://Images/Roulette/Hit2.png")
-const HitTripleSprite = preload("res://Images/Roulette/Hit3.png")
-const PowerUpSprite = preload("res://Images/Roulette/PowerUp.png")
-const DrainLifeSprite = preload("res://Images/Roulette/DrainLife.png")
-const SurpriseSprite = preload("res://Images/Roulette/Surprise.png")
-const WinSprite = preload("res://Images/Roulette/Win.png")
+const HitSprite = preload("res://Images/BattleFields/Roulette/Hit1.png")
+const HitDoubleSprite = preload("res://Images/BattleFields/Roulette/Hit2.png")
+const HitTripleSprite = preload("res://Images/BattleFields/Roulette/Hit3.png")
+const PowerUpSprite = preload("res://Images/BattleFields/Roulette/PowerUp.png")
+const DrainLifeSprite = preload("res://Images/BattleFields/Roulette/DrainLife.png")
+const SurpriseSprite = preload("res://Images/BattleFields/Roulette/Surprise.png")
+const WinSprite = preload("res://Images/BattleFields/Roulette/Win.png")
 
 enum ROULETTE_FACES{HIT, HIT_STRONG, HIT_CRIT, POWER_UP, DRAIN_LIFE, SURPRISE, WIN}
 
