@@ -13,7 +13,7 @@ func sing_attack():
 	DialogBox.show_timeout("SEA MELODY!", 1)
 	yield(DialogBox, "done")
 	var battleField = BulletsDownBattleField.instance()
-	battleField.base_speed = 55
+	battleField.base_speed = 60
 	battleField.total_bullets = 4
 	battleField.stop_point = 30
 	battleField.stop_point_time = 1

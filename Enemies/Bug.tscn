@@ -7,7 +7,7 @@
 [node name="Bug" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 max_hp = 58
-power = 10
+power = 9
 exp_points = 9
 entry_text = "A.. Bug? Hops in!"
 

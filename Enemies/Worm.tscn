@@ -7,7 +7,7 @@
 [node name="Worm" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 max_hp = 48
-power = 9
+power = 8
 exp_points = 9
 entry_text = "A.. Worm? attacks!"
 
