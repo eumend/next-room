@@ -41,9 +41,7 @@ func suicide_attack():
 	animate_explosion()
 
 func undead_attack():
-	DialogBox.show_timeout("DIE!", 1)
-	yield(DialogBox, "done")
-	animate_explosion()
+	suicide_attack()
 
 func _on_Explosion_animation_finished():
 	undead = false

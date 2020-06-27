@@ -24,7 +24,7 @@ func get_attack_pattern():
 # Bat
 
 func leech_life():
-	DialogBox.show_timeout("It's showing fangs!", 1)
+	DialogBox.show_timeout("It's showing its fangs!", 1.5)
 	yield(DialogBox, "done")
 	animationPlayer.play("StatusAttack1")
 	yield(animationPlayer, "animation_finished")
@@ -43,7 +43,7 @@ func attack():
 		.attack()
 
 func undead_attack():
-	DialogBox.show_timeout("It's burying itself!?", 1)
+	DialogBox.show_timeout("It buried itself in the ground!?", 1.5)
 	yield(DialogBox, "done")
 	var fireAttackBattleField = FireAtackBattleField.instance()
 	fireAttackBattleField.init(4)
@@ -66,7 +66,7 @@ func is_dead():
 const JanKenBattleField = preload("res://BattleFields/Enemy/JankenBattleField.tscn")
 
 func shield_attack():
-	DialogBox.show_timeout("Janken again?", 1)
+	DialogBox.show_timeout("Its wing is transforming...", 1)
 	yield(DialogBox, "done")
 	var jankenBattleField = JanKenBattleField.instance()
 	jankenBattleField.choice_map = {
@@ -181,7 +181,7 @@ var roulette_selections = []
 var rouletteBattleField = null
 
 func spectre_attack():
-	DialogBox.show_timeout("It has an ominous aura!", 1)
+	DialogBox.show_timeout("It has an ominous aura!", 1.5)
 	yield(DialogBox, "done")
 	rouletteBattleField = RouletteBattleField.instance()
 	rouletteBattleField.connect("face_selected", self, "on_rouletteBattleField_face_selected")
@@ -279,7 +279,7 @@ func on_shootEmUpBattleField_done():
 const FalldownBattleField = preload("res://BattleFields/Enemy/FalldownBattleField.tscn")
 
 func ring_angel_attack():
-	DialogBox.show_timeout("The sky is falling!?", 1)
+	DialogBox.show_timeout("It flew to the sky!", 1)
 	yield(DialogBox, "done")
 	var battleField = FalldownBattleField.instance()
 	battleField.bullet_time = 1

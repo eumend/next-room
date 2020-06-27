@@ -9,7 +9,7 @@ script = ExtResource( 2 )
 max_hp = 34
 power = 7
 exp_points = 5
-entry_text = "Mermaid swims in!"
+entry_text = "A Mermaid swims in!"
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 4 )

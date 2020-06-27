@@ -17,13 +17,13 @@ func attack():
 		.attack()
 
 func suicide_attack():
-	DialogBox.show_timeout("A wind blows!", 1)
+	DialogBox.show_timeout("You can feel the wind blowing...", 2)
 	yield(DialogBox, "done")
 	.take_damage(self.hp)
 	emit_signal("end_turn")
 
 func warm_light_attack():
-	DialogBox.show_timeout("It emits a warm light...", 1)
+	DialogBox.show_timeout("It's emitting a warm light...", 1.5)
 	yield(DialogBox, "done")
 	.heal_damage(1)
 	emit_signal("end_turn")

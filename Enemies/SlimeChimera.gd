@@ -65,7 +65,7 @@ func candle_attack():
 const JanKenBattleField = preload("res://BattleFields/Enemy/JankenBattleField.tscn")
 
 func tome_attack():
-	DialogBox.show_timeout("Janken again!", 1)
+	DialogBox.show_timeout("The heads are transforming...", 1)
 	yield(DialogBox, "done")
 	var jankenBattleField = JanKenBattleField.instance()
 	jankenBattleField.choice_map = {
@@ -152,7 +152,7 @@ func on_shootBossBattleField_done():
 const FalldownBattleField = preload("res://BattleFields/Enemy/FalldownBattleField.tscn")
 
 func face_angel_battle_field():
-	DialogBox.show_timeout("The earth and sky are trembling!", 1)
+	DialogBox.show_timeout("The earth and sky are trembling!", 1.5)
 	yield(DialogBox, "done")
 	var battleField = FalldownBattleField.instance()
 	battleField.bullet_time = 1

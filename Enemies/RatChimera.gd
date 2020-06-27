@@ -96,7 +96,7 @@ func _on_jankenBattleField_done():
 const BulletsDownBattleField = preload("res://BattleFields/Enemy/BulletsDownBattleField.tscn")
 
 func seahorse_ink_attack():
-	DialogBox.show_timeout("It's shooting ink!", 1)
+	DialogBox.show_timeout("It's shooting gunk!", 1)
 	yield(DialogBox, "done")
 	var battleField = BulletsDownBattleField.instance()
 	battleField.base_speed = 60

@@ -12,7 +12,7 @@ power = 12
 exp_points = 0
 is_boss = true
 is_big_boss = true
-entry_text = "???"
+entry_text = "?????"
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )

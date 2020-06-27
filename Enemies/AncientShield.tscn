@@ -9,7 +9,7 @@ script = ExtResource( 2 )
 max_hp = 25
 power = 6
 exp_points = 4
-entry_text = "Ancient Shield unearthed!"
+entry_text = "An Ancient Shield was unearthed!"
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 3 )

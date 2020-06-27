@@ -11,7 +11,7 @@ max_hp = 60
 power = 8
 exp_points = 9
 is_boss = true
-entry_text = "Sea Horse Rider swims in!"
+entry_text = "The Sea Horse Rider swims in!"
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 3 )

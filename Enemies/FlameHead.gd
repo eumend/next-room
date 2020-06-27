@@ -11,7 +11,7 @@ func attack():
 		.attack()
 
 func undead_attack():
-	DialogBox.show_timeout("(It's blowing up!)", 1)
+	DialogBox.show_timeout("It's blowing up!!!", 1)
 	yield(DialogBox, "done")
 	animate_explosion()
 

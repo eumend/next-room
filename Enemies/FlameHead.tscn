@@ -9,7 +9,7 @@ script = ExtResource( 2 )
 max_hp = 8
 power = 3
 exp_points = 3
-entry_text = "Flame Head attacks!"
+entry_text = "The Flame Head is burning red!"
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 3 )
