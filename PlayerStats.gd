@@ -13,6 +13,9 @@ const level_chart = {
 	9: 180,
 	10: 220,
 	11: 260,
+	12: 320,
+	13: 380,
+	14: 450,
 }
 
 export var max_hp = 20 setget set_max_hp
