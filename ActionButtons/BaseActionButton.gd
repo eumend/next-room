@@ -51,7 +51,7 @@ func is_player_ready():
 
 func finish_turn():
 	if(is_battle_ready()):
-		player.ap -= player.max_ap # TODO: Change into something else, really
+		player.end_turn() 
 
 
 func _on_ActionButton_pressed():

@@ -17,10 +17,6 @@ const level_chart = {
 
 export var max_hp = 20
 var hp = max_hp setget set_hp
-export var max_ap = 3
-var ap = max_ap setget set_ap
-export var max_mp = 10
-var mp = max_mp setget set_mp
 var exp_points = 0 setget set_exp_points
 var level = 1 setget set_level
 export var power = 3 setget set_power
@@ -30,8 +26,6 @@ var base_hp = max_hp
 var base_power = power
 
 signal hp_changed(value)
-signal ap_changed(value)
-signal mp_changed(value)
 signal power_changed(value)
 signal level_changed(value)
 signal status_changed(value)
@@ -101,15 +95,8 @@ func set_hp(value):
 	if hp == 0:
 		emit_signal("died")
 
-func set_ap(value):
-	ap = clamp(value, 0, max_ap)
-	emit_signal("ap_changed", ap)
-	if ap == 0:
-		emit_signal("end_turn")
-
-func set_mp(value):
-	mp = clamp(value, 0, max_mp)
-	emit_signal("mp_changed", mp)
+func end_turn():
+	emit_signal("end_turn")
 
 func set_power(value):
 	power = value
@@ -126,23 +113,19 @@ func leveled_up():
 func level_up(lv_increase):
 	# get increments, TODO: Make them depend on level?
 	var hp_increase = 2
-	var mp_increase = 2
 	var power_increase = 1
 	
 	# Increase stats
 	self.level += lv_increase
 	self.max_hp += hp_increase
-	self.max_mp += mp_increase
 	self.power += power_increase
 	
 	# Heal
 #	self.hp += self.max_hp
-#	self.mp = self.max_mp
 	
 	last_level_up_summary = {
 		"lv": lv_increase,
 		"hp": hp_increase,
-		"mp": mp_increase,
 		"power": power_increase,
 	}
 

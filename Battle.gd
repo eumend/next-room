@@ -136,7 +136,7 @@ var Levels = {
 
 func _ready():
 	$BGPlayer.play()
-	# skip_to_level(7, 9) # Debugging
+#	skip_to_level(5, 99) # Debugging
 	update_level_layout()
 	create_player()
 	start_battle()
@@ -157,7 +157,6 @@ func start_player_turn():
 	var playerStats = BattleUnits.PlayerStats
 	playerStats.clear_buffs()
 	actionButtons.start_turn()
-	playerStats.ap = playerStats.max_ap
 
 func _on_Player_end_turn():
 	if BattleUnits.is_player_turn(): # We trigger this early if the enemy dies, so this can get called twice
