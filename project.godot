@@ -38,9 +38,11 @@ _global_script_class_icons={
 
 [application]
 
-config/name="MobileRPG"
+config/name="NextRoom"
+config/description="Slay a palette of quirky monsters (and many chimeras) with quick reflexes!"
 run/main_scene="res://Main.tscn"
 config/icon="res://icon.png"
+config/windows_native_icon="res://icon.ico"
 
 [autoload]
 
