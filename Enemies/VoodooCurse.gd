@@ -185,7 +185,7 @@ func on_start_turn():
 	.on_start_turn()
 
 func voodoo_atack():
-	DialogBox.show_timeout("(It's stares at you with a grudge... be careful!)", 1.5)
+	DialogBox.show_timeout("It's stares at you with a grudge... be careful!", 1.5)
 	yield(DialogBox, "done")
 	on_voodoo = true
 	emit_signal("end_turn")
