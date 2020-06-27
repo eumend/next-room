@@ -19,10 +19,9 @@ func explode():
 	moving = false
 	animationPlayer.play("Explode")
 
-func check_overlap(zone_area):
-	if overlaps_area(zone_area):
-		emit_signal("hit")
-		explode()
+func on_hit():
+	emit_signal("hit")
+	explode()
 
 
 func _on_AnimationPlayer_animation_finished(_anim_name):

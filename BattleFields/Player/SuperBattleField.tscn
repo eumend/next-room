@@ -5,7 +5,7 @@
 [ext_resource path="res://BattleFields/Player/Utils/PlayerBumper.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 1.15331, 19.9066 )
+extents = Vector2( 1.16539, 20.0974 )
 
 [node name="SuperBattleField" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
