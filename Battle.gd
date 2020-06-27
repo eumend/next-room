@@ -170,7 +170,6 @@ func _on_Player_died():
 	ActionBattle.force_end_of_battle()
 	if BattleUnits.is_player_turn():
 		actionButtons.hide()
-	# TODO: We could show game_over instantly here
 
 func _on_Player_status_changed(status):
 	if status.size() > 0:
@@ -219,7 +218,7 @@ func _on_Enemy_fled():
 
 func start_enemy_turn():
 	var enemy = BattleUnits.Enemy
-	if enemy != null and not enemy.is_queued_for_deletion(): # TODO: Check fi still needed
+	if enemy != null:
 		BattleUnits.set_current_turn(GameConstants.UNITS.ENEMY)
 		enemy.start_turn()
 

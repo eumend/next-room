@@ -13,16 +13,13 @@ onready var doneTimer = $DoneTimer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	# TODO: Some animation?
 	fieldButton.connect("pressed", self, "_on_FieldButton_pressed")
 	doneTimer.connect("timeout", self, "done")
 
 func done():
-	# TODO: Some animation?
 #	print("BF: DONE")
 	emit_signal("done")
-	self.hide()
-#	queue_free()
+	queue_free()
 
 func hit(hit_force = GameConstants.HIT_FORCE.NORMAL):
 #	print("BF: HIT", hit_force)
@@ -49,7 +46,6 @@ func miss():
 	emit_signal("miss")
 
 func _on_FieldButton_pressed():
-	# Field button pressed
 #	print("BF: PRESSED")
 	on_pressed()
 	pass
