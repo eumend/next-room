@@ -14,28 +14,33 @@ const BattleUnits = preload("res://BattleUnits.tres")
 func _ready():
 	var player = BattleUnits.PlayerStats
 	if player:
-		update_hp(player.hp)
-		update_pow(player.power)
-		update_level(player.level)
+		update_hp()
+		update_pow()
+		update_level()
 
-func update_hp(value):
+func update_hp():
 	var player = BattleUnits.PlayerStats
-	hpLabel.text = "HP\n" + str(value) + "/" + str(player.max_hp)
+	hpLabel.text = "HP\n" + str(player.hp) + "/" + str(player.max_hp)
 
-func update_pow(value):
-	powLabel.text = "POW\n" + str(value)
+func update_pow():
+	var player = BattleUnits.PlayerStats
+	powLabel.text = "POW\n" + str(player.power)
 
-func update_level(value):
-	lvLabel.text = "LV\n" + str(value)
+func update_level():
+	var player = BattleUnits.PlayerStats
+	lvLabel.text = "LV\n" + str(player.level)
 
-func _on_PlayerStats_hp_changed(value):
-	update_hp(value)
+func _on_PlayerStats_hp_changed(_value):
+	update_hp()
 
-func _on_PlayerStats_level_changed(value, _old_value):
-	update_level(value)
+func _on_PlayerStats_max_hp_changed(_value):
+	update_hp()
 
-func _on_PlayerStats_power_changed(value):
-	update_pow(value)
+func _on_PlayerStats_level_changed(_value, _old_value):
+	update_level()
+
+func _on_PlayerStats_power_changed(_value):
+	update_pow()
 
 func _on_PlayerStats_status_changed(statuses):
 	if statuses.size() > 0:

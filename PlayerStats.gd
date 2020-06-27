@@ -15,7 +15,7 @@ const level_chart = {
 	11: 260,
 }
 
-export var max_hp = 20
+export var max_hp = 20 setget set_max_hp
 var hp = max_hp setget set_hp
 var exp_points = 0 setget set_exp_points
 var level = 1 setget set_level
@@ -26,6 +26,7 @@ var base_hp = max_hp
 var base_power = power
 
 signal hp_changed(value)
+signal max_hp_changed(value)
 signal power_changed(value)
 signal level_changed(value)
 signal status_changed(value)
@@ -95,6 +96,10 @@ func set_hp(value):
 	if hp == 0:
 		emit_signal("died")
 
+func set_max_hp(value):
+	max_hp = value
+	emit_signal("max_hp_changed", value)
+
 func end_turn():
 	emit_signal("end_turn")
 
@@ -105,23 +110,18 @@ func set_power(value):
 func set_exp_points(value):
 	exp_points = value
 	if leveled_up():
-		level_up(1) # TODO: Find the real next level? Might be multiple levels!
+		level_up(1)
 
 func leveled_up():
 	return level in level_chart and exp_points >= level_chart[level]
 
 func level_up(lv_increase):
-	# get increments, TODO: Make them depend on level?
 	var hp_increase = 2
 	var power_increase = 1
-	
-	# Increase stats
+
 	self.level += lv_increase
 	self.max_hp += hp_increase
 	self.power += power_increase
-	
-	# Heal
-#	self.hp += self.max_hp
 	
 	last_level_up_summary = {
 		"lv": lv_increase,
@@ -143,7 +143,8 @@ func reset_plus():
 	self.power = base_power
 	self.level = 1
 	self.exp_points = 0
-	self.max_hp = 20 # TODO: Once we enable restart+, this should be removed so the player keeps its current max hp
+	self.max_hp = 20
+	self.hp = self.max_hp
 	clear_status()
 
 func reset():
