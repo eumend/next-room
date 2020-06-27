@@ -1,6 +1,6 @@
 extends "res://Enemies/BaseEnemy.gd"
 
-const FireAtackBattleField = preload("res://BattleFields/EnemyBattleFields/GridGeyserBattleField.tscn")
+const FireAtackBattleField = preload("res://BattleFields/Enemy/GridGeyserBattleField.tscn")
 const Explosion = preload("res://Animations/Explosion1Animation.tscn")
 
 var undead = true

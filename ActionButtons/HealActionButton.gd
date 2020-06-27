@@ -1,6 +1,6 @@
 extends "res://ActionButtons/BaseActionButton.gd"
 
-const HealBattleField = preload("res://BattleFields/HealBattleField.tscn")
+const HealBattleField = preload("res://BattleFields/Player/HealBattleField.tscn")
 
 func _on_pressed():
 	var healBattleField = HealBattleField.instance()

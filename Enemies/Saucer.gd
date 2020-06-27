@@ -1,6 +1,6 @@
 extends "res://Enemies/BaseEnemy.gd"
 
-const ShootBossBattleField = preload("res://BattleFields/EnemyBattleFields/ShootBossBattleField.tscn")
+const ShootBossBattleField = preload("res://BattleFields/Enemy/ShootBossBattleField.tscn")
 
 func get_attack_pattern():
 	return {

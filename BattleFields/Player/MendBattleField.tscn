@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://BattleFields/BaseBattleField.tscn" type="PackedScene" id=1]
+[ext_resource path="res://BattleFields/Player/MendBattleField.gd" type="Script" id=2]
+[ext_resource path="res://BattleFields/Player/Utils/PlayerBumperH.tscn" type="PackedScene" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 2.12073, 10 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 35.3162, 1.03909 )
+
+[node name="MendBattleField" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Player" parent="Field" index="0" instance=ExtResource( 3 )]
+
+[node name="BorderL" type="Area2D" parent="Field" index="1"]
+position = Vector2( -1, 49 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Field/BorderL" index="0"]
+shape = SubResource( 1 )
+
+[node name="BorderR" type="Area2D" parent="Field" index="2"]
+position = Vector2( 73, 49 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Field/BorderR" index="0"]
+shape = SubResource( 1 )
+
+[node name="BorderB" type="Area2D" parent="Field" index="3"]
+position = Vector2( 36, 60 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Field/BorderB" index="0"]
+shape = SubResource( 2 )
+
+[node name="BulletTimer" type="Timer" parent="Field" index="4"]
+one_shot = true
+
+[node name="DoneTimer" type="Timer" parent="Field" index="5"]
+one_shot = true
+[connection signal="area_entered" from="Field/BorderL" to="." method="_on_BorderL_area_entered"]
+[connection signal="area_entered" from="Field/BorderR" to="." method="_on_BorderR_area_entered"]
+[connection signal="area_entered" from="Field/BorderB" to="." method="_on_BorderB_area_entered"]

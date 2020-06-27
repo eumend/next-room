@@ -1,6 +1,6 @@
 extends "res://Enemies/BaseEnemy.gd"
 
-const BulletsDownBattleField = preload("res://BattleFields/EnemyBattleFields/BulletsDownBattleField.tscn")
+const BulletsDownBattleField = preload("res://BattleFields/Enemy/BulletsDownBattleField.tscn")
 const noteSprite = preload("res://Images/Aux/NoteBullet.png")
 
 func get_attack_pattern():

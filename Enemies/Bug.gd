@@ -1,6 +1,6 @@
 extends "res://Enemies/BaseEnemy.gd"
 
-const ShootEmUpBattleField = preload("res://BattleFields/EnemyBattleFields/ShootEmUpBattleField.tscn")
+const ShootEmUpBattleField = preload("res://BattleFields/Enemy/ShootEmUpBattleField.tscn")
 export var min_bullets = 3
 export var max_bullets = 5
 

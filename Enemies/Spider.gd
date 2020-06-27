@@ -1,6 +1,6 @@
 extends "res://Enemies/BaseEnemy.gd"
 
-const RouletteBattleField = preload("res://BattleFields/EnemyBattleFields/RouletteBattleField.tscn")
+const RouletteBattleField = preload("res://BattleFields/Enemy/RouletteBattleField.tscn")
 const HitSprite = preload("res://Images/Roulette/Hit1.png")
 const PoisonHitSprite = preload("res://Images/Roulette/HitPoison.png")
 const WinSprite = preload("res://Images/Roulette/Win.png")

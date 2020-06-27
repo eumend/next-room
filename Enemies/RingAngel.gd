@@ -1,6 +1,6 @@
 extends "res://Enemies/BaseEnemy.gd"
 
-const FalldownBattleField = preload("res://BattleFields/EnemyBattleFields/FalldownBattleField.tscn")
+const FalldownBattleField = preload("res://BattleFields/Enemy/FalldownBattleField.tscn")
 export(float) var bullet_interval = 1
 export(int) var wall_interval = 6
 export(int) var total_time = 10

@@ -1,7 +1,7 @@
 extends "res://ActionButtons/BaseActionButton.gd"
 
 const Slash = preload("res://Animations/Slash.tscn")
-const SingleHitBattleField = preload("res://BattleFields/SingleHitBattleField.tscn")
+const SingleHitBattleField = preload("res://BattleFields/Player/SingleHitBattleField.tscn")
 
 var battlefield_done = false
 

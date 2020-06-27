@@ -1,0 +1,162 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://BattleFields/BaseBattleField.tscn" type="PackedScene" id=1]
+[ext_resource path="res://BattleFields/Enemy/SpinesBattleField.gd" type="Script" id=2]
+[ext_resource path="res://Images/Player.png" type="Texture" id=3]
+[ext_resource path="res://BattleFields/Enemy/Utils/Spike.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Images/ShieldEffect.png" type="Texture" id=5]
+[ext_resource path="res://Music/SFX/shield_1.wav" type="AudioStream" id=6]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 4.91491, 4.91881 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 5 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 5 )
+region = Rect2( 32, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 5 )
+region = Rect2( 48, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 5 )
+region = Rect2( 64, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 5 )
+region = Rect2( 80, 0, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=8]
+animations = [ {
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
+"loop": true,
+"name": "Shield",
+"speed": 18.0
+} ]
+
+[sub_resource type="Animation" id=9]
+resource_name = "ShakePlayer"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -3, 0 ), Vector2( 3, 0 ), Vector2( -3, 0 ), Vector2( 3, 0 ), Vector2( 0, 0 ) ]
+}
+
+[node name="SpinesBattleField" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Player" type="Area2D" parent="Field" index="0"]
+position = Vector2( 36, 30 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Field/Player" index="0"]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="Field/Player" index="1"]
+texture = ExtResource( 3 )
+
+[node name="ShieldAnimation" type="AnimatedSprite" parent="Field/Player" index="2"]
+visible = false
+frames = SubResource( 8 )
+animation = "Shield"
+frame = 5
+playing = true
+
+[node name="PlayerAnimationPlayer" type="AnimationPlayer" parent="Field/Player" index="3"]
+anims/ShakePlayer = SubResource( 9 )
+
+[node name="TSpike" parent="Field" index="1" instance=ExtResource( 4 )]
+position = Vector2( 36, -1 )
+rotation = 3.14159
+
+[node name="TRSpike" parent="Field" index="2" instance=ExtResource( 4 )]
+position = Vector2( 69, 1 )
+rotation = 3.92699
+
+[node name="ColorRect" parent="Field/TRSpike/Spike" index="0"]
+self_modulate = Color( 0.898039, 0.898039, 0.898039, 1 )
+
+[node name="RSpike" parent="Field" index="3" instance=ExtResource( 4 )]
+position = Vector2( 71, 30 )
+rotation = 4.71239
+
+[node name="ColorRect" parent="Field/RSpike/Spike" index="0"]
+self_modulate = Color( 0.85098, 0, 0, 1 )
+
+[node name="BRSpike" parent="Field" index="4" instance=ExtResource( 4 )]
+position = Vector2( 70, 60 )
+rotation = 5.49779
+
+[node name="ColorRect" parent="Field/BRSpike/Spike" index="0"]
+self_modulate = Color( 0.882353, 0.623529, 0, 1 )
+
+[node name="BSpike" parent="Field" index="5" instance=ExtResource( 4 )]
+position = Vector2( 37, 67 )
+
+[node name="ColorRect" parent="Field/BSpike/Spike" index="0"]
+self_modulate = Color( 0.027451, 0.345098, 0.823529, 1 )
+
+[node name="BLSpike" parent="Field" index="6" instance=ExtResource( 4 )]
+position = Vector2( 3, 59 )
+rotation = 0.785398
+
+[node name="ColorRect" parent="Field/BLSpike/Spike" index="0"]
+self_modulate = Color( 0.705882, 0, 1, 1 )
+
+[node name="LSpike" parent="Field" index="7" instance=ExtResource( 4 )]
+self_modulate = Color( 0, 0.192157, 0, 1 )
+position = Vector2( -1, 31 )
+rotation = 1.5708
+
+[node name="ColorRect" parent="Field/LSpike/Spike" index="0"]
+self_modulate = Color( 0.352941, 1, 0, 1 )
+
+[node name="TLSpike" parent="Field" index="8" instance=ExtResource( 4 )]
+position = Vector2( 2, 0 )
+rotation = 2.35619
+
+[node name="ColorRect" parent="Field/TLSpike/Spike" index="0"]
+self_modulate = Color( 0.67451, 0.67451, 0.67451, 1 )
+
+[node name="SpikeTimer" type="Timer" parent="Field" index="9"]
+
+[node name="CooldownTimer" type="Timer" parent="Field" index="10"]
+wait_time = 0.5
+
+[node name="ShieldTimer" type="Timer" parent="Field" index="11"]
+wait_time = 0.3
+
+[node name="SFXShield" type="AudioStreamPlayer" parent="." index="4"]
+stream = ExtResource( 6 )
+volume_db = 10.0
+
+[editable path="Field/TSpike"]
+
+[editable path="Field/TRSpike"]
+
+[editable path="Field/RSpike"]
+
+[editable path="Field/BRSpike"]
+
+[editable path="Field/BSpike"]
+
+[editable path="Field/BLSpike"]
+
+[editable path="Field/LSpike"]
+
+[editable path="Field/TLSpike"]

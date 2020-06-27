@@ -1,0 +1,72 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://BattleFields/BaseBattleField.tscn" type="PackedScene" id=1]
+[ext_resource path="res://BattleFields/Enemy/ShootEmUpBattleField.gd" type="Script" id=2]
+[ext_resource path="res://BattleFields/Enemy/Utils/LaserShooter.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Images/ShootEmUp/shoot_up_over.png" type="Texture" id=4]
+[ext_resource path="res://Images/ShootEmUp/shoot_up_shots_progress.png" type="Texture" id=5]
+[ext_resource path="res://Music/SFX/laser_1.wav" type="AudioStream" id=6]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 1.09912, 34.0908 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 1.09913, 30.5344 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 37.7525, 1.13723 )
+
+[node name="ShootEmUpBattleField" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Shooter" parent="Field" index="0" instance=ExtResource( 3 )]
+position = Vector2( 36, 59 )
+
+[node name="BorderL" type="Area2D" parent="Field" index="1"]
+position = Vector2( 0, 31 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Field/BorderL" index="0"]
+shape = SubResource( 1 )
+
+[node name="BorderR" type="Area2D" parent="Field" index="2"]
+position = Vector2( 72.0974, 29.2111 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Field/BorderR" index="0"]
+shape = SubResource( 2 )
+
+[node name="BorderB" type="Area2D" parent="Field" index="3"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Field/BorderB" index="0"]
+position = Vector2( 35.8161, 60.0967 )
+shape = SubResource( 3 )
+
+[node name="BorderT" type="Area2D" parent="Field" index="4"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Field/BorderT" index="0"]
+position = Vector2( 36.0952, 0 )
+shape = SubResource( 3 )
+
+[node name="BulletTimer" type="Timer" parent="Field" index="5"]
+wait_time = 0.3
+
+[node name="ShotsLeftBar" type="TextureProgress" parent="Field" index="6"]
+margin_left = 49.0
+margin_top = 3.0
+margin_right = 69.0
+margin_bottom = 10.0
+max_value = 4.0
+value = 2.0
+texture_over = ExtResource( 4 )
+texture_progress = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Mask" parent="." index="2"]
+position = Vector2( 35.907, 7 )
+
+[node name="DoneTimer" parent="." index="3"]
+wait_time = 0.5
+
+[node name="SFXLaser" type="AudioStreamPlayer" parent="." index="4"]
+stream = ExtResource( 6 )

@@ -1,6 +1,6 @@
 extends "res://Enemies/BaseEnemy.gd"
 
-const SpinesBattleField = preload("res://BattleFields/EnemyBattleFields/SpinesBattleField.tscn")
+const SpinesBattleField = preload("res://BattleFields/Enemy/SpinesBattleField.tscn")
 
 func get_attack_pattern():
 	return {

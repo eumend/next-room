@@ -57,7 +57,7 @@ func animate_explosion():
 
 # Ancient Sword
 
-const JanKenBattleField = preload("res://BattleFields/EnemyBattleFields/JankenBattleField.tscn")
+const JanKenBattleField = preload("res://BattleFields/Enemy/JankenBattleField.tscn")
 
 func sword_janken_attack():
 	DialogBox.show_timeout("Janken... but how?", 1)
@@ -93,7 +93,7 @@ func _on_jankenBattleField_done():
 
 ### Sea Horse
 
-const BulletsDownBattleField = preload("res://BattleFields/EnemyBattleFields/BulletsDownBattleField.tscn")
+const BulletsDownBattleField = preload("res://BattleFields/Enemy/BulletsDownBattleField.tscn")
 
 func seahorse_ink_attack():
 	DialogBox.show_timeout("It's shooting ink!", 1)
@@ -113,7 +113,7 @@ func on_bulletsDownBattleField_done():
 
 # Spider
 
-const RouletteBattleField = preload("res://BattleFields/EnemyBattleFields/RouletteBattleField.tscn")
+const RouletteBattleField = preload("res://BattleFields/Enemy/RouletteBattleField.tscn")
 const HitSprite = preload("res://Images/Roulette/Hit1.png")
 const PoisonHitSprite = preload("res://Images/Roulette/HitPoison.png")
 const WinSprite = preload("res://Images/Roulette/Win.png")
@@ -221,7 +221,7 @@ func deal_damage(hit_force = null, _fixed_amount = null):
 
 ## Worm
 
-const ShootEmUpBattleField = preload("res://BattleFields/EnemyBattleFields/ShootEmUpBattleField.tscn")
+const ShootEmUpBattleField = preload("res://BattleFields/Enemy/ShootEmUpBattleField.tscn")
 
 func worm_attack():
 	DialogBox.show_timeout("It's sending projectiles!", 1)
@@ -250,7 +250,7 @@ func on_shootEmUpBattleField_done():
 
 # Feather Angel
 
-const FalldownBattleField = preload("res://BattleFields/EnemyBattleFields/FalldownBattleField.tscn")
+const FalldownBattleField = preload("res://BattleFields/Enemy/FalldownBattleField.tscn")
 
 func feather_angel_attack():
 	DialogBox.show_timeout("The earth is shaking!", 1)

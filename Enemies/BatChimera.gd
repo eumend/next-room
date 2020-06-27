@@ -32,7 +32,7 @@ func leech_life():
 
 # Skull
 
-const FireAtackBattleField = preload("res://BattleFields/EnemyBattleFields/GridGeyserBattleField.tscn")
+const FireAtackBattleField = preload("res://BattleFields/Enemy/GridGeyserBattleField.tscn")
 
 var undead = true
 
@@ -63,7 +63,7 @@ func is_dead():
 
 # Ancient Shield
 
-const JanKenBattleField = preload("res://BattleFields/EnemyBattleFields/JankenBattleField.tscn")
+const JanKenBattleField = preload("res://BattleFields/Enemy/JankenBattleField.tscn")
 
 func shield_attack():
 	DialogBox.show_timeout("Janken again?", 1)
@@ -98,7 +98,7 @@ func _on_jankenBattleField_done():
 
 # Mermaid
 
-const BulletsDownBattleField = preload("res://BattleFields/EnemyBattleFields/BulletsDownBattleField.tscn")
+const BulletsDownBattleField = preload("res://BattleFields/Enemy/BulletsDownBattleField.tscn")
 const noteSprite = preload("res://Images/Aux/NoteBullet.png")
 
 func mermaid_attack():
@@ -127,7 +127,7 @@ func on_bulletsDownBattleField_done():
 
 # Spectre
 
-const RouletteBattleField = preload("res://BattleFields/EnemyBattleFields/RouletteBattleField.tscn")
+const RouletteBattleField = preload("res://BattleFields/Enemy/RouletteBattleField.tscn")
 const HitSprite = preload("res://Images/Roulette/Hit1.png")
 const HitDoubleSprite = preload("res://Images/Roulette/Hit2.png")
 const HitTripleSprite = preload("res://Images/Roulette/Hit3.png")
@@ -245,7 +245,7 @@ func deal_damage(hit_force = null, _fixed_amount= null):
 
 # Bug
 
-const ShootEmUpBattleField = preload("res://BattleFields/EnemyBattleFields/ShootEmUpBattleField.tscn")
+const ShootEmUpBattleField = preload("res://BattleFields/Enemy/ShootEmUpBattleField.tscn")
 
 func bug_attack():
 	DialogBox.show_timeout("Shoot carefully!", 1)
@@ -276,7 +276,7 @@ func on_shootEmUpBattleField_done():
 
 # Ring Angel
 
-const FalldownBattleField = preload("res://BattleFields/EnemyBattleFields/FalldownBattleField.tscn")
+const FalldownBattleField = preload("res://BattleFields/Enemy/FalldownBattleField.tscn")
 
 func ring_angel_attack():
 	DialogBox.show_timeout("The sky is falling!?", 1)

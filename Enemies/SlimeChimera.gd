@@ -62,7 +62,7 @@ func candle_attack():
 
 # Ancient tome
 
-const JanKenBattleField = preload("res://BattleFields/EnemyBattleFields/JankenBattleField.tscn")
+const JanKenBattleField = preload("res://BattleFields/Enemy/JankenBattleField.tscn")
 
 func tome_attack():
 	DialogBox.show_timeout("Janken again!", 1)
@@ -125,7 +125,7 @@ func take_damage(amount, hit_force = null):
 
 # Saucer
 
-const ShootBossBattleField = preload("res://BattleFields/EnemyBattleFields/ShootBossBattleField.tscn")
+const ShootBossBattleField = preload("res://BattleFields/Enemy/ShootBossBattleField.tscn")
 
 func saucer_attack():
 	DialogBox.show_timeout("Shoot it down!", 1)
@@ -149,7 +149,7 @@ func on_shootBossBattleField_done():
 
 # Face Angel
 
-const FalldownBattleField = preload("res://BattleFields/EnemyBattleFields/FalldownBattleField.tscn")
+const FalldownBattleField = preload("res://BattleFields/Enemy/FalldownBattleField.tscn")
 
 func face_angel_battle_field():
 	DialogBox.show_timeout("The earth and sky are trembling!", 1)

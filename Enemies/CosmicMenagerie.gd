@@ -1,7 +1,7 @@
 extends "res://Enemies/BaseEnemy.gd"
 
-const ShootBossBattleField = preload("res://BattleFields/EnemyBattleFields/ShootBossBattleField.tscn")
-const ShootEmUpBattleField = preload("res://BattleFields/EnemyBattleFields/ShootEmUpBattleField.tscn")
+const ShootBossBattleField = preload("res://BattleFields/Enemy/ShootBossBattleField.tscn")
+const ShootEmUpBattleField = preload("res://BattleFields/Enemy/ShootEmUpBattleField.tscn")
 const BossSprite = preload("res://Images/ShootEmUp/ufo_2.png")
 
 export var min_bullets = 3

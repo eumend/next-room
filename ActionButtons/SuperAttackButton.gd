@@ -1,7 +1,7 @@
 extends "res://ActionButtons/BaseActionButton.gd"
 
 const Slash = preload("res://Animations/Slash.tscn")
-const SuperBattleField = preload("res://BattleFields/SuperBattleField.tscn")
+const SuperBattleField = preload("res://BattleFields/Player/SuperBattleField.tscn")
 
 func _on_pressed():
 	var superBattleField = SuperBattleField.instance()
