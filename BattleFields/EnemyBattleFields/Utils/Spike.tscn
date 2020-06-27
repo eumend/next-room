@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://BattleFields/EnemyBattleFields/Utils/Spike.gd" type="Script" id=1]
 [ext_resource path="res://Images/Aux/Spike.png" type="Texture" id=2]
+[ext_resource path="res://Music/SFX/crack_1.wav" type="AudioStream" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 2.10054, 20.0806 )
@@ -71,3 +72,6 @@ shape = SubResource( 1 )
 anims/Default = SubResource( 2 )
 anims/Peek = SubResource( 3 )
 anims/Shoot = SubResource( 4 )
+
+[node name="SFXCrack" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )

@@ -10,7 +10,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1.98877, 2.25034 )
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=2]
 resource_name = "Hit"
 length = 0.5
 step = 0.05
@@ -54,7 +54,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 1.14906, 29.2385 )
 
 [node name="FalldownBattleField" instance=ExtResource( 1 )]
@@ -79,7 +79,7 @@ shape = SubResource( 1 )
 texture = ExtResource( 6 )
 
 [node name="playerAnimation" type="AnimationPlayer" parent="Field/Player" index="2"]
-anims/Hit = SubResource( 4 )
+anims/Hit = SubResource( 2 )
 anims/None = SubResource( 3 )
 
 [node name="BFCeiling" parent="Field" index="1" instance=ExtResource( 3 )]
@@ -97,14 +97,14 @@ position = Vector2( 0, 30 )
 collision_layer = 2048
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Field/BFLeft" index="0"]
-shape = SubResource( 2 )
+shape = SubResource( 4 )
 
 [node name="BFRight" type="StaticBody2D" parent="Field" index="4"]
 position = Vector2( 72, 30 )
 collision_layer = 2048
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Field/BFRight" index="0"]
-shape = SubResource( 2 )
+shape = SubResource( 4 )
 
 [node name="CloseInTimer" type="Timer" parent="Field" index="5"]
 wait_time = 3.0

@@ -18,6 +18,7 @@ func on_animationPlayer_animation_finished(anim_name):
 
 func shoot():
 	shooting = true
+	$SFXCrack.play()
 	animationPlayer.play("Peek")
 	
 func on_hit_animation():

@@ -10,7 +10,7 @@ max_hp = 108
 power = 9
 exp_points = 10
 is_boss = true
-entry_text = "The Cosmic Menagerie dives down!"
+entry_text = "The Mothership dives down!"
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )

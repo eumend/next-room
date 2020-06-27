@@ -39,7 +39,7 @@ animations = [ {
 "frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
 "loop": true,
 "name": "Shield",
-"speed": 12.0
+"speed": 18.0
 } ]
 
 [sub_resource type="Animation" id=9]
@@ -74,7 +74,7 @@ texture = ExtResource( 3 )
 visible = false
 frames = SubResource( 8 )
 animation = "Shield"
-frame = 3
+frame = 5
 playing = true
 
 [node name="PlayerAnimationPlayer" type="AnimationPlayer" parent="Field/Player" index="3"]
@@ -139,7 +139,7 @@ self_modulate = Color( 0.67451, 0.67451, 0.67451, 1 )
 wait_time = 0.5
 
 [node name="ShieldTimer" type="Timer" parent="Field" index="11"]
-wait_time = 0.5
+wait_time = 0.3
 
 [node name="SFXShield" type="AudioStreamPlayer" parent="." index="4"]
 stream = ExtResource( 6 )

@@ -72,8 +72,9 @@ func on_bossBullet_hit(target, bullet):
 			bullet.direction = Vector2(bullet.direction.x, bullet.direction.y * -1)
 			return
 		"Laser":
-			bullet.take_hit()
-			emit_signal("boss_hit")
+			if bullet.hp > 0:
+				bullet.take_hit()
+				emit_signal("boss_hit")
 			return
 
 func on_bossBullet_hp_changed(hp):
