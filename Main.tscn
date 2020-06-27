@@ -118,11 +118,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="L1" type="Label" parent="UI/CreditsContainer/C1"]
-margin_right = 70.0
-margin_bottom = 12.0
-text = "By RockCandy"
-
 [node name="L2" type="Label" parent="UI/CreditsContainer/C1"]
 margin_top = 16.0
 margin_right = 70.0
@@ -156,17 +151,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="L2" type="Label" parent="UI/CreditsContainer/C2"]
+margin_top = -1.0
+margin_right = 70.0
+margin_bottom = 11.0
+text = "By RockCandy"
+
 [node name="L1" type="Label" parent="UI/CreditsContainer/C2"]
 margin_right = 70.0
 margin_bottom = 33.0
 text = "Made in Ubuntu using the Godot Engine, LMMS and GIMP."
-autowrap = true
-
-[node name="L2" type="Label" parent="UI/CreditsContainer/C2"]
-margin_top = 37.0
-margin_right = 70.0
-margin_bottom = 77.0
-text = "You can get the source code at https://github.com/eumend/next-room"
 autowrap = true
 
 [node name="Back" type="Button" parent="UI/CreditsContainer/C2"]
