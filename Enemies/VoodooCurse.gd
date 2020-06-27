@@ -156,7 +156,6 @@ const secondary_attack_roulettes = [
 ]
 
 var on_voodoo = false
-var hit_while_voodoo = false
 var current_roulette_index = 0
 var selected_index = 0
 var selections = []
@@ -182,9 +181,7 @@ func get_attack_pattern():
 		}
 
 func on_start_turn():
-	if hit_while_voodoo:
-		on_voodoo = false
-		hit_while_voodoo = false
+	on_voodoo = false
 	.on_start_turn()
 
 func voodoo_atack():
@@ -198,7 +195,6 @@ func take_damage(amount, hit_force = null):
 		var playerStats = BattleUnits.PlayerStats
 		if playerStats:
 			playerStats.take_damage(amount, hit_force)
-			hit_while_voodoo = true
 	.take_damage(amount, hit_force)
 
 func triple_hit_roulette_attack():
