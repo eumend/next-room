@@ -5,7 +5,6 @@
 [ext_resource path="res://Images/BattleFields/Player.png" type="Texture" id=3]
 [ext_resource path="res://Music/SFX/laser_1.wav" type="AudioStream" id=4]
 
-
 [sub_resource type="CircleShape2D" id=1]
 radius = 5.52525
 
@@ -30,7 +29,7 @@ shape = SubResource( 1 )
 position = Vector2( 36, 62 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Field/Bottom" index="0"]
-position = Vector2( 0, 6 )
+position = Vector2( 0, 8 )
 shape = SubResource( 2 )
 
 [node name="FireBulletTimer" type="Timer" parent="." index="4"]
