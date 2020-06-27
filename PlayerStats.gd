@@ -121,6 +121,7 @@ func level_up(lv_increase):
 
 	self.level += lv_increase
 	self.max_hp += hp_increase
+	self.hp += hp_increase
 	self.power += power_increase
 	
 	last_level_up_summary = {
