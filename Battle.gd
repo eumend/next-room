@@ -136,7 +136,7 @@ var Levels = {
 
 func _ready():
 	$BGPlayer.play()
-#	skip_to_level(5, 99) # Debugging
+#	skip_to_level(8, 15) # Debugging
 	update_level_layout()
 	create_player()
 	start_battle()
@@ -274,7 +274,7 @@ func handle_enemy_death_eot(enemy):
 func end_battle(enemy):
 	# Battle over cleanup
 	reset_player_status()
-	if enemy.is_boss:
+	if enemy.is_boss or playerScore.current_level == 8:
 		# Save current progress
 		playerScore.save()
 		var playerStats = BattleUnits.PlayerStats
@@ -397,7 +397,8 @@ func _on_ContinueButton_pressed():
 	if enemy:
 		BattleUnits.Enemy = null
 		enemy.queue_free()
-	playerScore.kill_streak = 0
+	if playerScore.current_level != 8:
+		playerScore.kill_streak = 0
 	playerScore.continues_taken += 1
 	update_level_layout()
 	yield(get_tree().create_timer(0.3), "timeout")
