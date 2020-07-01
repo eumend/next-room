@@ -109,9 +109,9 @@ rect_min_size = Vector2( 90, 0 )
 [node name="C1" type="VBoxContainer" parent="UI/CreditsContainer"]
 visible = false
 margin_left = 10.0
-margin_top = -53.0
+margin_top = -45.0
 margin_right = 80.0
-margin_bottom = 52.0
+margin_bottom = 44.0
 rect_min_size = Vector2( 70, 0 )
 size_flags_horizontal = 2
 __meta__ = {
@@ -142,9 +142,9 @@ text = "Next"
 [node name="C2" type="VBoxContainer" parent="UI/CreditsContainer"]
 visible = false
 margin_left = 10.0
-margin_top = -52.0
+margin_top = -34.0
 margin_right = 80.0
-margin_bottom = 51.0
+margin_bottom = 34.0
 rect_min_size = Vector2( 70, 0 )
 size_flags_horizontal = 2
 __meta__ = {
