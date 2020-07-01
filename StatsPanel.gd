@@ -52,6 +52,12 @@ func _on_PlayerStats_status_changed(statuses):
 		lvLabel.show()
 		display_status(statuses)
 
+func _on_PlayerStats_status_healed(statuses):
+	_on_PlayerStats_status_changed(statuses)
+	var numberAnimation = NumberAnimation.instance()
+	lvLabel.add_child(numberAnimation)
+	numberAnimation.play_heal(null, "+++")
+
 func display_status(statuses):
 	if statuses.size() > 0:
 		var last_status = statuses.back()

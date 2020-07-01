@@ -33,6 +33,7 @@ signal max_hp_changed(value)
 signal power_changed(value)
 signal level_changed(value)
 signal status_changed(value)
+signal status_healed(value)
 signal took_damage(value)
 signal heal_damage(value)
 signal died
@@ -65,7 +66,7 @@ func clear_status():
 func heal_status():
 	if player_statuses.has(GameConstants.STATUS.POISON):
 		player_statuses.erase(GameConstants.STATUS.POISON)
-		emit_signal("status_changed", player_statuses)
+	emit_signal("status_healed", player_statuses)
 
 func clear_buffs():
 	if player_statuses.has(GameConstants.STATUS.SHIELDED):

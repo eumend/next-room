@@ -43,7 +43,7 @@ func _fire_bullet():
 	var new_bullet = Bullet.instance()
 	new_bullet.position = Vector2(rand_range(min_starting_x, max_starting_x), bullet_starting_y)
 	new_bullet.speed = get_bullet_speed()
-	if fired_bullets == total_bullets: # Last bullet
+	if is_special(fired_bullets):
 		new_bullet.color = "00ffed" # Blue
 	add_child(new_bullet)
 	new_bullet.connect("hit", self, "on_Bullet_hit")
@@ -51,7 +51,7 @@ func _fire_bullet():
 func on_Bullet_hit(target, bullet):
 	bullets_that_hit += 1
 	if target.name == "Player":
-		if bullets_that_hit == total_bullets:
+		if is_special(bullets_that_hit):
 			heal(GameConstants.HIT_FORCE.CRIT)
 			heal_status()
 		else:
@@ -63,6 +63,9 @@ func on_Bullet_hit(target, bullet):
 		miss()
 	if bullets_that_hit == total_bullets:
 		doneTimer.start()
+
+func is_special(bullet_count):
+	return bullet_count == total_bullets or bullet_count == ceil(total_bullets / 2)
 
 func get_bullet_speed():
 	match(bullets_left):

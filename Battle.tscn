@@ -401,6 +401,7 @@ stream = ExtResource( 23 )
 [connection signal="max_hp_changed" from="PlayerStats" to="UI/StatsPanel" method="_on_PlayerStats_max_hp_changed"]
 [connection signal="power_changed" from="PlayerStats" to="UI/StatsPanel" method="_on_PlayerStats_power_changed"]
 [connection signal="status_changed" from="PlayerStats" to="UI/StatsPanel" method="_on_PlayerStats_status_changed"]
+[connection signal="status_healed" from="PlayerStats" to="UI/StatsPanel" method="_on_PlayerStats_status_healed"]
 [connection signal="took_damage" from="PlayerStats" to="UI/StatsPanel" method="_on_PlayerStats_took_damage"]
 [connection signal="pressed" from="UI/OverworldActionButtons/NextRoomButton" to="." method="_on_NextRoomButton_pressed"]
 [connection signal="pressed" from="UI/OverworldActionButtons/RestartButton" to="." method="_on_RestartButton_pressed"]
