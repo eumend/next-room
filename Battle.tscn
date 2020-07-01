@@ -312,9 +312,9 @@ __meta__ = {
 
 [node name="NextRoomButton" type="Button" parent="UI/OverworldActionButtons"]
 visible = false
-margin_top = 7.0
-margin_right = 72.0
-margin_bottom = 20.0
+margin_top = 24.0
+margin_right = 77.0
+margin_bottom = 37.0
 rect_min_size = Vector2( 70, 13 )
 text = "NEXT ROOM"
 

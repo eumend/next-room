@@ -136,7 +136,7 @@ var Levels = {
 
 func _ready():
 	$BGPlayer.play()
-#	skip_to_level(8, 15) # Debugging
+#	skip_to_level(8, 99) # Debugging
 	update_level_layout()
 	create_player()
 	start_battle()
@@ -256,7 +256,7 @@ func eot_checks():
 
 func handle_boss_death_eot(enemy):
 	playerScore.current_level += 1
-	nextRoomButton.text = "NEXT FLOOR"
+	nextRoomButton.text = "SAVE"
 	if playerScore.current_level in Levels:
 		handle_enemy_death_eot(enemy)
 	else:
@@ -289,6 +289,8 @@ func end_battle(enemy):
 		nextRoomButton.text = "BOSS BATTLE"
 	elif boss_battle_is_next:
 		nextRoomButton.text = "YOU ARE CLOSE..."
+	elif playerScore.current_level == 8:
+		nextRoomButton.text = "SAVE"
 	nextRoomButton.show()
 	
 
