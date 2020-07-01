@@ -31,6 +31,14 @@ var hit_force_pattern = {
 	GameConstants.HIT_FORCE.CRIT: 10,
 }
 
+const ENEMY_DIALOGS = GameConstants.ENEMY_DIALOGS
+
+var dialog_lengths = {
+	ENEMY_DIALOGS.SHORT: 1.5,
+	ENEMY_DIALOGS.MEDIUM: 2,
+	ENEMY_DIALOGS.LONG: 3,
+}
+
 var selected_attack = null # Used when calling an attack during an animation
 
 func start_turn():
@@ -161,7 +169,11 @@ func _ready():
 	on_start_of_battle()
 
 func on_start_of_battle():
-	DialogBox.show_timeout(entry_text, 2)
+	DialogBox.show_timeout(entry_text, 2.5)
+
+func show_attack_text(text, l = ENEMY_DIALOGS.SHORT):
+	DialogBox.show_timeout(text, dialog_lengths[l], true)
+	return DialogBox
 
 func on_attack_animation_finished(_animation_name):
 	pass
