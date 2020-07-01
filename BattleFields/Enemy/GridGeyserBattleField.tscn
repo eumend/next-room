@@ -6,45 +6,47 @@
 [ext_resource path="res://Images/BattleFields/Player.png" type="Texture" id=4]
 [ext_resource path="res://Music/SFX/erupt_1.wav" type="AudioStream" id=5]
 
-
 [node name="GridGeyserBattleField" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
 [node name="Grid" type="GridContainer" parent="Field" index="0"]
+light_mask = 16385
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 72.0
-margin_bottom = 60.0
+margin_right = 73.0
+margin_bottom = 61.0
+custom_constants/vseparation = -1
+custom_constants/hseparation = -1
 columns = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="TL" type="Button" parent="Field/Grid" index="0"]
-margin_right = 34.0
-margin_bottom = 28.0
+margin_right = 37.0
+margin_bottom = 31.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="TR" type="Button" parent="Field/Grid" index="1"]
-margin_left = 38.0
-margin_right = 72.0
-margin_bottom = 28.0
+margin_left = 36.0
+margin_right = 73.0
+margin_bottom = 31.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="BL" type="Button" parent="Field/Grid" index="2"]
-margin_top = 32.0
-margin_right = 34.0
-margin_bottom = 60.0
+margin_top = 30.0
+margin_right = 37.0
+margin_bottom = 61.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="BR" type="Button" parent="Field/Grid" index="3"]
-margin_left = 38.0
-margin_top = 32.0
-margin_right = 72.0
-margin_bottom = 60.0
+margin_left = 36.0
+margin_top = 30.0
+margin_right = 73.0
+margin_bottom = 61.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -55,9 +57,12 @@ visible = false
 
 [node name="Player" type="Node2D" parent="Field" index="3"]
 visible = false
+z_index = 1
 
 [node name="Sprite" type="Sprite" parent="Field/Player" index="0"]
 texture = ExtResource( 4 )
+
+[node name="Movement" type="Sprite" parent="Field/Player" index="1"]
 
 [node name="SFXErupt" type="AudioStreamPlayer" parent="." index="3"]
 stream = ExtResource( 5 )
@@ -65,6 +70,11 @@ stream = ExtResource( 5 )
 [node name="SpawnGeyserTimer" type="Timer" parent="." index="4"]
 wait_time = 1.1
 one_shot = true
+
+[node name="StartTimer" type="Timer" parent="." index="6"]
+wait_time = 0.5
+one_shot = true
+autostart = true
 [connection signal="pressed" from="Field/Grid/TL" to="." method="_on_TL_pressed"]
 [connection signal="pressed" from="Field/Grid/TR" to="." method="_on_TR_pressed"]
 [connection signal="pressed" from="Field/Grid/BL" to="." method="_on_BL_pressed"]

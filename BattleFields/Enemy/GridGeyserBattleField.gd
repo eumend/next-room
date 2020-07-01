@@ -4,12 +4,12 @@ const GeyserAnimation = preload("res://Animations/GeyserAnimation.tscn")
 
 enum POSITIONS{TL, TR, BL, BR}
 enum FIRING_STATUS{IDLE, ERUPTING, FIRING}
-# w =72, h = 60
+
 var player_coords = {
-	POSITIONS.TL: Vector2(18, 15),
-	POSITIONS.TR: Vector2(54, 15),
-	POSITIONS.BL: Vector2(18, 45),
-	POSITIONS.BR: Vector2(54, 45),
+	POSITIONS.TL: Vector2(17, 14),
+	POSITIONS.TR: Vector2(55, 16),
+	POSITIONS.BL: Vector2(17, 46),
+	POSITIONS.BR: Vector2(55, 46),
 }
 
 var enemy_coords = {
@@ -33,25 +33,37 @@ var firing_status = {
 	POSITIONS.BR: FIRING_STATUS.IDLE,
 }
 
+var movement_sprites = {
+	POSITIONS.TL: preload("res://Images/BattleFields/Geyser/PlayerMovementBR.png"),
+	POSITIONS.TR: preload("res://Images/BattleFields/Geyser/PlayerMovementBL.png"),
+	POSITIONS.BL: preload("res://Images/BattleFields/Geyser/PlayerMovementTR.png"),
+	POSITIONS.BR: preload("res://Images/BattleFields/Geyser/PlayerMovementTL.png"),
+}
+
 export var geyser_amount = 4
 var geysers_left = geyser_amount
 var geysers_done = 0
 var next_position = null
 
 onready var player = $Field/Player
+onready var playerMovement = $Field/Player/Movement
 onready var spawnGeyserTimer = $SpawnGeyserTimer
+onready var startTimer = $StartTimer
 var current_player_position = null
 
 func _ready():
 	spawnGeyserTimer.connect("timeout", self, "on_spawnGeyserTimer_timeout")
+	startTimer.connect("timeout", self, "on_startTimer_timeout")
 	var starting_position = get_free_position()
 	change_player_position(starting_position)
 	player.show()
-	spawn_geysers(starting_position)
 
 func init(new_amount = 4):
 	geyser_amount = new_amount
 	geysers_left = new_amount
+
+func on_startTimer_timeout():
+	spawn_geysers(current_player_position)
 
 func spawn_geysers(position = null):
 	if position == null:
@@ -102,8 +114,10 @@ func move(position):
 			enemy_hit(GameConstants.HIT_FORCE.NORMAL)
 
 func change_player_position(position):
-		current_player_position = position
-		player.position = player_coords[position]
+	current_player_position = position
+	player.position = player_coords[position]
+	playerMovement.texture = movement_sprites[position]
+		
 
 func _on_TL_pressed():
 	move(POSITIONS.TL)

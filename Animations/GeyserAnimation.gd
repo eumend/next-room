@@ -15,6 +15,7 @@ func _ready():
 	timer.wait_time = time
 	sprite.play("erupt")
 	yield(sprite, "animation_finished")
+	sprite.z_index = 2
 	sprite.play("loop")
 	emit_signal("fired")
 	timer.connect("timeout", self, "on_timeout")
