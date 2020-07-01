@@ -7,16 +7,22 @@ var current_pointer = 1
 onready var pointer1 = $Field/Pointer1
 onready var pointer2 = $Field/Pointer2
 var total_pointers = 2
-var speed = 70
+var speed = 90
+var speed_increase = {
+	1: 0,
+	2: 20
+}
+var paused = false
 
 func _ready():
 	var pointer = get_current_pointer()
 	pointer.show()
 
 func _physics_process(delta):
-	var motion = Vector2(direction, 0)
-	var pointer = get_current_pointer()
-	pointer.position += motion * delta * speed * current_pointer
+	if not paused:
+		var motion = Vector2(direction, 0)
+		var pointer = get_current_pointer()
+		pointer.position += motion * delta * (speed + speed_increase[current_pointer])
 
 func _on_FieldButton_pressed():
 	var overlapping_area_names = []
@@ -37,7 +43,8 @@ func _on_FieldButton_pressed():
 		direction = 1
 		pointer.show()
 	else:
-		done()
+		paused = true
+		doneTimer.start()
 
 func get_current_pointer():
 	if current_pointer == 1:
