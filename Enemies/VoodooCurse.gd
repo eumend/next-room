@@ -283,7 +283,7 @@ func deal_damage(hit_force = null, _fixed_amount = null):
 						surprise_damage -= bufferForPoison
 					.deal_damage(null, surprise_damage)
 				FACES.WIN:
-					.deal_damage(null, damage_amount)
+					.deal_damage(null, 0)
 			
 		else:
 			.deal_damage(hit_force)

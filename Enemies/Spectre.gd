@@ -119,6 +119,6 @@ func deal_damage(hit_force = null, _fixed_amount= null):
 				ROULETTE_FACES.SURPRISE:
 					.deal_damage(null, playerStats.hp - 1)
 				ROULETTE_FACES.WIN:
-					.deal_damage(roulette_hit_force)
+					.deal_damage(null, 0)
 		else:
 			.deal_damage(hit_force)
