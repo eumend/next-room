@@ -109,7 +109,7 @@ var Levels = {
 			"saucer": 15,
 		},
 		"boss": "cosmic_menagerie",
-		"mook_count": 5,
+		"mook_count": 0,
 		"background": preload("res://Images/Dungeons/Dungeon6.png")
 	},
 	7: {
@@ -133,10 +133,12 @@ var Levels = {
 		"background": preload("res://Images/Dungeons/Dungeon8.png")
 	}
 }
+var enemy_encounter_rate = null
+var last_enemy = null
 
 func _ready():
 	$BGPlayer.play()
-#	skip_to_level(8, 99) # Debugging
+	# skip_to_level(1, 10) # Debugging
 	update_level_layout()
 	create_player()
 	start_battle()
@@ -181,6 +183,14 @@ func _on_Player_status_changed(status):
 			_: return
 
 func create_new_enemy():
+	var enemy_name = pick_next_enemy()
+	var enemy = Enemies[enemy_name].instance()
+	enemyStartPosition.add_child(enemy)
+	enemy.connect("end_turn", self, "_on_Enemy_end_turn")
+	enemy.connect("died", self, "_on_Enemy_died")
+	enemy.connect("fled", self, "_on_Enemy_fled")
+
+func pick_next_enemy():
 	var enemy_name = null
 	var level_info = Levels[playerScore.current_level]
 	var is_boss_battle = playerScore.kill_streak == level_info["mook_count"]
@@ -189,12 +199,16 @@ func create_new_enemy():
 	elif playerScore.current_level == 8:
 		enemy_name = ["rat_chimera", "bat_chimera", "slime_chimera"][playerScore.kill_streak]
 	else:
-		enemy_name = Utils.pick_from_weighted(level_info["enemies"])
-	var enemy = Enemies[enemy_name].instance()
-	enemyStartPosition.add_child(enemy)
-	enemy.connect("end_turn", self, "_on_Enemy_end_turn")
-	enemy.connect("died", self, "_on_Enemy_died")
-	enemy.connect("fled", self, "_on_Enemy_fled")
+		var level_enemies = level_info["enemies"]
+		if not enemy_encounter_rate:
+			enemy_encounter_rate = level_enemies
+		if last_enemy in enemy_encounter_rate:
+			enemy_encounter_rate[last_enemy] = enemy_encounter_rate[last_enemy] - 5
+		else:
+			enemy_encounter_rate = level_enemies
+		enemy_name = Utils.pick_from_weighted(enemy_encounter_rate)
+		last_enemy = enemy_name
+	return enemy_name
 
 func _on_Enemy_end_turn():
 	BattleUnits.set_current_turn(null)
@@ -227,7 +241,7 @@ func handle_status_eot():
 	if not player.is_dead():
 		if player.has_status(GameConstants.STATUS.POISON):
 			yield(get_tree().create_timer(0.5), "timeout")
-			DialogBox.show_timeout("Damage by poison!", 1)
+			DialogBox.show_timeout("Damage by poison!", 1.5)
 			player.take_status_damage(round(player.max_hp / 8))
 			yield(DialogBox, "done")
 			emit_signal("_done")
@@ -255,7 +269,10 @@ func eot_checks():
 	return true
 
 func handle_boss_death_eot(enemy):
+	# Reset level vars
 	playerScore.current_level += 1
+	enemy_encounter_rate = null
+	last_enemy = null
 	nextRoomButton.text = "SAVE"
 	if playerScore.current_level in Levels:
 		handle_enemy_death_eot(enemy)
