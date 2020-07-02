@@ -7,7 +7,7 @@ var current_pointer = 1
 onready var pointer1 = $Field/Pointer1
 onready var pointer2 = $Field/Pointer2
 var total_pointers = 2
-var speed = 90
+var speed = 75
 var speed_increase = {
 	1: 0,
 	2: 20
