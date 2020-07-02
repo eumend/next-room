@@ -359,6 +359,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Timer" type="Timer" parent="UI/TextBoxPanel"]
+one_shot = true
+
 [node name="Fade" type="ColorRect" parent="."]
 modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
