@@ -185,7 +185,7 @@ func on_start_turn():
 	.on_start_turn()
 
 func voodoo_atack():
-	var dialog = show_attack_text("It's stares at you with a grudge... be careful!")
+	var dialog = show_attack_text("It stares at you with a grudge... be careful!")
 	yield(dialog, "done")
 	on_voodoo = true
 	emit_signal("end_turn")
