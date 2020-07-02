@@ -6,8 +6,8 @@ onready var bossBullet = $Field/BossBullet
 onready var bossHP = $Field/BossHP
 
 var bullet_pattern = {
-	GameConstants.BOMB_BULLET_TYPES.COOLDOWN: 50,
-	GameConstants.BOMB_BULLET_TYPES.COUNTDOWN: 50,
+	GameConstants.BOMB_BULLET_TYPES.COOLDOWN: 65,
+	GameConstants.BOMB_BULLET_TYPES.COUNTDOWN: 35,
 }
 
 var bullet_time = 2
@@ -51,6 +51,8 @@ func _on_bulletTimer_timeout():
 
 func fire_laser():
 	shooter.fire()
+#	shots_left -= 1
+#	shotsLeft.value -= 1
 
 func start_battlefield():
 	pass

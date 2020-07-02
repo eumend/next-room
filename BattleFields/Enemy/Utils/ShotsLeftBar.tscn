@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Images/BattleFields/ShootEmUp/shoot_up_over.png" type="Texture" id=1]
+[ext_resource path="res://Images/BattleFields/ShootEmUp/shoot_up_shots_progress.png" type="Texture" id=2]
+
+[node name="ShotsLeftBar" type="TextureProgress"]
+margin_left = 49.0
+margin_top = 3.0
+margin_right = 69.0
+margin_bottom = 10.0
+max_value = 4.0
+value = 2.0
+texture_over = ExtResource( 1 )
+texture_progress = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
