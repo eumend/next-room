@@ -9,7 +9,7 @@ script = ExtResource( 2 )
 max_hp = 60
 power = 11
 exp_points = 15
-entry_text = "The Face Angel descends!"
+entry_text = "The Cherubim descends!"
 bullet_interval = 1.5
 wall_interval = 2.5
 

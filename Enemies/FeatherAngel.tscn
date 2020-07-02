@@ -9,7 +9,7 @@ script = ExtResource( 2 )
 max_hp = 65
 power = 10
 exp_points = 12
-entry_text = "The Feather Angel descends!"
+entry_text = "The Seraph descends!"
 bullet_interval = 0.8
 
 [node name="Sprite" parent="." index="0"]
