@@ -9,8 +9,7 @@ func get_attack_pattern():
 	}
 
 func ink_attack():
-	DialogBox.show_timeout("INK ATTACK!", 1)
-	yield(DialogBox, "done")
+	show_attack_text("INK ATTACK!")
 	var battleField = BulletsDownBattleField.instance()
 	battleField.base_speed = 52
 	battleField.total_bullets = 4

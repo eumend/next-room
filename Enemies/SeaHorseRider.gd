@@ -18,14 +18,13 @@ func get_attack_pattern():
 		}
 
 func regenerate_attack():
-	DialogBox.show_timeout("I'M TIRED...", 1)
-	yield(DialogBox, "done")
+	var dialog = show_attack_text("I'M TIRED...")
+	yield(dialog, "done")
 	.heal_damage(round(self.max_hp / 3))
 	emit_signal("end_turn")
 
 func sing_attack():
-	DialogBox.show_timeout("SEA MELODY!", 1)
-	yield(DialogBox, "done")
+	show_attack_text("SEA MELODY!")
 	var battleField = BulletsDownBattleField.instance()
 	battleField.base_speed = 70
 	battleField.total_bullets = 5
@@ -39,10 +38,9 @@ func sing_attack():
 	ActionBattle.start_small_field(battleField)
 
 func ink_attack():
-	DialogBox.show_timeout("INK ATTACK!", 1)
-	yield(DialogBox, "done")
+	show_attack_text("INK ATTACK!")
 	var battleField = BulletsDownBattleField.instance()
-	battleField.base_speed = 60
+	battleField.base_speed = 52
 	battleField.total_bullets = 6
 	battleField.connect("hit", self, "on_BattleField_hit")
 	battleField.connect("done", self, "on_BattleField_done")

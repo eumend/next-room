@@ -99,7 +99,7 @@ func seahorse_ink_attack():
 	DialogBox.show_timeout("It's shooting gunk!", 1)
 	yield(DialogBox, "done")
 	var battleField = BulletsDownBattleField.instance()
-	battleField.base_speed = 60
+	battleField.base_speed = 55
 	battleField.total_bullets = 5
 	battleField.connect("hit", self, "on_bulletsDownBattleField_hit")
 	battleField.connect("done", self, "on_bulletsDownBattleField_done")
