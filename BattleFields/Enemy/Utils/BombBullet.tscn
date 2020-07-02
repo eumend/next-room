@@ -5,7 +5,6 @@
 [ext_resource path="res://Music/SFX/draw_1.wav" type="AudioStream" id=3]
 [ext_resource path="res://Images/BattleFields/ShootEmUp/ufo_1.png" type="Texture" id=4]
 
-
 [sub_resource type="Animation" id=1]
 resource_name = "Cooldown"
 tracks/0/type = "value"
@@ -15,10 +14,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5, 1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 0, 1, 0.952941, 1 ), Color( 0, 1, 0.952941, 1 ) ]
+"values": [ Color( 0, 0.929412, 1, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -33,7 +32,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.5, 1 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 0.568627, 0, 0, 1 ), Color( 0.568627, 0, 0, 1 ) ]
+"values": [ Color( 1, 0, 0, 1 ), Color( 0.568627, 0, 0, 1 ), Color( 0.380392, 0, 0, 1 ) ]
 }
 
 [sub_resource type="Animation" id=3]
