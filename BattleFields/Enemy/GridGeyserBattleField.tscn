@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://BattleFields/BaseBattleField.tscn" type="PackedScene" id=1]
 [ext_resource path="res://BattleFields/Enemy/GridGeyserBattleField.gd" type="Script" id=2]
 [ext_resource path="res://Animations/GeyserAnimation.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Images/BattleFields/Player.png" type="Texture" id=4]
 [ext_resource path="res://Music/SFX/erupt_1.wav" type="AudioStream" id=5]
+[ext_resource path="res://Images/BattleFields/Geyser/PlayerMovement.png" type="Texture" id=6]
 
 [node name="GridGeyserBattleField" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -63,6 +64,8 @@ z_index = 1
 texture = ExtResource( 4 )
 
 [node name="Movement" type="Sprite" parent="Field/Player" index="1"]
+light_mask = 16385
+texture = ExtResource( 6 )
 
 [node name="SFXErupt" type="AudioStreamPlayer" parent="." index="3"]
 stream = ExtResource( 5 )

@@ -6,10 +6,10 @@ enum POSITIONS{TL, TR, BL, BR}
 enum FIRING_STATUS{IDLE, ERUPTING, FIRING}
 
 var player_coords = {
-	POSITIONS.TL: Vector2(17, 14),
-	POSITIONS.TR: Vector2(55, 16),
-	POSITIONS.BL: Vector2(17, 46),
-	POSITIONS.BR: Vector2(55, 46),
+	POSITIONS.TL: Vector2(18, 14),
+	POSITIONS.TR: Vector2(54, 16),
+	POSITIONS.BL: Vector2(18, 46),
+	POSITIONS.BR: Vector2(54, 46),
 }
 
 var enemy_coords = {
@@ -31,13 +31,6 @@ var firing_status = {
 	POSITIONS.TR: FIRING_STATUS.IDLE,
 	POSITIONS.BL: FIRING_STATUS.IDLE,
 	POSITIONS.BR: FIRING_STATUS.IDLE,
-}
-
-var movement_sprites = {
-	POSITIONS.TL: preload("res://Images/BattleFields/Geyser/PlayerMovementBR.png"),
-	POSITIONS.TR: preload("res://Images/BattleFields/Geyser/PlayerMovementBL.png"),
-	POSITIONS.BL: preload("res://Images/BattleFields/Geyser/PlayerMovementTR.png"),
-	POSITIONS.BR: preload("res://Images/BattleFields/Geyser/PlayerMovementTL.png"),
 }
 
 export var geyser_amount = 4
@@ -116,8 +109,6 @@ func move(position):
 func change_player_position(position):
 	current_player_position = position
 	player.position = player_coords[position]
-	playerMovement.texture = movement_sprites[position]
-		
 
 func _on_TL_pressed():
 	move(POSITIONS.TL)

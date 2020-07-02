@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/PlayerMovementTR.png-036fc9324994eae632f4efb80832fa99.stex"
+path="res://.import/PlayerMovement.png-aab78dc910bfc711da855a18f766eb83.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/BattleFields/Geyser/PlayerMovementTR.png"
-dest_files=[ "res://.import/PlayerMovementTR.png-036fc9324994eae632f4efb80832fa99.stex" ]
+source_file="res://Images/BattleFields/Geyser/PlayerMovement.png"
+dest_files=[ "res://.import/PlayerMovement.png-aab78dc910bfc711da855a18f766eb83.stex" ]
 
 [params]
 
