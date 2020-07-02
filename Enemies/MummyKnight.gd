@@ -23,8 +23,7 @@ func get_attack_pattern():
 		}
 
 func vengeance_attack():
-	DialogBox.show_timeout("VENGEANCE!", 1)
-	yield(DialogBox, "done")
+	show_attack_text("VENGEANCE!")
 	var jankenBattleField = JanKenBattleField.instance()
 	jankenBattleField.play_until = [jankenBattleField.OUTCOMES.LOSE]
 	jankenBattleField.max_turns = 5
@@ -35,8 +34,7 @@ func vengeance_attack():
 	ActionBattle.start_small_field(jankenBattleField)
 
 func janken_attack():
-	DialogBox.show_timeout("JAN-KEN-PON!", 1)
-	yield(DialogBox, "done")
+	show_attack_text("JAN-KEN-PON!")
 	var jankenBattleField = JanKenBattleField.instance()
 	jankenBattleField.connect("player_draw", self, "_on_jankenBattleField_player_draw")
 	jankenBattleField.connect("player_lose", self, "_on_jankenBattleField_player_lose")

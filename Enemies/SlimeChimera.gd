@@ -30,8 +30,7 @@ func get_attack_pattern():
 # Slime
 
 func slime_attack():
-	DialogBox.show_timeout("It's... secreting ooze?", 1)
-	yield(DialogBox, "done")
+	show_attack_text("It's... secreting ooze?")
 	animationPlayer.play("StatusAttack1")
 	yield(animationPlayer, "animation_finished")
 	emit_signal("end_turn")
@@ -55,8 +54,8 @@ func attack():
 		.attack()
 
 func candle_attack():
-	DialogBox.show_timeout("It's... melting!?", 2)
-	yield(DialogBox, "done")
+	var dialog = show_attack_text("It's... melting!?")
+	yield(dialog, "done")
 	.take_damage(self.hp)
 	emit_signal("end_turn")
 
@@ -65,8 +64,7 @@ func candle_attack():
 const JanKenBattleField = preload("res://BattleFields/Enemy/JankenBattleField.tscn")
 
 func tome_attack():
-	DialogBox.show_timeout("The heads are transforming...", 1)
-	yield(DialogBox, "done")
+	show_attack_text("The heads are transforming...")
 	var jankenBattleField = JanKenBattleField.instance()
 	jankenBattleField.choice_map = {
 		jankenBattleField.CHOICES.SCISSORS: 0,
@@ -96,8 +94,8 @@ func _on_jankenBattleField_done():
 # Starfish
 
 func starfish_attack():
-	DialogBox.show_timeout("It's... laying down...", 1)
-	yield(DialogBox, "done")
+	var dialog = show_attack_text("It's... laying down...")
+	yield(dialog, "done")
 	.heal_damage(round(self.max_hp / 5))
 	emit_signal("end_turn")
 
@@ -110,8 +108,8 @@ func on_start_turn():
 
 func voodoo_attack():
 	voodoo = true
-	DialogBox.show_timeout("It took a menacing stance...", 2)
-	yield(DialogBox, "done")
+	var dialog = show_attack_text("It took a menacing stance....")
+	yield(dialog, "done")
 	emit_signal("end_turn")
 
 func take_damage(amount, hit_force = null):
@@ -128,8 +126,7 @@ func take_damage(amount, hit_force = null):
 const ShootBossBattleField = preload("res://BattleFields/Enemy/ShootBossBattleField.tscn")
 
 func saucer_attack():
-	DialogBox.show_timeout("Shoot it down!", 1)
-	yield(DialogBox, "done")
+	show_attack_text("Shoot it down!")
 	var battleField = ShootBossBattleField.instance()
 	battleField.initial_bullets = 1
 	battleField.bullet_time = 2
@@ -152,8 +149,7 @@ func on_shootBossBattleField_done():
 const FalldownBattleField = preload("res://BattleFields/Enemy/FalldownBattleField.tscn")
 
 func face_angel_battle_field():
-	DialogBox.show_timeout("The earth and sky are trembling!", 1.5)
-	yield(DialogBox, "done")
+	show_attack_text("The earth and sky are trembling!")
 	var battleField = FalldownBattleField.instance()
 	battleField.bullet_time = 1
 	battleField.move_time = 6

@@ -67,8 +67,7 @@ func get_attack_pattern():
 		}
 
 func bite_attack():
-	DialogBox.show_timeout("SPIDER BITE!", 1)
-	yield(DialogBox, "done")
+	show_attack_text("SPIDER BITE!")
 	rouletteBattleField = RouletteBattleField.instance()
 	rouletteBattleField.connect("face_selected", self, "on_rouletteBattleField_face_selected")
 	ActionBattle.start_small_field(rouletteBattleField)

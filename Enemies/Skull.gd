@@ -11,8 +11,8 @@ func attack():
 		.attack()
 
 func undead_attack():
-	DialogBox.show_timeout("UNDEAD ATTACK!", 1)
-	yield(DialogBox, "done")
+	var dialog = show_attack_text("UNDEAD ATTACK!")
+	yield(dialog, "done")
 	var fireAttackBattleField = FireAtackBattleField.instance()
 	fireAttackBattleField.init(2)
 	fireAttackBattleField.connect("enemy_hit", self, "_on_fireAttackBattleField_enemy_hit")

@@ -7,14 +7,14 @@ func get_attack_pattern():
 	}
 
 func voodoo_atack():
-	DialogBox.show_timeout("It's arm is tearing a bit...", 1.5)
-	yield(DialogBox, "done")
+	var dialog = show_attack_text("It's arm is tearing a bit...")
+	yield(dialog, "done")
 	take_damage(self.power)
 	emit_signal("end_turn")
 
 func idle_attack():
-	DialogBox.show_timeout("It's staring at you...", 1.5)
-	yield(DialogBox, "done")
+	var dialog = show_attack_text("It's staring at you...")
+	yield(dialog, "done")
 	emit_signal("end_turn")
 
 func take_damage(amount, hit_force = null):

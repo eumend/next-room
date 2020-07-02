@@ -185,8 +185,8 @@ func on_start_turn():
 	.on_start_turn()
 
 func voodoo_atack():
-	DialogBox.show_timeout("It's stares at you with a grudge... be careful!", 1.5)
-	yield(DialogBox, "done")
+	var dialog = show_attack_text("It's stares at you with a grudge... be careful!")
+	yield(dialog, "done")
 	on_voodoo = true
 	emit_signal("end_turn")
 
@@ -198,8 +198,7 @@ func take_damage(amount, hit_force = null):
 	.take_damage(amount, hit_force)
 
 func triple_hit_roulette_attack():
-	DialogBox.show_timeout("...", 1)
-	yield(DialogBox, "done")
+	show_attack_text("...")
 	rouletteBattleField = RouletteBattleField.instance()
 	rouletteBattleField.connect("face_selected", self, "on_tripleRouletteBattleField_face_selected")
 	ActionBattle.start_small_field(rouletteBattleField)
@@ -289,8 +288,7 @@ func deal_damage(hit_force = null, _fixed_amount = null):
 			.deal_damage(hit_force)
 
 func secondary_effect_roulette_attack():
-	DialogBox.show_timeout("!!!", 1)
-	yield(DialogBox, "done")
+	show_attack_text("!!!")
 	rouletteBattleField = RouletteBattleField.instance()
 	rouletteBattleField.connect("face_selected", self, "on_secondaryRouletteBattleField_face_selected")
 	rouletteBattleField.connect("face_displayed", self, "on_secondaryRouletteBattleField_face_displayed")

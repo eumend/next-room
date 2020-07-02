@@ -32,8 +32,8 @@ func attack():
 		.attack()
 
 func undead_attack():
-	DialogBox.show_timeout("It's blowing up!?", 2)
-	yield(DialogBox, "done")
+	var dialog = show_attack_text("It's blowing up!?")
+	yield(dialog, "done")
 	animate_explosion()
 
 func is_dead():
@@ -60,8 +60,7 @@ func animate_explosion():
 const JanKenBattleField = preload("res://BattleFields/Enemy/JankenBattleField.tscn")
 
 func sword_janken_attack():
-	DialogBox.show_timeout("Janken... but how?", 1)
-	yield(DialogBox, "done")
+	show_attack_text("Jan-Ken... but how?")
 	var jankenBattleField = JanKenBattleField.instance()
 	jankenBattleField.choice_map = {
 		jankenBattleField.CHOICES.SCISSORS: 80,
@@ -96,8 +95,7 @@ func _on_jankenBattleField_done():
 const BulletsDownBattleField = preload("res://BattleFields/Enemy/BulletsDownBattleField.tscn")
 
 func seahorse_ink_attack():
-	DialogBox.show_timeout("It's shooting gunk!", 1)
-	yield(DialogBox, "done")
+	show_attack_text("It's shooting gunk!")
 	var battleField = BulletsDownBattleField.instance()
 	battleField.base_speed = 55
 	battleField.total_bullets = 5
@@ -168,8 +166,7 @@ var selected_roulette_index = 0
 var rouletteBattleField = null
 
 func spider_bite_attack():
-	DialogBox.show_timeout("It's ready to bite!", 1)
-	yield(DialogBox, "done")
+	show_attack_text("It's ready to bite!")
 	rouletteBattleField = RouletteBattleField.instance()
 	rouletteBattleField.connect("face_selected", self, "on_rouletteBattleField_face_selected")
 	ActionBattle.start_small_field(rouletteBattleField)
@@ -224,8 +221,7 @@ func deal_damage(hit_force = null, _fixed_amount = null):
 const ShootEmUpBattleField = preload("res://BattleFields/Enemy/ShootEmUpBattleField.tscn")
 
 func worm_attack():
-	DialogBox.show_timeout("It's sending projectiles!", 1)
-	yield(DialogBox, "done")
+	show_attack_text("It's sending projectiles!")
 	var battleField = ShootEmUpBattleField.instance()
 	var bullets = get_bullets()
 	battleField.bullets = bullets
@@ -253,8 +249,7 @@ func on_shootEmUpBattleField_done():
 const FalldownBattleField = preload("res://BattleFields/Enemy/FalldownBattleField.tscn")
 
 func feather_angel_attack():
-	DialogBox.show_timeout("The earth is shaking!", 1)
-	yield(DialogBox, "done")
+	show_attack_text("The earth is shaking!")
 	var battleField = FalldownBattleField.instance()
 	battleField.bullet_time = 1
 	battleField.move_time = 6

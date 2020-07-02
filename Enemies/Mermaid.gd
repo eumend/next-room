@@ -10,8 +10,7 @@ func get_attack_pattern():
 	}
 
 func sing_attack():
-	DialogBox.show_timeout("SEA MELODY!", 1)
-	yield(DialogBox, "done")
+	show_attack_text("SEA MELODY!")
 	var battleField = BulletsDownBattleField.instance()
 	battleField.base_speed = 60
 	battleField.total_bullets = 4

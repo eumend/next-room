@@ -11,8 +11,7 @@ func get_attack_pattern():
 	}
 
 func bug_attack():
-	DialogBox.show_timeout("...", 1)
-	yield(DialogBox, "done")
+	show_attack_text("... (shoot carefully!)")
 	var battleField = ShootEmUpBattleField.instance()
 	var bullets = get_bullets()
 	battleField.bullets = bullets

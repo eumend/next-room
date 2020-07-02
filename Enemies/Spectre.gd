@@ -65,8 +65,7 @@ func get_attack_pattern():
 		}
 #
 func roulette_attack():
-	DialogBox.show_timeout("GHOST TRICK!", 1)
-	yield(DialogBox, "done")
+	show_attack_text("GHOST TRICK!")
 	rouletteBattleField = RouletteBattleField.instance()
 	rouletteBattleField.connect("face_selected", self, "on_rouletteBattleField_face_selected")
 	rouletteBattleField.connect("face_displayed", self, "on_rouletteBattleField_face_displayed")
@@ -76,7 +75,7 @@ func roulette_attack():
 	start_roulette(current_roulette_index)
 #
 func start_roulette(roulette_index):
-	var roulette_speed = 0.1 + (0.05 * roulette_index) # A bit slower as we go up
+	var roulette_speed = 0.1 + (0.03 * roulette_index) # A bit slower as we go up
 	var roulette_data = roulettes[roulette_index]
 	rouletteBattleField.start_roulette(roulette_data, roulette_speed)
 #

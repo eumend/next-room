@@ -9,8 +9,7 @@ func get_attack_pattern():
 	}
 
 func saucer_attack():
-	DialogBox.show_timeout("---", 1)
-	yield(DialogBox, "done")
+	show_attack_text("---")
 	var battleField = ShootBossBattleField.instance()
 	battleField.initial_bullets = 1
 	battleField.bullet_time = 2

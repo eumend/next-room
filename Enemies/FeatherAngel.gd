@@ -13,8 +13,7 @@ func get_attack_pattern():
 	}
 
 func falldown_attack():
-	DialogBox.show_timeout(". . . T H O U . . . F A L L . . .", 1)
-	yield(DialogBox, "done")
+	show_attack_text(". . . F A L L . . .")
 	var battleField = FalldownBattleField.instance()
 	battleField.bullet_time = bullet_interval
 	battleField.move_time = wall_interval

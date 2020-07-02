@@ -18,8 +18,7 @@ func get_attack_pattern():
 	return pattern
 
 func bullet_attack():
-	DialogBox.show_timeout("THOU SHALT NOT...", 1)
-	yield(DialogBox, "done")
+	show_attack_text("THOU SHALT NOT...")
 	var battleField = FalldownBattleField.instance()
 	battleField.bullet_time = bullet_interval * 0.75
 	battleField.move_time = wall_interval * 1.8
@@ -30,8 +29,7 @@ func bullet_attack():
 	ActionBattle.start_small_field(battleField)
 
 func wall_attack():
-	DialogBox.show_timeout("...COME ANY CLOSER...", 1)
-	yield(DialogBox, "done")
+	show_attack_text("...COME ANY CLOSER...")
 	var battleField = FalldownBattleField.instance()
 	battleField.bullet_time = bullet_interval
 	battleField.move_time = wall_interval * 0.5
@@ -53,8 +51,7 @@ func wall_attack():
 
 
 func falldown_attack():
-	DialogBox.show_timeout("...I WON'T ALLOW IT", 1)
-	yield(DialogBox, "done")
+	show_attack_text("...I WON'T ALLOW IT")
 	var battleField = FalldownBattleField.instance()
 	battleField.bullet_time = bullet_interval * 0.75
 	battleField.move_time = wall_interval * 0.75

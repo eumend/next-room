@@ -27,7 +27,7 @@ func is_dead():
 	return .is_dead() and not undead
 
 func fire_attack():
-	DialogBox.show_timeout("BURN!", 2)
+	show_attack_text("BURN!")
 	if self.hp <= round(self.max_hp / 3):
 		do_fire_attack(5)
 	elif self.hp <= round(self.max_hp / 2):
@@ -36,8 +36,8 @@ func fire_attack():
 		do_fire_attack(3)
 
 func suicide_attack():
-	DialogBox.show_timeout("DIE!", 1)
-	yield(DialogBox, "done")
+	var dialog = show_attack_text("DIE!")
+	yield(dialog, "done")
 	animate_explosion()
 
 func undead_attack():

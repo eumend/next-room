@@ -8,8 +8,7 @@ func get_attack_pattern():
 	}
 
 func janken_attack():
-	DialogBox.show_timeout("KEN-PON...", 1)
-	yield(DialogBox, "done")
+	show_attack_text("KEN-PON...")
 	var jankenBattleField = JanKenBattleField.instance()
 	jankenBattleField.choice_map = {
 		jankenBattleField.CHOICES.SCISSORS: 0,

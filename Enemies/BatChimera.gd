@@ -24,8 +24,7 @@ func get_attack_pattern():
 # Bat
 
 func leech_life():
-	DialogBox.show_timeout("It's showing its fangs!", 1.5)
-	yield(DialogBox, "done")
+	show_attack_text("It's showing its fangs!")
 	animationPlayer.play("StatusAttack1")
 	yield(animationPlayer, "animation_finished")
 	emit_signal("end_turn")
@@ -43,8 +42,8 @@ func attack():
 		.attack()
 
 func undead_attack():
-	DialogBox.show_timeout("It buried itself in the ground!?", 1.5)
-	yield(DialogBox, "done")
+	var dialog = show_attack_text("It buried itself in the ground!?")
+	yield(dialog, "done")
 	var fireAttackBattleField = FireAtackBattleField.instance()
 	fireAttackBattleField.init(4)
 	fireAttackBattleField.connect("enemy_hit", self, "_on_fireAttackBattleField_enemy_hit")
@@ -66,8 +65,7 @@ func is_dead():
 const JanKenBattleField = preload("res://BattleFields/Enemy/JankenBattleField.tscn")
 
 func shield_attack():
-	DialogBox.show_timeout("Its wing is transforming...", 1)
-	yield(DialogBox, "done")
+	show_attack_text("Its wing are transforming...")
 	var jankenBattleField = JanKenBattleField.instance()
 	jankenBattleField.choice_map = {
 		jankenBattleField.CHOICES.SCISSORS: 20,
@@ -102,8 +100,7 @@ const BulletsDownBattleField = preload("res://BattleFields/Enemy/BulletsDownBatt
 const noteSprite = preload("res://Images/BattleFields/BulletsDown/NoteBullet.png")
 
 func mermaid_attack():
-	DialogBox.show_timeout("It's screeching!", 1)
-	yield(DialogBox, "done")
+	show_attack_text("It's screeching!")
 	var battleField = BulletsDownBattleField.instance()
 	battleField.base_speed = 70
 	battleField.total_bullets = 4
@@ -181,8 +178,7 @@ var roulette_selections = []
 var rouletteBattleField = null
 
 func spectre_attack():
-	DialogBox.show_timeout("It has an ominous aura!", 1.5)
-	yield(DialogBox, "done")
+	show_attack_text("It has an ominous aura!")
 	rouletteBattleField = RouletteBattleField.instance()
 	rouletteBattleField.connect("face_selected", self, "on_rouletteBattleField_face_selected")
 	rouletteBattleField.connect("face_displayed", self, "on_rouletteBattleField_face_displayed")
@@ -248,8 +244,7 @@ func deal_damage(hit_force = null, _fixed_amount= null):
 const ShootEmUpBattleField = preload("res://BattleFields/Enemy/ShootEmUpBattleField.tscn")
 
 func bug_attack():
-	DialogBox.show_timeout("Shoot carefully!", 1)
-	yield(DialogBox, "done")
+	show_attack_text("Shoot carefully!")
 	var battleField = ShootEmUpBattleField.instance()
 	var bullets = get_bullets()
 	battleField.bullets = bullets
@@ -279,8 +274,7 @@ func on_shootEmUpBattleField_done():
 const FalldownBattleField = preload("res://BattleFields/Enemy/FalldownBattleField.tscn")
 
 func ring_angel_attack():
-	DialogBox.show_timeout("It flew to the sky!", 1)
-	yield(DialogBox, "done")
+	show_attack_text("It flew to the sky!")
 	var battleField = FalldownBattleField.instance()
 	battleField.bullet_time = 1
 	battleField.move_time = 6
