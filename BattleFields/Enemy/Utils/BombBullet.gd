@@ -55,10 +55,11 @@ func explode():
 	explodeSFX.play()
 
 func _on_countdownTimer_timeout():
-	if bullet_type == GameConstants.BOMB_BULLET_TYPES.COUNTDOWN:
-		self.explode()
-	else:
-		self.disappear()
+	if not paused:
+		if bullet_type == GameConstants.BOMB_BULLET_TYPES.COUNTDOWN:
+			self.explode()
+		else:
+			self.disappear()
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "Explode" or anim_name == "Disappear":
