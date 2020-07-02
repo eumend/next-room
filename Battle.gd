@@ -138,7 +138,7 @@ var last_enemy = null
 
 func _ready():
 	$BGPlayer.play()
-	# skip_to_level(6, 10) # Debugging
+	# skip_to_level(7, 12) # Debugging
 	update_level_layout()
 	create_player()
 	start_battle()

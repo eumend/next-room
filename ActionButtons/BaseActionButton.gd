@@ -2,6 +2,8 @@ extends Button
 
 const BattleUnits = preload("res://BattleUnits.tres")
 const ActionBattle = preload("res://ActionBattle.tres")
+const DialogBox = preload("res://DialogBox.tres")
+
 var player = null
 var enemy = null
 

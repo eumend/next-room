@@ -24,6 +24,7 @@ var exp_points = 0 setget set_exp_points
 var level = 1 setget set_level
 export var power = 3 setget set_power
 var player_statuses = []
+var player_buffs = []
 
 var base_hp = max_hp
 var base_power = power
@@ -57,10 +58,11 @@ func has_status(status):
 func add_status(new_status):
 	if not player_statuses.has(new_status):
 		player_statuses.append(new_status)
-		emit_signal("status_changed", player_statuses)
+	emit_signal("status_changed", player_statuses)
 
 func clear_status():
 	player_statuses = []
+	player_buffs = []
 	emit_signal("status_changed", player_statuses)
 
 func heal_status():
@@ -68,10 +70,31 @@ func heal_status():
 		player_statuses.erase(GameConstants.STATUS.POISON)
 	emit_signal("status_healed", player_statuses)
 
+func add_buff(buff, turns):
+	if player_statuses.has(buff):
+		var new_buffs = []
+		for buff_pair in player_buffs:
+			if buff_pair[0] == buff:
+				new_buffs.append([buff, turns])
+			else:
+				new_buffs.append(buff_pair)
+		player_buffs = new_buffs
+	else:
+		player_buffs.append([buff, turns])
+	add_status(buff)
+
 func clear_buffs():
-	if player_statuses.has(GameConstants.STATUS.SHIELDED):
-		player_statuses.erase(GameConstants.STATUS.SHIELDED)
-		emit_signal("status_changed", player_statuses)
+	var new_buffs = []
+	for buff_pairs in player_buffs:
+		var buff = buff_pairs[0]
+		var turns = buff_pairs[1]
+		var turns_left = turns - 1
+		if turns_left > 0:
+			new_buffs.append([buff, turns_left])
+		else:
+			player_statuses.erase(buff)
+			emit_signal("status_changed", player_statuses)
+	player_buffs = new_buffs
 
 func take_status_damage(damage):
 	_take_damage(damage, null)

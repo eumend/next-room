@@ -5,18 +5,25 @@ const BattleUnits = preload("res://BattleUnits.tres")
 const DialogBox = preload("res://DialogBox.tres")
 
 onready var chargeButton = $ChargeActionButton
+onready var boostButton = $BoostActionButton
+onready var shieldButton = $ShieldActionButton
 
 func _ready():
 	ActionBattle.MidPanel = self
 	var playerStats = BattleUnits.PlayerStats
 	playerStats.connect("level_changed", self, "on_playerStats_level_changed")
 	chargeButton.connect("charge", self, "_on_chargeButton_charge")
+	boostButton.connect("hide_buttons", self, "_on_hide_buttons")
+	shieldButton.connect("hide_buttons", self, "_on_hide_buttons")
+
+func _on_hide_buttons():
+	self.hide()
 
 func _on_chargeButton_charge(num = 1):
 	var skills = get_children()
 	for skill in skills:
-		skill.recharge_by(num)
 		skill.disabled = true
+		skill.recharge_by(num)
 
 func on_playerStats_level_changed(level, old_level):
 	if level > old_level:

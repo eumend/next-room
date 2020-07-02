@@ -1,7 +1,5 @@
 extends "res://ActionButtons/BaseActionButton.gd"
 
-const DialogBox = preload("res://DialogBox.tres")
-
 signal charge
 
 func _on_pressed():

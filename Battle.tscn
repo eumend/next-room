@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://Images/Mobile RPG Mockup.png" type="Texture" id=1]
 [ext_resource path="res://Music/Songs/bg_2.ogg" type="AudioStream" id=2]
@@ -24,6 +24,7 @@
 [ext_resource path="res://Music/SFX/miss_1.wav" type="AudioStream" id=22]
 [ext_resource path="res://Music/SFX/win_short_1.wav" type="AudioStream" id=23]
 [ext_resource path="res://ActionButtons/ChargeActionButton.gd" type="Script" id=24]
+[ext_resource path="res://ActionButtons/BoostActionButton.gd" type="Script" id=25]
 
 [sub_resource type="Animation" id=1]
 length = 0.2
@@ -275,30 +276,24 @@ __meta__ = {
 
 [node name="SwordActionButton" parent="UI/BattleActionButtons" instance=ExtResource( 15 )]
 
-[node name="HealActionButton" parent="UI/BattleActionButtons" instance=ExtResource( 14 )]
+[node name="ChargeActionButton" parent="UI/BattleActionButtons" instance=ExtResource( 17 )]
 margin_left = 42.0
 margin_right = 76.0
-
-[node name="ShieldActionButton" parent="UI/BattleActionButtons" instance=ExtResource( 17 )]
-visible = false
-margin_left = 42.0
-margin_right = 76.0
-level_required = 999
+text = "CHARGE"
+script = ExtResource( 24 )
+level_required = 10
+recharge_turns = 1
 
 [node name="ComboActionButton" parent="UI/BattleActionButtons" instance=ExtResource( 16 )]
 margin_top = 16.0
 margin_bottom = 29.0
 level_required = 4
 
-[node name="ChargeActionButton" parent="UI/BattleActionButtons" instance=ExtResource( 17 )]
+[node name="HealActionButton" parent="UI/BattleActionButtons" instance=ExtResource( 14 )]
 margin_left = 42.0
 margin_top = 16.0
 margin_right = 76.0
 margin_bottom = 29.0
-text = "CHARGE"
-script = ExtResource( 24 )
-level_required = 10
-recharge_turns = 1
 
 [node name="SuperAttackButton" parent="UI/BattleActionButtons" instance=ExtResource( 12 )]
 margin_top = 32.0
@@ -309,6 +304,22 @@ margin_left = 42.0
 margin_top = 32.0
 margin_right = 76.0
 margin_bottom = 45.0
+
+[node name="BoostActionButton" parent="UI/BattleActionButtons" instance=ExtResource( 17 )]
+margin_top = 48.0
+margin_bottom = 61.0
+text = "BOOST"
+script = ExtResource( 25 )
+level_required = 10
+recharge_turns = 3
+
+[node name="ShieldActionButton" parent="UI/BattleActionButtons" instance=ExtResource( 17 )]
+margin_left = 42.0
+margin_top = 48.0
+margin_right = 76.0
+margin_bottom = 61.0
+level_required = 12
+recharge_turns = 3
 
 [node name="OverworldActionButtons" type="VBoxContainer" parent="UI"]
 margin_left = 9.0
@@ -392,7 +403,7 @@ anims/None = SubResource( 8 )
 
 [node name="BGPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
-volume_db = -5.0
+volume_db = -15.0
 autoplay = true
 
 [node name="SFXLevelUp" type="AudioStreamPlayer" parent="."]

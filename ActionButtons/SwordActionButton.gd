@@ -16,7 +16,7 @@ func _on_SingleHitBattleField_hit(hit_force):
 	if(is_battle_ready()):
 		animate_slash(enemy.global_position)
 		play_sfx(hit_force)
-		var damage = get_damage(player.power, hit_force)
+		var damage = get_damage(player, hit_force)
 		enemy.take_damage(damage, hit_force)
 
 func _on_SingleHitBattleField_miss():
@@ -27,7 +27,13 @@ func _on_SingleHitBattleField_miss():
 func _on_SingleHitBattleField_done():
 	battlefield_done = true
 
-func get_damage(power, hit_force):
+func get_damage(player, hit_force):
+	var damage = get_hit_force_multiplier(player.power, hit_force)
+	if player.has_status(GameConstants.STATUS.BOOST):
+		damage += damage * 0.2
+	return ceil(damage)
+	
+func get_hit_force_multiplier(power, hit_force):
 	match(hit_force):
 		GameConstants.HIT_FORCE.CRIT: return power + ceil(power / 2)
 		GameConstants.HIT_FORCE.STRONG: return power

@@ -6,7 +6,6 @@
 [ext_resource path="res://Music/SFX/move_1.wav" type="AudioStream" id=4]
 [ext_resource path="res://Music/Songs/bg_1.ogg" type="AudioStream" id=5]
 
-
 [sub_resource type="Animation" id=1]
 resource_name = "Default"
 
@@ -190,6 +189,7 @@ stream = ExtResource( 4 )
 
 [node name="BGMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
+volume_db = -10.0
 autoplay = true
 
 [node name="Tween" type="Tween" parent="."]

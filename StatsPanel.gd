@@ -8,6 +8,7 @@ onready var sfxMiss = $SFXMiss
 
 const PoisonIcon = preload("res://Images/UI/skull_icon.png")
 const ShieldIcon = preload("res://Images/UI/shield_icon.png")
+const SwordIcon = preload("res://Images/UI/sword_icon.png")
 const NumberAnimation = preload("res://Animations/NumberAnimation.tscn")
 const BattleUnits = preload("res://BattleUnits.tres")
 
@@ -70,9 +71,8 @@ func get_status_icon(status):
 	match(status):
 		GameConstants.STATUS.POISON: return PoisonIcon
 		GameConstants.STATUS.SHIELDED: return ShieldIcon
+		GameConstants.STATUS.BOOST: return SwordIcon
 		_: return null
-
-
 
 
 func _on_PlayerStats_heal_damage(amount):
