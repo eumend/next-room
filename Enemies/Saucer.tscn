@@ -7,8 +7,8 @@
 [node name="Saucer" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 max_hp = 51
-power = 8
-exp_points = 9
+power = 10
+exp_points = 15
 entry_text = "A Saucer flies down!"
 
 [node name="Sprite" parent="." index="0"]

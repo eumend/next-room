@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Dungeon6.png-ed86d5fb8f7bdb51133ba662a0f0b0d2.stex"
+path="res://.import/HeavenDungeon.png-08bac5266bb1d704e6d927c5a763e730.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/Dungeons/Dungeon6.png"
-dest_files=[ "res://.import/Dungeon6.png-ed86d5fb8f7bdb51133ba662a0f0b0d2.stex" ]
+source_file="res://Images/Dungeons/HeavenDungeon.png"
+dest_files=[ "res://.import/HeavenDungeon.png-08bac5266bb1d704e6d927c5a763e730.stex" ]
 
 [params]
 

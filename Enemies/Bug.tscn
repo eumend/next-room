@@ -6,9 +6,9 @@
 
 [node name="Bug" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
-max_hp = 58
-power = 9
-exp_points = 9
+max_hp = 70
+power = 10
+exp_points = 12
 entry_text = "A.. Bug? Hops in!"
 
 [node name="Sprite" parent="." index="0"]

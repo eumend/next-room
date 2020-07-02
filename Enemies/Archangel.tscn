@@ -6,9 +6,9 @@
 
 [node name="Archangel" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
-max_hp = 120
-power = 11
-exp_points = 25
+max_hp = 99
+power = 9
+exp_points = 15
 is_boss = true
 entry_text = "The Archangel descends!"
 wall_interval = 3.0

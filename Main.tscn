@@ -1,10 +1,11 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
-[ext_resource path="res://Images/Dungeons/Dungeon.png" type="Texture" id=2]
+[ext_resource path="res://Images/Dungeons/SewerDungeon.png" type="Texture" id=2]
 [ext_resource path="res://Images/Logo.png" type="Texture" id=3]
 [ext_resource path="res://Music/SFX/move_1.wav" type="AudioStream" id=4]
 [ext_resource path="res://Music/Songs/bg_1.ogg" type="AudioStream" id=5]
+
 
 [sub_resource type="Animation" id=1]
 resource_name = "Default"

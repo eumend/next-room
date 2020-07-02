@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Images/Mobile RPG Mockup.png" type="Texture" id=1]
 [ext_resource path="res://Music/Songs/bg_2.ogg" type="AudioStream" id=2]
-[ext_resource path="res://Images/Dungeons/Dungeon.png" type="Texture" id=3]
+[ext_resource path="res://Images/Dungeons/SewerDungeon.png" type="Texture" id=3]
 [ext_resource path="res://Battle.gd" type="Script" id=4]
 [ext_resource path="res://PlayerStats.gd" type="Script" id=5]
 [ext_resource path="res://StatsPanel.gd" type="Script" id=6]

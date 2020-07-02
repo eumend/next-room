@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Dungeon8.png-b2da3fa87082cb54d61e1ebb21e3f202.stex"
+path="res://.import/WaterDungeon.png-574f08e7084b27746a83753878690c18.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/Dungeons/Dungeon8.png"
-dest_files=[ "res://.import/Dungeon8.png-b2da3fa87082cb54d61e1ebb21e3f202.stex" ]
+source_file="res://Images/Dungeons/WaterDungeon.png"
+dest_files=[ "res://.import/WaterDungeon.png-574f08e7084b27746a83753878690c18.stex" ]
 
 [params]
 

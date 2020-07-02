@@ -60,7 +60,7 @@ var Levels = {
 		},
 		"boss": "sewer_chimera",
 		"mook_count": 4,
-		"background": preload("res://Images/Dungeons/Dungeon.png")
+		"background": preload("res://Images/Dungeons/SewerDungeon.png")
 	},
 	2: {
 		"enemies": {
@@ -70,7 +70,7 @@ var Levels = {
 		},
 		"boss": "fire_skull",
 		"mook_count": 4,
-		"background": preload("res://Images/Dungeons/Dungeon2.png")
+		"background": preload("res://Images/Dungeons/FireDungeon.png")
 	},
 	3: {
 		"enemies": {
@@ -80,7 +80,7 @@ var Levels = {
 		},
 		"boss": "mummy_knight",
 		"mook_count": 5,
-		"background": preload("res://Images/Dungeons/Dungeon3.png")
+		"background": preload("res://Images/Dungeons/GroundDungeon.png")
 	},
 	4: {
 		"enemies": {
@@ -90,7 +90,7 @@ var Levels = {
 		},
 		"boss": "sea_horse_rider",
 		"mook_count": 5,
-		"background": preload("res://Images/Dungeons/Dungeon4.png")
+		"background": preload("res://Images/Dungeons/WaterDungeon.png")
 	},
 	5: {
 		"enemies": {
@@ -100,19 +100,9 @@ var Levels = {
 		},
 		"boss": "voodoo_curse",
 		"mook_count": 5,
-		"background": preload("res://Images/Dungeons/Dungeon5.png")
+		"background": preload("res://Images/Dungeons/GhostDungeon.png")
 	},
 	6: {
-		"enemies": {
-			"worm": 45,
-			"bug": 40,
-			"saucer": 15,
-		},
-		"boss": "cosmic_menagerie",
-		"mook_count": 0,
-		"background": preload("res://Images/Dungeons/Dungeon6.png")
-	},
-	7: {
 		"enemies": {
 			"feather_angel": 45,
 			"ring_angel": 40,
@@ -120,7 +110,17 @@ var Levels = {
 		},
 		"boss": "archangel",
 		"mook_count": 4,
-		"background": preload("res://Images/Dungeons/Dungeon7.png")
+		"background": preload("res://Images/Dungeons/HeavenDungeon.png")
+	},
+	7: {
+		"enemies": {
+			"worm": 45,
+			"bug": 40,
+			"saucer": 15,
+		},
+		"boss": "cosmic_menagerie",
+		"mook_count": 4,
+		"background": preload("res://Images/Dungeons/SpaceDungeon.png")
 	},
 	8: {
 		"enemies": { # Handled by code
@@ -130,7 +130,7 @@ var Levels = {
 		},
 		"boss": "dragon_chimera",
 		"mook_count": 3,
-		"background": preload("res://Images/Dungeons/Dungeon8.png")
+		"background": preload("res://Images/Dungeons/LastDungeon.png")
 	}
 }
 var enemy_encounter_rate = null
@@ -138,7 +138,7 @@ var last_enemy = null
 
 func _ready():
 	$BGPlayer.play()
-	# skip_to_level(1, 10) # Debugging
+	# skip_to_level(6, 10) # Debugging
 	update_level_layout()
 	create_player()
 	start_battle()

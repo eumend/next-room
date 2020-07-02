@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Dungeon4.png-e801d1cf540bd141936ced504fbb6dc3.stex"
+path="res://.import/FireDungeon.png-f40691a2d4300f63a5960fa2f0320ebf.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/Dungeons/Dungeon4.png"
-dest_files=[ "res://.import/Dungeon4.png-e801d1cf540bd141936ced504fbb6dc3.stex" ]
+source_file="res://Images/Dungeons/FireDungeon.png"
+dest_files=[ "res://.import/FireDungeon.png-f40691a2d4300f63a5960fa2f0320ebf.stex" ]
 
 [params]
 
