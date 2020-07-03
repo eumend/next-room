@@ -23,8 +23,8 @@
 [ext_resource path="res://Music/SFX/beep_1.wav" type="AudioStream" id=21]
 [ext_resource path="res://Music/SFX/miss_1.wav" type="AudioStream" id=22]
 [ext_resource path="res://Music/SFX/win_short_1.wav" type="AudioStream" id=23]
-[ext_resource path="res://ActionButtons/ChargeActionButton.gd" type="Script" id=24]
-[ext_resource path="res://ActionButtons/BoostActionButton.gd" type="Script" id=25]
+[ext_resource path="res://ActionButtons/ChargeActionButton.tscn" type="PackedScene" id=24]
+[ext_resource path="res://ActionButtons/BoostActionButton.tscn" type="PackedScene" id=25]
 
 [sub_resource type="Animation" id=1]
 length = 0.2
@@ -295,21 +295,15 @@ margin_bottom = 29.0
 margin_top = 32.0
 margin_bottom = 45.0
 
-[node name="ChargeActionButton" parent="UI/BattleActionButtons" instance=ExtResource( 17 )]
+[node name="ChargeActionButton" parent="UI/BattleActionButtons" instance=ExtResource( 24 )]
 margin_left = 42.0
 margin_top = 32.0
 margin_right = 76.0
 margin_bottom = 45.0
-text = "CHARGE"
-script = ExtResource( 24 )
-level_required = 10
-recharge_turns = 1
 
-[node name="BoostActionButton" parent="UI/BattleActionButtons" instance=ExtResource( 17 )]
+[node name="BoostActionButton" parent="UI/BattleActionButtons" instance=ExtResource( 25 )]
 margin_top = 48.0
 margin_bottom = 61.0
-text = "BOOST"
-script = ExtResource( 25 )
 level_required = 11
 recharge_turns = 3
 
