@@ -276,20 +276,16 @@ __meta__ = {
 
 [node name="SwordActionButton" parent="UI/BattleActionButtons" instance=ExtResource( 15 )]
 
-[node name="ChargeActionButton" parent="UI/BattleActionButtons" instance=ExtResource( 17 )]
+[node name="HealActionButton" parent="UI/BattleActionButtons" instance=ExtResource( 14 )]
 margin_left = 42.0
 margin_right = 76.0
-text = "CHARGE"
-script = ExtResource( 24 )
-level_required = 10
-recharge_turns = 1
 
 [node name="ComboActionButton" parent="UI/BattleActionButtons" instance=ExtResource( 16 )]
 margin_top = 16.0
 margin_bottom = 29.0
 level_required = 4
 
-[node name="HealActionButton" parent="UI/BattleActionButtons" instance=ExtResource( 14 )]
+[node name="MendActionButton" parent="UI/BattleActionButtons" instance=ExtResource( 18 )]
 margin_left = 42.0
 margin_top = 16.0
 margin_right = 76.0
@@ -299,18 +295,22 @@ margin_bottom = 29.0
 margin_top = 32.0
 margin_bottom = 45.0
 
-[node name="MendActionButton" parent="UI/BattleActionButtons" instance=ExtResource( 18 )]
+[node name="ChargeActionButton" parent="UI/BattleActionButtons" instance=ExtResource( 17 )]
 margin_left = 42.0
 margin_top = 32.0
 margin_right = 76.0
 margin_bottom = 45.0
+text = "CHARGE"
+script = ExtResource( 24 )
+level_required = 10
+recharge_turns = 1
 
 [node name="BoostActionButton" parent="UI/BattleActionButtons" instance=ExtResource( 17 )]
 margin_top = 48.0
 margin_bottom = 61.0
 text = "BOOST"
 script = ExtResource( 25 )
-level_required = 10
+level_required = 11
 recharge_turns = 3
 
 [node name="ShieldActionButton" parent="UI/BattleActionButtons" instance=ExtResource( 17 )]
