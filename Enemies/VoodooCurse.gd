@@ -165,8 +165,8 @@ func get_attack_pattern():
 	var playerStats = BattleUnits.PlayerStats
 	if self.hp <= round(self.max_hp / 3):
 		return {
-			"voodoo_atack": 65,
-			"triple_hit_roulette_attack": 35,
+			"voodoo_atack": 60,
+			"triple_hit_roulette_attack": 40,
 		}
 	elif not playerStats.has_status(GameConstants.STATUS.POISON):
 		return {
@@ -175,9 +175,9 @@ func get_attack_pattern():
 		}
 	else:
 		return {
-			"secondary_effect_roulette_attack": 40,
+			"secondary_effect_roulette_attack": 50,
 			"triple_hit_roulette_attack": 30,
-			"default_attack": 30,
+			"default_attack": 20,
 		}
 
 func on_start_turn():
@@ -206,7 +206,7 @@ func triple_hit_roulette_attack():
 	start_triple_roulette(current_roulette_index)
 
 func start_triple_roulette(roulette_index):
-	var roulette_speed = 0.12 - (0.01 * roulette_index) # Faster as we go up
+	var roulette_speed = 0.1 - (0.01 * roulette_index) # Faster as we go up
 	var roulette_data = triple_attack_roulettes[roulette_index]
 	rouletteBattleField.start_roulette(roulette_data, roulette_speed)
 
@@ -298,7 +298,7 @@ func secondary_effect_roulette_attack():
 	start_secondary_roulette(current_roulette_index)
 
 func start_secondary_roulette(roulette_index):
-	var roulette_speed = 0.1 + (0.05 * roulette_index) # Slower as we go up
+	var roulette_speed = 0.095 - (0.01 * roulette_index) # Slower as we go up
 	var roulette_data = secondary_attack_roulettes[roulette_index]
 	rouletteBattleField.start_roulette(roulette_data, roulette_speed)
 

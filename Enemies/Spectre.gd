@@ -75,7 +75,7 @@ func roulette_attack():
 	start_roulette(current_roulette_index)
 #
 func start_roulette(roulette_index):
-	var roulette_speed = 0.1 + (0.03 * roulette_index) # A bit slower as we go up
+	var roulette_speed = 0.09 + (0.02 * roulette_index) # A bit slower as we go up
 	var roulette_data = roulettes[roulette_index]
 	rouletteBattleField.start_roulette(roulette_data, roulette_speed)
 #
