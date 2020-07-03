@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/charge_1.wav-4e9bc6dcfea5f62b075be0414e86c09a.sample"
+
+[deps]
+
+source_file="res://Music/SFX/charge_1.wav"
+dest_files=[ "res://.import/charge_1.wav-4e9bc6dcfea5f62b075be0414e86c09a.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

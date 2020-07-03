@@ -234,8 +234,8 @@ align = 1
 
 [node name="Status" type="VBoxContainer" parent="UI/StatsPanel/StatsContainer"]
 visible = false
-margin_left = 82.0
-margin_right = 103.0
+margin_left = 63.0
+margin_right = 84.0
 margin_bottom = 19.0
 rect_min_size = Vector2( 21, 19 )
 custom_constants/separation = 0
@@ -414,6 +414,7 @@ stream = ExtResource( 21 )
 
 [node name="SFXWin" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 23 )
+[connection signal="debuff" from="PlayerStats" to="UI/StatsPanel" method="_on_PlayerStats_debuff"]
 [connection signal="heal_damage" from="PlayerStats" to="UI/StatsPanel" method="_on_PlayerStats_heal_damage"]
 [connection signal="hp_changed" from="PlayerStats" to="UI/StatsPanel" method="_on_PlayerStats_hp_changed"]
 [connection signal="level_changed" from="PlayerStats" to="UI/StatsPanel" method="_on_PlayerStats_level_changed"]

@@ -11,6 +11,7 @@ const ShieldIcon = preload("res://Images/UI/shield_icon.png")
 const SwordIcon = preload("res://Images/UI/sword_icon.png")
 const NumberAnimation = preload("res://Animations/NumberAnimation.tscn")
 const BattleUnits = preload("res://BattleUnits.tres")
+const DialogBox = preload("res://DialogBox.tres")
 
 func _ready():
 	var player = BattleUnits.PlayerStats
@@ -91,6 +92,17 @@ func _on_PlayerStats_took_damage(amount, hit_force):
 	else:
 		var extra_text = get_hit_force_text(hit_force)
 		numberAnimation.play_damage(amount, extra_text)
+
+func _on_PlayerStats_debuff(buff):
+	var buff_name = get_debuff_name(buff)
+	var text = buff_name + " wore off!"
+	DialogBox.show_timeout(text, 1)
+
+func get_debuff_name(buff):
+	match(buff):
+		GameConstants.STATUS.SHIELDED: return "SHIELD"
+		GameConstants.STATUS.BOOST: return "BOOST"
+		_: return
 
 func animate_panel(hit_force):
 	match(hit_force):

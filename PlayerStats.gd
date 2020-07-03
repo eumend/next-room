@@ -34,6 +34,7 @@ signal max_hp_changed(value)
 signal power_changed(value)
 signal level_changed(value)
 signal status_changed(value)
+signal debuff(buff)
 signal status_healed(value)
 signal took_damage(value)
 signal heal_damage(value)
@@ -93,6 +94,7 @@ func clear_buffs():
 			new_buffs.append([buff, turns_left])
 		else:
 			player_statuses.erase(buff)
+			emit_signal("debuff", buff)
 			emit_signal("status_changed", player_statuses)
 	player_buffs = new_buffs
 

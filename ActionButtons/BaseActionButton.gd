@@ -58,8 +58,11 @@ func finish_turn():
 
 func _on_ActionButton_pressed():
 	charge = 0
-	sfxBeep.play()
+	pressed_sfx()
 	_on_pressed()
+
+func pressed_sfx():
+	sfxBeep.play()
 
 func _on_pressed():
 	pass # Replace with function body.
