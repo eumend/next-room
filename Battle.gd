@@ -292,11 +292,7 @@ func end_battle(enemy):
 	# Battle over cleanup
 	reset_player_status()
 	if enemy.is_boss or playerScore.current_level == 8:
-		# Save current progress
-		playerScore.save()
-		var playerStats = BattleUnits.PlayerStats
-		if playerStats:
-			playerStats.save()
+		save_progress()
 	enemy.queue_free()
 	
 	var level_info = Levels[playerScore.current_level]
@@ -422,7 +418,14 @@ func _on_ContinueButton_pressed():
 	update_level_layout()
 	yield(get_tree().create_timer(0.3), "timeout")
 	actionButtons.recharge_all()
+	save_progress()
 	$BGPlayer.play()
 	start_battle()
 	animationPlayer.play("FadeIn")
 	yield(animationPlayer, "animation_finished")
+
+func save_progress():
+	playerScore.save()
+	var playerStats = BattleUnits.PlayerStats
+	if playerStats:
+		playerStats.save()
