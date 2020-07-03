@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://ActionButtons/BaseActionButton.gd" type="Script" id=1]
 [ext_resource path="res://Music/SFX/blow_1.wav" type="AudioStream" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Music/SFX/beep_2.wav" type="AudioStream" id=7]
 [ext_resource path="res://Music/SFX/charge_1.wav" type="AudioStream" id=8]
 [ext_resource path="res://Music/SFX/stat_boost_1.wav" type="AudioStream" id=9]
+[ext_resource path="res://Music/SFX/heal_2.wav" type="AudioStream" id=10]
 
 [node name="ActionButton" type="Button"]
 margin_right = 34.0
@@ -25,6 +26,9 @@ stream = ExtResource( 2 )
 
 [node name="SFXHeal" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
+
+[node name="SFXHealStatus" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
 
 [node name="SFXBeep" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )

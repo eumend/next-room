@@ -19,6 +19,7 @@ func _on_MendBattleField_heal(hit_force = null):
 
 func _on_MendBattleField_heal_status():
 	if(is_battle_ready()):
+		$SFXHealStatus.play()
 		player.heal_status()
 
 func _on_MendBattleField_miss():
