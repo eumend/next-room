@@ -65,7 +65,7 @@ func is_dead():
 const JanKenBattleField = preload("res://BattleFields/Enemy/JankenBattleField.tscn")
 
 func shield_attack():
-	show_attack_text("Its wing are transforming...")
+	show_attack_text("Its wings are transforming...")
 	var jankenBattleField = JanKenBattleField.instance()
 	jankenBattleField.choice_map = {
 		jankenBattleField.CHOICES.SCISSORS: 20,
