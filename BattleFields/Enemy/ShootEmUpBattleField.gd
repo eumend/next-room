@@ -100,6 +100,7 @@ func on_bombBullet_disappear():
 
 func handle_bullet_disappeared():
 	bullets_done += 1
+	heal()
 	check_finished()
 
 func check_finished():

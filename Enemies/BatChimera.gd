@@ -247,6 +247,7 @@ func bug_attack():
 	battleField.shots_left = bullets.size() - 1
 	battleField.connect("hit", self, "on_shootEmUpBattleField_hit")
 	battleField.connect("done", self, "on_shootEmUpBattleField_done")
+	battleField.connect("heal", self, "on_shootEmUpBattleField_heal")
 	ActionBattle.start_small_field(battleField)
 
 func get_bullets():
@@ -264,6 +265,9 @@ func on_shootEmUpBattleField_hit(_hit_force):
 
 func on_shootEmUpBattleField_done():
 	emit_signal("end_turn")
+
+func on_shootEmUpBattleField_heal():
+	.heal_player(1)
 
 # Ring Angel
 

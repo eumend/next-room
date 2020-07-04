@@ -99,6 +99,11 @@ func take_damage(amount, hit_force = null):
 		animationPlayer.play("Shake")
 		yield(animationPlayer, "animation_finished")
 
+func heal_player(amount):
+	var playerStats = BattleUnits.PlayerStats
+	if playerStats:
+		playerStats.heal_damage(amount)
+
 func flee():
 	$SFXFlee.play()
 	hpLabel.hide()

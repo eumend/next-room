@@ -33,6 +33,7 @@ func shoot_em_attack():
 	battleField.shots_left = bullets.size()
 	battleField.connect("hit", self, "on_shootBattleField_hit")
 	battleField.connect("done", self, "on_BattleField_done")
+	battleField.connect("heal", self, "on_BattleField_heal")
 	ActionBattle.start_small_field(battleField)
 
 func get_bullets():
@@ -55,3 +56,6 @@ func on_shootBattleField_hit(_hit_force):
 
 func on_BattleField_done():
 	emit_signal("end_turn")
+
+func on_BattleField_heal():
+	.heal_player(1)
