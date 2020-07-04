@@ -110,11 +110,7 @@ func mermaid_attack():
 	battleField.color = "2effff" # Light blue
 	battleField.connect("hit", self, "on_bulletsDownBattleField_hit")
 	battleField.connect("done", self, "on_bulletsDownBattleField_done")
-	battleField.connect("fired", self, "on_bulletsDownBattleField_fired")
 	ActionBattle.start_small_field(battleField)
-
-func on_bulletsDownBattleField_fired():
-	$SFXNeutral.play()
 
 func on_bulletsDownBattleField_hit(_hit_force):
 	.deal_damage(GameConstants.HIT_FORCE.STRONG)

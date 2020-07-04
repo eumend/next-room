@@ -6,6 +6,7 @@ var speed = 50
 var paused = false
 var color = "ffffff" setget set_color
 onready var animationPlayer = $AnimationPlayer
+signal unpaused
 
 func set_color(new_color):
 	color = new_color
@@ -25,6 +26,7 @@ func pause():
 
 func unpause():
 	paused = false
+	emit_signal("unpaused")
 
 func disappear():
 	paused = true

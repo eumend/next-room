@@ -19,11 +19,7 @@ func sing_attack():
 	battleField.sprite = noteSprite
 	battleField.connect("hit", self, "on_BattleField_hit")
 	battleField.connect("done", self, "on_BattleField_done")
-	battleField.connect("fired", self, "on_BattleField_fired")
 	ActionBattle.start_small_field(battleField)
-
-func on_BattleField_fired():
-	$SFXNeutral.play()
 
 func on_BattleField_hit(_hit_force):
 	.deal_damage(GameConstants.HIT_FORCE.STRONG)

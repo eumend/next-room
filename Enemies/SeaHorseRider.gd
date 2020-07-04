@@ -34,7 +34,6 @@ func sing_attack():
 	battleField.color = "2effff" # Light blue
 	battleField.connect("hit", self, "on_BattleField_hit")
 	battleField.connect("done", self, "on_BattleField_done")
-	battleField.connect("fired", self, "on_BattleField_fired")
 	ActionBattle.start_small_field(battleField)
 
 func ink_attack():
@@ -45,9 +44,6 @@ func ink_attack():
 	battleField.connect("hit", self, "on_BattleField_hit")
 	battleField.connect("done", self, "on_BattleField_done")
 	ActionBattle.start_small_field(battleField)
-
-func on_BattleField_fired():
-	$SFXNeutral.play()
 
 func on_BattleField_hit(_hit_force):
 	.deal_damage(GameConstants.HIT_FORCE.STRONG)

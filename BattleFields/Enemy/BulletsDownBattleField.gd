@@ -51,6 +51,7 @@ func _fire_bullet():
 	new_bullet.position = bullet_position
 	new_bullet.speed = get_bullet_speed()
 	new_bullet.connect("hit", self, "on_Bullet_hit")
+	new_bullet.connect("unpaused", self, "on_Bullet_unpaused")
 	add_child(new_bullet)
 	emit_signal("fired")
 
@@ -90,6 +91,9 @@ func on_Bullet_hit(target, bullet):
 		bullet.disappear()
 	if bullets_that_hit == total_bullets:
 		doneTimer.start()
+
+func on_Bullet_unpaused():
+	$SFXUnpause.play()
 
 func _on_FieldButton_pressed():
 	if current_pos == LEFT:
