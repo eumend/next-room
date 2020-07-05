@@ -57,7 +57,9 @@ func _on_PlayerStats_status_changed(statuses):
 func _on_PlayerStats_status_healed(statuses):
 	_on_PlayerStats_status_changed(statuses)
 	var numberAnimation = NumberAnimation.instance()
-	lvLabel.add_child(numberAnimation)
+	var player = BattleUnits.PlayerStats
+	var parentLabel = statusContainer if player.is_under_status() else lvLabel
+	parentLabel.add_child(numberAnimation)
 	numberAnimation.play_heal(null, "+++")
 
 func display_status(statuses):
