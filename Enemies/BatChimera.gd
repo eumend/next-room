@@ -266,7 +266,7 @@ func on_shootEmUpBattleField_hit(_hit_force):
 func on_shootEmUpBattleField_done():
 	emit_signal("end_turn")
 
-func on_shootEmUpBattleField_heal():
+func on_shootEmUpBattleField_heal(_hit_force):
 	.heal_player(1)
 
 # Ring Angel

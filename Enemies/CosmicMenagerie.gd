@@ -23,6 +23,7 @@ func saucer_attack():
 	battleField.connect("hit", self, "on_bossBattleField_hit")
 	battleField.connect("done", self, "on_BattleField_done")
 	battleField.connect("boss_hit", self, "on_BattleField_boss_hit")
+	battleField.connect("heal", self, "on_BattleField_heal")
 	ActionBattle.start_small_field(battleField)
 
 func shoot_em_attack():
@@ -57,5 +58,5 @@ func on_shootBattleField_hit(_hit_force):
 func on_BattleField_done():
 	emit_signal("end_turn")
 
-func on_BattleField_heal():
+func on_BattleField_heal(_hit_force):
 	.heal_player(1)
