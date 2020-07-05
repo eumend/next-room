@@ -42,7 +42,7 @@ func unpause():
 
 func disappear():
 	paused = true
-	emit_signal("disappear")
+	emit_signal("disappear", bullet_type)
 	animationPlayer.playback_speed = 1
 	animationPlayer.play("Disappear")
 	disappearSFX.play()

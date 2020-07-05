@@ -61,9 +61,9 @@ func handle_bullet_explode():
 	if not pause:
 		.handle_bullet_explode()
 
-func handle_bullet_disappeared():
+func handle_bullet_disappeared(bullet_type):
 	if not pause:
-		.handle_bullet_disappeared()
+		.handle_bullet_disappeared(bullet_type)
 
 func on_bossBullet_hit(target, bullet):
 	match(target.name):

@@ -95,12 +95,13 @@ func handle_bullet_explode():
 	hit()
 	check_finished()
 
-func on_bombBullet_disappear():
-	handle_bullet_disappeared()
+func on_bombBullet_disappear(bullet_type):
+	handle_bullet_disappeared(bullet_type)
 
-func handle_bullet_disappeared():
+func handle_bullet_disappeared(bullet_type):
 	bullets_done += 1
-	heal()
+	if bullet_type == GameConstants.BOMB_BULLET_TYPES.COOLDOWN:
+		heal()
 	check_finished()
 
 func check_finished():

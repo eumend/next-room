@@ -3,3 +3,4 @@
 *.exe
 *.x86_64
 *.pck
+.vscode
