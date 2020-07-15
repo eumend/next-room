@@ -25,6 +25,11 @@ const Explosion = preload("res://Animations/Explosion1Animation.tscn")
 
 var undead = true
 
+func take_damage(amount, hit_force = null):
+	.take_damage(amount, hit_force)
+	if self.hp <= floor(self.max_hp / 4):
+		$Sprite.self_modulate = "ff0000"
+
 func attack():
 	if self.hp <= 0:
 		undead_attack() 
@@ -82,7 +87,7 @@ func _on_jankenBattleField_player_lose():
 	.deal_damage(GameConstants.HIT_FORCE.STRONG)
 
 func _on_jankenBattleField_player_win():
-	.take_damage(ceil(self.max_hp / 6))
+	take_damage(ceil(self.max_hp / 6))
 
 func _on_jankenBattleField_done():
 	if self.hp <= 0:

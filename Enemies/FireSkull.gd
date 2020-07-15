@@ -5,6 +5,11 @@ const Explosion = preload("res://Animations/Explosion1Animation.tscn")
 
 var undead = true
 
+func take_damage(amount, hit_force = null):
+	.take_damage(amount, hit_force)
+	if self.hp <= floor(self.max_hp / 4):
+		$Sprite.self_modulate = "ff0000"
+
 func get_attack_pattern():
 	var playerStats = BattleUnits.PlayerStats
 	if playerStats.hp <= round(self.power * 2):
