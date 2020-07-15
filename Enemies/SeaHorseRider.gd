@@ -6,9 +6,9 @@ const noteSprite = preload("res://Images/BattleFields/BulletsDown/NoteBullet.png
 func get_attack_pattern():
 	if self.hp < round(self.max_hp / 2):
 		return {
-			"sing_attack": 20,
-			"ink_attack": 20,
-			"regenerate_attack": 60,
+			"sing_attack": 30,
+			"ink_attack": 30,
+			"regenerate_attack": 40,
 		}
 	else:
 		return {
@@ -26,7 +26,7 @@ func regenerate_attack():
 func sing_attack():
 	show_attack_text("SEA MELODY!")
 	var battleField = BulletsDownBattleField.instance()
-	battleField.base_speed = 70
+	battleField.base_speed = 75
 	battleField.total_bullets = 5
 	battleField.stop_point = 30
 	battleField.stop_point_time = 1
