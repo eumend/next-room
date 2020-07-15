@@ -24,6 +24,7 @@ signal death_animation_done
 
 var hp = max_hp setget set_hp
 var on_death_animation = false
+var turn_count = 0
 
 var hit_force_pattern = {
 	GameConstants.HIT_FORCE.NORMAL: 60,
@@ -48,6 +49,7 @@ func on_startTurnTimer_timeout():
 	on_start_turn()
 
 func on_start_turn():
+	turn_count += 1
 	attack()
 
 func attack():

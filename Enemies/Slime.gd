@@ -8,8 +8,8 @@ func get_attack_pattern():
 		}
 	else:
 		return {
-			"default_attack": 10,
-			"poison_attack": 90,
+			"default_attack": 40,
+			"poison_attack": 60,
 		}
 
 func poison_attack():

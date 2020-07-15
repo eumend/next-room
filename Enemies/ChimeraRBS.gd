@@ -2,10 +2,14 @@ extends "res://Enemies/BaseEnemy.gd"
 
 func get_attack_pattern():
 	var playerStats = BattleUnits.PlayerStats
-	if not playerStats.has_status(GameConstants.STATUS.POISON):
+	if turn_count < 2:
 		return {
-			"poison_attack": 80,
-			"default_attack": 20,
+			"default_attack": 100,
+		}
+	elif not playerStats.has_status(GameConstants.STATUS.POISON):
+		return {
+			"poison_attack": 70,
+			"default_attack": 30,
 		}
 	elif self.hp <= round(self.max_hp / 2):
 		return {
