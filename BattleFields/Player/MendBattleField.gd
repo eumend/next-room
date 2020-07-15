@@ -5,9 +5,12 @@ const Bullet = preload("res://BattleFields/Enemy/Utils/Bullet.tscn")
 onready var player = $Field/Player
 onready var bulletTimer = $Field/BulletTimer
 
+const TOTAL_WIDTH = 72
+const MARGIN = 15
+
 # Player
-var min_starting_x = 10
-var max_starting_x = 62
+var min_starting_x = 0 + MARGIN
+var max_starting_x = TOTAL_WIDTH - MARGIN
 var starting_y = 50
 
 # Bullets
@@ -15,7 +18,7 @@ var total_bullets = 8
 var bullets_left = total_bullets
 var bullets_that_hit = 0
 var fired_bullets = 0
-var base_speed = 65
+var base_speed = 85
 var bullet_starting_y = -4 # Above the screen
 
 
@@ -27,17 +30,16 @@ func _ready():
 func start_player_bumper():
 	randomize()
 	var middle_of_field = min_starting_x + (max_starting_x - min_starting_x) / 2
-	var starting_position = Vector2(rand_range(min_starting_x, max_starting_x), starting_y)
-	var starting_direction = 1 if starting_position.x < middle_of_field else -1
-	player.position = starting_position
+	var starting_direction = 1
+	player.position = Vector2(middle_of_field, starting_y)
 	player.direction = starting_direction
-	player.speed = 100
+	player.speed = 200
 	player.start()
 
 func fire_bullet():
 	fired_bullets += 1
-	bulletTimer.wait_time = get_bullet_wait_time()
-	bulletTimer.start()
+#	bulletTimer.wait_time = get_bullet_wait_time()
+#	bulletTimer.start()
 
 func _fire_bullet():
 	var new_bullet = Bullet.instance()
@@ -93,11 +95,13 @@ func _on_FieldButton_pressed():
 
 func _on_BorderL_area_entered(area):
 	if area.name == "Player":
+		player.stop()
 		player.direction = 1
 
 
 func _on_BorderR_area_entered(area):
 	if area.name == "Player":
+		player.stop()
 		player.direction = -1
 
 

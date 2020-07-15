@@ -3,7 +3,7 @@
 [ext_resource path="res://BattleFields/Player/Utils/PlayerBumperH.gd" type="Script" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 5.04844, 1.04258 )
+extents = Vector2( 7.9977, 1.04258 )
 
 [node name="Player" type="Area2D"]
 script = ExtResource( 1 )
@@ -16,9 +16,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -5.0
+margin_left = -8.0
 margin_top = -1.0
-margin_right = 5.0
+margin_right = 8.0
 margin_bottom = 1.0
 mouse_filter = 2
 __meta__ = {
