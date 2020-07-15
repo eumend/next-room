@@ -27,7 +27,7 @@ func fire_bumper():
 	var playerBumper = PlayerBumper.instance()
 	playerBumper.position = starting_position
 	playerBumper.direction = direction
-	playerBumper.speed = 120
+	playerBumper.speed = 90
 	add_child(playerBumper)
 	playerBumper.add_to_group("bumpers")
 	playerBumper.connect("hit", self, "on_playerBumper_hit")

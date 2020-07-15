@@ -20,9 +20,9 @@ func explode():
 	animationPlayer.play("Explode")
 
 func on_hit():
-	emit_signal("hit")
-	explode()
-
+	if moving:
+		emit_signal("hit")
+		explode()
 
 func _on_AnimationPlayer_animation_finished(_anim_name):
 	queue_free()
