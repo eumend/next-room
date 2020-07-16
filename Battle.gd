@@ -96,7 +96,7 @@ var Levels = {
 		"enemies": {
 			"spider": 45,
 			"spectre": 40,
-			"voodoo_doll": 15
+			"voodoo_doll": 15,
 		},
 		"boss": "voodoo_curse",
 		"mook_count": 5,
@@ -138,7 +138,7 @@ var last_enemy = null
 
 func _ready():
 	$BGPlayer.play()
-	# skip_to_level(7, 12) # Debugging
+	# skip_to_level(5, 12) # Debugging
 	update_level_layout()
 	create_player()
 	start_battle()
@@ -172,6 +172,7 @@ func _on_Player_died():
 	ActionBattle.force_end_of_battle()
 	if BattleUnits.is_player_turn():
 		actionButtons.hide()
+		game_over()
 
 func _on_Player_status_changed(status):
 	if status.size() > 0:
