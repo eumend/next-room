@@ -137,11 +137,17 @@ var enemy_encounter_rate = null
 var last_enemy = null
 
 func _ready():
+	load_save()
 	$BGPlayer.play()
 	# skip_to_level(5, 12) # Debugging
 	update_level_layout()
 	create_player()
 	start_battle()
+
+func load_save():
+	var playerStats = BattleUnits.PlayerStats
+	playerStats.load_save()
+	playerScore.load_save()
 
 func start_battle():
 	create_new_enemy()

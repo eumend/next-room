@@ -6,8 +6,8 @@ var turns_taken = 0
 var current_run = 0
 var continues_taken = 0
 
-func _ready():
-	load_save()
+#func _ready():
+#	load_save()
 
 func load_save():
 	var saved_state = SaveFile.load_save("player_score")

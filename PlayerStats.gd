@@ -166,7 +166,7 @@ func set_level(value):
 
 func _ready():
 	BattleUnits.PlayerStats = self
-	load_save()
+#	load_save()
 
 func reset_plus():
 	self.hp = base_hp
