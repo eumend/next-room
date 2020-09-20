@@ -4,3 +4,5 @@
 *.x86_64
 *.pck
 .vscode
+export_presets.cfg
+.import
