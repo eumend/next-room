@@ -6,7 +6,7 @@ var undead = true
 
 func take_damage(amount, hit_force = null):
 	.take_damage(amount, hit_force)
-	if self.hp <= floor(self.max_hp / 4):
+	if self.hp <= floor(self.max_hp / 4.0):
 		$Sprite.self_modulate = "ff0000"
 
 func attack():

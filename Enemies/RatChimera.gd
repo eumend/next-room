@@ -27,7 +27,7 @@ var undead = true
 
 func take_damage(amount, hit_force = null):
 	.take_damage(amount, hit_force)
-	if self.hp <= floor(self.max_hp / 4):
+	if self.hp <= floor(self.max_hp / 4.0):
 		$Sprite.self_modulate = "ff0000"
 
 func attack():
@@ -81,13 +81,13 @@ func sword_janken_attack():
 	ActionBattle.start_small_field(jankenBattleField)
 
 func _on_jankenBattleField_player_draw():
-	.heal_damage(ceil(self.max_hp / 5))
+	.heal_damage(ceil(self.max_hp / 5.0))
 
 func _on_jankenBattleField_player_lose():
 	.deal_damage(GameConstants.HIT_FORCE.STRONG)
 
 func _on_jankenBattleField_player_win():
-	take_damage(ceil(self.max_hp / 6))
+	take_damage(ceil(self.max_hp / 6.0))
 
 func _on_jankenBattleField_done():
 	if self.hp <= 0:

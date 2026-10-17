@@ -147,8 +147,8 @@ func animate_damage(amount, hit_force):
 
 func get_attack_damage_amount(amount, hit_force):
 	match(hit_force):
-		GameConstants.HIT_FORCE.CRIT: return amount + ceil(amount / 3)
-		GameConstants.HIT_FORCE.STRONG: return amount + ceil(amount / 5)
+		GameConstants.HIT_FORCE.CRIT: return amount + ceil(amount / 3.0)
+		GameConstants.HIT_FORCE.STRONG: return amount + ceil(amount / 5.0)
 		_: return amount
 
 func get_hit_force_text(hit_force):

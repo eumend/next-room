@@ -39,7 +39,7 @@ func deal_damage(hit_force = null, _fixed_amount= null):
 	var playerStats = BattleUnits.PlayerStats
 	if playerStats:
 		if selected_attack == "slime_attack":
-			var attack_power = max(ceil(power / 2), 1)
+			var attack_power = max(ceil(power / 2.0), 1)
 			.deal_damage(null, attack_power)
 			playerStats.add_status(GameConstants.STATUS.POISON)
 		else:
@@ -48,7 +48,7 @@ func deal_damage(hit_force = null, _fixed_amount= null):
 # Candle
 
 func attack():
-	if self.hp <= round(self.max_hp / 5):
+	if self.hp <= round(self.max_hp / 5.0):
 		candle_attack()
 	else:
 		.attack()
@@ -80,13 +80,13 @@ func tome_attack():
 	ActionBattle.start_small_field(jankenBattleField)
 
 func _on_jankenBattleField_player_draw():
-	.heal_damage(ceil(self.max_hp / 5))
+	.heal_damage(ceil(self.max_hp / 5.0))
 
 func _on_jankenBattleField_player_lose():
 	.deal_damage(GameConstants.HIT_FORCE.STRONG)
 
 func _on_jankenBattleField_player_win():
-	.take_damage(ceil(self.max_hp / 5))
+	.take_damage(ceil(self.max_hp / 5.0))
 
 func _on_jankenBattleField_done():
 	emit_signal("end_turn")
@@ -96,7 +96,7 @@ func _on_jankenBattleField_done():
 func starfish_attack():
 	var dialog = show_attack_text("It's... laying down...")
 	yield(dialog, "done")
-	.heal_damage(round(self.max_hp / 5))
+	.heal_damage(round(self.max_hp / 5.0))
 	emit_signal("end_turn")
 
 # Voodoo doll

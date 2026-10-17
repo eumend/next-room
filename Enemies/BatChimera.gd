@@ -83,10 +83,10 @@ func _on_jankenBattleField_player_draw():
 	pass
 
 func _on_jankenBattleField_player_lose():
-	.heal_damage(ceil(self.max_hp / 5))
+	.heal_damage(ceil(self.max_hp / 5.0))
 
 func _on_jankenBattleField_player_win():
-	.take_damage(ceil(self.max_hp / 8))
+	.take_damage(ceil(self.max_hp / 8.0))
 
 func _on_jankenBattleField_done():
 	if self.hp <= 0:
@@ -206,9 +206,9 @@ func deal_damage(hit_force = null, _fixed_amount= null):
 	var playerStats = BattleUnits.PlayerStats
 	if playerStats:
 		if selected_attack == "leech_life":
-			var attack_power = max(ceil(power / 2), 1)
+			var attack_power = max(ceil(power / 2.0), 1)
 			.deal_damage(null, attack_power)
-			.heal_damage(round(self.max_hp / 5))
+			.heal_damage(round(self.max_hp / 5.0))
 		elif selected_attack == "spectre_attack":
 			var first_id = roulettes[0][roulette_selections[0]]["id"]
 			var second_id = roulettes[1][roulette_selections[1]]["id"]

@@ -4,7 +4,7 @@ const BulletsDownBattleField = preload("res://BattleFields/Enemy/BulletsDownBatt
 const noteSprite = preload("res://Images/BattleFields/BulletsDown/NoteBullet.png")
 
 func get_attack_pattern():
-	if self.hp < round(self.max_hp / 2):
+	if self.hp < round(self.max_hp / 2.0):
 		return {
 			"sing_attack": 30,
 			"ink_attack": 30,
@@ -20,7 +20,7 @@ func get_attack_pattern():
 func regenerate_attack():
 	var dialog = show_attack_text("I'M TIRED...")
 	yield(dialog, "done")
-	.heal_damage(round(self.max_hp / 3))
+	.heal_damage(round(self.max_hp / 3.0))
 	emit_signal("end_turn")
 
 func sing_attack():

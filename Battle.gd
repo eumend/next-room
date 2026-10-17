@@ -249,7 +249,7 @@ func handle_status_eot():
 		if player.has_status(GameConstants.STATUS.POISON):
 			yield(get_tree().create_timer(0.5), "timeout")
 			DialogBox.show_timeout("Damage by poison!", 1.5)
-			player.take_status_damage(round(player.max_hp / 8))
+			player.take_status_damage(round(player.max_hp / 8.0))
 			yield(DialogBox, "done")
 			emit_signal("_done")
 		else:

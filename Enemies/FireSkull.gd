@@ -7,7 +7,7 @@ var undead = true
 
 func take_damage(amount, hit_force = null):
 	.take_damage(amount, hit_force)
-	if self.hp <= floor(self.max_hp / 4):
+	if self.hp <= floor(self.max_hp / 4.0):
 		$Sprite.self_modulate = "ff0000"
 
 func get_attack_pattern():
@@ -23,7 +23,7 @@ func get_attack_pattern():
 		}
 
 func attack():
-	if self.hp <= round(self.max_hp / 5):
+	if self.hp <= round(self.max_hp / 5.0):
 		undead_attack()
 	else:
 		.attack()
@@ -33,9 +33,9 @@ func is_dead():
 
 func fire_attack():
 	show_attack_text("BURN!")
-	if self.hp <= round(self.max_hp / 3):
+	if self.hp <= round(self.max_hp / 3.0):
 		do_fire_attack(5)
-	elif self.hp <= round(self.max_hp / 2):
+	elif self.hp <= round(self.max_hp / 2.0):
 		do_fire_attack(4)
 	else:
 		do_fire_attack(3)

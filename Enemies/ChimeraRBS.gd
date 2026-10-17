@@ -11,7 +11,7 @@ func get_attack_pattern():
 			"poison_attack": 70,
 			"default_attack": 30,
 		}
-	elif self.hp <= round(self.max_hp / 2):
+	elif self.hp <= round(self.max_hp / 2.0):
 		return {
 			"leech_life": 60,
 			"default_attack": 40,
@@ -38,11 +38,11 @@ func deal_damage(hit_force = null, _fixed_amount= null):
 	var playerStats = BattleUnits.PlayerStats
 	if playerStats:
 		if selected_attack == "poison_attack":
-			var attack_power = max(ceil(power / 2), 1)
+			var attack_power = max(ceil(power / 2.0), 1)
 			.deal_damage(null, attack_power)
 			playerStats.add_status(GameConstants.STATUS.POISON)
 		elif selected_attack == "leech_life":
-			var attack_power = max(ceil(power / 3), 3)
+			var attack_power = max(ceil(power / 3.0), 3)
 			.deal_damage(null, attack_power)
 			.heal_damage(attack_power - 1)
 		else:

@@ -1,7 +1,7 @@
 extends "res://Enemies/BaseEnemy.gd"
 
 func get_attack_pattern():
-	if self.hp <= round(self.max_hp / 3):
+	if self.hp <= round(self.max_hp / 3.0):
 		return {
 			"suicide_attack": 100,
 		}
@@ -11,7 +11,7 @@ func get_attack_pattern():
 		}
 
 func attack():
-	if self.hp <= round(self.max_hp / 3):
+	if self.hp <= round(self.max_hp / 3.0):
 		suicide_attack()
 	else:
 		.attack()

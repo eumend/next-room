@@ -67,7 +67,7 @@ func on_Bullet_hit(target, bullet):
 		doneTimer.start()
 
 func is_special(bullet_count):
-	return bullet_count == total_bullets or bullet_count == ceil(total_bullets / 2)
+	return bullet_count == total_bullets or bullet_count == ceil(total_bullets / 2.0)
 
 func get_bullet_speed():
 	match(bullets_left):

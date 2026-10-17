@@ -3,11 +3,11 @@ extends "res://Enemies/BaseEnemy.gd"
 const JanKenBattleField = preload("res://BattleFields/Enemy/JankenBattleField.tscn")
 
 func get_attack_pattern():
-	if self.hp < round(self.max_hp / 4):
+	if self.hp < round(self.max_hp / 4.0):
 		return {
 			"vengeance_attack": 100,
 		}
-	elif self.hp < round(self.max_hp / 2):
+	elif self.hp < round(self.max_hp / 2.0):
 		return {
 			"default_attack": 20,
 			"janken_attack": 80,
@@ -43,13 +43,13 @@ func janken_attack():
 	ActionBattle.start_small_field(jankenBattleField)
 
 func _on_jankenBattleField_player_draw():
-	.heal_damage(ceil(self.max_hp / 6))
+	.heal_damage(ceil(self.max_hp / 6.0))
 
 func _on_jankenBattleField_player_lose():
 	.deal_damage(GameConstants.HIT_FORCE.STRONG)
 
 func _on_jankenBattleField_player_win():
-	.take_damage(max(ceil(self.max_hp / 8), 2))
+	.take_damage(max(ceil(self.max_hp / 8.0), 2))
 
 func _on_jankenBattleField_done():
 	emit_signal("end_turn")

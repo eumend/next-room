@@ -32,7 +32,7 @@ func _on_jankenBattleField_player_draw():
 	pass
 
 func _on_jankenBattleField_player_lose():
-	.heal_damage(ceil(self.max_hp / 3))
+	.heal_damage(ceil(self.max_hp / 3.0))
 
 func _on_jankenBattleField_player_win():
 	.take_damage(1)

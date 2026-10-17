@@ -13,7 +13,7 @@ func _on_pressed():
 func _on_MendBattleField_heal(hit_force = null):
 	if(is_battle_ready()):
 		play_sfx(hit_force)
-		var base_amount = ceil(player.max_hp / 10) + round(player.level / 5)
+		var base_amount = ceil(player.max_hp / 10.0) + round(player.level / 5.0)
 		var heal_amount = get_heal_amount(base_amount, hit_force)
 		player.heal_damage(heal_amount)
 
@@ -36,5 +36,5 @@ func play_sfx(_hit_force):
 func get_heal_amount(amount, hit_force):
 	match(hit_force):
 		GameConstants.HIT_FORCE.CRIT: return amount * 2
-		GameConstants.HIT_FORCE.STRONG: return amount + max(ceil(amount / 4), 1)
+		GameConstants.HIT_FORCE.STRONG: return amount + max(ceil(amount / 4.0), 1)
 		_: return amount

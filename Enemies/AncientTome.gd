@@ -24,13 +24,13 @@ func janken_attack():
 	ActionBattle.start_small_field(jankenBattleField)
 
 func _on_jankenBattleField_player_draw():
-	.heal_damage(ceil(self.max_hp / 4))
+	.heal_damage(ceil(self.max_hp / 4.0))
 
 func _on_jankenBattleField_player_lose():
 	.deal_damage(GameConstants.HIT_FORCE.STRONG)
 
 func _on_jankenBattleField_player_win():
-	.take_damage(ceil(self.max_hp / 4))
+	.take_damage(ceil(self.max_hp / 4.0))
 
 func _on_jankenBattleField_done():
 	emit_signal("end_turn")

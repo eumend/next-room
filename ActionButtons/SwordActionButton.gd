@@ -35,7 +35,7 @@ func get_damage(player, hit_force):
 	
 func get_hit_force_multiplier(power, hit_force):
 	match(hit_force):
-		GameConstants.HIT_FORCE.CRIT: return power + ceil(power / 2)
+		GameConstants.HIT_FORCE.CRIT: return power + ceil(power / 2.0)
 		GameConstants.HIT_FORCE.STRONG: return power
 		GameConstants.HIT_FORCE.NORMAL: return max(power - 1, 1)
 		_: return 0

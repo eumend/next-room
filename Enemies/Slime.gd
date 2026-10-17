@@ -22,7 +22,7 @@ func deal_damage(hit_force = null, _fixed_amount= null):
 	var playerStats = BattleUnits.PlayerStats
 	if playerStats:
 		if selected_attack == "poison_attack":
-			var attack_power = max(ceil(power / 2), 1)
+			var attack_power = max(ceil(power / 2.0), 1)
 			.deal_damage(null, attack_power)
 			playerStats.add_status(GameConstants.STATUS.POISON)
 		else:
