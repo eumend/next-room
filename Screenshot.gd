@@ -11,6 +11,10 @@ var _tag = ""
 var _index = 0
 
 func _ready():
+	if not OS.is_debug_build():
+		# Dev-only tool: release builds can't write to res:// anyway
+		set_process_input(false)
+		return
 	_check_actions([shortcut_action])
 	_check_path(output_path)
 	
