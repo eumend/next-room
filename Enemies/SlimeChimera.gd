@@ -11,7 +11,7 @@ func get_attack_pattern():
 			"saucer_attack": 10,
 			"face_angel_battle_field": 10,
 		}
-	elif not voodoo:
+	elif not last_was_voodoo:
 		return {
 			"tome_attack": 15,
 			"starfish_attack": 15,
@@ -101,8 +101,10 @@ func starfish_attack():
 
 # Voodoo doll
 var voodoo = false
+var last_was_voodoo = false
 
 func on_start_turn():
+	last_was_voodoo = voodoo
 	voodoo = false
 	.on_start_turn()
 
