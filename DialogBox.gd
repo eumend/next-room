@@ -65,5 +65,6 @@ func on_Timer_timeout():
 		var next = message_queue.pop_front()
 		_show_text(next[0], next[1])
 	else:
+		# Go idle before notifying, so "done" listeners can queue new text
+		processing = false
 		emit_signal("done")
-		reset_queue()
