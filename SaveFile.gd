@@ -27,6 +27,14 @@ func save(store_key, data):
 	save_state[store_key] = data
 	_save()
 
+func save_many(entries):
+	# One write for several keys, so a killed app can't leave them out of sync
+	if not save_state:
+		save_state = {}
+	for store_key in entries:
+		save_state[store_key] = entries[store_key]
+	_save()
+
 func _save():
 	# Write to a temp file first so a killed app can't leave a truncated save
 	var save_game = File.new()

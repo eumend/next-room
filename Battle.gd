@@ -148,6 +148,10 @@ func load_save():
 	var playerStats = BattleUnits.PlayerStats
 	playerStats.load_save()
 	playerScore.load_save()
+	# Never trust saved values to be in range (old builds, partial writes)
+	playerScore.current_level = int(clamp(playerScore.current_level, 1, Levels.size()))
+	var max_streak = Levels[playerScore.current_level]["mook_count"] # == boss is next
+	playerScore.kill_streak = int(clamp(playerScore.kill_streak, 0, max_streak))
 
 func start_battle():
 	create_new_enemy()
@@ -399,6 +403,7 @@ func game_over():
 	$SFXGameOver.play()
 	var text = "RUN: " + str(playerScore.current_run) + "\n" + "CONT: " + str(playerScore.continues_taken) + "\n" + "TURNS: " + str(playerScore.turns_taken)
 	BattleSummary.show_summary("GAME OVER", text)
+	save_after_game_over()
 	restartButton.show()
 	continueButton.show()
 
@@ -449,12 +454,29 @@ func save_new_run():
 	# Saved so the title screen Continue starts the next run instead of replaying the last boss
 	var finished_score = playerScore.get_data_json()
 	playerScore.reset(true)
-	playerScore.save()
+	var new_run_score = playerScore.get_data_json()
 	playerScore.set_data_from_json(finished_score)
-	SaveFile.save("player_stats", BattleUnits.PlayerStats.get_new_game_data_json())
+	SaveFile.save_many({
+		"player_score": new_run_score,
+		"player_stats": BattleUnits.PlayerStats.get_new_game_data_json(),
+	})
+
+func save_after_game_over():
+	# Save what the in-game Continue would give, so quitting at GAME OVER
+	# and continuing from the title screen isn't a free retry of the room
+	var score = playerScore.get_data_json()
+	if playerScore.current_level != 8:
+		score["kill_streak"] = 0
+	score["continues_taken"] += 1
+	var stats = BattleUnits.PlayerStats.get_data_json()
+	stats["hp"] = stats["max_hp"]
+	stats["status"] = []
+	SaveFile.save_many({"player_score": score, "player_stats": stats})
 
 func save_progress():
-	playerScore.save()
 	var playerStats = BattleUnits.PlayerStats
 	if playerStats:
-		playerStats.save()
+		SaveFile.save_many({
+			"player_score": playerScore.get_data_json(),
+			"player_stats": playerStats.get_data_json(),
+		})
