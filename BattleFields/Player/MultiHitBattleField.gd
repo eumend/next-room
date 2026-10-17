@@ -25,6 +25,8 @@ func _physics_process(delta):
 		pointer.position += motion * delta * (speed + speed_increase[current_pointer])
 
 func _on_FieldButton_pressed():
+	if paused: # Both hits are in, ignore extra taps while we wrap up
+		return
 	var overlapping_area_names = []
 	var pointer = get_current_pointer()
 	for area in pointer.get_overlapping_areas():
