@@ -6,6 +6,7 @@ signal disappear
 var direction = Vector2(0, 1) # Down
 var speed = 100
 var paused = false
+var resolved = false # Lasers can hit a bomb more than once
 var color = "ffffff" setget set_color
 var time_seconds = 3
 var base_countdown_animation_speed = 1
@@ -41,6 +42,9 @@ func unpause():
 	paused = false
 
 func disappear():
+	if resolved:
+		return
+	resolved = true
 	paused = true
 	emit_signal("disappear", bullet_type)
 	animationPlayer.playback_speed = 1
@@ -48,6 +52,9 @@ func disappear():
 	disappearSFX.play()
 #
 func explode():
+	if resolved:
+		return
+	resolved = true
 	paused = true
 	emit_signal("explode")
 	animationPlayer.playback_speed = 1
