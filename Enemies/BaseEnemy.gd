@@ -73,7 +73,7 @@ func deal_damage(hit_force = null, fixed_amount = null): #Connected to animation
 	$SFXBlow.play()
 	var playerStats = BattleUnits.PlayerStats
 	if playerStats:
-		hit_force = hit_force if hit_force else Utils.pick_from_weighted(get_hit_force_pattern())
+		hit_force = hit_force if hit_force != null else Utils.pick_from_weighted(get_hit_force_pattern())
 		var amount = fixed_amount if fixed_amount != null else get_attack_damage_amount(power, hit_force)
 		playerStats.take_damage(amount, hit_force)
 		if playerStats.is_dead():
