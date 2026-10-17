@@ -27,4 +27,6 @@ func pick_from_weighted(distribution):
 		if pct >= start_range and pct < end_range:
 			winner = item
 			break
+	if winner == null and ranges.size() > 0:
+		winner = ranges.back()[2] # rand_range can return total_size itself
 	return winner
