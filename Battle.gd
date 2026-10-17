@@ -302,8 +302,9 @@ func end_battle(enemy):
 	if enemy.is_boss:
 		# The next floor starts healed anyway, save it that way
 		BattleUnits.PlayerStats.heal_all()
-	if enemy.is_boss or playerScore.current_level == 8:
-		save_progress()
+	# Save after every room so closing the app (or Android's Back) mid-floor
+	# doesn't lose progress
+	save_progress()
 	enemy.queue_free()
 	
 	var level_info = Levels[playerScore.current_level]
