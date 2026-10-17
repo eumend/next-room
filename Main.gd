@@ -12,6 +12,8 @@ onready var tween = $Tween
 onready var backFromCreditsButton = $UI/CreditsContainer/C2/Back
 onready var creditsNextButton = $UI/CreditsContainer/C1/Next
 
+var leaving = false
+
 func _ready():
 	startButton.connect("pressed", self, "on_startButton_pressed")
 	continueButton.connect("pressed", self, "on_continueButton_pressed")
@@ -44,6 +46,9 @@ func on_creditsButton_pressed():
 	creditsBox1.show()
 
 func go_to_battle():
+	if leaving:
+		return
+	leaving = true
 	fade_out_bg_music()
 	sfxMove.play()
 	animationPlayer.play("FadeIn")

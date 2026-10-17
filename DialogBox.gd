@@ -9,11 +9,17 @@ var processing = false
 signal done
 
 func set_timer(new_timer):
+	# A new text box panel took over (new scene), drop anything left from the old one
+	message_queue = []
+	processing = false
 	DialogTimer = new_timer
 	DialogTimer.connect("timeout", self, "on_Timer_timeout")
 
+func is_ui_ready():
+	return is_instance_valid(TextBox) and is_instance_valid(DialogTimer) and DialogTimer.is_inside_tree()
+
 func show_text(text):
-	if TextBox:
+	if is_ui_ready():
 		reset_queue()
 		TextBox.text = text
 
@@ -36,18 +42,24 @@ func reset_queue():
 	if message_queue.size() > 0:
 		message_queue = []
 	processing = false
-	if DialogTimer:
+	if is_instance_valid(DialogTimer):
 		DialogTimer.stop()
 
 func _show_text(text, time_seconds):
-	if TextBox and DialogTimer:
+	if is_ui_ready():
 		# Process timed text, might have more types in the future
 		TextBox.text = text
 		DialogTimer.wait_time = time_seconds
 		DialogTimer.start()
-		
+	else:
+		# Nowhere to show it: don't leave callers waiting on "done" forever
+		message_queue = []
+		processing = false
+		call_deferred("emit_signal", "done")
+
 func on_Timer_timeout():
-	TextBox.text = ""
+	if is_instance_valid(TextBox):
+		TextBox.text = ""
 	# Handle queue recursion
 	if message_queue.size() > 0:
 		var next = message_queue.pop_front()
