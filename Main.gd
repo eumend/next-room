@@ -31,10 +31,12 @@ func on_creditsNextButton_pressed():
 	creditsBox2.show()
 
 func on_startButton_pressed():
+	buttonsBox.hide() # Ignore double taps during the fade
 	SaveFile.reset()
 	go_to_battle()
 
 func on_continueButton_pressed():
+	buttonsBox.hide() # Ignore double taps during the fade
 	go_to_battle()
 
 func on_creditsButton_pressed():
