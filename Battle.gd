@@ -207,12 +207,12 @@ func pick_next_enemy():
 		enemy_name = ["rat_chimera", "bat_chimera", "slime_chimera"][playerScore.kill_streak]
 	else:
 		var level_enemies = level_info["enemies"]
-		if not enemy_encounter_rate:
-			enemy_encounter_rate = level_enemies
+		if not enemy_encounter_rate or not last_enemy in enemy_encounter_rate:
+			# Copy so the per-level table in Levels is never mutated
+			enemy_encounter_rate = level_enemies.duplicate()
 		if last_enemy in enemy_encounter_rate:
-			enemy_encounter_rate[last_enemy] = enemy_encounter_rate[last_enemy] - 5
-		else:
-			enemy_encounter_rate = level_enemies
+			# Make repeats rarer, but never drop an enemy out of the pool
+			enemy_encounter_rate[last_enemy] = max(enemy_encounter_rate[last_enemy] - 5, 5)
 		enemy_name = Utils.pick_from_weighted(enemy_encounter_rate)
 		last_enemy = enemy_name
 	return enemy_name
@@ -236,6 +236,10 @@ func _on_Enemy_fled():
 	var enemy = BattleUnits.Enemy
 	ActionBattle.force_end_of_battle()
 	end_battle(enemy)
+
+func reset_encounters():
+	enemy_encounter_rate = null
+	last_enemy = null
 
 func start_enemy_turn():
 	var enemy = BattleUnits.Enemy
@@ -278,8 +282,7 @@ func eot_checks():
 func handle_boss_death_eot(enemy):
 	# Reset level vars
 	playerScore.current_level += 1
-	enemy_encounter_rate = null
-	last_enemy = null
+	reset_encounters()
 	nextRoomButton.text = "SAVE"
 	if playerScore.current_level in Levels:
 		handle_enemy_death_eot(enemy)
@@ -374,7 +377,10 @@ func _on_RestartButton_pressed():
 		BattleUnits.Enemy = null
 		enemy.queue_free()
 	playerScore.reset()
+	reset_encounters()
 	update_level_layout()
+	actionButtons.recharge_all()
+	save_progress() # So "Continue" on the title screen resumes this new run
 	yield(get_tree().create_timer(0.3), "timeout")
 	animationPlayer.play("FadeIn")
 	yield(animationPlayer, "animation_finished")
