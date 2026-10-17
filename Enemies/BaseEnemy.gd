@@ -24,6 +24,7 @@ signal death_animation_done
 
 var hp = max_hp setget set_hp
 var on_death_animation = false
+var dying = false
 var turn_count = 0
 
 var hit_force_pattern = {
@@ -70,11 +71,12 @@ func default_attack():
 
 
 func deal_damage(hit_force = null, fixed_amount = null): #Connected to animations
-	$SFXBlow.play()
 	var playerStats = BattleUnits.PlayerStats
 	if playerStats:
 		hit_force = hit_force if hit_force != null else Utils.pick_from_weighted(get_hit_force_pattern())
 		var amount = fixed_amount if fixed_amount != null else get_attack_damage_amount(power, hit_force)
+		if amount > 0:
+			$SFXBlow.play()
 		playerStats.take_damage(amount, hit_force)
 		if playerStats.is_dead():
 			emit_signal("end_turn")
@@ -83,6 +85,8 @@ func get_hit_force_pattern():
 	return hit_force_pattern
 
 func heal_damage(amount):
+	if hp <= 0: # Dead or "undead" (about to explode) units can't heal back
+		return
 	var old_hp = hp
 	self.hp = clamp(old_hp + amount, 0, self.max_hp)
 	var healed = self.hp - old_hp
@@ -91,6 +95,8 @@ func heal_damage(amount):
 		animate_heal(healed)
 
 func take_damage(amount, hit_force = null):
+	if dying:
+		return
 	if amount > 0:
 		$SFXBlow.play()
 	self.hp -= amount
@@ -114,6 +120,9 @@ func flee():
 	emit_signal("fled")
 
 func on_death():
+	if dying:
+		return
+	dying = true
 	on_death_animation = true
 	emit_signal("died")
 	var death_animation_name = "Fade"

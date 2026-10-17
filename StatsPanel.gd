@@ -85,7 +85,8 @@ func _on_PlayerStats_heal_damage(amount):
 
 
 func _on_PlayerStats_took_damage(amount, hit_force):
-	animate_panel(hit_force)
+	if amount > 0:
+		animate_panel(hit_force)
 	var numberAnimation = NumberAnimation.instance()
 	hpLabel.add_child(numberAnimation)
 	if amount == 0:
