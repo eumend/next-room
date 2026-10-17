@@ -98,4 +98,6 @@ func on_player_body_entered(node):
 		done_with_cooldown()
 
 func _on_FieldButton_pressed():
+	if in_done: # The field (and player) is already freed while we wait to finish
+		return
 	player.apply_impulse(Vector2(), force)
