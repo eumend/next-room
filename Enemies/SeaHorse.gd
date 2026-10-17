@@ -4,14 +4,14 @@ const BulletsDownBattleField = preload("res://BattleFields/Enemy/BulletsDownBatt
 
 func get_attack_pattern():
 	return {
-		"default_attack": 30,
-		"ink_attack": 70,
+		"default_attack": 45,
+		"ink_attack": 55,
 	}
 
 func ink_attack():
 	show_attack_text("INK ATTACK!")
 	var battleField = BulletsDownBattleField.instance()
-	battleField.base_speed = 52
+	battleField.base_speed = 45
 	battleField.total_bullets = 4
 	battleField.connect("hit", self, "on_BattleField_hit")
 	battleField.connect("done", self, "on_BattleField_done")
