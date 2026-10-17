@@ -2,15 +2,15 @@ extends Resource
 class_name DialogBox
 
 var TextBox = null
-var Timer = null setget set_timer
+var DialogTimer = null setget set_timer
 var message_queue = []
 var processing = false
 
 signal done
 
 func set_timer(new_timer):
-	Timer = new_timer
-	Timer.connect("timeout", self, "on_Timer_timeout")
+	DialogTimer = new_timer
+	DialogTimer.connect("timeout", self, "on_Timer_timeout")
 
 func show_text(text):
 	if TextBox:
@@ -36,15 +36,15 @@ func reset_queue():
 	if message_queue.size() > 0:
 		message_queue = []
 	processing = false
-	if Timer:
-		Timer.stop()
+	if DialogTimer:
+		DialogTimer.stop()
 
 func _show_text(text, time_seconds):
-	if TextBox and Timer:
+	if TextBox and DialogTimer:
 		# Process timed text, might have more types in the future
 		TextBox.text = text
-		Timer.wait_time = time_seconds
-		Timer.start()
+		DialogTimer.wait_time = time_seconds
+		DialogTimer.start()
 		
 func on_Timer_timeout():
 	TextBox.text = ""
