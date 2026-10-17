@@ -141,8 +141,14 @@ func set_power(value):
 
 func set_exp_points(value):
 	exp_points = value
-	if leveled_up():
+	var levels_gained = 0
+	while leveled_up():
 		level_up(1)
+		levels_gained += 1
+	if levels_gained > 1:
+		# Summarise all of them, not just the last one
+		for key in ["lv", "hp", "power"]:
+			last_level_up_summary[key] *= levels_gained
 
 func leveled_up():
 	return level in level_chart and exp_points >= level_chart[level]
