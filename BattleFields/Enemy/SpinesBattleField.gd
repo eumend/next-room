@@ -72,7 +72,7 @@ func on_spike_fired():
 		playerAnimationPlayer.play("ShakePlayer")
 		hit()
 	done_spikes += 1
-	if done_spikes >= total_spikes:
+	if fired_hits >= total_hits and done_spikes >= total_spikes:
 		doneTimer.start()
 
 func on_pressed():

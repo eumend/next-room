@@ -36,10 +36,13 @@ func on_playerBumper_hit():
 	emit_signal("hit", GameConstants.HIT_FORCE.NORMAL)
 
 func _on_FieldButton_pressed():
-	var overlapping = hitZone.get_overlapping_areas()
-	if overlapping.size() > 0:
-		var bumper = overlapping[0]
-		bumper.on_hit()
+	var live_bumper = null
+	for area in hitZone.get_overlapping_areas():
+		if area.is_in_group("bumpers") and area.moving:
+			live_bumper = area
+			break
+	if live_bumper:
+		live_bumper.on_hit()
 	else:
 		emit_signal("miss")
 		get_tree().call_group("bumpers", "disappear")

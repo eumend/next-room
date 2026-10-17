@@ -61,6 +61,11 @@ func on_startTimer_timeout():
 func spawn_geysers(position = null):
 	if position == null:
 		position = get_free_position()
+	if position == null:
+		# Every cell is erupting, try again shortly instead of stacking geysers
+		spawnGeyserTimer.wait_time = 0.3
+		spawnGeyserTimer.start()
+		return
 	spawn_geyser(position)
 	geysers_left -= 1
 	if geysers_left > 0:
@@ -87,7 +92,7 @@ func get_free_position():
 		if firing_status[s] == FIRING_STATUS.IDLE:
 			free_positions.append(s)
 	if free_positions.empty():
-		return current_player_position # Every cell is busy, reuse the player's
+		return null
 	return free_positions[randi() % free_positions.size()]
 
 func on_GeyserAnimation_done(position):
