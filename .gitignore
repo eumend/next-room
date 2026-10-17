@@ -6,3 +6,10 @@
 .vscode
 export_presets.cfg
 .import
+*.aab
+*.idsig
+build/
+# Android build template (Project > Install Android Build Template, Godot 3.6.3)
+android/
+.godot/
+.claude/
