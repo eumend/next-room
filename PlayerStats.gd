@@ -34,6 +34,7 @@ signal max_hp_changed(value)
 signal power_changed(value)
 signal level_changed(value)
 signal status_changed(value)
+signal poisoned
 signal debuff(buff)
 signal status_healed(value)
 signal took_damage(value)
@@ -59,6 +60,8 @@ func has_status(status):
 func add_status(new_status):
 	if not player_statuses.has(new_status):
 		player_statuses.append(new_status)
+		if new_status == GameConstants.STATUS.POISON:
+			emit_signal("poisoned")
 	emit_signal("status_changed", player_statuses)
 
 func clear_status():
@@ -200,13 +203,33 @@ func get_data_json():
 		"status": self.player_statuses,
 	}
 
+func get_new_game_data_json():
+	return {
+		"hp": 20,
+		"power": base_power,
+		"level": 1,
+		"exp": 0,
+		"max_hp": 20,
+		"status": [],
+	}
+
 func set_data_from_json(json):
-	hp = int(json["hp"])
-	power = int(json["power"])
-	level = int(json["level"])
-	exp_points = int(json["exp"])
-	max_hp = int(json["max_hp"])
-	player_statuses = json["status"]
+	max_hp = int(json.get("max_hp", max_hp))
+	hp = int(json.get("hp", max_hp))
+	power = int(json.get("power", power))
+	level = int(json.get("level", level))
+	exp_points = int(json.get("exp", exp_points))
+	# Buff turns aren't saved, so only keep poison
+	player_statuses = []
+	var statuses = json.get("status", [])
+	if typeof(statuses) == TYPE_ARRAY and statuses.has(float(GameConstants.STATUS.POISON)):
+		player_statuses.append(GameConstants.STATUS.POISON)
+	# Fields were set directly to skip side effects, refresh the stats panel
+	emit_signal("max_hp_changed", max_hp)
+	emit_signal("hp_changed", hp)
+	emit_signal("power_changed", power)
+	emit_signal("level_changed", level, level)
+	emit_signal("status_changed", player_statuses)
 
 func _exit_tree():
 	BattleUnits.PlayerStats = null

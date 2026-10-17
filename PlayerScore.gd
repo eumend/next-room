@@ -18,11 +18,12 @@ func save():
 	var data = get_data_json()
 	SaveFile.save("player_score", data)
 
-func reset():
+func reset(keep_run = false):
 	kill_streak = 0
 	current_level = 1
 	turns_taken = 0
-	current_run = 0
+	if not keep_run:
+		current_run = 0
 	continues_taken = 0
 
 func get_data_json():
@@ -35,8 +36,8 @@ func get_data_json():
 	}
 
 func set_data_from_json(json):
-	kill_streak = int(json["kill_streak"])
-	current_level = int(json["current_level"])
-	turns_taken = int(json["turns_taken"])
-	current_run = int(json["current_run"])
-	continues_taken = int(json["continues_taken"])
+	kill_streak = int(json.get("kill_streak", 0))
+	current_level = int(json.get("current_level", 1))
+	turns_taken = int(json.get("turns_taken", 0))
+	current_run = int(json.get("current_run", 0))
+	continues_taken = int(json.get("continues_taken", 0))
