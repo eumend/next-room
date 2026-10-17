@@ -4,6 +4,7 @@ signal hit(target, position)
 var direction = Vector2(0, 1) # Down
 var speed = 50
 var paused = false
+var has_hit = false
 var color = "ffffff" setget set_color
 onready var animationPlayer = $AnimationPlayer
 signal unpaused
@@ -17,7 +18,10 @@ func _physics_process(delta):
 		self.position += direction * speed * delta
 
 func _on_Bullet_area_entered(area):
-	if not paused: # FIXME: For some reason it keeps firing this event after hitting one time, even though it should not be moving anymore. This is a workaround to only detect once.
+	# Only report the first hit. Kept apart from 'paused' so a bullet parked
+	# at its stop point (StopBullet) still hits a player that moves under it.
+	if not has_hit:
+		has_hit = true
 		paused = true
 		emit_signal("hit", area, self)
 

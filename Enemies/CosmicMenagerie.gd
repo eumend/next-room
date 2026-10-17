@@ -38,8 +38,7 @@ func shoot_em_attack():
 	ActionBattle.start_small_field(battleField)
 
 func get_bullets():
-	randomize()
-	var qty = rand_range(min_bullets, max_bullets)
+	var qty = Utils.rand_int(min_bullets, max_bullets - 1)
 	var bullets = []
 	for _i in range(0, qty):
 		var bullet_type = [GameConstants.BOMB_BULLET_TYPES.COUNTDOWN, GameConstants.BOMB_BULLET_TYPES.COOLDOWN][randi() % 2]

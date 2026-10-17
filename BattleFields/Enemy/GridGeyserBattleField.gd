@@ -86,6 +86,8 @@ func get_free_position():
 	for s in firing_status:
 		if firing_status[s] == FIRING_STATUS.IDLE:
 			free_positions.append(s)
+	if free_positions.empty():
+		return current_player_position # Every cell is busy, reuse the player's
 	return free_positions[randi() % free_positions.size()]
 
 func on_GeyserAnimation_done(position):

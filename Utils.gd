@@ -1,14 +1,18 @@
 extends Node
 
+func _ready():
+	randomize()
+
+func rand_int(min_i, max_i): # Inclusive on both ends
+	return min_i + randi() % int(max(max_i - min_i + 1, 1))
+
 func value_from_float_range(min_f, max_f):
 	return min_f + (randf() * (max_f - min_f))
 
 func pick_from_list(list):
-	randomize()
 	return list[randi() % list.size()]
 
 func pick_from_weighted(distribution):
-	randomize()
 	var total_size = 0
 	var last_index = 0
 	var ranges = []

@@ -46,12 +46,13 @@ func _ready():
 func on_spikeTimer_timeout():
 	if fired_hits < total_hits:
 		var spike_qty = Utils.pick_from_weighted(spikes_per_hit)
-		total_spikes += spike_qty
 		var spikes_list = []
 		for spike in ALL_SPIKES:
 			if not spike.shooting:
 				spikes_list.append(spike)
 		spikes_list.shuffle()
+		spike_qty = min(spike_qty, spikes_list.size())
+		total_spikes += spike_qty
 		for _i in range(0, spike_qty):
 			var spike = spikes_list.pop_front()
 			spike.shoot()

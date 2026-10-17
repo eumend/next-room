@@ -28,7 +28,6 @@ func _ready():
 	fire_bullet()
 
 func start_player_bumper():
-	randomize()
 	var middle_of_field = min_starting_x + (max_starting_x - min_starting_x) / 2
 	var starting_direction = 1
 	player.position = Vector2(middle_of_field, starting_y)

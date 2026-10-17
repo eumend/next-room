@@ -236,8 +236,7 @@ func worm_attack():
 	ActionBattle.start_small_field(battleField)
 
 func get_bullets():
-	randomize()
-	var qty = rand_range(4, 6)
+	var qty = Utils.rand_int(4, 5)
 	var bullets = []
 	for _i in range(0, qty):
 		bullets.append(GameConstants.BOMB_BULLET_TYPES.COUNTDOWN)

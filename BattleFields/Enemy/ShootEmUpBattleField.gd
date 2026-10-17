@@ -73,13 +73,11 @@ func on_bombBullet_hit(target, bullet):
 			return
 
 func get_bullet_position():
-	randomize()
 	var bullet_x = rand_range(min_x, max_x)
 	var bullet_y = rand_range(min_y, max_y)
 	return Vector2(bullet_x, bullet_y)
 
 func get_bullet_direction():
-	randomize()
 	var side = [TL, TR, BL, BR][randi() % 4]
 	match(side):
 		TL: return Vector2(rand_range(-1, -sqrt(2) / 2), rand_range(0, sqrt(2) / 2))

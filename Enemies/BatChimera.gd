@@ -251,8 +251,7 @@ func bug_attack():
 	ActionBattle.start_small_field(battleField)
 
 func get_bullets():
-	randomize()
-	var qty = rand_range(3, 5)
+	var qty = Utils.rand_int(3, 4)
 	var bullets = []
 	for _i in range(0, qty - 1):
 		bullets.append(GameConstants.BOMB_BULLET_TYPES.COOLDOWN)

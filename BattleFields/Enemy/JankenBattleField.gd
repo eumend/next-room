@@ -52,7 +52,6 @@ func _on_showOutcomeTimer_timeout():
 func pick_enemy_choice():
 	if choice_map:
 		return Utils.pick_from_weighted(choice_map)
-	randomize()
 	return [CHOICES.ROCK, CHOICES.SCISSORS, CHOICES.PAPER][randi() % 3]
 
 func reset_gui():
