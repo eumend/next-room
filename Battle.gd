@@ -157,7 +157,7 @@ func create_player():
 	var playerStats = BattleUnits.PlayerStats
 	playerStats.connect("end_turn", self, "_on_Player_end_turn")
 	playerStats.connect("died", self, "_on_Player_died")
-	playerStats.connect("status_changed", self, "_on_Player_status_changed")
+	playerStats.connect("poisoned", self, "_on_Player_poisoned")
 
 func start_player_turn():
 	BattleUnits.set_current_turn(GameConstants.UNITS.PLAYER)
@@ -180,14 +180,8 @@ func _on_Player_died():
 		actionButtons.hide()
 		game_over()
 
-func _on_Player_status_changed(status):
-	if status.size() > 0:
-		var new_status = status.back()
-		match(new_status):
-			GameConstants.STATUS.POISON:
-				DialogBox.show_timeout("You got poisoned!")
-				return
-			_: return
+func _on_Player_poisoned():
+	DialogBox.show_timeout("You got poisoned!")
 
 func create_new_enemy():
 	var enemy_name = pick_next_enemy()
@@ -218,6 +212,8 @@ func pick_next_enemy():
 	return enemy_name
 
 func _on_Enemy_end_turn():
+	if not BattleUnits.is_enemy_turn(): # Enemies end their turn early when the player dies
+		return
 	BattleUnits.set_current_turn(null)
 	handle_status_eot()
 	yield(self, "_done")
@@ -269,6 +265,8 @@ func eot_checks():
 	if player.is_dead():
 		game_over()
 		return false
+	if enemy == null:
+		return false
 	if enemy.is_dead():
 		if enemy.is_boss:
 			playerScore.kill_streak = 0
@@ -301,6 +299,9 @@ func handle_enemy_death_eot(enemy):
 func end_battle(enemy):
 	# Battle over cleanup
 	reset_player_status()
+	if enemy.is_boss:
+		# The next floor starts healed anyway, save it that way
+		BattleUnits.PlayerStats.heal_all()
 	if enemy.is_boss or playerScore.current_level == 8:
 		save_progress()
 	enemy.queue_free()
@@ -345,6 +346,7 @@ func show_level_up_summary(level_up_summary):
 	BattleSummary.show_summary("LEVEL UP!", body)
 
 func _on_NextRoomButton_pressed():
+	nextRoomButton.hide() # Ignore double taps during the fade
 	animationPlayer.play("FadeOut")
 	yield(animationPlayer, "animation_finished")
 	var is_next_floor = playerScore.kill_streak == 0
@@ -362,10 +364,10 @@ func _on_NextRoomButton_pressed():
 	start_battle()
 
 func _on_RestartButton_pressed():
+	restartButton.hide() # Ignore double taps during the fade
+	continueButton.hide()
 	animationPlayer.play("FadeOut")
 	yield(animationPlayer, "animation_finished")
-	restartButton.hide()
-	continueButton.hide()
 	BattleSummary.hide_summary()
 	var playerStats = BattleUnits.PlayerStats
 	if playerScore.current_run > 0:
@@ -376,7 +378,7 @@ func _on_RestartButton_pressed():
 	if enemy:
 		BattleUnits.Enemy = null
 		enemy.queue_free()
-	playerScore.reset()
+	playerScore.reset(true)
 	reset_encounters()
 	update_level_layout()
 	actionButtons.recharge_all()
@@ -388,6 +390,10 @@ func _on_RestartButton_pressed():
 	start_battle()
 
 func game_over():
+	if restartButton.visible: # Already showing
+		return
+	BattleUnits.set_current_turn(null)
+	actionButtons.hide()
 	$BGPlayer.stop()
 	$SFXGameOver.play()
 	var text = "RUN: " + str(playerScore.current_run) + "\n" + "CONT: " + str(playerScore.continues_taken) + "\n" + "TURNS: " + str(playerScore.turns_taken)
@@ -400,6 +406,7 @@ func on_game_finished():
 	var text = "RUN: " + str(playerScore.current_run) + "\n" + "CONT: " + str(playerScore.continues_taken) + "\n" + "TURNS: " + str(playerScore.turns_taken)
 	BattleSummary.show_summary("FINISHED!", text)
 	actionButtons.hide()
+	save_new_run()
 	restartButton.show()
 	$SFXLevelUp.play()
 
@@ -414,10 +421,10 @@ func skip_to_level(lvl, player_lvl):
 	playerStats.hp = playerStats.max_hp
 
 func _on_ContinueButton_pressed():
+	restartButton.hide() # Ignore double taps during the fade
+	continueButton.hide()
 	animationPlayer.play("FadeOut")
 	yield(animationPlayer, "animation_finished")
-	restartButton.hide()
-	continueButton.hide()
 	BattleSummary.hide_summary()
 	var playerStats = BattleUnits.PlayerStats
 	playerStats.heal_all()
@@ -436,6 +443,14 @@ func _on_ContinueButton_pressed():
 	start_battle()
 	animationPlayer.play("FadeIn")
 	yield(animationPlayer, "animation_finished")
+
+func save_new_run():
+	# Saved so the title screen Continue starts the next run instead of replaying the last boss
+	var finished_score = playerScore.get_data_json()
+	playerScore.reset(true)
+	playerScore.save()
+	playerScore.set_data_from_json(finished_score)
+	SaveFile.save("player_stats", BattleUnits.PlayerStats.get_new_game_data_json())
 
 func save_progress():
 	playerScore.save()
