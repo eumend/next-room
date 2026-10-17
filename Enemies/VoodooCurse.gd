@@ -277,7 +277,7 @@ func deal_damage(hit_force = null, _fixed_amount = null):
 				FACES.SURPRISE:
 					var surprise_damage = playerStats.hp - 1
 					if playerStats.has_status(GameConstants.STATUS.POISON):
-						var poison_damage = round(playerStats.max_hp / 8.0)
+						var poison_damage = floor(playerStats.max_hp / 8.0)
 						var bufferForPoison = poison_damage if playerStats.hp > poison_damage else 0 # If player can survive poison next turn, we want him to survive with 1 HP
 						surprise_damage -= bufferForPoison
 					.deal_damage(null, surprise_damage)

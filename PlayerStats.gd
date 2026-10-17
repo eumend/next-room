@@ -106,7 +106,7 @@ func take_status_damage(damage):
 
 func take_damage(damage, hit_force = null):
 	if self.has_status(GameConstants.STATUS.SHIELDED):
-		damage = round(damage / 2.0)
+		damage = floor(damage / 2.0) # Rounds in the player's favour
 	_take_damage(damage, hit_force)
 
 func _take_damage(damage, hit_force):
