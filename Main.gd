@@ -11,6 +11,9 @@ onready var animationPlayer = $AnimationPlayer
 onready var tween = $Tween
 onready var backFromCreditsButton = $UI/CreditsContainer/C2/Back
 onready var creditsNextButton = $UI/CreditsContainer/C1/Next
+onready var privacyButton = $UI/CreditsContainer/C2/Privacy
+
+const PRIVACY_URL = "https://github.com/eumend/next-room/blob/master/PRIVACY.md"
 
 var leaving = false
 
@@ -20,6 +23,7 @@ func _ready():
 	creditsButton.connect("pressed", self, "on_creditsButton_pressed")
 	backFromCreditsButton.connect("pressed", self, "on_backFromCreditsButton_pressed")
 	creditsNextButton.connect("pressed", self, "on_creditsNextButton_pressed")
+	privacyButton.connect("pressed", self, "on_privacyButton_pressed")
 	SaveFile._load()
 	if SaveFile.save_state:
 		continueButton.visible = true
@@ -31,6 +35,9 @@ func on_backFromCreditsButton_pressed():
 func on_creditsNextButton_pressed():
 	creditsBox1.hide()
 	creditsBox2.show()
+
+func on_privacyButton_pressed():
+	OS.shell_open(PRIVACY_URL)
 
 func on_startButton_pressed():
 	buttonsBox.hide() # Ignore double taps during the fade

@@ -163,6 +163,13 @@ margin_bottom = 33.0
 text = "Made in Ubuntu using the Godot Engine, LMMS and GIMP."
 autowrap = true
 
+[node name="Privacy" type="Button" parent="UI/CreditsContainer/C2"]
+margin_top = 62.0
+margin_right = 70.0
+margin_bottom = 77.0
+rect_min_size = Vector2( 0, 15 )
+text = "Privacy"
+
 [node name="Back" type="Button" parent="UI/CreditsContainer/C2"]
 margin_top = 81.0
 margin_right = 70.0
