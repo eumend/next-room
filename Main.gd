@@ -24,6 +24,8 @@ func _ready():
 	backFromCreditsButton.connect("pressed", self, "on_backFromCreditsButton_pressed")
 	creditsNextButton.connect("pressed", self, "on_creditsNextButton_pressed")
 	privacyButton.connect("pressed", self, "on_privacyButton_pressed")
+	var background = Utils.top_center_color($Background.texture)
+	Utils.fill_screen_bars(background, background)
 	SaveFile._load()
 	if SaveFile.save_state:
 		continueButton.visible = true

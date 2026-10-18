@@ -1,7 +1,32 @@
 extends Node
 
+const DIALOG_GRAY = Color8(85, 85, 85)
+
+var bar_textures = []
+
 func _ready():
 	randomize()
+
+func fill_screen_bars(top_color, bottom_color):
+	bar_textures = [solid_texture(top_color), solid_texture(bottom_color)]
+	VisualServer.black_bars_set_images(RID(), bar_textures[0].get_rid(), RID(), bar_textures[1].get_rid())
+
+func top_center_color(texture):
+	var image = texture.get_data()
+	image.lock()
+	var color = image.get_pixel(int(image.get_width() / 2), 0)
+	image.unlock()
+	return color
+
+func solid_texture(color):
+	var image = Image.new()
+	image.create(1, 1, false, Image.FORMAT_RGB8)
+	image.lock()
+	image.set_pixel(0, 0, color)
+	image.unlock()
+	var texture = ImageTexture.new()
+	texture.create_from_image(image, 0)
+	return texture
 
 func rand_int(min_i, max_i): # Inclusive on both ends
 	return min_i + randi() % int(max(max_i - min_i + 1, 1))

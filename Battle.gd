@@ -418,6 +418,7 @@ func on_game_finished():
 
 func update_level_layout():
 	$Dungeon.texture = Levels[playerScore.current_level]["background"]
+	Utils.fill_screen_bars(Utils.top_center_color($Dungeon.texture), Utils.DIALOG_GRAY)
 
 func skip_to_level(lvl, player_lvl):
 	var playerStats = BattleUnits.PlayerStats
